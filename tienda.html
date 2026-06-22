@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda — Morsa's Proshop</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #2A2FA8;
+    --navy-dark: #1E2280;
+    --navy-deeper: #151970;
+    --gold: #F5A623;
+    --gold-light: #FBBF47;
+    --gold-pale: #FFF3D6;
+    --white: #FFFFFF;
+    --off-white: #F8F7F4;
+    --light-gray: #EFEFEF;
+    --mid-gray: #D0D0D0;
+    --text-dark: #0E1050;
+    --text-mid: #555;
+    --radius: 4px;
+    --radius-lg: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── ANNOUNCE BAR ─── */
+  .announce-bar {
+    background: var(--gold);
+    color: var(--navy-deeper);
+    text-align: center;
+    padding: 9px 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(21,25,112,0.18);
+  }
+
+  .nav-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    height: 64px;
+    gap: 16px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .nav-logo-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: rgba(245,166,35,0.65);
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+
+  .nav-back {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+    margin-left: auto;
+  }
+
+  .nav-back:hover { color: var(--gold); }
+
+  .nav-search {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 6px 14px;
+    gap: 8px;
+    transition: border-color 0.2s;
+    flex: 0 0 220px;
+  }
+
+  .nav-search:focus-within { border-color: var(--gold); }
+  .nav-search svg { width: 15px; height: 15px; stroke: rgba(255,255,255,0.5); fill: none; flex-shrink: 0; }
+  .nav-search input { background: none; border: none; outline: none; color: #fff; font-family: 'Barlow', sans-serif; font-size: 13px; width: 100%; }
+  .nav-search input::placeholder { color: rgba(255,255,255,0.4); }
+
+  .nav-cart {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    padding: 8px;
+    border-radius: var(--radius);
+    font-size: 20px;
+    transition: background 0.15s, color 0.15s;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .nav-cart:hover { background: rgba(245,166,35,0.14); color: var(--gold); }
+
+  .cart-badge {
+    position: absolute;
+    top: 2px; right: 2px;
+    background: var(--gold);
+    color: var(--navy-deeper);
+    font-size: 9px;
+    font-weight: 700;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ─── PAGE HEADER ─── */
+  .page-header {
+    background: var(--navy-deeper);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(245,166,35,0.03) 0, rgba(245,166,35,0.03) 1px, transparent 1px, transparent 50px);
+    pointer-events: none;
+  }
+
+  .page-header-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.15s; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb span { color: var(--gold); }
+
+  .page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+
+  .page-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 6px;
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  .shop-layout {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  /* ─── SIDEBAR FILTERS ─── */
+  .sidebar {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--light-gray);
+    position: sticky;
+    top: 80px;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    background: var(--navy-deeper);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .sidebar-clear {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.15s;
+  }
+
+  .sidebar-clear:hover { color: var(--gold); }
+
+  .filter-group {
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .filter-group:last-child { border-bottom: none; }
+
+  .filter-group-header {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .filter-group-header:hover { background: var(--off-white); }
+
+  .filter-group-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dark);
+  }
+
+  .filter-chevron {
+    font-size: 10px;
+    color: #999;
+    transition: transform 0.2s;
+  }
+
+  .filter-group.open .filter-chevron { transform: rotate(180deg); }
+
+  .filter-body {
+    padding: 4px 20px 16px;
+    display: none;
+  }
+
+  .filter-group.open .filter-body { display: block; }
+
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+
+  .filter-option:hover { color: var(--navy); }
+
+  .filter-option input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--navy);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .filter-option label {
+    font-size: 13px;
+    color: var(--text-mid);
+    cursor: pointer;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .filter-count {
+    font-size: 11px;
+    color: #bbb;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  /* Price range */
+  .price-range {
+    padding: 0 0 8px;
+  }
+
+  .price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .price-input {
+    flex: 1;
+    border: 1px solid var(--mid-gray);
+    border-radius: var(--radius);
+    padding: 7px 10px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .price-input:focus { border-color: var(--navy); }
+
+  .price-sep { font-size: 12px; color: #bbb; }
+
+  /* Size pills */
+  .size-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 4px;
+  }
+
+  .size-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 5px 10px;
+    border: 1.5px solid var(--mid-gray);
+    border-radius: var(--radius);
+    cursor: pointer;
+    color: var(--text-mid);
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .size-pill:hover, .size-pill.active {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  /* ─── PRODUCTS AREA ─── */
+  .products-area { flex: 1; }
+
+  .products-toolbar {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--light-gray);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 16px;
+  }
+
+  .products-count {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-mid);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .products-count strong { color: var(--navy); }
+
+  .active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .active-filter-tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--gold-pale);
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 100px;
+    padding: 3px 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--navy);
+    cursor: pointer;
+  }
+
+  .active-filter-tag:hover { background: rgba(245,166,35,0.3); }
+
+  .sort-select {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-dark);
+    border: 1.5px solid var(--mid-gray);
+    border-radius: var(--radius);
+    padding: 7px 12px;
+    background: var(--white);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    white-space: nowrap;
+  }
+
+  .sort-select:focus { border-color: var(--navy); }
+
+  /* ─── PRODUCTS GRID ─── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  /* ─── PRODUCT CARD ─── */
+  .product-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--light-gray);
+    overflow: hidden;
+    transition: box-shadow 0.22s, transform 0.22s;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 8px 32px rgba(21,25,112,0.13);
+    transform: translateY(-3px);
+  }
+
+  /* Image container with hover swap */
+  .product-img-wrap {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: var(--off-white);
+  }
+
+  .product-img-wrap img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s;
+  }
+
+  .product-img-wrap .img-hover {
+    opacity: 0;
+  }
+
+  .product-card:hover .img-hover { opacity: 1; }
+  .product-card:hover .img-main { opacity: 0; }
+
+  /* Badges */
+  .product-badges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 3;
+  }
+
+  .badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .badge-new { background: var(--navy); color: var(--white); }
+  .badge-sale { background: #E02020; color: #fff; }
+  .badge-hot { background: var(--gold); color: var(--navy-deeper); }
+
+  /* Wishlist btn */
+  .product-wish {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .product-wish:hover { border-color: #E02020; background: #fff0f0; }
+  .product-wish svg { width: 15px; height: 15px; stroke: #bbb; fill: none; transition: stroke 0.15s; }
+  .product-wish:hover svg { stroke: #E02020; }
+  .product-wish.active svg { stroke: #E02020; fill: #E02020; }
+
+  /* Color swatches */
+  .product-colors {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    gap: 4px;
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .product-card:hover .product-colors { opacity: 1; transform: translateY(0); }
+
+  .color-swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+
+  .color-swatch:hover, .color-swatch.active { transform: scale(1.25); }
+
+  /* Product info */
+  .product-info {
+    padding: 14px 14px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-sport {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--navy);
+    opacity: 0.6;
+    margin-bottom: 3px;
+  }
+
+  .product-name {
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+
+  .product-brand {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 10px;
+  }
+
+  .product-price-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .product-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .product-price-old {
+    font-size: 13px;
+    color: #bbb;
+    text-decoration: line-through;
+  }
+
+  .product-price-save {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #E02020;
+    background: #ffeaea;
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* Size selector */
+  .product-sizes {
+    display: none;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .product-card:hover .product-sizes { display: flex; }
+
+  .size-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border: 1.5px solid var(--mid-gray);
+    border-radius: 3px;
+    cursor: pointer;
+    color: var(--text-mid);
+    background: var(--white);
+    transition: all 0.12s;
+  }
+
+  .size-btn:hover, .size-btn.selected {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .size-btn.unavailable {
+    opacity: 0.35;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  /* Add to cart button */
+  .product-footer {
+    padding: 0 14px 14px;
+    margin-top: auto;
+  }
+
+  .btn-add-cart {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: background 0.15s;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: background 0.15s, opacity 0.2s, transform 0.2s;
+  }
+
+  .product-card:hover .btn-add-cart {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .btn-add-cart:hover { background: var(--gold); color: var(--navy-deeper); }
+
+  .btn-add-cart svg { width: 14px; height: 14px; stroke: currentColor; fill: none; }
+
+  /* ─── PAGINATION ─── */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .page-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    width: 38px; height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--mid-gray);
+    background: var(--white);
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .page-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .page-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+  .page-btn.arrow { width: auto; padding: 0 14px; gap: 5px; }
+
+  /* ─── PRODUCT DETAIL MODAL ─── */
+  /* ─── PRODUCT DETAIL VIEW (full-screen slide-over) ─── */
+  .pdv-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--off-white);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.42s cubic-bezier(.22,.8,.34,1);
+    overflow-y: auto;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .pdv-overlay.open {
+    transform: translateY(0);
+    pointer-events: all;
+    visibility: visible;
+  }
+
+  /* Top bar */
+  .pdv-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 28px;
+  }
+  .pdv-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .pdv-back:hover { background: #eef0ff; }
+  .pdv-breadcrumb {
+    font-size: 12px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pdv-breadcrumb span { color: var(--text-dark); font-weight: 600; }
+
+  /* Main product section */
+  .pdv-product {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 28px 0;
+    gap: 0;
+    width: 100%;
+  }
+
+  /* Image column */
+  .pdv-images {
+    display: flex;
+    gap: 12px;
+    padding-right: 40px;
+  }
+  .pdv-thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .pdv-thumb {
+    width: 68px; height: 80px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: #e8e8e4;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .pdv-thumb:hover { transform: scale(1.05); }
+  .pdv-thumb.active { border-color: var(--navy); box-shadow: 0 0 0 1px var(--navy); }
+  .pdv-main-img-wrap {
+    flex: 1;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #f0eeea;
+    position: relative;
+    aspect-ratio: 4/5;
+  }
+  .pdv-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.5s ease;
+  }
+  .pdv-main-img:hover { transform: scale(1.04); }
+  .pdv-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 100px;
+  }
+
+  /* Info column */
+  .pdv-info {
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .pdv-sport-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .pdv-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    color: var(--text-dark);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pdv-brand {
+    font-size: 12px; color: #aaa;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .pdv-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .pdv-stars { color: var(--gold); font-size: 14px; letter-spacing: 1px; }
+  .pdv-rating-count { font-size: 12px; color: #888; }
+  .pdv-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .pdv-price { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--navy); line-height: 1; }
+  .pdv-price-old { font-size: 20px; color: #bbb; text-decoration: line-through; font-family: 'Barlow Condensed', sans-serif; }
+  .pdv-save-chip {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    background: #e8f5ed; color: #2d8a55;
+    padding: 3px 9px; border-radius: 100px;
+  }
+  .pdv-divider { border: none; border-top: 1px solid #eee; margin: 2px 0 16px; }
+
+  .pdv-section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 9px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .pdv-section-label a {
+    font-weight: 500; text-transform: none; letter-spacing: 0;
+    font-size: 11px; color: #aaa; cursor: pointer; text-decoration: underline;
+  }
+
+  /* Colors */
+  .pdv-colors { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .pdv-color-swatch {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1.5px #ccc;
+    cursor: pointer;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+  .pdv-color-swatch:hover { transform: scale(1.14); }
+  .pdv-color-swatch.active { box-shadow: 0 0 0 2.5px var(--navy); }
+
+  /* Sizes */
+  .pdv-sizes { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+  .pdv-size-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700;
+    padding: 9px 14px;
+    border: 1.5px solid #ddd; border-radius: 8px;
+    cursor: pointer; color: var(--text-dark); background: var(--white);
+    transition: all 0.12s; min-width: 48px; text-align: center;
+  }
+  .pdv-size-btn:hover { border-color: var(--navy); color: var(--navy); background: #f0f2ff; }
+  .pdv-size-btn.selected { border-color: var(--navy); background: var(--navy); color: #fff; }
+
+  /* Description */
+  .pdv-desc { font-size: 13.5px; color: var(--text-mid); line-height: 1.7; margin-bottom: 16px; }
+  .pdv-features {
+    list-style: none; padding: 0; margin: 0 0 18px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .pdv-features li {
+    font-size: 12.5px; color: var(--text-mid);
+    display: flex; align-items: flex-start; gap: 7px; line-height: 1.45;
+  }
+  .pdv-features li::before { content:"✓"; color: var(--gold); font-weight: 800; flex-shrink: 0; }
+
+  .pdv-ship-note {
+    display: flex; align-items: center; gap: 8px;
+    background: #f0f7f3; border: 1px solid #c6e8d4;
+    border-radius: 8px; padding: 9px 13px;
+    font-size: 12px; color: #2d7a50; font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  /* Action buttons */
+  .pdv-actions { display: flex; flex-direction: column; gap: 9px; }
+  .pdv-btn-add {
+    background: var(--gold); color: var(--navy-deeper);
+    border: none; border-radius: 10px;
+    padding: 16px 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background 0.15s, transform 0.12s;
+  }
+  .pdv-btn-add:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .pdv-btn-wish {
+    background: #fff; color: var(--navy);
+    border: 1.5px solid var(--navy); border-radius: 10px;
+    padding: 13px 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    transition: all 0.15s;
+  }
+  .pdv-btn-wish:hover { background: var(--navy); color: #fff; }
+
+  /* ── RELATED CAROUSEL ── */
+  .pdv-related {
+    max-width: 1200px; margin: 40px auto 0; padding: 0 28px;
+    width: 100%;
+  }
+  .pdv-section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; color: var(--text-dark);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .pdv-section-title::after {
+    content: ''; flex: 1; height: 1px; background: #e0e0e0;
+  }
+  .pdv-carousel-wrap { position: relative; }
+  .pdv-carousel {
+    display: flex; gap: 16px; overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pdv-carousel::-webkit-scrollbar { display: none; }
+  .pdv-carousel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: #fff; border: 1.5px solid #ddd; border-radius: 50%;
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 2;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .pdv-carousel-btn:hover { border-color: var(--navy); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+  .pdv-carousel-btn.prev { left: -18px; }
+  .pdv-carousel-btn.next { right: -18px; }
+
+  .pdv-rel-card {
+    flex: 0 0 200px; scroll-snap-align: start;
+    background: #fff; border-radius: 12px;
+    overflow: hidden; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1.5px solid #f0f0f0;
+  }
+  .pdv-rel-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+  .pdv-rel-img {
+    width: 100%; aspect-ratio: 1;
+    object-fit: cover; object-position: top;
+    background: #f4f4f0;
+  }
+  .pdv-rel-info { padding: 10px 12px 12px; }
+  .pdv-rel-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--text-dark); margin-bottom: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .pdv-rel-brand { font-size: 11px; color: #aaa; margin-bottom: 6px; }
+  .pdv-rel-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; color: var(--navy);
+  }
+
+  /* ── REVIEWS ── */
+  .pdv-reviews {
+    max-width: 1200px; margin: 40px auto 0; padding: 0 28px;
+    width: 100%;
+  }
+  .pdv-reviews-header {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 40px; align-items: start;
+    margin-bottom: 28px;
+  }
+  .pdv-rating-big {
+    text-align: center;
+    background: #fff; border-radius: 16px;
+    padding: 24px 32px;
+    border: 1.5px solid #eee;
+    min-width: 160px;
+  }
+  .pdv-rating-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px; color: var(--navy); line-height: 1;
+  }
+  .pdv-rating-stars-big { font-size: 20px; color: var(--gold); margin: 4px 0; }
+  .pdv-rating-total { font-size: 12px; color: #aaa; }
+
+  .pdv-rating-bars { display: flex; flex-direction: column; gap: 7px; justify-content: center; }
+  .pdv-bar-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--text-mid); }
+  .pdv-bar-track {
+    flex: 1; height: 7px; background: #eee; border-radius: 100px; overflow: hidden;
+  }
+  .pdv-bar-fill { height: 100%; background: var(--gold); border-radius: 100px; }
+
+  /* Review cards */
+  .pdv-review-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+  .pdv-review-card {
+    background: #fff; border-radius: 12px;
+    padding: 18px 20px;
+    border: 1.5px solid #f0f0f0;
+  }
+  .pdv-review-top {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+  }
+  .pdv-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--navy);
+    color: #fff; font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .pdv-reviewer { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+  .pdv-review-date { font-size: 11px; color: #bbb; }
+  .pdv-review-stars { color: var(--gold); font-size: 13px; margin-left: auto; }
+  .pdv-review-title { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
+  .pdv-review-body { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+  .pdv-review-verified {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; color: #2d8a55; font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* Write review form */
+  .pdv-write-review {
+    background: #fff; border-radius: 14px;
+    padding: 24px; border: 1.5px solid #eee;
+    margin-bottom: 48px;
+  }
+  .pdv-wr-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; color: var(--text-dark); margin-bottom: 16px;
+  }
+  .pdv-wr-stars {
+    display: flex; gap: 6px; margin-bottom: 14px; cursor: pointer;
+  }
+  .pdv-wr-star { font-size: 24px; color: #ddd; transition: color 0.1s; }
+  .pdv-wr-star.lit { color: var(--gold); }
+  .pdv-wr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .pdv-wr-input {
+    font-family: 'Barlow', sans-serif; font-size: 13px;
+    border: 1.5px solid #e0e0e0; border-radius: 8px;
+    padding: 10px 13px; color: var(--text-dark);
+    outline: none; transition: border-color 0.15s;
+    background: #fafafa;
+  }
+  .pdv-wr-input:focus { border-color: var(--navy); background: #fff; }
+  .pdv-wr-textarea {
+    font-family: 'Barlow', sans-serif; font-size: 13px;
+    border: 1.5px solid #e0e0e0; border-radius: 8px;
+    padding: 10px 13px; color: var(--text-dark);
+    outline: none; transition: border-color 0.15s;
+    background: #fafafa; resize: vertical; min-height: 90px;
+    width: 100%; display: block; margin-bottom: 12px;
+  }
+  .pdv-wr-textarea:focus { border-color: var(--navy); background: #fff; }
+  .pdv-wr-submit {
+    background: var(--navy); color: #fff;
+    border: none; border-radius: 8px;
+    padding: 12px 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .pdv-wr-submit:hover { background: var(--navy-dark); }
+
+  /* ─── EMPTY STATE ─── */
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 32px;
+    display: none;
+  }
+
+  .empty-state.visible { display: block; }
+
+  .empty-icon { font-size: 56px; margin-bottom: 16px; }
+
+  .empty-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+
+  .empty-text { font-size: 14px; color: var(--text-mid); }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--navy-deeper);
+    color: var(--white);
+    border-left: 4px solid var(--gold);
+    border-radius: var(--radius-lg);
+    padding: 14px 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 280px;
+    max-width: 340px;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: transform 0.35s, opacity 0.35s;
+    pointer-events: none;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  .toast-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .toast-shipping {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+  }
+
+  .toast-shipping strong { color: var(--gold); font-weight: 700; }
+  .toast-shipping.free { color: #5eca8a; }
+  .toast-shipping.free strong { color: #5eca8a; }
+
+  .shipping-bar-wrap {
+    background: rgba(255,255,255,0.12);
+    border-radius: 100px;
+    height: 5px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .shipping-bar-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: var(--gold);
+    transition: width 0.5s ease;
+  }
+
+  .shipping-bar-fill.full { background: #5eca8a; }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCE BAR -->
+<div class="announce-bar">
+  ⛳ Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div>
+        <div class="nav-logo-text">Morsa's</div>
+        <div class="nav-logo-sub">Proshop</div>
+      </div>
+    </a>
+
+    <div class="nav-search">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
+      </svg>
+      <input type="text" placeholder="Buscar productos..." id="searchInput" oninput="filterProducts()">
+    </div>
+
+    <a href="index.html" class="nav-back">← Volver al Inicio</a>
+
+    <a href="carrito.html" class="nav-cart" aria-label="Carrito" style="position:relative;text-decoration:none;">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 01-8 0"></path>
+      </svg>
+      <span class="cart-badge" id="cartCount">0</span>
+    </a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a>
+      <span>›</span>
+      <span>Tienda</span>
+    </div>
+    <div class="page-title">Todos los Productos</div>
+    <div class="page-subtitle" id="headerCount">Mostrando todos los productos disponibles</div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="shop-layout">
+
+  <!-- ─── SIDEBAR ─── -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Filtros</span>
+      <button class="sidebar-clear" onclick="clearAllFilters()">Limpiar todo</button>
+    </div>
+
+    <!-- Deporte -->
+    <div class="filter-group open">
+      <div class="filter-group-header" onclick="toggleFilter(this)">
+        <span class="filter-group-title">Deporte</span>
+        <span class="filter-chevron">▼</span>
+      </div>
+      <div class="filter-body">
+        <div class="filter-option">
+          <input type="checkbox" id="f-golf" value="golf" onchange="filterProducts()">
+          <label for="f-golf">Golf <span class="filter-count">24</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-padel" value="padel" onchange="filterProducts()">
+          <label for="f-padel">Pádel <span class="filter-count">18</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-tenis" value="tenis" onchange="filterProducts()">
+          <label for="f-tenis">Tenis <span class="filter-count">14</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Categoría -->
+    <div class="filter-group open">
+      <div class="filter-group-header" onclick="toggleFilter(this)">
+        <span class="filter-group-title">Categoría</span>
+        <span class="filter-chevron">▼</span>
+      </div>
+      <div class="filter-body">
+        <div class="filter-option">
+          <input type="checkbox" id="f-palos" value="palos" onchange="filterProducts()">
+          <label for="f-palos">Palos <span class="filter-count">12</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-ropa" value="ropa" onchange="filterProducts()">
+          <label for="f-ropa">Ropa <span class="filter-count">20</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-zapatos" value="zapatos" onchange="filterProducts()">
+          <label for="f-zapatos">Zapatos <span class="filter-count">8</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-raquetas" value="raquetas" onchange="filterProducts()">
+          <label for="f-raquetas">Raquetas / Palas <span class="filter-count">10</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-accesorios" value="accesorios" onchange="filterProducts()">
+          <label for="f-accesorios">Accesorios <span class="filter-count">6</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-pelotas" value="pelotas" onchange="filterProducts()">
+          <label for="f-pelotas">Pelotas <span class="filter-count">5</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Género -->
+    <div class="filter-group open">
+      <div class="filter-group-header" onclick="toggleFilter(this)">
+        <span class="filter-group-title">Género</span>
+        <span class="filter-chevron">▼</span>
+      </div>
+      <div class="filter-body">
+        <div class="filter-option">
+          <input type="checkbox" id="f-caballeros" value="caballeros" onchange="filterProducts()">
+          <label for="f-caballeros">Caballeros <span class="filter-count">28</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-damas" value="damas" onchange="filterProducts()">
+          <label for="f-damas">Damas <span class="filter-count">18</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-ninos" value="ninos" onchange="filterProducts()">
+          <label for="f-ninos">Niños <span class="filter-count">10</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marca -->
+    <div class="filter-group">
+      <div class="filter-group-header" onclick="toggleFilter(this)">
+        <span class="filter-group-title">Marca</span>
+        <span class="filter-chevron">▼</span>
+      </div>
+      <div class="filter-body">
+        <div class="filter-option">
+          <input type="checkbox" id="f-titleist" value="Titleist" onchange="filterProducts()">
+          <label for="f-titleist">Titleist <span class="filter-count">8</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-mizuno" value="Mizuno" onchange="filterProducts()">
+          <label for="f-mizuno">Mizuno <span class="filter-count">7</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-callaway" value="Callaway" onchange="filterProducts()">
+          <label for="f-callaway">Callaway <span class="filter-count">6</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-wilson" value="Wilson" onchange="filterProducts()">
+          <label for="f-wilson">Wilson <span class="filter-count">8</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-ping" value="Ping" onchange="filterProducts()">
+          <label for="f-ping">Ping <span class="filter-count">5</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-greg" value="Greg Norman" onchange="filterProducts()">
+          <label for="f-greg">Greg Norman <span class="filter-count">6</span></label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="f-nb" value="New Balance" onchange="filterProducts()">
+          <label for="f-nb">New Balance <span class="filter-count">4</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Talla -->
+    <div class="filter-group">
+      <div class="filter-group-header" onclick="toggleFilter(this)">
+        <span class="filter-group-title">Talla</span>
+        <span class="filter-chevron">▼</span>
+      </div>
+      <div class="filter-body">
+        <div class="size-pills">
+          <span class="size-pill" onclick="toggleSizeFilter(this,'XS')">XS</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'S')">S</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'M')">M</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'L')">L</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'XL')">XL</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'XXL')">XXL</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'38')">38</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'39')">39</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'40')">40</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'41')">41</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'42')">42</span>
+          <span class="size-pill" onclick="toggleSizeFilter(this,'43')">43</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Precio -->
+    <div class="filter-group">
+      <div class="filter-group-header" onclick="toggleFilter(this)">
+        <span class="filter-group-title">Precio</span>
+        <span class="filter-chevron">▼</span>
+      </div>
+      <div class="filter-body">
+        <div class="price-range">
+          <div style="font-size:12px;color:#999;">Rango de precio (USD)</div>
+          <div class="price-inputs">
+            <input type="number" class="price-input" placeholder="Min" id="priceMin" oninput="filterProducts()">
+            <span class="price-sep">—</span>
+            <input type="number" class="price-input" placeholder="Max" id="priceMax" oninput="filterProducts()">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ─── PRODUCTS AREA ─── -->
+  <div class="products-area">
+
+    <!-- Toolbar -->
+    <div class="products-toolbar">
+      <div class="products-count" id="productsCount"><strong>56</strong> Productos</div>
+      <div class="active-filters" id="activeFilters"></div>
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="featured">Destacados</option>
+        <option value="price-asc">Precio: Menor a Mayor</option>
+        <option value="price-desc">Precio: Mayor a Menor</option>
+        <option value="newest">Más Recientes</option>
+        <option value="name">Nombre A-Z</option>
+      </select>
+    </div>
+
+    <!-- Grid -->
+    <div class="products-grid" id="productsGrid">
+
+      <!-- Product cards will be rendered by JS -->
+
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">🔍</div>
+      <div class="empty-title">Sin resultados</div>
+      <div class="empty-text">Intenta con otros filtros o términos de búsqueda.</div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination">
+      <a href="#" class="page-btn arrow">← Anterior</a>
+      <a href="#" class="page-btn active">1</a>
+      <a href="#" class="page-btn">2</a>
+      <a href="#" class="page-btn">3</a>
+      <span style="padding:0 4px;color:#bbb;font-size:13px;">...</span>
+      <a href="#" class="page-btn">8</a>
+      <a href="#" class="page-btn arrow">Siguiente →</a>
+    </div>
+
+  </div><!-- end products-area -->
+</div><!-- end shop-layout -->
+
+<!-- ─── PRODUCT DETAIL VIEW ─── -->
+<div class="pdv-overlay" id="pdvOverlay">
+
+  <!-- Sticky top bar -->
+  <div class="pdv-topbar">
+    <button class="pdv-back" onclick="closePDV()">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Volver a la Tienda
+    </button>
+    <div class="pdv-breadcrumb">
+      Tienda <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#ccc" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span id="pdvBreadName">Producto</span>
+    </div>
+  </div>
+
+  <!-- Product section -->
+  <div class="pdv-product">
+    <!-- Images left -->
+    <div class="pdv-images">
+      <div class="pdv-thumbs" id="pdvThumbs"></div>
+      <div class="pdv-main-img-wrap">
+        <img class="pdv-main-img" id="pdvMainImg" src="" alt="">
+        <div class="pdv-badge" id="pdvBadge" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- Info right -->
+    <div class="pdv-info">
+      <div class="pdv-sport-tag" id="pdvSport"></div>
+      <div class="pdv-name" id="pdvName"></div>
+      <div class="pdv-brand" id="pdvBrand"></div>
+      <div class="pdv-rating-row">
+        <span class="pdv-stars">★★★★★</span>
+        <span class="pdv-rating-count" id="pdvRatingCount">(0 reseñas)</span>
+      </div>
+      <div class="pdv-price-row" id="pdvPrice"></div>
+      <hr class="pdv-divider">
+
+      <!-- Color -->
+      <div id="pdvColorsWrap">
+        <div class="pdv-section-label">Color — <span id="pdvColorName" style="font-weight:500;text-transform:none;letter-spacing:0;font-size:11px;color:#888;margin-left:0"></span></div>
+        <div class="pdv-colors" id="pdvColors"></div>
+      </div>
+
+      <!-- Size -->
+      <div id="pdvSizesWrap">
+        <div class="pdv-section-label">Talla <a>Guía de tallas →</a></div>
+        <div class="pdv-sizes" id="pdvSizes"></div>
+      </div>
+
+      <!-- Description -->
+      <div class="pdv-desc" id="pdvDesc"></div>
+      <ul class="pdv-features" id="pdvFeatures"></ul>
+
+      <div class="pdv-ship-note">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v5h-7V8z"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/></svg>
+        Envío gratis en pedidos mayores a <strong style="margin-left:3px">$100</strong>
+      </div>
+
+      <div class="pdv-actions">
+        <button class="pdv-btn-add" onclick="addToCartFromPDV()">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Añadir al Carrito
+        </button>
+        <a href="carrito.html" class="pdv-btn-wish" style="text-decoration:none;background:var(--gold);color:var(--navy-deeper);border:none;" onmouseover="this.style.background='var(--gold-light)';this.style.color='var(--navy-deeper)'" onmouseout="this.style.background='var(--gold)';this.style.color='var(--navy-deeper)'">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Ir al Carrito
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related products carousel -->
+  <div class="pdv-related">
+    <div class="pdv-section-title">También te puede gustar</div>
+    <div class="pdv-carousel-wrap">
+      <button class="pdv-carousel-btn prev" onclick="scrollCarousel(-1)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="pdv-carousel" id="pdvCarousel"></div>
+      <button class="pdv-carousel-btn next" onclick="scrollCarousel(1)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Reviews -->
+  <div class="pdv-reviews">
+    <div class="pdv-section-title">Reseñas del Producto</div>
+    <div class="pdv-reviews-header">
+      <div class="pdv-rating-big">
+        <div class="pdv-rating-num" id="pdvBigRating">4.8</div>
+        <div class="pdv-rating-stars-big">★★★★★</div>
+        <div class="pdv-rating-total" id="pdvTotalReviews">0 reseñas</div>
+      </div>
+      <div class="pdv-rating-bars" id="pdvRatingBars">
+        <div class="pdv-bar-row"><span style="min-width:12px">5★</span><div class="pdv-bar-track"><div class="pdv-bar-fill" style="width:75%"></div></div><span>75%</span></div>
+        <div class="pdv-bar-row"><span style="min-width:12px">4★</span><div class="pdv-bar-track"><div class="pdv-bar-fill" style="width:15%"></div></div><span>15%</span></div>
+        <div class="pdv-bar-row"><span style="min-width:12px">3★</span><div class="pdv-bar-track"><div class="pdv-bar-fill" style="width:7%"></div></div><span>7%</span></div>
+        <div class="pdv-bar-row"><span style="min-width:12px">2★</span><div class="pdv-bar-track"><div class="pdv-bar-fill" style="width:2%"></div></div><span>2%</span></div>
+        <div class="pdv-bar-row"><span style="min-width:12px">1★</span><div class="pdv-bar-track"><div class="pdv-bar-fill" style="width:1%"></div></div><span>1%</span></div>
+      </div>
+    </div>
+
+    <div class="pdv-review-list" id="pdvReviewList"></div>
+
+    <!-- Write review -->
+    <div class="pdv-write-review">
+      <div class="pdv-wr-title">Escribe una Reseña</div>
+      <div class="pdv-wr-stars" id="pdvWrStars">
+        <span class="pdv-wr-star" data-v="1">★</span>
+        <span class="pdv-wr-star" data-v="2">★</span>
+        <span class="pdv-wr-star" data-v="3">★</span>
+        <span class="pdv-wr-star" data-v="4">★</span>
+        <span class="pdv-wr-star" data-v="5">★</span>
+      </div>
+      <div class="pdv-wr-row">
+        <input class="pdv-wr-input" id="pdvWrName" placeholder="Tu nombre" type="text">
+        <input class="pdv-wr-input" id="pdvWrTitle" placeholder="Título de la reseña" type="text">
+      </div>
+      <textarea class="pdv-wr-textarea" id="pdvWrBody" placeholder="Cuéntanos tu experiencia con este producto..."></textarea>
+      <button class="pdv-wr-submit" onclick="submitReview()">Publicar Reseña</button>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-top">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="var(--gold)" stroke-width="2.5" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastMsg">Producto añadido al carrito</span>
+  </div>
+  <div>
+    <div class="toast-shipping" id="toastShipping"></div>
+    <div class="shipping-bar-wrap">
+      <div class="shipping-bar-fill" id="shippingBar" style="width:0%"></div>
+    </div>
+  </div>
+  <a href="carrito.html" id="toast-cart-btn" style="display:flex;align-items:center;justify-content:center;gap:7px;background:var(--gold);color:var(--navy-deeper);border-radius:8px;padding:9px 14px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;margin-top:2px;transition:background 0.15s;" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    Ir al Carrito
+  </a>
+</div>
+
+<script>
+// ─── PRODUCT DATA ───
+const products = [
+  { id:1, name:'Polo Tour Performance', brand:'Greg Norman', sport:'golf', cat:'ropa', gender:'caballeros', price:89, colors:['#1a2490','#fff','#2d7a2d'], sizes:['S','M','L','XL','XXL'], badge:'new', img:'https://images.unsplash.com/photo-1598522325074-042db73aa4e6?w=400&q=80', img2:'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=400&q=80', desc:'Polo de alto rendimiento con tecnología de secado rápido. Perfecto para el campo de golf.' },
+  { id:2, name:'Driver Stealth 2', brand:'TaylorMade', sport:'golf', cat:'palos', gender:'caballeros', price:549, colors:['#111','#c0392b'], sizes:[], badge:'hot', img:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80', img2:'https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80', desc:'El driver más popular del tour. Cara Stealth con material de carbono para máxima distancia.' },
+  { id:3, name:'Pro V1 (12 unid.)', brand:'Titleist', sport:'golf', cat:'pelotas', gender:'caballeros', price:59, oldPrice:75, colors:['#fff'], sizes:[], badge:'sale', img:'https://images.unsplash.com/photo-1592919505780-303950717480?w=400&q=80', img2:'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400&q=80', desc:'La pelota de golf #1 en el tour profesional. Control total y distancia máxima.' },
+  { id:4, name:'Pala Pro Carbon V3', brand:'Wilson', sport:'padel', cat:'raquetas', gender:'caballeros', price:220, colors:['#111','#c0392b','#1a2490'], sizes:[], badge:'hot', img:'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=400&q=80', img2:'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=400&q=80', desc:'Pala de pádel de carbono con núcleo de espuma EVA para potencia y control.' },
+  { id:5, name:'Polo Dama Sleeveless', brand:'Greg Norman', sport:'golf', cat:'ropa', gender:'damas', price:75, colors:['#fff','#ffd700','#ff69b4'], sizes:['XS','S','M','L','XL'], badge:'new', img:'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80', img2:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80', desc:'Polo sin mangas para dama con tela de alto rendimiento y protección UV.' },
+  { id:6, name:'Court Air Max Tenis', brand:'New Balance', sport:'tenis', cat:'zapatos', gender:'caballeros', price:130, oldPrice:160, colors:['#fff','#1a2490','#111'], sizes:['40','41','42','43','44'], badge:'sale', img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80', img2:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&q=80', desc:'Zapatilla de tenis con suela de agarre reforzado y amortiguación premium.' },
+  { id:7, name:'Raqueta Pure Drive 2024', brand:'Wilson', sport:'tenis', cat:'raquetas', gender:'caballeros', price:265, colors:['#1a2490','#fff'], sizes:[], badge:'new', img:'https://images.unsplash.com/photo-1551773188-0801da12ddae?w=400&q=80', img2:'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=400&q=80', desc:'Raqueta de tenis con tecnología de fibra de carbono. Ideal para jugadores intermedios y avanzados.' },
+  { id:8, name:'Zapato Golf Dama', brand:'New Balance', sport:'golf', cat:'zapatos', gender:'damas', price:115, colors:['#fff','#ff69b4','#111'], sizes:['36','37','38','39','40'], badge:'', img:'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&q=80', img2:'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=400&q=80', desc:'Zapato de golf para dama con sistema impermeable y spike de cerámica.' },
+  { id:9, name:'Hierros JPX 923 Forged', brand:'Mizuno', sport:'golf', cat:'palos', gender:'caballeros', price:899, colors:['#c0c0c0'], sizes:[], badge:'hot', img:'https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80', img2:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80', desc:'Set de hierros forjados de alta precisión. El favorito de los golfistas de handicap bajo.' },
+  { id:10, name:'Shorts Caballero Dry', brand:'Greg Norman', sport:'golf', cat:'ropa', gender:'caballeros', price:65, colors:['#1a2490','#111','#808080'], sizes:['S','M','L','XL','XXL'], badge:'', img:'https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=400&q=80', img2:'https://images.unsplash.com/photo-1598522325074-042db73aa4e6?w=400&q=80', desc:'Short de golf Dry-Fit con 4 bolsillos y cintura elástica. Máximo confort en el campo.' },
+  { id:11, name:'Pala Defy Pro Gold', brand:'Wilson', sport:'padel', cat:'raquetas', gender:'caballeros', price:280, colors:['#ffd700','#111'], sizes:[], badge:'new', img:'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=400&q=80', img2:'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=400&q=80', desc:'La pala de pádel más avanzada de Wilson. Núcleo de espuma HR3 para golpes explosivos.' },
+  { id:12, name:'Guante de Golf Premium', brand:'Titleist', sport:'golf', cat:'accesorios', gender:'caballeros', price:28, colors:['#fff','#111'], sizes:['S','M','L','XL'], badge:'', img:'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400&q=80', img2:'https://images.unsplash.com/photo-1592919505780-303950717480?w=400&q=80', desc:'Guante de golf de cuero genuino con sistema de agarre antideslizante.' },
+  { id:13, name:'Set Junior JM01', brand:'Mizuno', sport:'golf', cat:'palos', gender:'ninos', price:320, colors:['#1a2490'], sizes:[], badge:'new', img:'https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80', img2:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80', desc:'Set completo de golf para niños. Incluye driver, maderas, hierros y bolsa.' },
+  { id:14, name:'Falda Dama Golf', brand:'Greg Norman', sport:'golf', cat:'ropa', gender:'damas', price:58, colors:['#fff','#1a2490','#ff69b4'], sizes:['XS','S','M','L'], badge:'', img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80', img2:'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80', desc:'Falda de golf para dama con pantalón interior integrado y bolsillo lateral.' },
+  { id:15, name:'Driver G430 Max', brand:'Ping', sport:'golf', cat:'palos', gender:'caballeros', price:499, colors:['#111'], sizes:[], badge:'hot', img:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80', img2:'https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80', desc:'El driver de mayor perdón de Ping. Tecnología Turbulator para reducir la resistencia al aire.' },
+  { id:16, name:'Polo Pádel Dama', brand:'Wilson', sport:'padel', cat:'ropa', gender:'damas', price:55, colors:['#fff','#ff69b4','#1a2490'], sizes:['XS','S','M','L','XL'], badge:'', img:'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80', img2:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80', desc:'Polo de pádel para dama con tecnología de secado rápido y corte ergonómico.' },
+];
+
+let cartCount = 0;
+let cartTotal = 0;
+const FREE_SHIPPING = 100;
+let activeFilters = { sports: [], cats: [], genders: [], brands: [], sizes: [], search: '', priceMin: 0, priceMax: Infinity };
+let currentProduct = null;
+
+// ─── RENDER CARDS ───
+function renderProducts(list) {
+  const grid = document.getElementById('productsGrid');
+  const empty = document.getElementById('emptyState');
+  const count = document.getElementById('productsCount');
+  const header = document.getElementById('headerCount');
+
+  grid.innerHTML = '';
+
+  if (list.length === 0) {
+    empty.classList.add('visible');
+    count.innerHTML = '<strong>0</strong> Productos';
+    header.textContent = 'No se encontraron productos';
+    return;
+  }
+
+  empty.classList.remove('visible');
+  count.innerHTML = `<strong>${list.length}</strong> Productos`;
+  header.textContent = `Mostrando ${list.length} productos`;
+
+  list.forEach(p => {
+    const badgeHtml = p.badge ? `<span class="badge badge-${p.badge}">${p.badge === 'new' ? 'Nuevo' : p.badge === 'hot' ? 'Popular' : 'Oferta'}</span>` : '';
+    const oldPriceHtml = p.oldPrice ? `<span class="product-price-old">$${p.oldPrice}</span><span class="product-price-save">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>` : '';
+    const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" style="background:${c}" onclick="event.stopPropagation()"></span>`).join('');
+    const sizes = p.sizes.length ? p.sizes.map(s => `<span class="size-btn" onclick="event.stopPropagation();selectSize(this)">${s}</span>`).join('') : '';
+    const sizesSection = p.sizes.length ? `<div class="product-sizes">${sizes}</div>` : '';
+
+    grid.innerHTML += `
+      <div class="product-card" onclick="openModal(${p.id})">
+        <div class="product-img-wrap">
+          <img class="img-main" src="${p.img}" alt="${p.name}" loading="lazy">
+          <img class="img-hover" src="${p.img2}" alt="${p.name}" loading="lazy">
+          <div class="product-badges">${badgeHtml}</div>
+          <button class="product-wish" onclick="event.stopPropagation();toggleWish(this)" aria-label="Favorito">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          <div class="product-colors">${swatches}</div>
+        </div>
+        <div class="product-info">
+          <div class="product-sport">${p.sport.toUpperCase()} · ${p.cat.toUpperCase()}</div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-brand">${p.brand}</div>
+          <div class="product-price-row">
+            <span class="product-price">$${p.price}</span>
+            ${oldPriceHtml}
+          </div>
+          ${sizesSection}
+        </div>
+        <div class="product-footer">
+          <button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id})">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Añadir al Carrito
+          </button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+// ─── FILTER LOGIC ───
+function filterProducts() {
+  const searchVal = document.getElementById('searchInput').value.toLowerCase();
+  const priceMin = parseFloat(document.getElementById('priceMin').value) || 0;
+  const priceMax = parseFloat(document.getElementById('priceMax').value) || Infinity;
+
+  const sportChecks = [...document.querySelectorAll('[id^="f-golf"],[id^="f-padel"],[id^="f-tenis"]')].filter(c=>c.checked).map(c=>c.value);
+  const catChecks = [...document.querySelectorAll('[id^="f-palos"],[id^="f-ropa"],[id^="f-zapatos"],[id^="f-raquetas"],[id^="f-accesorios"],[id^="f-pelotas"]')].filter(c=>c.checked).map(c=>c.value);
+  const genderChecks = [...document.querySelectorAll('[id^="f-caballeros"],[id^="f-damas"],[id^="f-ninos"]')].filter(c=>c.checked).map(c=>c.value);
+  const brandChecks = [...document.querySelectorAll('[id^="f-titleist"],[id^="f-mizuno"],[id^="f-callaway"],[id^="f-wilson"],[id^="f-ping"],[id^="f-greg"],[id^="f-nb"]')].filter(c=>c.checked).map(c=>c.value);
+  const sizeChecks = [...document.querySelectorAll('.size-pill.active')].map(s=>s.textContent);
+
+  let filtered = products.filter(p => {
+    if (sportChecks.length && !sportChecks.includes(p.sport)) return false;
+    if (catChecks.length && !catChecks.includes(p.cat)) return false;
+    if (genderChecks.length && !genderChecks.includes(p.gender)) return false;
+    if (brandChecks.length && !brandChecks.includes(p.brand)) return false;
+    if (sizeChecks.length && !sizeChecks.some(s => p.sizes.includes(s))) return false;
+    if (p.price < priceMin || p.price > priceMax) return false;
+    if (searchVal && !p.name.toLowerCase().includes(searchVal) && !p.brand.toLowerCase().includes(searchVal)) return false;
+    return true;
+  });
+
+  renderProducts(filtered);
+  updateActiveFilterTags(sportChecks, catChecks, genderChecks, brandChecks, sizeChecks);
+}
+
+function updateActiveFilterTags(sports, cats, genders, brands, sizes) {
+  const container = document.getElementById('activeFilters');
+  container.innerHTML = '';
+  const all = [...sports, ...cats, ...genders, ...brands, ...sizes];
+  all.forEach(f => {
+    const tag = document.createElement('span');
+    tag.className = 'active-filter-tag';
+    tag.innerHTML = `${f} ✕`;
+    tag.onclick = () => removeFilter(f);
+    container.appendChild(tag);
+  });
+}
+
+function removeFilter(val) {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(cb => { if (cb.value === val) cb.checked = false; });
+  const pills = document.querySelectorAll('.size-pill');
+  pills.forEach(p => { if (p.textContent === val) p.classList.remove('active'); });
+  filterProducts();
+}
+
+function clearAllFilters() {
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+  document.querySelectorAll('.size-pill').forEach(p => p.classList.remove('active'));
+  document.getElementById('priceMin').value = '';
+  document.getElementById('priceMax').value = '';
+  document.getElementById('searchInput').value = '';
+  filterProducts();
+}
+
+function toggleFilter(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+function toggleSizeFilter(pill, size) {
+  pill.classList.toggle('active');
+  filterProducts();
+}
+
+function selectSize(btn) {
+  btn.closest('.product-sizes').querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function sortProducts(val) { filterProducts(); }
+
+// ─── CART ───
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  cartCount++;
+  cartTotal += p.price;
+  document.getElementById('cartCount').textContent = cartCount;
+
+  const remaining = Math.max(0, FREE_SHIPPING - cartTotal);
+  const pct = Math.min(100, (cartTotal / FREE_SHIPPING) * 100);
+  const bar = document.getElementById('shippingBar');
+  const label = document.getElementById('toastShipping');
+
+  bar.style.width = pct + '%';
+  if (remaining <= 0) {
+    bar.classList.add('full');
+    label.className = 'toast-shipping free';
+    label.innerHTML = '<strong>🎉 ¡Tienes envío gratis!</strong>';
+  } else {
+    bar.classList.remove('full');
+    label.className = 'toast-shipping';
+    label.innerHTML = `Te faltan <strong>$${remaining.toFixed(0)}</strong> para <strong>envío gratis</strong>`;
+  }
+
+  showToast(`"${p.name}" añadido al carrito`);
+}
+
+function addToCartFromModal() {
+  if (!currentProduct) return;
+  addToCart(currentProduct.id);
+  closeModal();
+}
+
+// ─── WISHLIST ───
+function toggleWish(btn) {
+  btn.classList.toggle('active');
+}
+
+// ─── PRODUCT DETAIL VIEW ───
+const colorNames = {
+  '#1a2490':'Navy', '#fff':'Blanco', '#ffffff':'Blanco', '#2d7a2d':'Verde',
+  '#000':'Negro', '#000000':'Negro', '#c0392b':'Rojo', '#e74c3c':'Rojo',
+  '#f39c12':'Dorado', '#27ae60':'Verde', '#8e44ad':'Morado', '#2980b9':'Azul',
+  '#3498db':'Azul Cielo', '#e67e22':'Naranja', '#1abc9c':'Turquesa',
+  '#ecf0f1':'Gris Claro', '#95a5a6':'Gris', '#bdc3c7':'Plateado',
+  '#f5f5f0':'Arena', '#d4a017':'Oro', '#2c3e50':'Azul Marino',
+  '#7f8c8d':'Gris Medio'
+};
+function getColorName(hex) { return colorNames[hex.toLowerCase()] || hex; }
+
+// Seed reviews per product (static pool, augmented by user submissions)
+const reviewsDB = {};
+const reviewPool = [
+  { name:"Carlos M.", title:"Excelente calidad", body:"Material muy cómodo, lo uso en el campo y se ve y siente premium. Lo recomiendo al 100%.", stars:5, date:"Mayo 2025", verified:true },
+  { name:"Sofía R.", title:"Perfecto para el juego", body:"El ajuste es ideal, no te limita en el swing. Llegó rápido y bien empacado.", stars:5, date:"Abril 2025", verified:true },
+  { name:"Andrés V.", title:"Muy buen producto", body:"Cumple con lo que promete. Buena relación calidad-precio para lo que ofrece Morsa's.", stars:4, date:"Marzo 2025", verified:false },
+  { name:"Laura G.", title:"Me encantó el diseño", body:"El color es exactamente como en la foto. Muy cómodo para jugar.", stars:5, date:"Junio 2025", verified:true },
+  { name:"Miguel P.", title:"Buen material", body:"La tela es de buena calidad. Le daría 5 estrellas si el tiempo de entrega fuera más rápido.", stars:4, date:"Febrero 2025", verified:true },
+  { name:"Patricia L.", title:"Recomendado", body:"Ya compré dos veces en Morsa's y siempre quedo contento. Este producto no es la excepción.", stars:5, date:"Enero 2025", verified:true },
+  { name:"Roberto F.", title:"Gran compra", body:"Exactamente lo que necesitaba para mi rutina de golf. Tela transpirable y ligera.", stars:5, date:"Mayo 2025", verified:false },
+  { name:"Diana H.", title:"Talla correcta", body:"Pedí la talla que uso siempre y quedó perfecto. Muy satisfecha con la compra.", stars:4, date:"Abril 2025", verified:true }
+];
+
+function getReviews(id) {
+  if (!reviewsDB[id]) {
+    const count = 3 + (id % 3);
+    reviewsDB[id] = reviewPool.slice(0, count);
+  }
+  return reviewsDB[id];
+}
+
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  currentProduct = p;
+
+  const overlay = document.getElementById('pdvOverlay');
+  overlay.scrollTop = 0;
+
+  // Breadcrumb
+  document.getElementById('pdvBreadName').textContent = p.name;
+
+  // Main image
+  const mainImg = document.getElementById('pdvMainImg');
+  mainImg.src = p.img; mainImg.alt = p.name;
+
+  // Thumbnails
+  const thumbs = document.getElementById('pdvThumbs');
+  thumbs.innerHTML = [p.img, p.img2].map((src, i) =>
+    `<img class="pdv-thumb${i===0?' active':''}" src="${src}" alt="${p.name}" onclick="pdvSwitchImg(this,'${src}')">`
+  ).join('');
+
+  // Badge
+  const badge = document.getElementById('pdvBadge');
+  const badgeMap = { new:'NUEVO', popular:'POPULAR', sale:'OFERTA' };
+  if (p.badge && badgeMap[p.badge]) {
+    badge.textContent = badgeMap[p.badge];
+    badge.style.display = 'block';
+    badge.style.background = p.badge === 'sale' ? '#c0392b' : 'var(--navy)';
+  } else { badge.style.display = 'none'; }
+
+  // Sport tag
+  const sportMap = { golf:'⛳ Golf', padel:'🎾 Pádel', tenis:'🎾 Tenis' };
+  const catMap = { ropa:'Ropa', palos:'Palos', zapatos:'Zapatos', accesorios:'Accesorios', pelotas:'Pelotas', maletas:'Maletas', raquetas:'Raquetas/Palas' };
+  document.getElementById('pdvSport').textContent = (sportMap[p.sport]||p.sport) + '  ·  ' + (catMap[p.cat]||p.cat);
+  document.getElementById('pdvName').textContent = p.name;
+  document.getElementById('pdvBrand').textContent = p.brand;
+
+  // Reviews count in rating row
+  const reviews = getReviews(id);
+  document.getElementById('pdvRatingCount').textContent = `(${reviews.length} reseñas)`;
+
+  // Price
+  const priceEl = document.getElementById('pdvPrice');
+  let ph = `<span class="pdv-price">$${p.price}</span>`;
+  if (p.oldPrice) {
+    ph += ` <span class="pdv-price-old">$${p.oldPrice}</span>`;
+    ph += ` <span class="pdv-save-chip">Ahorras $${p.oldPrice - p.price}</span>`;
+  }
+  priceEl.innerHTML = ph;
+
+  // Colors
+  const cWrap = document.getElementById('pdvColorsWrap');
+  const cEl   = document.getElementById('pdvColors');
+  const cName = document.getElementById('pdvColorName');
+  if (p.colors && p.colors.length) {
+    cWrap.style.display = 'block';
+    cName.textContent = getColorName(p.colors[0]);
+    cEl.innerHTML = p.colors.map((c,i) =>
+      `<span class="pdv-color-swatch${i===0?' active':''}" style="background:${c}" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}')"></span>`
+    ).join('');
+  } else { cWrap.style.display = 'none'; }
+
+  // Sizes
+  const sWrap = document.getElementById('pdvSizesWrap');
+  const sEl   = document.getElementById('pdvSizes');
+  if (p.sizes && p.sizes.length) {
+    sWrap.style.display = 'block';
+    sEl.innerHTML = p.sizes.map(s =>
+      `<button class="pdv-size-btn" onclick="pdvSelectSize(this)">${s}</button>`
+    ).join('');
+  } else { sWrap.style.display = 'none'; }
+
+  // Description
+  document.getElementById('pdvDesc').textContent = p.desc;
+
+  // Features
+  const featureMap = {
+    'secado rápido':'Tecnología de secado rápido', 'rendimiento':'Alto rendimiento',
+    'golf':'Diseñado para el campo', 'uv':'Protección UV',
+    'stretch':'Tela stretch flexible', 'pádel':'Ideal para pádel',
+    'tenis':'Ideal para tenis', 'junior':'Diseño junior ergonómico', 'maleta':'Organización máxima'
+  };
+  let feats = [];
+  const dl = (p.desc||'').toLowerCase();
+  for (const [k,v] of Object.entries(featureMap)) if (dl.includes(k)) feats.push(v);
+  feats.push('Materiales de alta calidad');
+  if (feats.length > 4) feats = feats.slice(0,4);
+  document.getElementById('pdvFeatures').innerHTML = feats.map(f=>`<li>${f}</li>`).join('');
+
+  // Related carousel
+  const related = products.filter(x => x.id !== id && (x.sport === p.sport || x.cat === p.cat)).slice(0,8);
+  document.getElementById('pdvCarousel').innerHTML = related.map(r => `
+    <div class="pdv-rel-card" onclick="openModal(${r.id})">
+      <img class="pdv-rel-img" src="${r.img}" alt="${r.name}" loading="lazy">
+      <div class="pdv-rel-info">
+        <div class="pdv-rel-name">${r.name}</div>
+        <div class="pdv-rel-brand">${r.brand}</div>
+        <div class="pdv-rel-price">$${r.price}</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Reviews
+  renderReviews(id);
+
+  // Star picker reset
+  document.querySelectorAll('.pdv-wr-star').forEach(s => s.classList.remove('lit'));
+  document.getElementById('pdvWrName').value = '';
+  document.getElementById('pdvWrTitle').value = '';
+  document.getElementById('pdvWrBody').value = '';
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderReviews(id) {
+  const reviews = getReviews(id);
+  document.getElementById('pdvTotalReviews').textContent = reviews.length + ' reseñas';
+  document.getElementById('pdvRatingCount').textContent = `(${reviews.length} reseñas)`;
+
+  document.getElementById('pdvReviewList').innerHTML = reviews.map(r => `
+    <div class="pdv-review-card">
+      <div class="pdv-review-top">
+        <div class="pdv-avatar">${r.name[0]}</div>
+        <div>
+          <div class="pdv-reviewer">${r.name}</div>
+          <div class="pdv-review-date">${r.date}</div>
+        </div>
+        <div class="pdv-review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+      </div>
+      <div class="pdv-review-title">${r.title}</div>
+      <div class="pdv-review-body">${r.body}</div>
+      ${r.verified ? '<div class="pdv-review-verified">✓ Compra verificada</div>' : ''}
+    </div>
+  `).join('');
+}
+
+// Star picker interaction
+document.addEventListener('DOMContentLoaded', () => {
+  let selectedStars = 0;
+  const stars = document.querySelectorAll('.pdv-wr-star');
+  stars.forEach(s => {
+    s.addEventListener('mouseover', () => {
+      stars.forEach(x => x.classList.toggle('lit', parseInt(x.dataset.v) <= parseInt(s.dataset.v)));
+    });
+    s.addEventListener('mouseout', () => {
+      stars.forEach(x => x.classList.toggle('lit', parseInt(x.dataset.v) <= selectedStars));
+    });
+    s.addEventListener('click', () => {
+      selectedStars = parseInt(s.dataset.v);
+      stars.forEach(x => x.classList.toggle('lit', parseInt(x.dataset.v) <= selectedStars));
+    });
+  });
+});
+
+function submitReview() {
+  const name = document.getElementById('pdvWrName').value.trim();
+  const title = document.getElementById('pdvWrTitle').value.trim();
+  const body = document.getElementById('pdvWrBody').value.trim();
+  const stars = document.querySelectorAll('.pdv-wr-star.lit').length;
+  if (!name || !title || !body || !stars) {
+    showToast('Por favor completa todos los campos y selecciona una calificación');
+    return;
+  }
+  const now = new Date();
+  const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const review = { name, title, body, stars, date: months[now.getMonth()] + ' ' + now.getFullYear(), verified: false };
+  const id = currentProduct.id;
+  if (!reviewsDB[id]) reviewsDB[id] = [];
+  reviewsDB[id].unshift(review);
+  renderReviews(id);
+  document.getElementById('pdvWrName').value = '';
+  document.getElementById('pdvWrTitle').value = '';
+  document.getElementById('pdvWrBody').value = '';
+  document.querySelectorAll('.pdv-wr-star').forEach(s => s.classList.remove('lit'));
+  showToast('¡Gracias por tu reseña!');
+  document.getElementById('pdvReviewList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closePDV() {
+  document.getElementById('pdvOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentProduct = null;
+}
+// keep backward compat alias
+function closeModal() { closePDV(); }
+
+function pdvSwitchImg(thumb, src) {
+  document.getElementById('pdvMainImg').src = src;
+  document.querySelectorAll('.pdv-thumb').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
+}
+function pdvSelectColor(el, hex) {
+  document.querySelectorAll('.pdv-color-swatch').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pdvColorName').textContent = getColorName(hex);
+}
+function pdvSelectSize(el) {
+  document.querySelectorAll('.pdv-size-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function addToCartFromPDV() {
+  if (!currentProduct) return;
+  addToCart(currentProduct.id);
+}
+function addToCartFromModal() { addToCartFromPDV(); }
+function scrollCarousel(dir) {
+  const c = document.getElementById('pdvCarousel');
+  c.scrollBy({ left: dir * 440, behavior: 'smooth' });
+}
+
+
+// ─── TOAST ───
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Init — read URL params and pre-apply filters
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const sport = params.get('sport');
+  const cat = params.get('cat');
+  const gender = params.get('gender');
+  const sub = params.get('sub');
+
+  // Map sport
+  if (sport) {
+    const map = { golf: 'f-golf', padel: 'f-padel', tenis: 'f-tenis' };
+    if (map[sport]) { const el = document.getElementById(map[sport]); if (el) el.checked = true; }
+  }
+
+  // Map cat
+  if (cat) {
+    const map = { palos: 'f-palos', ropa: 'f-ropa', zapatos: 'f-zapatos', raquetas: 'f-raquetas', accesorios: 'f-accesorios', pelotas: 'f-pelotas', maletas: 'f-accesorios' };
+    if (map[cat]) { const el = document.getElementById(map[cat]); if (el) el.checked = true; }
+  }
+
+  // Map gender
+  if (gender) {
+    const map = { caballeros: 'f-caballeros', damas: 'f-damas', ninos: 'f-ninos' };
+    if (map[gender]) { const el = document.getElementById(map[gender]); if (el) el.checked = true; }
+  }
+
+  // Update page title based on filters
+  const titleEl = document.querySelector('.page-title');
+  const subtitleEl = document.querySelector('.page-subtitle');
+  if (sport && !cat && !gender) {
+    const names = { golf: 'Golf', padel: 'Pádel', tenis: 'Tenis' };
+    titleEl.textContent = names[sport] || 'Tienda';
+    subtitleEl.textContent = `Todos los productos de ${names[sport] || sport}`;
+  } else if (cat) {
+    const names = { palos: 'Palos de Golf', ropa: 'Ropa', zapatos: 'Zapatos', raquetas: 'Raquetas & Palas', accesorios: 'Accesorios', pelotas: 'Pelotas', maletas: 'Maletas' };
+    titleEl.textContent = names[cat] || 'Tienda';
+  } else if (gender) {
+    const names = { caballeros: 'Caballeros', damas: 'Damas', ninos: 'Niños Junior' };
+    titleEl.textContent = names[gender] || 'Tienda';
+    subtitleEl.textContent = `Equipamiento para ${names[gender] || gender}`;
+  }
+
+  filterProducts();
+})();
+</script>
+
+</body>
+</html>

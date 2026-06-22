@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito — Morsa's Proshop</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #2A2FA8;
+  --navy-dark: #1E2280;
+  --navy-deeper: #151970;
+  --gold: #F5A623;
+  --gold-light: #FBBF47;
+  --white: #FFFFFF;
+  --off-white: #F8F7F4;
+  --light-gray: #EFEFEF;
+  --mid-gray: #D0D0D0;
+  --text-dark: #0E1050;
+  --text-mid: #555;
+  --green: #27ae60;
+  --green-light: #e8f5ed;
+  --red: #e74c3c;
+  --red-light: #fdecea;
+  --radius: 8px;
+  --radius-lg: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Barlow', sans-serif; background: var(--off-white); color: var(--text-dark); min-height: 100vh; }
+
+/* ── NAV ── */
+.nav {
+  background: var(--navy-deeper);
+  padding: 0 32px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--white); }
+.nav-back {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white);
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer; text-decoration: none;
+  transition: background 0.15s;
+}
+.nav-back:hover { background: rgba(255,255,255,0.14); }
+.nav-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── STEPPER ── */
+.stepper-wrap {
+  background: var(--white);
+  border-bottom: 1px solid var(--light-gray);
+  padding: 0 32px;
+}
+.stepper {
+  max-width: 960px; margin: 0 auto;
+  display: flex; align-items: center;
+  padding: 16px 0;
+  gap: 0;
+}
+.step {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  transition: color 0.2s;
+}
+.step.active { color: var(--navy); }
+.step.done { color: var(--green); }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--light-gray);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.step.active .step-num { background: var(--navy); color: var(--white); }
+.step.done .step-num { background: var(--green); color: var(--white); }
+.step-line {
+  flex: 1; height: 1px;
+  background: var(--light-gray);
+  margin: 0 10px;
+  min-width: 24px;
+}
+.step-line.done { background: var(--green); }
+
+/* ── LAYOUT ── */
+.checkout-layout {
+  max-width: 960px; margin: 0 auto;
+  padding: 32px 24px 80px;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── PANELS ── */
+.panel {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--light-gray);
+  overflow: hidden;
+}
+.panel-header {
+  padding: 18px 22px 16px;
+  border-bottom: 1px solid var(--light-gray);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.panel-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; color: var(--text-dark); letter-spacing: 0.02em;
+}
+.panel-subtitle { font-size: 12px; color: #aaa; margin-top: 1px; }
+.panel-body { padding: 20px 22px; }
+
+/* ── CART ITEMS ── */
+.cart-item {
+  display: flex; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--light-gray);
+}
+.cart-item:last-child { border-bottom: none; padding-bottom: 0; }
+.cart-img {
+  width: 72px; height: 80px;
+  object-fit: cover; object-position: top;
+  border-radius: 8px;
+  background: var(--off-white);
+  flex-shrink: 0;
+}
+.cart-details { flex: 1; min-width: 0; }
+.cart-sport-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; font-weight: 800; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 3px;
+}
+.cart-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 700; color: var(--text-dark);
+  margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cart-brand { font-size: 11px; color: #aaa; margin-bottom: 8px; }
+.cart-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cart-pill {
+  font-size: 11px; font-weight: 600;
+  background: var(--off-white);
+  color: var(--text-mid);
+  padding: 2px 8px; border-radius: 100px;
+  border: 1px solid var(--light-gray);
+}
+.cart-right {
+  display: flex; flex-direction: column;
+  align-items: flex-end; justify-content: space-between;
+  flex-shrink: 0;
+}
+.cart-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; color: var(--navy);
+}
+.cart-qty {
+  display: flex; align-items: center; gap: 0;
+  border: 1.5px solid var(--light-gray);
+  border-radius: 8px; overflow: hidden;
+}
+.cart-qty-btn {
+  width: 28px; height: 28px;
+  background: none; border: none;
+  font-size: 16px; color: var(--text-mid);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.12s;
+}
+.cart-qty-btn:hover { background: var(--off-white); }
+.cart-qty-num {
+  width: 28px; text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--text-dark);
+  border-left: 1px solid var(--light-gray);
+  border-right: 1px solid var(--light-gray);
+  line-height: 28px;
+}
+.cart-remove {
+  background: none; border: none;
+  font-size: 11px; color: #bbb;
+  cursor: pointer; text-decoration: underline;
+  transition: color 0.12s;
+}
+.cart-remove:hover { color: var(--red); }
+
+/* ── EMPTY CART ── */
+.empty-cart {
+  text-align: center; padding: 48px 24px;
+  display: none;
+}
+.empty-cart.visible { display: block; }
+.empty-cart-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-cart-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; color: var(--text-dark); margin-bottom: 8px;
+}
+.empty-cart-text { font-size: 13px; color: var(--text-mid); margin-bottom: 20px; }
+.btn-shop {
+  background: var(--navy);
+  color: var(--white);
+  border: none; border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; cursor: pointer;
+  text-decoration: none; display: inline-block;
+  transition: background 0.15s;
+}
+.btn-shop:hover { background: var(--navy-dark); }
+
+/* ── SHIPPING PROGRESS ── */
+.ship-progress {
+  background: var(--green-light);
+  border: 1px solid #c6e8d4;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 16px;
+}
+.ship-progress-top {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px; font-weight: 600; color: #1a7a48;
+  margin-bottom: 8px;
+}
+.ship-bar-track {
+  height: 6px; background: rgba(0,0,0,0.1);
+  border-radius: 100px; overflow: hidden;
+}
+.ship-bar-fill {
+  height: 100%; border-radius: 100px;
+  background: var(--green);
+  transition: width 0.5s ease;
+}
+.ship-bar-fill.complete { background: var(--green); }
+
+/* ── DELIVERY OPTIONS ── */
+.delivery-opts { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+.delivery-opt {
+  border: 1.5px solid var(--light-gray);
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.delivery-opt:hover { border-color: var(--navy); }
+.delivery-opt.selected {
+  border-color: var(--navy);
+  background: #f0f2ff;
+}
+.delivery-opt input[type="radio"] { margin-top: 3px; accent-color: var(--navy); flex-shrink: 0; }
+.delivery-opt-body { flex: 1; }
+.delivery-opt-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 800; color: var(--text-dark);
+  letter-spacing: 0.02em; margin-bottom: 2px;
+  display: flex; align-items: center; gap: 8px;
+}
+.delivery-opt-desc { font-size: 12px; color: var(--text-mid); line-height: 1.4; }
+.delivery-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+  padding: 2px 8px; border-radius: 100px;
+  text-transform: uppercase;
+}
+.badge-free { background: var(--green-light); color: #1a7a48; }
+.badge-cost { background: #fff3d6; color: #8a5a00; }
+.badge-store { background: #e8eaff; color: var(--navy); }
+
+/* ── FORM ── */
+/* Required field validation */
+.form-input.invalid {
+  border-color: var(--red) !important;
+  background: var(--red-light) !important;
+}
+.field-error {
+  font-size: 11px;
+  color: var(--red);
+  margin-top: 3px;
+  display: none;
+}
+.field-error.visible { display: block; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-grid.full { grid-template-columns: 1fr; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.span2 { grid-column: 1 / -1; }
+.form-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--text-mid);
+}
+.form-input {
+  font-family: 'Barlow', sans-serif; font-size: 13px;
+  border: 1.5px solid var(--light-gray);
+  border-radius: 8px; padding: 10px 12px;
+  color: var(--text-dark); background: #fafafa;
+  outline: none; transition: border-color 0.15s;
+}
+.form-input:focus { border-color: var(--navy); background: var(--white); }
+.form-input::placeholder { color: #bbb; }
+.zone-note {
+  background: #fff8e6;
+  border: 1px solid #f0d080;
+  border-radius: 8px; padding: 9px 12px;
+  font-size: 12px; color: #7a5500;
+  display: flex; align-items: flex-start; gap: 7px;
+}
+
+/* ── PAYMENT METHODS ── */
+.payment-opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 0; }
+.payment-opt {
+  border: 1.5px solid var(--light-gray);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  display: flex; align-items: center; gap: 12px;
+}
+.payment-opt:hover { border-color: var(--navy); }
+.payment-opt.selected { border-color: var(--navy); background: #f0f2ff; }
+.payment-opt input[type="radio"] { accent-color: var(--navy); flex-shrink: 0; }
+.payment-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.payment-body { flex: 1; }
+.payment-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 800; color: var(--text-dark);
+  letter-spacing: 0.02em;
+}
+.payment-desc { font-size: 11px; color: var(--text-mid); }
+
+/* Payment instructions box */
+.payment-instructions {
+  background: var(--off-white);
+  border: 1.5px solid var(--light-gray);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 12px;
+  display: none;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.payment-instructions.visible { display: block; }
+.instr-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--text-mid);
+  margin-bottom: 8px;
+}
+.instr-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text-dark);
+  margin-bottom: 4px;
+}
+.instr-label { color: #aaa; min-width: 80px; font-size: 11px; }
+.instr-val { font-weight: 700; }
+.copy-btn {
+  background: none; border: 1px solid var(--mid-gray);
+  border-radius: 5px; padding: 2px 7px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--text-mid); cursor: pointer;
+  transition: all 0.12s;
+}
+.copy-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+
+/* ── ORDER SUMMARY (right column) ── */
+.summary-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; color: var(--text-mid);
+  padding: 7px 0;
+}
+.summary-row:not(:last-child) { border-bottom: 1px solid var(--light-gray); }
+.summary-row.total {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; color: var(--text-dark);
+  padding: 12px 0 0;
+  border-top: 2px solid var(--text-dark);
+  border-bottom: none;
+  margin-top: 4px;
+}
+.summary-row.total span:last-child { color: var(--navy); }
+.summary-row.shipping-free span:last-child { color: var(--green); font-weight: 700; }
+.summary-row.discount span:last-child { color: var(--green); }
+
+/* ── COUPON ── */
+.coupon-row {
+  display: flex; gap: 8px; margin: 12px 0;
+}
+.coupon-input {
+  flex: 1;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--light-gray);
+  border-radius: 8px; padding: 9px 12px;
+  outline: none; transition: border-color 0.15s;
+  color: var(--text-dark); background: #fafafa;
+}
+.coupon-input:focus { border-color: var(--navy); background: white; }
+.coupon-input::placeholder { font-weight: 500; text-transform: none; letter-spacing: 0; color: #bbb; }
+.coupon-btn {
+  background: var(--navy); color: white;
+  border: none; border-radius: 8px;
+  padding: 9px 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; cursor: pointer;
+  transition: background 0.15s;
+}
+.coupon-btn:hover { background: var(--navy-dark); }
+.coupon-msg { font-size: 11px; margin-top: 4px; display: none; }
+.coupon-msg.ok { color: var(--green); display: block; }
+.coupon-msg.err { color: var(--red); display: block; }
+
+/* ── CHECKOUT BUTTON ── */
+.btn-checkout {
+  width: 100%;
+  background: var(--gold);
+  color: var(--navy-deeper);
+  border: none; border-radius: 10px;
+  padding: 16px 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.15s, transform 0.12s;
+  margin-top: 16px;
+}
+.btn-checkout:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-checkout:active { transform: translateY(0); }
+.btn-checkout:disabled { background: var(--mid-gray); cursor: not-allowed; transform: none; }
+
+.secure-note {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-size: 11px; color: #aaa; margin-top: 10px;
+}
+
+/* ── CONFIRMATION SCREEN ── */
+.confirmation {
+  display: none;
+  text-align: center;
+  padding: 48px 32px;
+}
+.confirmation.visible { display: block; }
+.conf-check {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--green-light);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 32px;
+}
+.conf-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; color: var(--text-dark);
+  letter-spacing: 0.02em; margin-bottom: 6px;
+}
+.conf-subtitle { font-size: 14px; color: var(--text-mid); margin-bottom: 24px; line-height: 1.5; }
+.conf-order-num {
+  background: var(--off-white);
+  border: 1.5px solid var(--light-gray);
+  border-radius: 10px;
+  padding: 14px 24px;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+.conf-order-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #aaa; margin-bottom: 4px; }
+.conf-order-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; color: var(--navy); letter-spacing: 0.08em;
+}
+.conf-steps {
+  display: flex; flex-direction: column; gap: 10px;
+  max-width: 360px; margin: 0 auto 28px;
+  text-align: left;
+}
+.conf-step {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--text-mid);
+}
+.conf-step-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--navy);
+  color: white; font-size: 12px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.btn-back-shop {
+  background: var(--navy); color: white;
+  border: none; border-radius: 10px;
+  padding: 13px 28px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; cursor: pointer;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+  transition: background 0.15s;
+}
+.btn-back-shop:hover { background: var(--navy-dark); }
+
+/* Step visibility */
+.checkout-step { display: none; }
+.checkout-step.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="tienda.html" class="nav-back">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Tienda
+  </a>
+  <div class="nav-title">Checkout</div>
+  <a href="index.html" class="nav-logo">MORSA'S<span> PROSHOP</span></a>
+</nav>
+
+<!-- STEPPER -->
+<div class="stepper-wrap">
+  <div class="stepper">
+    <div class="step active" id="step-ind-1">
+      <div class="step-num">1</div>
+      <span>Carrito</span>
+    </div>
+    <div class="step-line" id="line-1"></div>
+    <div class="step" id="step-ind-2">
+      <div class="step-num">2</div>
+      <span>Envío</span>
+    </div>
+    <div class="step-line" id="line-2"></div>
+    <div class="step" id="step-ind-3">
+      <div class="step-num">3</div>
+      <span>Pago</span>
+    </div>
+    <div class="step-line" id="line-3"></div>
+    <div class="step" id="step-ind-4">
+      <div class="step-num">4</div>
+      <span>Confirmación</span>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="checkout-layout">
+
+  <!-- LEFT COLUMN: steps 1-3 + confirmation -->
+  <div>
+
+    <!-- ── STEP 1: CARRITO ── -->
+    <div class="checkout-step active panel" id="step1">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Tu Carrito</div>
+          <div class="panel-subtitle" id="cart-count-label">0 productos</div>
+        </div>
+        <button onclick="clearCart()" style="font-size:11px;color:#bbb;background:none;border:none;cursor:pointer;text-decoration:underline;">Vaciar carrito</button>
+      </div>
+      <div class="panel-body">
+        <div id="cart-items-list"></div>
+        <div class="empty-cart" id="empty-cart">
+          <div class="empty-cart-icon">🛒</div>
+          <div class="empty-cart-title">Tu carrito está vacío</div>
+          <div class="empty-cart-text">Agrega productos desde la tienda para comenzar tu compra.</div>
+          <a href="tienda.html" class="btn-shop">Ir a la tienda</a>
+        </div>
+        <div class="ship-progress" id="ship-progress">
+          <div class="ship-progress-top">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v5h-7V8z"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/></svg>
+            <span id="ship-progress-msg">Agrega más para envío gratis</span>
+          </div>
+          <div class="ship-bar-track">
+            <div class="ship-bar-fill" id="ship-bar" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 22px 20px; display:flex; justify-content:flex-end;">
+        <button class="btn-checkout" style="width:auto;padding:13px 32px;" onclick="goToStep(2)" id="btn-to-shipping">
+          Continuar al Envío
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: ENVÍO ── -->
+    <div class="checkout-step panel" id="step2">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Datos de Envío</div>
+          <div class="panel-subtitle">¿Cómo quieres recibir tu pedido?</div>
+        </div>
+        <button onclick="goToStep(1)" style="font-size:11px;color:var(--navy);background:none;border:none;cursor:pointer;text-decoration:underline;font-weight:700;">← Editar carrito</button>
+      </div>
+      <div class="panel-body">
+
+        <!-- Delivery options -->
+        <div style="margin-bottom:18px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Método de entrega</div>
+          <div class="delivery-opts">
+            <label class="delivery-opt selected" id="opt-delivery">
+              <input type="radio" name="delivery" value="delivery" checked onchange="selectDelivery('delivery')">
+              <div class="delivery-opt-body">
+                <div class="delivery-opt-title">
+                  🚗 Delivery a domicilio — Caracas
+                  <span class="delivery-badge badge-cost" id="delivery-cost-badge">$3.00</span>
+                </div>
+                <div class="delivery-opt-desc">Entrega en las próximas 24 horas dentro de Caracas. Envío gratis en pedidos mayores a $100.</div>
+              </div>
+            </label>
+            <label class="delivery-opt" id="opt-pickup">
+              <input type="radio" name="delivery" value="pickup" onchange="selectDelivery('pickup')">
+              <div class="delivery-opt-body">
+                <div class="delivery-opt-title">
+                  🏪 Retiro en tienda
+                  <span class="delivery-badge badge-store">GRATIS</span>
+                </div>
+                <div class="delivery-opt-desc">Morsa's Superstore — C.C. La Tahona, Caracas. Lunes a sábado 10am–7pm. Listo en 24 horas.</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Delivery address form -->
+        <div id="delivery-form">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de contacto y dirección</div>
+          <div class="form-grid" style="margin-bottom:12px;">
+            <div class="form-group">
+              <label class="form-label">Nombre</label>
+              <input class="form-input" id="f-nombre" type="text" placeholder="Tu nombre completo" oninput="clearError('f-nombre')"><span class="field-error" id="err-f-nombre">Este campo es obligatorio</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono / WhatsApp</label>
+              <input class="form-input" id="f-telefono" type="tel" placeholder="+58 414 000 0000" oninput="clearError('f-telefono')"><span class="field-error" id="err-f-telefono">Este campo es obligatorio</span>
+            </div>
+            <div class="form-group span2">
+              <label class="form-label">Dirección</label>
+              <input class="form-input" id="f-direccion" type="text" placeholder="Calle, edificio, piso, apartamento..." oninput="clearError('f-direccion')"><span class="field-error" id="err-f-direccion">Este campo es obligatorio</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Urbanización / Sector</label>
+              <input class="form-input" id="f-sector" type="text" placeholder="Ej: Las Mercedes, Altamira..." oninput="clearError('f-sector')"><span class="field-error" id="err-f-sector">Este campo es obligatorio</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Municipio</label>
+              <select class="form-input" id="f-municipio" onchange="clearError('f-municipio')">
+                <option value="">Selecciona...</option>
+                <option>Baruta</option>
+                <option>Chacao</option>
+                <option>El Hatillo</option>
+                <option>Libertador</option>
+                <option>Sucre</option>
+              </select>
+            </div>
+            <div class="form-group span2">
+              <label class="form-label">Punto de referencia (opcional)</label>
+              <input class="form-input" id="f-referencia" type="text" placeholder="Cerca de...">
+            </div>
+          </div>
+          <div class="zone-note">
+            <span>📍</span>
+            <span>El delivery aplica solo dentro del área metropolitana de Caracas. Si tienes dudas sobre tu zona, escríbenos por WhatsApp antes de confirmar.</span>
+          </div>
+        </div>
+
+        <!-- Pickup form (hidden by default) -->
+        <div id="pickup-form" style="display:none;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de contacto</div>
+          <div class="form-grid" style="margin-bottom:16px;">
+            <div class="form-group">
+              <label class="form-label">Nombre</label>
+              <input class="form-input" id="p-nombre" type="text" placeholder="Tu nombre completo">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono / WhatsApp</label>
+              <input class="form-input" id="p-telefono" type="tel" placeholder="+58 414 000 0000">
+            </div>
+          </div>
+          <div style="background:#e8eaff;border:1.5px solid #c0c4ff;border-radius:10px;padding:14px 16px;font-size:13px;color:var(--navy);">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;">📍 Morsa's Superstore</div>
+            <div style="font-weight:600;margin-bottom:2px;">C.C. La Tahona, Caracas</div>
+            <div style="font-size:12px;color:#555;margin-bottom:4px;">Lunes a Sábado: 10:00am – 7:00pm</div>
+            <div style="font-size:12px;color:#555;">Te avisaremos por WhatsApp cuando tu pedido esté listo para retirar.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+          <button class="btn-checkout" style="width:auto;padding:13px 32px;" onclick="validateShipping()">
+            Continuar al Pago
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: PAGO ── -->
+    <div class="checkout-step panel" id="step3">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Método de Pago</div>
+          <div class="panel-subtitle">Selecciona cómo quieres pagar</div>
+        </div>
+        <button onclick="goToStep(2)" style="font-size:11px;color:var(--navy);background:none;border:none;cursor:pointer;text-decoration:underline;font-weight:700;">← Editar envío</button>
+      </div>
+      <div class="panel-body">
+        <div class="payment-opts">
+
+          <label class="payment-opt selected" onclick="selectPayment('zelle')">
+            <input type="radio" name="payment" value="zelle" checked>
+            <div class="payment-icon" style="background:#5c35cc15;">💜</div>
+            <div class="payment-body">
+              <div class="payment-name">Zelle</div>
+              <div class="payment-desc">Transferencia desde banco en EE.UU. — Inmediata</div>
+            </div>
+          </label>
+
+          <label class="payment-opt" onclick="selectPayment('cash')">
+            <input type="radio" name="payment" value="cash">
+            <div class="payment-icon" style="background:#27ae6015;">💵</div>
+            <div class="payment-body">
+              <div class="payment-name">Dólares en efectivo</div>
+              <div class="payment-desc">Pago al momento del delivery o al retirar en tienda</div>
+            </div>
+          </label>
+
+          <label class="payment-opt" onclick="selectPayment('stripe')">
+            <input type="radio" name="payment" value="stripe">
+            <div class="payment-icon" style="background:#635bff15;">💳</div>
+            <div class="payment-body">
+              <div class="payment-name">Tarjeta internacional</div>
+              <div class="payment-desc">Visa / Mastercard via Stripe — Cargo en USD</div>
+            </div>
+          </label>
+
+          <label class="payment-opt" onclick="selectPayment('venmo')">
+            <input type="radio" name="payment" value="venmo">
+            <div class="payment-icon" style="background:#3d95ce15;">💙</div>
+            <div class="payment-body">
+              <div class="payment-name">Venmo</div>
+              <div class="payment-desc">Transferencia desde app Venmo (EE.UU.)</div>
+            </div>
+          </label>
+
+          <label class="payment-opt" onclick="selectPayment('pagomovil')">
+            <input type="radio" name="payment" value="pagomovil">
+            <div class="payment-icon" style="background:#e74c3c15;">🏦</div>
+            <div class="payment-body">
+              <div class="payment-name">Pago móvil</div>
+              <div class="payment-desc">Escribe por WhatsApp para confirmar el monto en bolívares</div>
+            </div>
+          </label>
+
+          <label class="payment-opt" onclick="selectPayment('usdt')">
+            <input type="radio" name="payment" value="usdt">
+            <div class="payment-icon" style="background:#26a17b15;">₮</div>
+            <div class="payment-body">
+              <div class="payment-name">USDT — Binance</div>
+              <div class="payment-desc">Crypto USDT (TRC20 o BEP20) via Binance Pay</div>
+            </div>
+          </label>
+
+        </div>
+
+        <!-- Payment instructions -->
+        <div class="payment-instructions visible" id="pay-instructions">
+          <div class="instr-title" id="instr-title">Instrucciones de pago — Zelle</div>
+          <div id="instr-body">
+            <div class="instr-row">
+              <span class="instr-label">Email Zelle</span>
+              <span class="instr-val">pagos@morsas.com</span>
+              <button class="copy-btn" onclick="copyText('pagos@morsas.com', this)">Copiar</button>
+            </div>
+            <div class="instr-row">
+              <span class="instr-label">Nombre</span>
+              <span class="instr-val">Morsa's Proshop LLC</span>
+            </div>
+            <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">
+              Incluye tu número de orden en el comentario del pago. Envíanos el comprobante por WhatsApp para confirmar.
+            </div>
+          </div>
+        </div>
+
+        <!-- Stripe card form (hidden) -->
+        <div id="stripe-form" style="display:none;margin-top:12px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de tarjeta</div>
+          <div class="form-grid" style="margin-bottom:10px;">
+            <div class="form-group span2">
+              <label class="form-label">Número de tarjeta</label>
+              <input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Fecha de vencimiento</label>
+              <input class="form-input" type="text" placeholder="MM / AA" maxlength="7">
+            </div>
+            <div class="form-group">
+              <label class="form-label">CVV</label>
+              <input class="form-input" type="text" placeholder="123" maxlength="4">
+            </div>
+            <div class="form-group span2">
+              <label class="form-label">Nombre en la tarjeta</label>
+              <input class="form-input" type="text" placeholder="Como aparece en la tarjeta">
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#aaa;">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Pago procesado de forma segura por Stripe. No almacenamos datos de tarjeta.
+          </div>
+        </div>
+
+        <!-- Pago móvil instructions (hidden) -->
+        <div id="pagomovil-form" style="display:none;margin-top:12px;">
+          <div class="payment-instructions visible">
+            <div class="instr-title">Datos para pago móvil</div>
+            <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
+              El monto en bolívares se calcula a tasa BCV del día. Al confirmar pedido te enviaremos el monto exacto por WhatsApp, o puedes escribirnos directamente al botón <strong>"Enviar pedido por WhatsApp"</strong> que se encuentra en la siguiente sección una vez confirmes el pedido para acelerar el proceso.
+            </div>
+          </div>
+        </div>
+
+        <!-- USDT instructions (hidden) -->
+        <div id="usdt-form" style="display:none;margin-top:12px;">
+          <div class="payment-instructions visible">
+            <div class="instr-title">Binance Pay / USDT</div>
+            <div class="instr-row">
+              <span class="instr-label">Binance ID</span>
+              <span class="instr-val">364212398</span>
+              <button class="copy-btn" onclick="copyText('364212398', this)">Copiar</button>
+            </div>
+            <div class="instr-row">
+              <span class="instr-label">Red</span>
+              <span class="instr-val">TRC20 o BEP20 (USDT)</span>
+            </div>
+            <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">
+              Envía exactamente el monto de tu orden. Comparte el hash de la transacción por WhatsApp para confirmar.
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;margin-top:20px;">
+          <button class="btn-checkout" style="width:auto;padding:13px 32px;" onclick="placeOrder()">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Confirmar Pedido
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: CONFIRMACIÓN ── -->
+    <div class="checkout-step panel" id="step4">
+      <div class="confirmation visible">
+        <div class="conf-check">✅</div>
+        <div class="conf-title">¡Pedido Confirmado!</div>
+        <div class="conf-subtitle" id="conf-subtitle">Gracias por tu compra. Te contactaremos por WhatsApp para coordinar el pago y la entrega.</div>
+        <div class="conf-order-num">
+          <div class="conf-order-label">Número de orden</div>
+          <div class="conf-order-val" id="conf-order-num">MP-000000</div>
+        </div>
+        <div class="conf-steps">
+          <div class="conf-step">
+            <div class="conf-step-icon">1</div>
+            <div>Recibirás un mensaje de WhatsApp en los próximos minutos con los detalles del pago.</div>
+          </div>
+          <div class="conf-step">
+            <div class="conf-step-icon">2</div>
+            <div>Envía tu comprobante de pago y te confirmamos el pedido.</div>
+          </div>
+          <div class="conf-step" id="conf-step3">
+            <div class="conf-step-icon">3</div>
+            <div id="conf-step3-text">Coordinamos la fecha y hora de tu delivery.</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+          <a id="wa-notify-btn" href="#" target="_blank"
+            style="display:inline-flex;align-items:center;gap:9px;background:#25D366;color:#fff;border:none;border-radius:10px;padding:15px 28px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background 0.15s;box-shadow:0 4px 16px rgba(37,211,102,0.3);"
+            onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.845L0 24l6.335-1.509A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.727.888.924-3.638-.235-.374A9.818 9.818 0 1112 21.818z"/></svg>
+            Enviar pedido por WhatsApp
+          </a>
+          <div style="font-size:11px;color:#aaa;max-width:300px;text-align:center;line-height:1.5;">
+            Toca el botón para enviarnos los detalles de tu pedido y coordinar el pago.
+          </div>
+          <a href="tienda.html" class="btn-back-shop">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            Seguir comprando
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end left column -->
+
+  <!-- RIGHT COLUMN: Order summary -->
+  <div>
+    <div class="panel" style="position:sticky;top:86px;">
+      <div class="panel-header">
+        <div class="panel-title">Resumen del Pedido</div>
+      </div>
+      <div class="panel-body">
+
+        <!-- Mini cart items -->
+        <div id="summary-mini-items" style="margin-bottom:12px;"></div>
+
+        <!-- Coupon -->
+        <div class="coupon-row">
+          <input class="coupon-input" id="coupon-input" type="text" placeholder="Código de descuento">
+          <button class="coupon-btn" onclick="applyCoupon()">Aplicar</button>
+        </div>
+        <div class="coupon-msg" id="coupon-msg"></div>
+
+        <hr style="border:none;border-top:1px solid var(--light-gray);margin:12px 0;">
+
+        <!-- Totals -->
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="sum-subtotal">$0.00</span>
+        </div>
+        <div class="summary-row" id="sum-discount-row" style="display:none;">
+          <span>Descuento (MORSA10)</span>
+          <span id="sum-discount" class="discount">-$0.00</span>
+        </div>
+        <div class="summary-row" id="sum-shipping-row">
+          <span>Delivery</span>
+          <span id="sum-shipping">$3.00</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="sum-total">$0.00</span>
+        </div>
+
+        <button class="btn-checkout" onclick="goToStep(currentStep + 1)" id="summary-cta">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span id="summary-cta-label">Continuar</span>
+        </button>
+
+        <div class="secure-note">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Compra segura — datos protegidos
+        </div>
+
+        <div style="display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap;">
+          <span style="font-size:18px;" title="Zelle">💜</span>
+          <span style="font-size:18px;" title="Dólares">💵</span>
+          <span style="font-size:18px;" title="Stripe">💳</span>
+          <span style="font-size:18px;" title="Venmo">💙</span>
+          <span style="font-size:18px;" title="Pago Móvil">🏦</span>
+          <span style="font-size:18px;" title="USDT">₮</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end checkout-layout -->
+
+<script>
+// ── CONSTANTS ──
+const FREE_SHIPPING = 100;
+const DELIVERY_COST = 3;
+
+// ── STATE ──
+let currentStep = 1;
+let deliveryMethod = 'delivery';
+let paymentMethod = 'zelle';
+let discountApplied = false;
+let discountPct = 0;
+
+// ── DEMO CART (shared with tienda via localStorage simulation) ──
+// Pre-filled with sample items so the page is useful standalone
+let cart = [
+  { id:1, name:'Polo Tour Performance', brand:'Greg Norman', sport:'golf', cat:'ropa', price:89, qty:1, color:'#1a2490', size:'M', img:'https://images.unsplash.com/photo-1598522325074-042db73aa4e6?w=120&q=70' },
+  { id:3, name:'Pro V1 (12 unid.)', brand:'Titleist', sport:'golf', cat:'pelotas', price:59, qty:1, color:'#fff', size:'', img:'https://images.unsplash.com/photo-1592919505780-303950717480?w=120&q=70' },
+];
+
+// ── CALCULATIONS ──
+function getSubtotal() {
+  return cart.reduce((s, i) => s + i.price * i.qty, 0);
+}
+function getDiscount() {
+  if (!discountApplied) return 0;
+  return Math.round(getSubtotal() * discountPct) / 100;
+}
+function getShipping() {
+  if (deliveryMethod === 'pickup') return 0;
+  const sub = getSubtotal() - getDiscount();
+  return sub >= FREE_SHIPPING ? 0 : DELIVERY_COST;
+}
+function getTotal() {
+  return getSubtotal() - getDiscount() + getShipping();
+}
+
+// ── RENDER CART ITEMS ──
+function renderCart() {
+  const list = document.getElementById('cart-items-list');
+  const empty = document.getElementById('empty-cart');
+  const shipProg = document.getElementById('ship-progress');
+  const countLabel = document.getElementById('cart-count-label');
+
+  if (cart.length === 0) {
+    list.innerHTML = '';
+    empty.classList.add('visible');
+    shipProg.style.display = 'none';
+    countLabel.textContent = '0 productos';
+    updateSummary();
+    return;
+  }
+
+  empty.classList.remove('visible');
+  shipProg.style.display = 'block';
+  countLabel.textContent = cart.length === 1 ? '1 producto' : `${cart.length} productos`;
+
+  list.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img class="cart-img" src="${item.img}" alt="${item.name}" onerror="this.style.background='#eee'">
+      <div class="cart-details">
+        <div class="cart-sport-tag">${item.sport.toUpperCase()} · ${item.cat.toUpperCase()}</div>
+        <div class="cart-name">${item.name}</div>
+        <div class="cart-brand">${item.brand}</div>
+        <div class="cart-meta">
+          ${item.color ? `<span class="cart-pill" style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:${item.color};border:1px solid #ddd;display:inline-block;"></span> Color</span>` : ''}
+          ${item.size ? `<span class="cart-pill">Talla ${item.size}</span>` : ''}
+        </div>
+      </div>
+      <div class="cart-right">
+        <div class="cart-price">$${(item.price * item.qty).toFixed(0)}</div>
+        <div class="cart-qty">
+          <button class="cart-qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <span class="cart-qty-num">${item.qty}</span>
+          <button class="cart-qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+        <button class="cart-remove" onclick="removeItem(${item.id})">Eliminar</button>
+      </div>
+    </div>
+  `).join('');
+
+  updateShippingBar();
+  updateSummary();
+}
+
+function updateShippingBar() {
+  const sub = getSubtotal();
+  const pct = Math.min(100, (sub / FREE_SHIPPING) * 100);
+  const bar = document.getElementById('ship-bar');
+  const msg = document.getElementById('ship-progress-msg');
+  bar.style.width = pct + '%';
+  if (sub >= FREE_SHIPPING) {
+    msg.innerHTML = '<strong>🎉 ¡Tienes envío gratis!</strong>';
+    bar.classList.add('complete');
+  } else {
+    const rem = (FREE_SHIPPING - sub).toFixed(0);
+    msg.innerHTML = `Agrega <strong>$${rem} más</strong> para envío gratis`;
+    bar.classList.remove('complete');
+  }
+}
+
+function updateSummary() {
+  const sub = getSubtotal();
+  const disc = getDiscount();
+  const ship = getShipping();
+  const total = getTotal();
+
+  document.getElementById('sum-subtotal').textContent = '$' + sub.toFixed(2);
+  document.getElementById('sum-total').textContent = '$' + total.toFixed(2);
+
+  const discRow = document.getElementById('sum-discount-row');
+  discRow.style.display = discountApplied ? 'flex' : 'none';
+  document.getElementById('sum-discount').textContent = '-$' + disc.toFixed(2);
+
+  const shipRow = document.getElementById('sum-shipping-row');
+  const shipEl = document.getElementById('sum-shipping');
+  if (deliveryMethod === 'pickup') {
+    shipRow.style.display = 'none';
+  } else {
+    shipRow.style.display = 'flex';
+    if (ship === 0) {
+      shipEl.textContent = 'GRATIS';
+      shipEl.style.color = 'var(--green)';
+      shipEl.style.fontWeight = '700';
+      shipRow.classList.add('shipping-free');
+    } else {
+      shipEl.textContent = '$' + ship.toFixed(2);
+      shipEl.style.color = '';
+      shipEl.style.fontWeight = '';
+      shipRow.classList.remove('shipping-free');
+    }
+  }
+
+  // Update delivery badge
+  const badge = document.getElementById('delivery-cost-badge');
+  if (badge) {
+    if (sub >= FREE_SHIPPING) {
+      badge.textContent = 'GRATIS';
+      badge.className = 'delivery-badge badge-free';
+    } else {
+      badge.textContent = '$3.00';
+      badge.className = 'delivery-badge badge-cost';
+    }
+  }
+
+  // Mini summary items
+  const mini = document.getElementById('summary-mini-items');
+  if (mini) {
+    mini.innerHTML = cart.map(i => `
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-mid);padding:4px 0;">
+        <span style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${i.qty > 1 ? `${i.qty}×` : ''} ${i.name}</span>
+        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">$${(i.price*i.qty).toFixed(0)}</span>
+      </div>
+    `).join('');
+  }
+}
+
+// ── CART ACTIONS ──
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  renderCart();
+}
+function removeItem(id) {
+  cart = cart.filter(i => i.id !== id);
+  renderCart();
+}
+function clearCart() {
+  if (!confirm('¿Vaciar el carrito?')) return;
+  cart = [];
+  renderCart();
+}
+
+// ── COUPON ──
+const COUPONS = { 'MORSA10': 10, 'GOLF15': 15, 'PADEL20': 20 };
+function applyCoupon() {
+  const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+  const msg = document.getElementById('coupon-msg');
+  if (COUPONS[code]) {
+    discountApplied = true;
+    discountPct = COUPONS[code];
+    msg.textContent = `✓ Código aplicado — ${discountPct}% de descuento`;
+    msg.className = 'coupon-msg ok';
+    updateSummary();
+  } else if (code === '') {
+    msg.textContent = 'Ingresa un código de descuento';
+    msg.className = 'coupon-msg err';
+  } else {
+    discountApplied = false;
+    discountPct = 0;
+    msg.textContent = 'Código no válido';
+    msg.className = 'coupon-msg err';
+    updateSummary();
+  }
+}
+
+// ── FIELD HELPERS ──
+function clearError(id) {
+  const el = document.getElementById(id);
+  const err = document.getElementById('err-' + id);
+  if (el) el.classList.remove('invalid');
+  if (err) err.classList.remove('visible');
+}
+
+// ── SHIPPING VALIDATION ──
+function validateShipping() {
+  if (deliveryMethod === 'pickup') {
+    const nombre = document.getElementById('p-nombre').value.trim();
+    const telefono = document.getElementById('p-telefono').value.trim();
+    let valid = true;
+    [['p-nombre', nombre], ['p-telefono', telefono]].forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      const err = document.getElementById('err-' + id);
+      if (!val) {
+        el.classList.add('invalid');
+        if (err) err.classList.add('visible');
+        valid = false;
+      } else {
+        el.classList.remove('invalid');
+        if (err) err.classList.remove('visible');
+      }
+    });
+    if (valid) goToStep(3);
+    return;
+  }
+
+  // Delivery fields
+  const fields = [
+    { id: 'f-nombre',    val: document.getElementById('f-nombre').value.trim() },
+    { id: 'f-telefono',  val: document.getElementById('f-telefono').value.trim() },
+    { id: 'f-direccion', val: document.getElementById('f-direccion').value.trim() },
+    { id: 'f-sector',    val: document.getElementById('f-sector').value.trim() },
+    { id: 'f-municipio', val: document.getElementById('f-municipio').value },
+  ];
+
+  let valid = true;
+  fields.forEach(({ id, val }) => {
+    const el = document.getElementById(id);
+    const err = document.getElementById('err-' + id);
+    if (!val) {
+      el.classList.add('invalid');
+      if (err) err.classList.add('visible');
+      valid = false;
+    } else {
+      el.classList.remove('invalid');
+      if (err) err.classList.remove('visible');
+    }
+  });
+
+  if (!valid) {
+    document.getElementById('delivery-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  goToStep(3);
+}
+
+// ── STEP NAVIGATION ──
+function goToStep(n) {
+  if (n < 1 || n > 4) return;
+  if (n > 1 && cart.length === 0) { alert('Agrega productos al carrito primero.'); return; }
+
+  document.querySelectorAll('.checkout-step').forEach((s, i) => {
+    s.classList.toggle('active', i + 1 === n);
+  });
+
+  // Update stepper
+  for (let i = 1; i <= 4; i++) {
+    const ind = document.getElementById('step-ind-' + i);
+    const line = document.getElementById('line-' + i);
+    ind.className = 'step' + (i < n ? ' done' : i === n ? ' active' : '');
+    if (line) line.className = 'step-line' + (i < n ? ' done' : '');
+  }
+
+  // Update CTA
+  const ctaLabel = document.getElementById('summary-cta-label');
+  const cta = document.getElementById('summary-cta');
+  if (n === 1) { ctaLabel.textContent = 'Continuar al Envío'; cta.onclick = () => goToStep(2); }
+  else if (n === 2) { ctaLabel.textContent = 'Continuar al Pago'; cta.onclick = validateShipping; }
+  else if (n === 3) { ctaLabel.textContent = 'Confirmar Pedido'; cta.onclick = placeOrder; }
+  else { cta.style.display = 'none'; }
+
+  currentStep = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── DELIVERY ──
+function selectDelivery(val) {
+  deliveryMethod = val;
+  document.getElementById('opt-delivery').classList.toggle('selected', val === 'delivery');
+  document.getElementById('opt-pickup').classList.toggle('selected', val === 'pickup');
+  document.getElementById('delivery-form').style.display = val === 'delivery' ? 'block' : 'none';
+  document.getElementById('pickup-form').style.display = val === 'pickup' ? 'block' : 'none';
+  document.getElementById('sum-shipping-row').style.display = val === 'pickup' ? 'none' : 'flex';
+  updateSummary();
+}
+
+// ── PAYMENT ──
+const instrData = {
+  zelle: {
+    title: 'Instrucciones de pago — Zelle',
+    html: `<div class="instr-row"><span class="instr-label">Email Zelle</span><span class="instr-val">info@morsasgolf.com</span><button class="copy-btn" onclick="copyText('info@morsasgolf.com',this)">Copiar</button></div>
+           <div class="instr-row"><span class="instr-label">Nombre</span><span class="instr-val">Morsa's Proshop LLC</span></div>
+           <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">Envíanos el comprobante por WhatsApp para confirmar tu pedido.</div>`
+  },
+  venmo: {
+    title: 'Instrucciones de pago — Venmo',
+    html: `<div class="instr-row"><span class="instr-label">Usuario Venmo</span><span class="instr-val">@mariafernanda-nunez</span><button class="copy-btn" onclick="copyText('@mariafernanda-nunez',this)">Copiar</button></div>
+            <div class="instr-row"><span class="instr-label">Nombre</span><span class="instr-val">Maria Fernanda Nunez</span></div>
+           <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">Envíanos el comprobante por WhatsApp para confirmar tu pedido.</div>`
+  },
+  cash: {
+    title: 'Pago en efectivo',
+    html: `<div style="font-size:12px;color:var(--text-mid);line-height:1.6;">El pago en dólares se realiza <strong>al momento de la entrega</strong> (delivery) o al retirar en tienda. Ten el monto exacto listo.<br><br>💡 Aceptamos billetes de $1, $5, $10, $20, $50 y $100.</div>`
+  }
+};
+
+function selectPayment(val) {
+  paymentMethod = val;
+  document.querySelectorAll('.payment-opt').forEach(o => {
+    o.classList.toggle('selected', o.querySelector('input').value === val);
+  });
+  document.querySelectorAll('.payment-opt input').forEach(r => {
+    if (r.value === val) r.checked = true;
+  });
+
+  // Hide all extra forms
+  ['stripe-form','pagomovil-form','usdt-form'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+
+  const instrBox = document.getElementById('pay-instructions');
+  if (val === 'stripe') {
+    instrBox.classList.remove('visible');
+    document.getElementById('stripe-form').style.display = 'block';
+  } else if (val === 'pagomovil') {
+    instrBox.classList.remove('visible');
+    document.getElementById('pagomovil-form').style.display = 'block';
+  } else if (val === 'usdt') {
+    instrBox.classList.remove('visible');
+    document.getElementById('usdt-form').style.display = 'block';
+  } else if (instrData[val]) {
+    instrBox.classList.add('visible');
+    document.getElementById('instr-title').textContent = instrData[val].title;
+    document.getElementById('instr-body').innerHTML = instrData[val].html;
+  } else {
+    instrBox.classList.remove('visible');
+  }
+}
+
+// ── COPY ──
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).catch(() => {});
+  btn.textContent = '✓ Copiado';
+  btn.style.background = 'var(--green)';
+  btn.style.color = 'white';
+  btn.style.borderColor = 'var(--green)';
+  setTimeout(() => { btn.textContent = 'Copiar'; btn.style = ''; }, 2000);
+}
+
+// ── CARD FORMAT ──
+function formatCard(el) {
+  el.value = el.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+}
+
+// ── PLACE ORDER ──
+// ── WHATSAPP NOTIFICATION (CallMeBot + WA link backup) ──
+const WA_PHONE   = '584128422837';
+const WA_API_KEY = '1144889';
+
+function buildWhatsAppMessage(orderNum, snapshot) {
+  const lines = [
+    '🛍️ *NUEVO PEDIDO — Morsas Proshop*',
+    '━━━━━━━━━━━━━━━━━━━━',
+    `📦 Orden: *${orderNum}*`,
+    '',
+    '🛒 *Productos:*',
+    ...snapshot.items.map(i => `  • ${i.qty > 1 ? i.qty + '× ' : ''}${i.name} — $${(i.price * i.qty).toFixed(2)}`),
+    '',
+    `💰 Subtotal: $${snapshot.subtotal}`,
+    snapshot.discount > 0 ? `🏷️ Descuento: -$${snapshot.discount}` : null,
+    `🚚 Envío: ${snapshot.shipping === 0 ? 'GRATIS' : '$' + snapshot.shipping}`,
+    `✅ *Total: $${snapshot.total}*`,
+    '',
+    `📬 Entrega: *${snapshot.deliveryLabel}*`,
+    snapshot.deliveryMethod === 'delivery' ? `📍 ${snapshot.direccion}` : '📍 Retiro en La Tahona',
+    snapshot.deliveryMethod === 'delivery' ? `👤 ${snapshot.nombre}` : null,
+    snapshot.deliveryMethod === 'delivery' ? `📱 ${snapshot.telefono}` : null,
+    '',
+    `💳 Pago: *${snapshot.payLabel}*`,
+  ].filter(l => l !== null).join('\n');
+  return lines;
+}
+
+async function sendWhatsAppNotification(orderNum, snapshot) {
+  const msg = buildWhatsAppMessage(orderNum, snapshot);
+  try {
+    const url = `https://api.callmebot.com/whatsapp.php?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}&apikey=${WA_API_KEY}`;
+    await fetch(url, { mode: 'no-cors' });
+  } catch(e) {
+    console.warn('CallMeBot error:', e);
+  }
+  // Also update the WA button as backup
+  const waBtn = document.getElementById('wa-notify-btn');
+  if (waBtn) waBtn.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+}
+
+function placeOrder() {
+  const orderNum = 'MP-' + Math.floor(100000 + Math.random() * 900000);
+  document.getElementById('conf-order-num').textContent = orderNum;
+
+  const pickupNames = { delivery: 'Delivery a domicilio — Caracas', pickup: 'Retiro en tienda — La Tahona' };
+  const payNames    = { zelle:'Zelle', cash:'Dólares en efectivo', stripe:'Tarjeta internacional (Stripe)', venmo:'Venmo', pagomovil:'Pago móvil', usdt:'USDT / Binance' };
+
+  document.getElementById('conf-subtitle').textContent =
+    `Gracias por tu compra. Coordinaremos el ${deliveryMethod === 'pickup' ? 'retiro en tienda' : 'delivery'} y el pago por ${payNames[paymentMethod]} por WhatsApp en los próximos minutos.`;
+
+  if (deliveryMethod === 'pickup') {
+    document.getElementById('conf-step3-text').textContent = 'Puedes retirar tu pedido en Morsa\'s Superstore, C.C. La Tahona, cuando te avisemos.';
+  }
+
+  // Build snapshot for WhatsApp notification
+  const sub  = getSubtotal();
+  const disc = getDiscount();
+  const ship = getShipping();
+  const snapshot = {
+    items:          [...cart],
+    subtotal:       sub.toFixed(2),
+    discount:       disc.toFixed(2),
+    shipping:       ship,
+    total:          getTotal().toFixed(2),
+    deliveryMethod,
+    deliveryLabel:  pickupNames[deliveryMethod],
+    payLabel:       payNames[paymentMethod],
+    nombre:         document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '—',
+    telefono:       document.getElementById(deliveryMethod === 'delivery' ? 'f-telefono' : 'p-telefono')?.value || '—',
+    direccion:      [
+                      document.getElementById('f-direccion')?.value,
+                      document.getElementById('f-sector')?.value,
+                      document.getElementById('f-municipio')?.value
+                    ].filter(Boolean).join(', ') || '—',
+  };
+
+  // Send WhatsApp notification automatically + update button as backup
+  sendWhatsAppNotification(orderNum, snapshot);
+
+  goToStep(4);
+  cart = [];
+}
+
+// ── INIT ──
+renderCart();
+</script>
+</body>
+</html>
