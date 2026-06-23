@@ -4,12 +4,12 @@
 const API = {
     // Obtener productos
     getProducts: async (category = null) => {
-        let url = `${CONFIG.API_URL}${CONFIG.WC_STORE_API}/products`;
+        let url = `${CONFIG.API_URL}${CONFIG.WC_STORE_API}/products?per_page=100`;
         if (category) {
             // Nota: Para filtrar por categoría, WooCommerce Store API usa ?category=ID
             // Por simplicidad en la demo, podríamos cargar todos y filtrar en el frontend,
             // o mapear el slug de categoría a su ID.
-            url += `?category=${category}`;
+            url += `&category=${category}`;
         }
         
         try {
