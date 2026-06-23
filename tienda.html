@@ -1672,28 +1672,13 @@
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
     Ir al Carrito
   </a>
-</div>
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
 
 <script>
 // ─── PRODUCT DATA ───
-const products = [
-  { id:1, name:'Polo Tour Performance', brand:'Greg Norman', sport:'golf', cat:'ropa', gender:'caballeros', price:89, colors:['#1a2490','#fff','#2d7a2d'], sizes:['S','M','L','XL','XXL'], badge:'new', img:'https://images.unsplash.com/photo-1598522325074-042db73aa4e6?w=400&q=80', img2:'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=400&q=80', desc:'Polo de alto rendimiento con tecnología de secado rápido. Perfecto para el campo de golf.' },
-  { id:2, name:'Driver Stealth 2', brand:'TaylorMade', sport:'golf', cat:'palos', gender:'caballeros', price:549, colors:['#111','#c0392b'], sizes:[], badge:'hot', img:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80', img2:'https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80', desc:'El driver más popular del tour. Cara Stealth con material de carbono para máxima distancia.' },
-  { id:3, name:'Pro V1 (12 unid.)', brand:'Titleist', sport:'golf', cat:'pelotas', gender:'caballeros', price:59, oldPrice:75, colors:['#fff'], sizes:[], badge:'sale', img:'https://images.unsplash.com/photo-1592919505780-303950717480?w=400&q=80', img2:'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400&q=80', desc:'La pelota de golf #1 en el tour profesional. Control total y distancia máxima.' },
-  { id:4, name:'Pala Pro Carbon V3', brand:'Wilson', sport:'padel', cat:'raquetas', gender:'caballeros', price:220, colors:['#111','#c0392b','#1a2490'], sizes:[], badge:'hot', img:'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=400&q=80', img2:'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=400&q=80', desc:'Pala de pádel de carbono con núcleo de espuma EVA para potencia y control.' },
-  { id:5, name:'Polo Dama Sleeveless', brand:'Greg Norman', sport:'golf', cat:'ropa', gender:'damas', price:75, colors:['#fff','#ffd700','#ff69b4'], sizes:['XS','S','M','L','XL'], badge:'new', img:'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80', img2:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80', desc:'Polo sin mangas para dama con tela de alto rendimiento y protección UV.' },
-  { id:6, name:'Court Air Max Tenis', brand:'New Balance', sport:'tenis', cat:'zapatos', gender:'caballeros', price:130, oldPrice:160, colors:['#fff','#1a2490','#111'], sizes:['40','41','42','43','44'], badge:'sale', img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80', img2:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&q=80', desc:'Zapatilla de tenis con suela de agarre reforzado y amortiguación premium.' },
-  { id:7, name:'Raqueta Pure Drive 2024', brand:'Wilson', sport:'tenis', cat:'raquetas', gender:'caballeros', price:265, colors:['#1a2490','#fff'], sizes:[], badge:'new', img:'https://images.unsplash.com/photo-1551773188-0801da12ddae?w=400&q=80', img2:'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=400&q=80', desc:'Raqueta de tenis con tecnología de fibra de carbono. Ideal para jugadores intermedios y avanzados.' },
-  { id:8, name:'Zapato Golf Dama', brand:'New Balance', sport:'golf', cat:'zapatos', gender:'damas', price:115, colors:['#fff','#ff69b4','#111'], sizes:['36','37','38','39','40'], badge:'', img:'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&q=80', img2:'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=400&q=80', desc:'Zapato de golf para dama con sistema impermeable y spike de cerámica.' },
-  { id:9, name:'Hierros JPX 923 Forged', brand:'Mizuno', sport:'golf', cat:'palos', gender:'caballeros', price:899, colors:['#c0c0c0'], sizes:[], badge:'hot', img:'https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80', img2:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80', desc:'Set de hierros forjados de alta precisión. El favorito de los golfistas de handicap bajo.' },
-  { id:10, name:'Shorts Caballero Dry', brand:'Greg Norman', sport:'golf', cat:'ropa', gender:'caballeros', price:65, colors:['#1a2490','#111','#808080'], sizes:['S','M','L','XL','XXL'], badge:'', img:'https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=400&q=80', img2:'https://images.unsplash.com/photo-1598522325074-042db73aa4e6?w=400&q=80', desc:'Short de golf Dry-Fit con 4 bolsillos y cintura elástica. Máximo confort en el campo.' },
-  { id:11, name:'Pala Defy Pro Gold', brand:'Wilson', sport:'padel', cat:'raquetas', gender:'caballeros', price:280, colors:['#ffd700','#111'], sizes:[], badge:'new', img:'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=400&q=80', img2:'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=400&q=80', desc:'La pala de pádel más avanzada de Wilson. Núcleo de espuma HR3 para golpes explosivos.' },
-  { id:12, name:'Guante de Golf Premium', brand:'Titleist', sport:'golf', cat:'accesorios', gender:'caballeros', price:28, colors:['#fff','#111'], sizes:['S','M','L','XL'], badge:'', img:'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400&q=80', img2:'https://images.unsplash.com/photo-1592919505780-303950717480?w=400&q=80', desc:'Guante de golf de cuero genuino con sistema de agarre antideslizante.' },
-  { id:13, name:'Set Junior JM01', brand:'Mizuno', sport:'golf', cat:'palos', gender:'ninos', price:320, colors:['#1a2490'], sizes:[], badge:'new', img:'https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80', img2:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80', desc:'Set completo de golf para niños. Incluye driver, maderas, hierros y bolsa.' },
-  { id:14, name:'Falda Dama Golf', brand:'Greg Norman', sport:'golf', cat:'ropa', gender:'damas', price:58, colors:['#fff','#1a2490','#ff69b4'], sizes:['XS','S','M','L'], badge:'', img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80', img2:'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80', desc:'Falda de golf para dama con pantalón interior integrado y bolsillo lateral.' },
-  { id:15, name:'Driver G430 Max', brand:'Ping', sport:'golf', cat:'palos', gender:'caballeros', price:499, colors:['#111'], sizes:[], badge:'hot', img:'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80', img2:'https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80', desc:'El driver de mayor perdón de Ping. Tecnología Turbulator para reducir la resistencia al aire.' },
-  { id:16, name:'Polo Pádel Dama', brand:'Wilson', sport:'padel', cat:'ropa', gender:'damas', price:55, colors:['#fff','#ff69b4','#1a2490'], sizes:['XS','S','M','L','XL'], badge:'', img:'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=400&q=80', img2:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80', desc:'Polo de pádel para dama con tecnología de secado rápido y corte ergonómico.' },
-];
+const products = [];
 
 let cartCount = 0;
 let cartTotal = 0;
@@ -1837,8 +1822,14 @@ function sortProducts(val) { filterProducts(); }
 function addToCart(id) {
   const p = products.find(x => x.id === id);
   if (!p) return;
-  cartCount++;
-  cartTotal += p.price;
+  
+  // Llamamos a la API global del carrito (del archivo js/cart.js)
+  Cart.add(p.id, p.name, p.price, p.img);
+  
+  // Continuamos con la logica visual antigua (shipping bar, count, etc) por compatibilidad visual
+  cartCount = Cart.items.reduce((acc, i) => acc + i.quantity, 0);
+  cartTotal = Cart.getTotal();
+  
   document.getElementById('cartCount').textContent = cartCount;
 
   const remaining = Math.max(0, FREE_SHIPPING - cartTotal);
@@ -2166,9 +2157,28 @@ function showToast(msg) {
     subtitleEl.textContent = `Equipamiento para ${names[gender] || gender}`;
   }
 
-  filterProducts();
+  API.getProducts().then(wcProducts => {
+    wcProducts.forEach(p => {
+      products.push({
+        id: p.id,
+        name: p.name,
+        brand: p.attributes?.find(a => a.name === 'Marca')?.terms?.[0]?.name || 'Morsa\'s',
+        sport: p.categories?.find(c => ['golf','padel','tenis'].includes(c.slug))?.slug || 'golf',
+        cat: p.categories?.find(c => ['palos','ropa','zapatos','raquetas','accesorios','pelotas'].includes(c.slug))?.slug || 'accesorios',
+        gender: 'caballeros',
+        price: (parseFloat(p.prices?.price || 0) / Math.pow(10, p.prices?.currency_minor_unit || 2)).toFixed(2),
+        oldPrice: p.on_sale ? (parseFloat(p.prices?.regular_price || 0) / Math.pow(10, p.prices?.currency_minor_unit || 2)).toFixed(2) : null,
+        colors: [],
+        sizes: p.attributes?.find(a => a.name === 'Talla')?.terms?.map(t => t.name) || [],
+        badge: p.on_sale ? 'sale' : '',
+        img: p.images?.[0]?.src || 'https://via.placeholder.com/400',
+        img2: p.images?.[1]?.src || p.images?.[0]?.src || 'https://via.placeholder.com/400',
+        desc: p.short_description?.replace(/(<([^>]+)>)/gi, "") || ''
+      });
+    });
+    filterProducts();
+  });
 })();
 </script>
-
 </body>
 </html>

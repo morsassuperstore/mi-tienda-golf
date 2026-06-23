@@ -976,6 +976,10 @@ body { font-family: 'Barlow', sans-serif; background: var(--off-white); color: v
 
 </div><!-- end checkout-layout -->
 
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+
 <script>
 // ── CONSTANTS ──
 const FREE_SHIPPING = 100;
@@ -989,15 +993,11 @@ let discountApplied = false;
 let discountPct = 0;
 
 // ── DEMO CART (shared with tienda via localStorage simulation) ──
-// Pre-filled with sample items so the page is useful standalone
-let cart = [
-  { id:1, name:'Polo Tour Performance', brand:'Greg Norman', sport:'golf', cat:'ropa', price:89, qty:1, color:'#1a2490', size:'M', img:'https://images.unsplash.com/photo-1598522325074-042db73aa4e6?w=120&q=70' },
-  { id:3, name:'Pro V1 (12 unid.)', brand:'Titleist', sport:'golf', cat:'pelotas', price:59, qty:1, color:'#fff', size:'', img:'https://images.unsplash.com/photo-1592919505780-303950717480?w=120&q=70' },
-];
+// Ahora manejado por cart.js usando LocalStorage
 
 // ── CALCULATIONS ──
 function getSubtotal() {
-  return cart.reduce((s, i) => s + i.price * i.qty, 0);
+  return Cart.getTotal();
 }
 function getDiscount() {
   if (!discountApplied) return 0;
@@ -1019,7 +1019,7 @@ function renderCart() {
   const shipProg = document.getElementById('ship-progress');
   const countLabel = document.getElementById('cart-count-label');
 
-  if (cart.length === 0) {
+  if (Cart.items.length === 0) {
     list.innerHTML = '';
     empty.classList.add('visible');
     shipProg.style.display = 'none';
@@ -1030,28 +1030,24 @@ function renderCart() {
 
   empty.classList.remove('visible');
   shipProg.style.display = 'block';
-  countLabel.textContent = cart.length === 1 ? '1 producto' : `${cart.length} productos`;
+  countLabel.textContent = Cart.items.length === 1 ? '1 producto' : `${Cart.items.length} productos`;
 
-  list.innerHTML = cart.map(item => `
+  list.innerHTML = Cart.items.map(item => `
     <div class="cart-item">
-      <img class="cart-img" src="${item.img}" alt="${item.name}" onerror="this.style.background='#eee'">
+      <img class="cart-img" src="${item.image}" alt="${item.title}" onerror="this.style.background='#eee'">
       <div class="cart-details">
-        <div class="cart-sport-tag">${item.sport.toUpperCase()} · ${item.cat.toUpperCase()}</div>
-        <div class="cart-name">${item.name}</div>
-        <div class="cart-brand">${item.brand}</div>
-        <div class="cart-meta">
-          ${item.color ? `<span class="cart-pill" style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:${item.color};border:1px solid #ddd;display:inline-block;"></span> Color</span>` : ''}
-          ${item.size ? `<span class="cart-pill">Talla ${item.size}</span>` : ''}
-        </div>
+        <div class="cart-sport-tag">PRODUCTO</div>
+        <div class="cart-name">${item.title}</div>
+        <div class="cart-brand">Morsa's</div>
       </div>
       <div class="cart-right">
-        <div class="cart-price">$${(item.price * item.qty).toFixed(0)}</div>
+        <div class="cart-price">$${(item.price * item.quantity).toFixed(2)}</div>
         <div class="cart-qty">
-          <button class="cart-qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
-          <span class="cart-qty-num">${item.qty}</span>
-          <button class="cart-qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+          <button class="cart-qty-btn" onclick="changeQty(${item.product_id}, ${item.variation_id}, -1)">−</button>
+          <span class="cart-qty-num">${item.quantity}</span>
+          <button class="cart-qty-btn" onclick="changeQty(${item.product_id}, ${item.variation_id}, 1)">+</button>
         </div>
-        <button class="cart-remove" onclick="removeItem(${item.id})">Eliminar</button>
+        <button class="cart-remove" onclick="removeItem(${item.product_id}, ${item.variation_id})">Eliminar</button>
       </div>
     </div>
   `).join('');
@@ -1123,29 +1119,29 @@ function updateSummary() {
   // Mini summary items
   const mini = document.getElementById('summary-mini-items');
   if (mini) {
-    mini.innerHTML = cart.map(i => `
+    mini.innerHTML = Cart.items.map(i => `
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-mid);padding:4px 0;">
-        <span style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${i.qty > 1 ? `${i.qty}×` : ''} ${i.name}</span>
-        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">$${(i.price*i.qty).toFixed(0)}</span>
+        <span style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${i.quantity > 1 ? `${i.quantity}×` : ''} ${i.title}</span>
+        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">$${(i.price*i.quantity).toFixed(2)}</span>
       </div>
     `).join('');
   }
 }
 
 // ── CART ACTIONS ──
-function changeQty(id, delta) {
-  const item = cart.find(i => i.id === id);
+function changeQty(pid, vid, delta) {
+  const item = Cart.items.find(i => i.product_id === pid && i.variation_id === vid);
   if (!item) return;
-  item.qty = Math.max(1, item.qty + delta);
+  Cart.updateQuantity(pid, vid, item.quantity + delta);
   renderCart();
 }
-function removeItem(id) {
-  cart = cart.filter(i => i.id !== id);
+function removeItem(pid, vid) {
+  Cart.remove(pid, vid);
   renderCart();
 }
 function clearCart() {
   if (!confirm('¿Vaciar el carrito?')) return;
-  cart = [];
+  Cart.clear();
   renderCart();
 }
 
@@ -1235,7 +1231,7 @@ function validateShipping() {
 // ── STEP NAVIGATION ──
 function goToStep(n) {
   if (n < 1 || n > 4) return;
-  if (n > 1 && cart.length === 0) { alert('Agrega productos al carrito primero.'); return; }
+  if (n > 1 && Cart.items.length === 0) { alert('Agrega productos al carrito primero.'); return; }
 
   document.querySelectorAll('.checkout-step').forEach((s, i) => {
     s.classList.toggle('active', i + 1 === n);
@@ -1382,51 +1378,92 @@ async function sendWhatsAppNotification(orderNum, snapshot) {
   if (waBtn) waBtn.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
 }
 
-function placeOrder() {
-  const orderNum = 'MP-' + Math.floor(100000 + Math.random() * 900000);
-  document.getElementById('conf-order-num').textContent = orderNum;
+async function placeOrder() {
+  const btn = document.querySelector('.btn-checkout[onclick="placeOrder()"]');
+  if (btn) btn.disabled = true;
 
-  const pickupNames = { delivery: 'Delivery a domicilio — Caracas', pickup: 'Retiro en tienda — La Tahona' };
-  const payNames    = { zelle:'Zelle', cash:'Dólares en efectivo', stripe:'Tarjeta internacional (Stripe)', venmo:'Venmo', pagomovil:'Pago móvil', usdt:'USDT / Binance' };
-
-  document.getElementById('conf-subtitle').textContent =
-    `Gracias por tu compra. Coordinaremos el ${deliveryMethod === 'pickup' ? 'retiro en tienda' : 'delivery'} y el pago por ${payNames[paymentMethod]} por WhatsApp en los próximos minutos.`;
-
-  if (deliveryMethod === 'pickup') {
-    document.getElementById('conf-step3-text').textContent = 'Puedes retirar tu pedido en Morsa\'s Superstore, C.C. La Tahona, cuando te avisemos.';
-  }
-
-  // Build snapshot for WhatsApp notification
-  const sub  = getSubtotal();
-  const disc = getDiscount();
-  const ship = getShipping();
-  const snapshot = {
-    items:          [...cart],
-    subtotal:       sub.toFixed(2),
-    discount:       disc.toFixed(2),
-    shipping:       ship,
-    total:          getTotal().toFixed(2),
-    deliveryMethod,
-    deliveryLabel:  pickupNames[deliveryMethod],
-    payLabel:       payNames[paymentMethod],
-    nombre:         document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '—',
-    telefono:       document.getElementById(deliveryMethod === 'delivery' ? 'f-telefono' : 'p-telefono')?.value || '—',
-    direccion:      [
-                      document.getElementById('f-direccion')?.value,
-                      document.getElementById('f-sector')?.value,
-                      document.getElementById('f-municipio')?.value
-                    ].filter(Boolean).join(', ') || '—',
+  // Preparar los datos para el backend
+  const checkoutData = {
+    payment_method: paymentMethod,
+    line_items: Cart.items.map(item => ({
+      product_id: item.product_id,
+      quantity: item.quantity,
+      variation_id: item.variation_id
+    })),
+    billing: {
+      first_name: document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '',
+      phone: document.getElementById(deliveryMethod === 'delivery' ? 'f-telefono' : 'p-telefono')?.value || '',
+      address_1: document.getElementById('f-direccion')?.value || 'Retiro en Tienda',
+      city: document.getElementById('f-sector')?.value || 'Caracas',
+      state: document.getElementById('f-municipio')?.value || ''
+    },
+    shipping: {
+      first_name: document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '',
+      address_1: document.getElementById('f-direccion')?.value || 'Retiro en Tienda',
+      city: document.getElementById('f-sector')?.value || 'Caracas',
+      state: document.getElementById('f-municipio')?.value || ''
+    }
   };
 
-  // Send WhatsApp notification automatically + update button as backup
-  sendWhatsAppNotification(orderNum, snapshot);
+  try {
+    const result = await API.submitCheckout(checkoutData);
 
-  goToStep(4);
-  cart = [];
+    const orderNum = result.order_id || 'MP-' + Math.floor(100000 + Math.random() * 900000);
+    document.getElementById('conf-order-num').textContent = orderNum;
+
+    const pickupNames = { delivery: 'Delivery a domicilio — Caracas', pickup: 'Retiro en tienda — La Tahona' };
+    const payNames    = { zelle:'Zelle', cash:'Dólares en efectivo', stripe:'Tarjeta internacional (Stripe)', venmo:'Venmo', pagomovil:'Pago móvil', usdt:'USDT / Binance' };
+
+    document.getElementById('conf-subtitle').textContent =
+      `Gracias por tu compra. Coordinaremos el ${deliveryMethod === 'pickup' ? 'retiro en tienda' : 'delivery'} y el pago por ${payNames[paymentMethod]} por WhatsApp en los próximos minutos.`;
+
+    if (deliveryMethod === 'pickup') {
+      document.getElementById('conf-step3-text').textContent = 'Puedes retirar tu pedido en Morsa\'s Superstore, C.C. La Tahona, cuando te avisemos.';
+    }
+
+    // Build snapshot for WhatsApp notification
+    const sub  = getSubtotal();
+    const disc = getDiscount();
+    const ship = getShipping();
+    const snapshot = {
+      items:          [...Cart.items],
+      subtotal:       sub.toFixed(2),
+      discount:       disc.toFixed(2),
+      shipping:       ship,
+      total:          getTotal().toFixed(2),
+      deliveryMethod,
+      deliveryLabel:  pickupNames[deliveryMethod],
+      payLabel:       payNames[paymentMethod],
+      nombre:         document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '—',
+      telefono:       document.getElementById(deliveryMethod === 'delivery' ? 'f-telefono' : 'p-telefono')?.value || '—',
+      direccion:      [
+                        document.getElementById('f-direccion')?.value,
+                        document.getElementById('f-sector')?.value,
+                        document.getElementById('f-municipio')?.value
+                      ].filter(Boolean).join(', ') || '—',
+    };
+
+    sendWhatsAppNotification(orderNum, snapshot);
+
+    if (result.checkout_url) {
+      // Redirigir a Stripe u otra pasarela
+      window.location.href = result.checkout_url;
+      return;
+    }
+
+    goToStep(4);
+    Cart.clear();
+
+  } catch (err) {
+    alert('Hubo un error procesando tu pedido: ' + err.message);
+    if (btn) btn.disabled = false;
+  }
 }
 
 // ── INIT ──
-renderCart();
+document.addEventListener('DOMContentLoaded', () => {
+  renderCart();
+});
 </script>
 </body>
 </html>
