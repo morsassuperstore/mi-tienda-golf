@@ -2158,6 +2158,27 @@ function showToast(msg) {
   }
 
   API.getProducts().then(wcProducts => {
+    if (wcProducts && wcProducts.error) {
+      const grid = document.getElementById('productsGrid');
+      const empty = document.getElementById('emptyState');
+      grid.innerHTML = '';
+      empty.classList.add('visible');
+      empty.innerHTML = `
+        <div style="text-align:center; padding: 60px 20px; background:white; border-radius:var(--radius-lg); border:1px solid var(--light-gray); grid-column: 1 / -1;">
+          <svg viewBox="0 0 24 24" width="48" height="48" stroke="var(--gold)" fill="none" stroke-width="2" style="margin-bottom:16px;">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <h2 style="font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--navy-deeper); margin-bottom:12px;">Mantenimiento en curso</h2>
+          <p style="color:var(--text-mid); font-size:15px; max-width:400px; margin:0 auto; line-height:1.6;">Estamos sincronizando nuestro inventario de la tienda física para ofrecerte lo mejor. Por favor, intenta recargar la página en unos minutos.</p>
+        </div>
+      `;
+      document.querySelector('.shop-header-count').innerHTML = '';
+      document.querySelector('.shop-header-title').textContent = 'Mantenimiento';
+      return;
+    }
+
     wcProducts.forEach(p => {
       products.push({
         id: p.id,

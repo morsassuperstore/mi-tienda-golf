@@ -18,7 +18,7 @@ const API = {
             return await response.json();
         } catch (error) {
             console.error('API Error:', error);
-            return [];
+            return { error: true, message: 'No se pudo conectar con el servidor de la tienda.' };
         }
     },
 
