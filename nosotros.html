@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nosotros — Morsa's Proshop</title>
+  <meta name="description" content="Conoce la historia de Morsa's Proshop. Empresa familiar líder en equipamiento de golf en Caracas y toda Venezuela. Distribuidores de Mizuno, Big Max y más.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #2A2FA8;
+      --navy-dark: #1E2280;
+      --navy-deeper: #151970;
+      --gold: #F5A623;
+      --gold-light: #FBBF47;
+      --gold-pale: #FFF3D6;
+      --white: #FFFFFF;
+      --off-white: #F8F7F4;
+      --light-gray: #EFEFEF;
+      --text-dark: #0E1050;
+      --text-mid: #4A4F9E;
+      --radius: 6px;
+      --radius-lg: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ─── ANNOUNCEMENT BAR ─── */
+    .announce-bar {
+      background: var(--gold);
+      color: var(--navy-deeper);
+      text-align: center;
+      padding: 9px 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(21, 25, 112, 0.18);
+    }
+
+    .nav-inner {
+      position: relative;
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      height: 90px;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img,
+    .nav-logo svg {
+      width: 68px;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .nav-logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .nav-logo-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      color: rgba(245, 166, 35, 0.65);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .nav-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-back:hover {
+      color: var(--gold);
+    }
+
+    /* ─── HERO SECTION ─── */
+    .about-hero {
+      background: linear-gradient(135deg, var(--navy-deeper) 0%, #0a0c3b 100%);
+      color: var(--white);
+      padding: 100px 32px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at bottom right, rgba(245, 166, 35, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .about-hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .about-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .about-subtitle {
+      font-size: 18px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ─── ABOUT CONTENT ─── */
+    .about-layout {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 32px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-text-content h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: var(--navy-deeper);
+      margin-top: 32px;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+      border-bottom: 2px solid var(--gold-pale);
+      padding-bottom: 6px;
+    }
+
+    .about-text-content h3:first-of-type {
+      margin-top: 0;
+    }
+
+    .about-text-content p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .about-text-content strong {
+      color: var(--navy-deeper);
+    }
+
+    .about-media {
+      position: relative;
+    }
+
+    .about-media-box {
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(14, 26, 96, 0.12);
+      border: 1px solid var(--light-gray);
+      background: var(--off-white);
+    }
+
+    .about-media-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-badge-card {
+      position: absolute;
+      bottom: -24px;
+      left: -24px;
+      background: var(--gold);
+      color: var(--navy-deeper);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 12px 32px rgba(245, 166, 35, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .about-badge-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      line-height: 1;
+    }
+
+    .about-badge-lbl {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ─── VALUES SECTION ─── */
+    .values-section {
+      background: var(--off-white);
+      padding: 80px 32px;
+      border-top: 1px solid var(--light-gray);
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .values-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.02);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .value-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+
+    .value-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: var(--navy-deeper);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .value-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    /* ─── BRANDS SECTION ─── */
+    .brands-section {
+      padding: 60px 32px;
+      background: var(--white);
+      overflow: hidden;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .brands-title {
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 30px;
+    }
+
+    .brand-logos-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      user-select: none;
+      mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+    }
+
+    .brand-logos-track {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      flex-shrink: 0;
+      animation: scrollMarquee 35s linear infinite;
+    }
+
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 40px)); }
+    }
+
+    .brand-logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+    }
+
+    .brand-logo-item img {
+      max-width: 100%;
+      max-height: 32px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.6;
+      transition: filter 0.2s, opacity 0.2s;
+    }
+
+    .brand-logo-item img:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter-wrap {
+      background: var(--navy-deeper);
+      color: var(--white);
+      padding: 80px 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .newsletter-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+
+    .newsletter-sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .newsletter-input:focus {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--gold);
+    }
+
+    .btn-primary {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--navy-deeper);
+      border: none;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--light-gray);
+      padding: 80px 32px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: var(--navy-deeper);
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-brand-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(245, 166, 35, 0.1);
+      transition: background 0.2s;
+    }
+
+    .social-btn:hover {
+      background: rgba(245, 166, 35, 0.2);
+    }
+
+    .footer-col-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy-deeper);
+      margin-bottom: 20px;
+    }
+
+    .footer-col-links {
+      list-style: none;
+    }
+
+    .footer-col-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col-links a {
+      font-size: 14px;
+      color: #555;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-col-links a:hover {
+      color: var(--navy);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--light-gray);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .footer-payments {
+      display: flex;
+      gap: 8px;
+    }
+
+    .payment-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      color: #777;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .about-media {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .about-title {
+        font-size: 40px;
+      }
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announce-bar">
+    Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/extracted_img_0.jpg" data-src-fallback="assets/extracted_img_0" alt="Morsa's Proshop Logo">
+        <div>
+          <div class="nav-logo-text">Morsa's</div>
+          <div class="nav-logo-sub">Proshop</div>
+        </div>
+      </a>
+      <a href="index.html" class="nav-back">← Volver al Inicio</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="about-hero">
+    <div class="about-hero-inner">
+      <span class="about-eyebrow">Sobre Nosotros</span>
+      <h1 class="about-title">Nuestra Historia & Pasión</h1>
+      <p class="about-subtitle">Morsa's Proshop es el punto de encuentro definitivo para los apasionados del golf en Venezuela.</p>
+    </div>
+  </header>
+
+  <!-- CONTENT SECTION -->
+  <main class="about-layout">
+    <div class="about-grid">
+      <div class="about-text-content">
+        <h3>Pasión por el Juego, Compromiso con tu Rendimiento</h3>
+        <p>
+          Bienvenidos a <strong>Morsa’s Proshop</strong>, el punto de encuentro definitivo para los apasionados del golf en Venezuela. Fundada como una empresa familiar, hemos consolidado una trayectoria impecable basada en la confianza, el conocimiento experto y la curaduría del mejor equipamiento deportivo.
+        </p>
+        <p>
+          Somos distribuidores autorizados de una completa selección de marcas líderes de nivel mundial como <strong>Mizuno, Big Max, Nippon Shaft, Piretti, Iomic</strong> y muchas otras firmas de renombre internacional. En nuestra tienda online y física, tendrás acceso a un inventario premium que incluye palos de golf de alta precisión, bolsas de diseño profesional, carritos de última tecnología, calzado y ropa de rendimiento.
+        </p>
+
+        <h3>Asesoramiento de Expertos para Expertos</h3>
+        <p>
+          Creemos que cada swing es único. Por eso, nuestro equipo de asesores profesionales te acompaña de forma personalizada en cada decisión de compra, asegurando que encuentres la vara, el grip o el palo idóneo para perfeccionar tu handicap.
+        </p>
+        <p>
+          Nos enorgullece ofrecer una experiencia de compra impecable, respaldada por un sistema de envíos rápidos y seguros a nivel nacional. Si estás buscando una especificación técnica o un producto exclusivo que no encuentras en nuestro catálogo, nuestro equipo hará lo imposible por conseguirlo para ti.
+        </p>
+        <p>
+          Somos golfistas apasionados, y estamos aquí para ayudarte a dominar el campo.
+        </p>
+      </div>
+
+      <div class="about-media">
+        <div class="about-media-box">
+          <img src="assets/extracted_img_1.jpg" data-src-fallback="assets/destacado-golf" alt="Morsa's Proshop Golf Layout">
+        </div>
+        <div class="about-badge-card">
+          <span class="about-badge-val">100%</span>
+          <span class="about-badge-lbl">Pasión Familiar</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- VALUES CARD GRID -->
+  <section class="values-section">
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon" style="height: 40px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+          <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="5" />
+            <path d="M12 3a2 2 0 0 1 2 2M10 5a2 2 0 0 0 2 2" />
+            <path d="M9 13h6" />
+            <path d="M12 13v8" />
+            <path d="M10 13l2 4 2-4" />
+          </svg>
+        </div>
+        <h4 class="value-title">Asesoría Profesional</h4>
+        <p class="value-desc">Nuestro personal cuenta con amplia experiencia y te guiará para elegir el equipo ideal para tu swing.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="height: 40px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+          <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="7" />
+            <polygon points="12 4 13.5 7 17 7.5 14.5 10 15 13.5 12 12 9 13.5 9.5 10 7 7.5 10.5 7" />
+            <path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" />
+          </svg>
+        </div>
+        <h4 class="value-title">Marcas Premium</h4>
+        <p class="value-desc">Somos distribuidores oficiales de firmas mundialmente reconocidas, garantizando calidad original.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="height: 40px; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+          <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 7v10" />
+            <path d="M12 12v10" />
+            <path d="M22 7v10" />
+            <path d="M12 12l-5-2.5" />
+            <path d="M12 12l5-2.5" />
+          </svg>
+        </div>
+        <h4 class="value-title">Despachos Nacionales</h4>
+        <p class="value-desc">Gestionamos envíos rápidos y embalados con máximo cuidado para que lleguen seguros a tu destino.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS CAROUSEL -->
+  <section class="brands-section">
+    <div class="brands-title">Distribuidor Oficial de Marcas Premium</div>
+    <div class="brand-logos-container" id="brand-logos-container">
+      <!-- Generado dinámicamente desde CONFIG.BRANDS en js/config.js -->
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter-wrap">
+    <div class="newsletter-inner">
+      <div class="newsletter-title">Mantente en el Juego</div>
+      <p class="newsletter-sub">
+        Suscríbete para recibir novedades, ofertas exclusivas y consejos de nuestro equipo de profesionales.
+      </p>
+      <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+        <input id="newsletter-email" name="email" aria-label="Correo electrónico para boletín" type="email" class="newsletter-input" placeholder="Ingresa tu correo electrónico" required>
+        <button type="submit" class="btn-primary" style="white-space:nowrap; flex-shrink:0;">Suscribirme →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <!-- Brand -->
+        <div>
+          <div class="footer-brand-name">Morsa's Proshop</div>
+          <p class="footer-brand-desc">
+            El destino número uno de Venezuela para golf, pádel y tenis.
+            Equipos premium, ropa de alto rendimiento y servicio experto — en tienda y en línea.
+          </p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/morsasgolf/" target="_blank" class="social-btn" aria-label="Instagram">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #F5A623; margin-top:9px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Golf -->
+        <div>
+          <div class="footer-col-title">Golf</div>
+          <ul class="footer-col-links">
+            <li><a href="tienda.html?sport=golf&gender=caballeros">Golf Caballeros</a></li>
+            <li><a href="tienda.html?sport=golf&gender=damas">Golf Damas</a></li>
+            <li><a href="tienda.html?cat=palos&sport=golf">Palos de Golf</a></li>
+            <li><a href="tienda.html?cat=pelotas&sport=golf">Pelotas de Golf</a></li>
+            <li><a href="tienda.html?cat=maletas&sport=golf">Bolsas de Golf</a></li>
+            <li><a href="tienda.html?cat=accesorios">Accesorios</a></li>
+          </ul>
+        </div>
+
+        <!-- Padel & Tennis -->
+        <div>
+          <div class="footer-col-title">Padel & Tennis</div>
+          <ul class="footer-col-links">
+            <li><a href="tienda.html?cat=raquetas&sport=padel">Palas de Pádel</a></li>
+            <li><a href="tienda.html?cat=raquetas&sport=tenis">Raquetas de Tenis</a></li>
+            <li><a href="tienda.html?cat=ropa&sport=padel">Ropa de Pádel</a></li>
+            <li><a href="tienda.html?cat=ropa&sport=tenis">Ropa de Tenis</a></li>
+            <li><a href="tienda.html?cat=zapatos">Calzado</a></li>
+            <li><a href="#">Balls & Strings</a></li>
+          </ul>
+        </div>
+
+        <!-- Info -->
+        <div>
+          <div class="footer-col-title">Help & Info</div>
+          <ul class="footer-col-links">
+            <li><a href="https://wa.me/584128422837?text=Hola,%20tengo%20una%20consulta." target="_blank">Contáctanos</a></li>
+            <li><a href="#">Guía de Tallas</a></li>
+            <li><a href="#">Política de Envíos</a></li>
+            <li><a href="#">Devoluciones</a></li>
+            <li><a href="index.html#ubicaciones">Nuestra Tienda</a></li>
+            <li><a href="nosotros.html">Sobre Morsa's</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 Morsa's Proshop · Caracas, Venezuela · Todos los derechos reservados</div>
+        <div class="footer-payments">
+          <span class="payment-badge">Visa</span>
+          <span class="payment-badge">Mastercard</span>
+          <span class="payment-badge">PayPal</span>
+          <span class="payment-badge">Zelle</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Carrusel de marcas dinámico
+      const container = document.getElementById('brand-logos-container');
+      if (container && typeof CONFIG !== 'undefined' && CONFIG.BRANDS) {
+        let track1HTML = '<div class="brand-logos-track">';
+        let track2HTML = '<div class="brand-logos-track" aria-hidden="true">';
+        
+        CONFIG.BRANDS.forEach(brand => {
+          const itemHTML = `
+            <div class="brand-logo-item">
+              <img src="${brand.logo}" alt="${brand.name}">
+            </div>
+          `;
+          track1HTML += itemHTML;
+          track2HTML += itemHTML;
+        });
+        
+        track1HTML += '</div>';
+        track2HTML += '</div>';
+        
+        container.innerHTML = track1HTML + track2HTML;
+      }
+
+      // Auto-resolución de extensiones de imagen fallback
+      const extensions = ['.webp', '.jpg', '.jpeg', '.png'];
+      document.querySelectorAll('[data-src-fallback]').forEach(el => {
+        const basePath = el.getAttribute('data-src-fallback');
+        let index = 0;
+        function tryLoad() {
+          if (index >= extensions.length) return;
+          const path = basePath + extensions[index];
+          const img = new Image();
+          img.onload = () => el.src = path;
+          img.onerror = () => { index++; tryLoad(); };
+          img.src = path;
+        }
+        tryLoad();
+      });
+    });
+
+    function handleNewsletterSubmit(event) {
+      event.preventDefault();
+      const emailInput = document.getElementById('newsletter-email');
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      showCustomToast(`¡Gracias! Te has suscrito con éxito con: ${email}`);
+      emailInput.value = '';
+    }
+
+    function showCustomToast(message) {
+      let toast = document.getElementById('custom-newsletter-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'custom-newsletter-toast';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '32px';
+        toast.style.right = '32px';
+        toast.style.background = 'var(--navy-deeper)';
+        toast.style.color = '#fff';
+        toast.style.borderLeft = '4px solid var(--gold)';
+        toast.style.borderRadius = '8px';
+        toast.style.padding = '14px 20px';
+        toast.style.fontFamily = "'Barlow Condensed', sans-serif";
+        toast.style.fontSize = '14px';
+        toast.style.fontWeight = '600';
+        toast.style.letterSpacing = '0.06em';
+        toast.style.boxShadow = '0 8px 32px rgba(0,0,0,0.25)';
+        toast.style.zIndex = '2000';
+        toast.style.transition = 'transform 0.35s, opacity 0.35s';
+        toast.style.transform = 'translateY(80px)';
+        toast.style.opacity = '0';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = message;
+      setTimeout(() => {
+        toast.style.transform = 'translateY(0)';
+        toast.style.opacity = '1';
+      }, 50);
+      setTimeout(() => {
+        toast.style.transform = 'translateY(80px)';
+        toast.style.opacity = '0';
+      }, 3500);
+    }
+  </script>
+  <script src="js/animations.js"></script>
+</body>
+
+</html>

@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tienda — Morsa's Proshop</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Explora el catálogo premium de Morsa's Proshop. Compra palos de golf, palas de pádel, raquetas de tenis, ropa deportiva y calzado de las mejores marcas en Venezuela con envío gratis.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --navy: #2A2FA8;
@@ -14,19 +15,19 @@
     --gold-light: #FBBF47;
     --gold-pale: #FFF3D6;
     --white: #FFFFFF;
-    --off-white: #F8F7F4;
-    --light-gray: #EFEFEF;
-    --mid-gray: #D0D0D0;
+    --off-white: #F8F9FA;
+    --light-gray: #E2E8F0;
+    --mid-gray: #CBD5E1;
     --text-dark: #0E1050;
-    --text-mid: #555;
-    --radius: 4px;
-    --radius-lg: 10px;
+    --text-mid: #555555;
+    --radius: 6px;
+    --radius-lg: 12px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     background: var(--off-white);
     color: var(--text-dark);
     overflow-x: hidden;
@@ -55,26 +56,35 @@
   }
 
   .nav-inner {
+    position: relative;
     max-width: 1320px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     padding: 0 32px;
-    height: 64px;
+    height: 90px;
     gap: 16px;
   }
 
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
     text-decoration: none;
     flex-shrink: 0;
   }
 
+  .nav-logo img,
+  .nav-logo svg {
+    width: 68px;
+    height: 68px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
   .nav-logo-text {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 32px;
     letter-spacing: 0.05em;
     color: var(--gold);
     line-height: 1;
@@ -82,9 +92,9 @@
 
   .nav-logo-sub {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.22em;
-    color: rgba(245,166,35,0.65);
+    color: rgba(245, 166, 35, 0.65);
     text-transform: uppercase;
     margin-top: 1px;
   }
@@ -268,7 +278,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    cursor: pointer;
+    -webkit-user-select: none;
     user-select: none;
     transition: background 0.15s;
   }
@@ -379,8 +389,8 @@
     border: 1.5px solid var(--mid-gray);
     border-radius: var(--radius);
     cursor: pointer;
-    color: var(--text-mid);
     transition: all 0.15s;
+    -webkit-user-select: none;
     user-select: none;
   }
 
@@ -473,16 +483,17 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--light-gray);
     overflow: hidden;
-    transition: box-shadow 0.22s, transform 0.22s;
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     cursor: pointer;
     position: relative;
+    min-height: 380px;
   }
 
   .product-card:hover {
-    box-shadow: 0 8px 32px rgba(21,25,112,0.13);
-    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(21, 27, 41, 0.08);
+    transform: translateY(-4px);
   }
 
   /* Image container with hover swap */
@@ -490,7 +501,7 @@
     position: relative;
     aspect-ratio: 1/1;
     overflow: hidden;
-    background: var(--off-white);
+    background: var(--white);
   }
 
   .product-img-wrap img {
@@ -498,7 +509,8 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 10px;
     transition: opacity 0.4s;
   }
 
@@ -778,8 +790,7 @@
   .pdv-topbar {
     position: sticky;
     top: 0;
-    z-index: 10;
-    background: rgba(255,255,255,0.96);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid #eee;
     display: flex;
@@ -1261,19 +1272,55 @@
   }
 
   .shipping-bar-fill.full { background: #5eca8a; }
+  /* ─── SKELETON LOADER ─── */
+  .skeleton-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--light-gray);
+    overflow: hidden;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+  }
+  .skeleton-img {
+    aspect-ratio: 1/1;
+    background: var(--off-white);
+    animation: pulse 1.5s infinite;
+  }
+  .skeleton-body {
+    padding: 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .skeleton-line {
+    height: 12px;
+    background: var(--off-white);
+    border-radius: 4px;
+    animation: pulse 1.5s infinite;
+  }
+  .skeleton-line.short { width: 40%; }
+  .skeleton-line.price { width: 30%; height: 20px; margin-top: auto; }
+  @keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+  }
 </style>
 </head>
 <body>
 
 <!-- ANNOUNCE BAR -->
 <div class="announce-bar">
-  ⛳ Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: text-bottom; margin-right: 4px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
 </div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
+      <img src="assets/extracted_img_0.jpg" data-src-fallback="assets/extracted_img_0" alt="Morsa's Proshop Logo">
       <div>
         <div class="nav-logo-text">Morsa's</div>
         <div class="nav-logo-sub">Proshop</div>
@@ -1281,17 +1328,17 @@
     </a>
 
     <div class="nav-search">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="7"></circle>
         <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
       </svg>
-      <input type="text" placeholder="Buscar productos..." id="searchInput" oninput="filterProducts()">
+      <input type="text" placeholder="Buscar productos..." id="searchInput" name="q" aria-label="Buscar productos" oninput="filterProducts()">
     </div>
 
     <a href="index.html" class="nav-back">← Volver al Inicio</a>
 
     <a href="carrito.html" class="nav-cart" aria-label="Carrito" style="position:relative;text-decoration:none;">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <path d="M16 10a4 4 0 01-8 0"></path>
@@ -1474,9 +1521,9 @@
         <div class="price-range">
           <div style="font-size:12px;color:#999;">Rango de precio (USD)</div>
           <div class="price-inputs">
-            <input type="number" class="price-input" placeholder="Min" id="priceMin" oninput="filterProducts()">
+            <input type="number" class="price-input" placeholder="Min" id="priceMin" name="priceMin" aria-label="Precio mínimo" oninput="filterProducts()">
             <span class="price-sep">—</span>
-            <input type="number" class="price-input" placeholder="Max" id="priceMax" oninput="filterProducts()">
+            <input type="number" class="price-input" placeholder="Max" id="priceMax" name="priceMax" aria-label="Precio máximo" oninput="filterProducts()">
           </div>
         </div>
       </div>
@@ -1645,10 +1692,10 @@
         <span class="pdv-wr-star" data-v="5">★</span>
       </div>
       <div class="pdv-wr-row">
-        <input class="pdv-wr-input" id="pdvWrName" placeholder="Tu nombre" type="text">
-        <input class="pdv-wr-input" id="pdvWrTitle" placeholder="Título de la reseña" type="text">
+        <input class="pdv-wr-input" id="pdvWrName" name="wr-name" aria-label="Tu nombre" placeholder="Tu nombre" type="text">
+        <input class="pdv-wr-input" id="pdvWrTitle" name="wr-title" aria-label="Título de la reseña" placeholder="Título de la reseña" type="text">
       </div>
-      <textarea class="pdv-wr-textarea" id="pdvWrBody" placeholder="Cuéntanos tu experiencia con este producto..."></textarea>
+      <textarea class="pdv-wr-textarea" id="pdvWrBody" name="wr-body" aria-label="Texto de la reseña" placeholder="Cuéntanos tu experiencia con este producto..."></textarea>
       <button class="pdv-wr-submit" onclick="submitReview()">Publicar Reseña</button>
     </div>
   </div>
@@ -2157,6 +2204,21 @@ function showToast(msg) {
     subtitleEl.textContent = `Equipamiento para ${names[gender] || gender}`;
   }
 
+  // ─── SKELETON LOADER INJECTION ───
+  const grid = document.getElementById('productsGrid');
+  const skeletonHtml = Array(8).fill(`
+    <div class="skeleton-card">
+      <div class="skeleton-img"></div>
+      <div class="skeleton-body">
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line price"></div>
+      </div>
+    </div>
+  `).join('');
+  grid.innerHTML = skeletonHtml;
+
   API.getProducts().then(wcProducts => {
     if (wcProducts && wcProducts.error) {
       const grid = document.getElementById('productsGrid');
@@ -2198,8 +2260,16 @@ function showToast(msg) {
       });
     });
     filterProducts();
+    const prodParam = params.get('product');
+    if (prodParam) {
+      const pid = parseInt(prodParam);
+      if (!isNaN(pid)) {
+        setTimeout(() => openModal(pid), 450);
+      }
+    }
   });
 })();
 </script>
+<script src="js/animations.js"></script>
 </body>
 </html>
