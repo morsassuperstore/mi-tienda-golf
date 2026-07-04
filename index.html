@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Morsa's Proshop — Golf · Pádel · Tenis</title>
-  <meta name="description" content="Morsa's Proshop es la tienda número uno en Venezuela de golf, pádel y tenis. Encuentra palas, raquetas, palos de golf, ropa y calzado premium. Visítanos en Caracas con nuestro simulador de swing.">
-  <meta name="keywords" content="golf venezuela, padel caracas, palas de padel, raquetas de tenis, palos de golf, morsas proshop, morsas superstore">
+  <meta name="description"
+    content="Morsa's Proshop es la tienda número uno en Venezuela de golf, pádel y tenis. Encuentra palas, raquetas, palos de golf, ropa y calzado premium. Visítanos en Caracas con nuestro simulador de swing.">
+  <meta name="keywords"
+    content="golf venezuela, padel caracas, palas de padel, raquetas de tenis, palos de golf, morsas proshop, morsas superstore">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -73,7 +75,7 @@
       display: flex;
       align-items: center;
       padding: 0 32px;
-      height: 90px;
+      height: 74px;
       gap: 0;
     }
 
@@ -87,15 +89,15 @@
 
     .nav-logo img,
     .nav-logo svg {
-      width: 68px;
-      height: 68px;
+      width: 50px;
+      height: 50px;
       object-fit: cover;
       border-radius: 8px;
     }
 
     .nav-logo-text {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
+      font-size: 26px;
       letter-spacing: 0.05em;
       color: var(--gold);
       line-height: 1;
@@ -103,11 +105,13 @@
 
     .nav-logo-sub {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      color: rgba(245, 166, 35, 0.65);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold);
       text-transform: uppercase;
       margin-top: 1px;
+      line-height: 1;
     }
 
     .nav-links {
@@ -1657,9 +1661,10 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
     }
-  
+
     /* ── FIX SUBMENU BACKGROUND ── */
-    .mega-menu, .dropdown-menu {
+    .mega-menu,
+    .dropdown-menu {
       background-color: #ffffff !important;
       background: #ffffff !important;
     }
@@ -1671,17 +1676,23 @@
 
   <!-- ANNOUNCEMENT BAR -->
   <div class="announce-bar">
-    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: text-bottom; margin-right: 4px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+      style="vertical-align: text-bottom; margin-right: 4px;">
+      <path
+        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+      <line x1="12" y1="22.08" x2="12" y2="12" />
+    </svg> Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
   </div>
 
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <!-- Logo -->
-      <a href="#" class="nav-logo">
-        <img
-          src="assets/extracted_img_0.jpg"
-          alt="Morsa's Proshop Logo" style="width:68px;height:68px;border-radius:8px;object-fit:cover;">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo morsas 2026.png" alt="Morsa's Proshop Logo"
+          style="width:50px;height:50px;border-radius:8px;object-fit:cover;">
         <div>
           <div class="nav-logo-text">Morsa's</div>
           <div class="nav-logo-sub">Proshop</div>
@@ -1758,7 +1769,8 @@
               </div>
               <div class="mega-col" style="border-right:none;padding-right:0;">
                 <div class="mega-featured">
-                  <img src="assets/destacado-padel.jpg" data-src-fallback="assets/destacado-padel" alt="Destacado Pádel">
+                  <img src="assets/destacado-padel.jpg" data-src-fallback="assets/destacado-padel"
+                    alt="Destacado Pádel">
                   <div class="mega-featured-label">Top ventas</div>
                   <div class="mega-featured-title">Blade V10 Wilson</div>
                   <a href="tienda.html?sport=padel" class="mega-featured-btn">Ver ahora →</a>
@@ -1792,7 +1804,8 @@
               </div>
               <div class="mega-col" style="border-right:none;padding-right:0;">
                 <div class="mega-featured">
-                  <img src="assets/destacado-tenis.jpg" data-src-fallback="assets/destacado-tenis" alt="Destacado Tenis">
+                  <img src="assets/destacado-tenis.jpg" data-src-fallback="assets/destacado-tenis"
+                    alt="Destacado Tenis">
                   <div class="mega-featured-label">Top ventas</div>
                   <div class="mega-featured-title">Pure Drive Babolat</div>
                   <a href="tienda.html?sport=tenis" class="mega-featured-btn">Ver ahora →</a>
@@ -1822,17 +1835,18 @@
             <circle cx="11" cy="11" r="7"></circle>
             <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
           </svg>
-          <input id="nav-search-input" name="q" aria-label="Buscar productos" type="text" placeholder="Buscar productos...">
+          <input id="nav-search-input" name="q" aria-label="Buscar productos" type="text"
+            placeholder="Buscar productos...">
         </div>
         <a href="carrito.html" class="nav-icon-btn" aria-label="Carrito"
           style="position:relative;text-decoration:none;">
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <path d="M16 10a4 4 0 01-8 0"></path>
           </svg>
-          <span class="cart-badge">3</span>
+          <span class="cart-badge" style="display: none;">0</span>
         </a>
       </div>
     </div>
@@ -1843,27 +1857,27 @@
     .hero-cinematic {
       position: relative;
       width: 100%;
-      height: 85vh;
-      min-height: 600px;
+      height: 65vh;
+      min-height: 480px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       overflow: hidden;
       background-color: var(--navy-deeper);
     }
+
     .hero-video-bg {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: 1;
-      opacity: 0.6; /* Oscurecer el video para que el texto resalte */
+      opacity: 0.6;
+      /* Oscurecer el video para que el texto resalte */
     }
+
     .hero-overlay {
       position: absolute;
       top: 0;
@@ -1873,12 +1887,14 @@
       background: linear-gradient(to right, rgba(10, 12, 60, 0.95) 0%, rgba(10, 12, 60, 0.4) 60%, rgba(10, 12, 60, 0.1) 100%);
       z-index: 2;
     }
+
     .hero-content {
       position: relative;
       z-index: 3;
       max-width: 800px;
       padding: 0 6%;
     }
+
     .hero-eyebrow {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 16px;
@@ -1888,18 +1904,21 @@
       margin-bottom: 20px;
       animation: fadeInDown 1s ease forwards;
     }
+
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(60px, 9vw, 130px);
       color: white;
       line-height: 0.9;
       margin-bottom: 24px;
-      text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
       animation: fadeInLeft 1s ease forwards;
     }
+
     .hero-title .gold {
       color: var(--gold);
     }
+
     .hero-subtitle {
       font-size: clamp(16px, 2.2vw, 22px);
       color: rgba(255, 255, 255, 0.9);
@@ -1908,12 +1927,14 @@
       max-width: 650px;
       animation: fadeIn 1.5s ease forwards;
     }
+
     .hero-ctas {
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
       animation: fadeInUp 1s ease forwards;
     }
+
     .hero-stats {
       background: rgba(21, 25, 112, 0.85);
       -webkit-backdrop-filter: blur(12px);
@@ -1924,6 +1945,7 @@
       position: relative;
       z-index: 4;
     }
+
     .hero-stat {
       padding: 24px 48px;
       text-align: center;
@@ -1934,12 +1956,15 @@
       align-items: center;
       transition: background 0.3s ease;
     }
+
     .hero-stat:hover {
       background: rgba(255, 255, 255, 0.05);
     }
+
     .hero-stat:last-child {
       border-right: none;
     }
+
     .hero-stat-label {
       font-family: 'Barlow', sans-serif;
       font-size: 16px;
@@ -1947,26 +1972,56 @@
       line-height: 1.5;
       margin-top: 12px;
     }
-    
+
     @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
+
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
-  
+
     /* ── FIX SUBMENU BACKGROUND ── */
-    .mega-menu, .dropdown-menu {
+    .mega-menu,
+    .dropdown-menu {
       background-color: #ffffff !important;
       background: #ffffff !important;
     }
@@ -1978,11 +2033,12 @@
       <source src="assets/hero-video.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
-    
+
     <div class="hero-content">
       <div class="hero-eyebrow">Nueva Colección Temporada 2026</div>
       <h1 class="hero-title">Juega Tu<br>Mejor <span class="gold">Partido</span></h1>
-      <p class="hero-subtitle">El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios premium — todo en un solo lugar.</p>
+      <p class="hero-subtitle">El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios
+        premium — todo en un solo lugar.</p>
       <div class="hero-ctas">
         <a href="tienda.html" class="btn-primary">Comprar Ahora →</a>
         <a href="#sports" class="btn-outline">Explorar Deportes</a>
@@ -2068,22 +2124,36 @@
         grid-template-columns: 1fr !important;
         gap: 40px !important;
       }
+
       .sim-media {
         order: -1;
       }
     }
   </style>
-  <section class="simulator-section" style="background:var(--navy-deeper);color:#fff;padding:80px 32px;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;background:radial-gradient(circle at top right, rgba(245,166,35,0.12) 0%, transparent 60%);pointer-events:none;"></div>
-    <div class="sim-container" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;">
+  <section class="simulator-section"
+    style="background:var(--navy-deeper);color:#fff;padding:80px 32px;position:relative;overflow:hidden;">
+    <div
+      style="position:absolute;inset:0;background:radial-gradient(circle at top right, rgba(245,166,35,0.12) 0%, transparent 60%);pointer-events:none;">
+    </div>
+    <div class="sim-container"
+      style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;">
       <div class="sim-content" style="z-index:2;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Experiencia Exclusiva en Caracas</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1.05;letter-spacing:0.02em;margin-bottom:20px;color:#fff;">Prueba Tu Swing en Nuestro<br><span class="gold" style="color:var(--gold);">Simulador de Golf Profesional</span></h2>
+        <div
+          style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">
+          Experiencia Exclusiva en Caracas</div>
+        <h2
+          style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1.05;letter-spacing:0.02em;margin-bottom:20px;color:#fff;">
+          Prueba Tu Swing en Nuestro<br><span class="gold" style="color:var(--gold);">Simulador de Golf
+            Profesional</span></h2>
         <p style="font-size:15px;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:28px;">
-          En nuestra sede de <strong>La Tahona</strong>, ponemos a tu disposición tecnología de análisis de swing de última generación. Mide la velocidad de tu bola, el ángulo de lanzamiento y el spin en tiempo real para elegir el palo perfecto o perfeccionar tu juego.
+          En nuestra sede de <strong>La Tahona</strong>, ponemos a tu disposición tecnología de análisis de swing de
+          última generación. Mide la velocidad de tu bola, el ángulo de lanzamiento y el spin en tiempo real para elegir
+          el palo perfecto o perfeccionar tu juego.
         </p>
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <a href="https://wa.me/584128422837?text=Hola,%20me%20gustaría%20reservar%20una%20sesión%20en%20el%20simulador%20de%20swing." target="_blank" class="btn-primary" style="background:var(--gold);color:var(--navy-deeper);border:none;box-shadow:0 4px 16px rgba(245,166,35,0.3);">
+          <a href="https://wa.me/584128422837?text=Hola,%20me%20gustaría%20reservar%20una%20sesión%20en%20el%20simulador%20de%20swing."
+            target="_blank" class="btn-primary"
+            style="background:var(--gold);color:var(--navy-deeper);border:none;box-shadow:0 4px 16px rgba(245,166,35,0.3);">
             Reservar Sesión
           </a>
           <a href="#sports" class="btn-outline" style="border-color:rgba(255,255,255,0.3);color:#fff;">
@@ -2092,13 +2162,18 @@
         </div>
       </div>
       <div class="sim-media" style="position:relative;z-index:2;">
-        <div style="aspect-ratio:16/10;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 40px rgba(0,0,0,0.4);background:#000;">
-          <img src="assets/simulador-golf.jpg" data-src-fallback="assets/simulador-golf" alt="Simulador de golf en Morsa's Proshop" style="width:100%;height:100%;object-fit:cover;opacity:0.85;">
+        <div
+          style="aspect-ratio:16/10;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 40px rgba(0,0,0,0.4);background:#000;">
+          <img src="assets/simulador-golf.jpg" data-src-fallback="assets/simulador-golf"
+            alt="Simulador de golf en Morsa's Proshop" style="width:100%;height:100%;object-fit:cover;opacity:0.85;">
         </div>
-        <div style="position:absolute;bottom:-16px;left:-16px;background:rgba(21,25,112,0.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(245,166,35,0.3);padding:16px 20px;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.3);display:flex;align-items:center;gap:12px;">
+        <div
+          style="position:absolute;bottom:-16px;left:-16px;background:rgba(21,25,112,0.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(245,166,35,0.3);padding:16px 20px;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.3);display:flex;align-items:center;gap:12px;">
           <div style="font-size:24px;">🏌️‍♂️</div>
           <div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Tecnología</div>
+            <div
+              style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">
+              Tecnología</div>
             <div style="font-size:13px;font-weight:700;color:#fff;">Foresight Sports GCQuad</div>
           </div>
         </div>
@@ -2131,7 +2206,9 @@
           #prod-carousel::-webkit-scrollbar {
             display: none;
           }
-          .mega-menu, .dropdown-menu {
+
+          .mega-menu,
+          .dropdown-menu {
             background-color: #ffffff !important;
             background: #ffffff !important;
           }
@@ -2249,13 +2326,14 @@
         margin-bottom: 4px;
         align-self: flex-start;
       }
-    
-    /* ── FIX SUBMENU BACKGROUND ── */
-    .mega-menu, .dropdown-menu {
-      background-color: #ffffff !important;
-      background: #ffffff !important;
-    }
-  </style>
+
+      /* ── FIX SUBMENU BACKGROUND ── */
+      .mega-menu,
+      .dropdown-menu {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+      }
+    </style>
 
     <div class="locations-grid">
 
@@ -2323,7 +2401,8 @@
         Suscríbete para recibir novedades, ofertas exclusivas y consejos de nuestro equipo de profesionales.
       </p>
       <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-        <input id="newsletter-email" name="email" aria-label="Correo electrónico para boletín" type="email" class="newsletter-input" placeholder="Ingresa tu correo electrónico" required>
+        <input id="newsletter-email" name="email" aria-label="Correo electrónico para boletín" type="email"
+          class="newsletter-input" placeholder="Ingresa tu correo electrónico" required>
         <button type="submit" class="btn-primary" style="white-space:nowrap; flex-shrink:0;">Suscribirme →</button>
       </form>
     </div>
@@ -2341,7 +2420,15 @@
             Equipos premium, ropa de alto rendimiento y servicio experto — en tienda y en línea.
           </p>
           <div class="footer-social">
-            <a href="https://www.instagram.com/morsasgolf/" target="_blank" class="social-btn" aria-label="Instagram" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(245,166,35,0.1);transition:background 0.2s;"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #F5A623;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+            <a href="https://www.instagram.com/morsasgolf/" target="_blank" class="social-btn" aria-label="Instagram"
+              style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(245,166,35,0.1);transition:background 0.2s;"><svg
+                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="color: #F5A623;">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg></a>
           </div>
         </div>
 
@@ -2375,7 +2462,8 @@
         <div>
           <div class="footer-col-title">Help & Info</div>
           <ul class="footer-col-links">
-            <li><a href="https://wa.me/584128422837?text=Hola,%20tengo%20una%20consulta." target="_blank">Contáctanos</a></li>
+            <li><a href="https://wa.me/584128422837?text=Hola,%20tengo%20una%20consulta."
+                target="_blank">Contáctanos</a></li>
             <li><a href="#">Guía de Tallas</a></li>
             <li><a href="#">Política de Envíos</a></li>
             <li><a href="#">Devoluciones</a></li>
@@ -2405,7 +2493,7 @@
       if (container && typeof CONFIG !== 'undefined' && CONFIG.BRANDS) {
         let track1HTML = '<div class="brand-logos-track">';
         let track2HTML = '<div class="brand-logos-track" aria-hidden="true">';
-        
+
         CONFIG.BRANDS.forEach(brand => {
           const itemHTML = `
             <div class="brand-logo-item">
@@ -2415,10 +2503,10 @@
           track1HTML += itemHTML;
           track2HTML += itemHTML;
         });
-        
+
         track1HTML += '</div>';
         track2HTML += '</div>';
-        
+
         container.innerHTML = track1HTML + track2HTML;
       }
 
@@ -2486,8 +2574,8 @@
             const id = p.id;
             const name = p.name;
             const brand = p.attributes?.find(a => a.name === 'Marca')?.terms?.[0]?.name || 'Morsa\'s';
-            const sport = p.categories?.find(c => ['golf','padel','tenis'].includes(c.slug))?.slug || 'golf';
-            const cat = p.categories?.find(c => ['palos','ropa','zapatos','raquetas','accesorios','pelotas'].includes(c.slug))?.slug || 'accesorios';
+            const sport = p.categories?.find(c => ['golf', 'padel', 'tenis'].includes(c.slug))?.slug || 'golf';
+            const cat = p.categories?.find(c => ['palos', 'ropa', 'zapatos', 'raquetas', 'accesorios', 'pelotas'].includes(c.slug))?.slug || 'accesorios';
             const price = (parseFloat(p.prices?.price || 0) / Math.pow(10, p.prices?.currency_minor_unit || 2)).toFixed(2);
             const img = p.images?.[0]?.src || 'https://via.placeholder.com/400';
 
@@ -2567,6 +2655,7 @@
       }, 3500);
     }
   </script>
+  <script src="js/cart.js"></script>
   <script src="js/animations.js"></script>
 </body>
 
