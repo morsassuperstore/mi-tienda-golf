@@ -1,5 +1,5 @@
 const CONFIG = {
-    API_URL: 'http://localhost:8080/wp-json',
+    API_URL: 'https://admin-dev.morsasgolf.com/wp-json',
     WC_STORE_API: '/wc/store/v1',
     MORSA_API: '/morsa/v1',
     // Las credenciales OAuth ya no son estrictamente necesarias para leer productos si usamos el Store API,
