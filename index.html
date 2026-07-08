@@ -39,11 +39,14 @@
       padding: 0;
     }
 
+    html {
+      overflow-x: clip;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--white);
       color: var(--text-dark);
-      overflow-x: hidden;
     }
 
     /* ─── ANNOUNCEMENT BAR ─── */
@@ -89,9 +92,9 @@
 
     .nav-logo img,
     .nav-logo svg {
-      width: 50px;
       height: 50px;
-      object-fit: cover;
+      width: auto;
+      object-fit: contain;
       border-radius: 8px;
     }
 
@@ -1668,6 +1671,85 @@
       background-color: #ffffff !important;
       background: #ffffff !important;
     }
+
+    /* ── RESPONSIVE GRIDS & LAYOUTS ── */
+    @media (max-width: 991px) {
+      .tab-content.active {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+      }
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 40px 16px !important;
+      }
+      .sports-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .sport-card-bg {
+        min-height: 380px !important;
+        padding: 24px !important;
+        aspect-ratio: auto !important;
+      }
+      .sport-card-name {
+        font-size: 38px !important;
+      }
+      .promo-banner {
+        grid-template-columns: 1fr !important;
+        padding: 40px 24px !important;
+        margin: 0 16px !important;
+        gap: 24px !important;
+      }
+      .promo-right {
+        align-items: flex-start !important;
+      }
+      .promo-discount {
+        position: relative !important;
+        transform: none !important;
+        right: auto !important;
+        top: auto !important;
+        font-size: 56px !important;
+        opacity: 0.2 !important;
+      }
+      .gender-split {
+        grid-template-columns: 1fr !important;
+        margin: 0 16px !important;
+        gap: 16px !important;
+      }
+      .gender-card {
+        min-height: 380px !important;
+        padding: 32px !important;
+      }
+      .gender-title {
+        font-size: 56px !important;
+      }
+      .footer-top {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+      footer {
+        padding: 48px 16px 24px !important;
+      }
+      .footer-bottom {
+        flex-direction: column !important;
+        gap: 16px !important;
+        align-items: flex-start !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab-content.active {
+        grid-template-columns: 1fr !important;
+      }
+      .features-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 
 </head>
@@ -1692,7 +1774,7 @@
       <!-- Logo -->
       <a href="index.html" class="nav-logo">
         <img src="assets/logo morsas 2026.png" alt="Morsa's Proshop Logo"
-          style="width:50px;height:50px;border-radius:8px;object-fit:cover;">
+          style="height:50px;width:auto;border-radius:8px;object-fit:contain;">
         <div>
           <div class="nav-logo-text">Morsa's</div>
           <div class="nav-logo-sub">Proshop</div>
@@ -1836,7 +1918,7 @@
             <line x1="16.5" y1="16.5" x2="22" y2="22"></line>
           </svg>
           <input id="nav-search-input" name="q" aria-label="Buscar productos" type="text"
-            placeholder="Buscar productos...">
+            placeholder="Buscar productos..." onkeypress="handleDesktopSearch(event)">
         </div>
         <a href="carrito.html" class="nav-icon-btn" aria-label="Carrito"
           style="position:relative;text-decoration:none;">
@@ -1848,8 +1930,93 @@
           </svg>
           <span class="cart-badge" style="display: none;">0</span>
         </a>
+        <!-- Hamburger mobile toggle -->
+        <button class="mobile-toggle" aria-label="Abrir menú" onclick="toggleMobileMenu()">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav" id="mobileNav">
+      <div class="mobile-nav-header">
+        <div class="mobile-nav-logo">
+          <img src="assets/logo morsas 2026.png" alt="Logo" style="height:36px;width:auto;object-fit:contain;border-radius:6px;">
+          <div>
+            <div class="logo-title">Morsa's</div>
+            <div class="logo-subtitle">Proshop</div>
+          </div>
+        </div>
+        <button class="mobile-close" aria-label="Cerrar menú" onclick="toggleMobileMenu()">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-nav-body">
+        <div class="mobile-search">
+          <input type="text" id="mobileSearchInput" placeholder="Buscar productos..." onkeypress="handleMobileSearch(event)">
+          <button onclick="triggerMobileSearch()" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+        <ul class="mobile-links">
+          <li>
+            <button class="mobile-accordion-btn" onclick="toggleAccordion(this)">Golf <span>+</span></button>
+            <div class="mobile-accordion-content">
+              <a href="tienda.html?sport=golf" onclick="toggleMobileMenu()">Ver todo Golf</a>
+              <a href="tienda.html?cat=palos&sport=golf" onclick="toggleMobileMenu()">Palos de Golf</a>
+              <a href="tienda.html?cat=pelotas&sport=golf" onclick="toggleMobileMenu()">Pelotas de Golf</a>
+              <a href="tienda.html?cat=accesorios&sport=golf" onclick="toggleMobileMenu()">Accesorios Golf</a>
+              <a href="tienda.html?cat=zapatos&sport=golf" onclick="toggleMobileMenu()">Calzado Golf</a>
+              <a href="tienda.html?cat=maletas&sport=golf" onclick="toggleMobileMenu()">Bolsas / Maletas</a>
+              <a href="tienda.html?gender=caballeros&sport=golf&cat=ropa" onclick="toggleMobileMenu()">Ropa Caballeros</a>
+              <a href="tienda.html?gender=damas&sport=golf&cat=ropa" onclick="toggleMobileMenu()">Ropa Damas</a>
+            </div>
+          </li>
+          <li>
+            <button class="mobile-accordion-btn" onclick="toggleAccordion(this)">Pádel <span>+</span></button>
+            <div class="mobile-accordion-content">
+              <a href="tienda.html?sport=padel" onclick="toggleMobileMenu()">Ver todo Pádel</a>
+              <a href="tienda.html?cat=raquetas&sport=padel" onclick="toggleMobileMenu()">Palas de Pádel</a>
+              <a href="tienda.html?cat=pelotas&sport=padel" onclick="toggleMobileMenu()">Pelotas de Pádel</a>
+              <a href="tienda.html?cat=zapatos&sport=padel" onclick="toggleMobileMenu()">Calzado Pádel</a>
+              <a href="tienda.html?sport=padel&gender=caballeros&cat=ropa" onclick="toggleMobileMenu()">Ropa Caballeros</a>
+              <a href="tienda.html?sport=padel&gender=damas&cat=ropa" onclick="toggleMobileMenu()">Ropa Damas</a>
+              <a href="tienda.html?cat=accesorios&sport=padel" onclick="toggleMobileMenu()">Bolsas & Fundas</a>
+            </div>
+          </li>
+          <li>
+            <button class="mobile-accordion-btn" onclick="toggleAccordion(this)">Tenis <span>+</span></button>
+            <div class="mobile-accordion-content">
+              <a href="tienda.html?sport=tenis" onclick="toggleMobileMenu()">Ver todo Tenis</a>
+              <a href="tienda.html?cat=raquetas&sport=tenis" onclick="toggleMobileMenu()">Raquetas</a>
+              <a href="tienda.html?cat=pelotas&sport=tenis" onclick="toggleMobileMenu()">Pelotas de Tenis</a>
+              <a href="tienda.html?cat=zapatos&sport=tenis" onclick="toggleMobileMenu()">Calzado Tenis</a>
+              <a href="tienda.html?sport=tenis&gender=caballeros&cat=ropa" onclick="toggleMobileMenu()">Ropa Caballeros</a>
+              <a href="tienda.html?sport=tenis&gender=damas&cat=ropa" onclick="toggleMobileMenu()">Ropa Damas</a>
+              <a href="tienda.html?cat=accesorios&sport=tenis" onclick="toggleMobileMenu()">Raqueteros</a>
+            </div>
+          </li>
+          <li>
+            <button class="mobile-accordion-btn" onclick="toggleAccordion(this)">Niños <span>+</span></button>
+            <div class="mobile-accordion-content">
+              <a href="tienda.html?gender=ninos" onclick="toggleMobileMenu()">Ver todo Niños</a>
+              <a href="tienda.html?cat=palos&gender=ninos" onclick="toggleMobileMenu()">Palos Junior</a>
+              <a href="tienda.html?cat=ropa&gender=ninos" onclick="toggleMobileMenu()">Ropa Junior</a>
+              <a href="tienda.html?cat=zapatos&gender=ninos" onclick="toggleMobileMenu()">Calzado Junior</a>
+            </div>
+          </li>
+          <li><a href="nosotros.html" class="mobile-direct-link" onclick="toggleMobileMenu()">Sobre Nosotros</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
   </nav>
 
   <!-- ─── HERO CINEMÁTICO ─── -->
@@ -2247,6 +2414,12 @@
         gap: 24px;
       }
 
+      @media (max-width: 768px) {
+        .locations-grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
       .location-card {
         border-radius: var(--radius-lg);
         overflow: hidden;
@@ -2332,6 +2505,225 @@
       .dropdown-menu {
         background-color: #ffffff !important;
         background: #ffffff !important;
+      }
+
+      /* ── RESPONSIVE NAV MOBILE ── */
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--white);
+        cursor: pointer;
+        padding: 8px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        height: 100vh;
+        background: var(--navy-deeper);
+        z-index: 1000;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .mobile-nav.open {
+        right: 0;
+      }
+
+      .mobile-nav-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 24px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .mobile-nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .mobile-nav-logo img {
+        height: 36px;
+        width: auto;
+        border-radius: 6px;
+        object-fit: contain;
+      }
+
+      .mobile-nav-logo .logo-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 20px;
+        color: var(--gold);
+        line-height: 1;
+      }
+
+      .mobile-nav-logo .logo-subtitle {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: var(--gold);
+        text-transform: uppercase;
+        line-height: 1;
+      }
+
+      .mobile-close {
+        background: none;
+        border: none;
+        color: var(--white);
+        cursor: pointer;
+        padding: 4px;
+      }
+
+      .mobile-nav-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .mobile-search {
+        display: flex;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: var(--radius);
+        padding: 8px 12px;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .mobile-search input {
+        background: none;
+        border: none;
+        outline: none;
+        color: var(--white);
+        font-size: 14px;
+        width: 100%;
+      }
+
+      .mobile-search button {
+        background: none;
+        border: none;
+        color: var(--gold);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .mobile-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .mobile-accordion-btn {
+        width: 100%;
+        background: none;
+        border: none;
+        color: var(--white);
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        cursor: pointer;
+      }
+
+      .mobile-accordion-btn span {
+        color: var(--gold);
+        font-size: 16px;
+        transition: transform 0.2s;
+      }
+
+      .mobile-accordion-btn.active span {
+        transform: rotate(45deg);
+      }
+
+      .mobile-accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        display: flex;
+        flex-direction: column;
+        padding-left: 12px;
+        background: rgba(0,0,0,0.15);
+        border-radius: var(--radius);
+      }
+
+      .mobile-accordion-content a {
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 14px;
+        padding: 8px 12px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(255,255,255,0.02);
+      }
+
+      .mobile-accordion-content a:hover {
+        color: var(--gold);
+      }
+
+      .mobile-direct-link {
+        display: block;
+        color: var(--white);
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+
+      .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .mobile-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      @media (max-width: 991px) {
+        .nav-inner {
+          padding: 0 16px;
+          justify-content: space-between;
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-search {
+          display: none;
+        }
+        .mobile-toggle {
+          display: flex;
+        }
       }
     </style>
 
@@ -2653,6 +3045,46 @@
         toast.style.transform = 'translateY(80px)';
         toast.style.opacity = '0';
       }, 3500);
+    }
+
+    function toggleMobileMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+      mobileNav.classList.toggle('open');
+      mobileOverlay.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    }
+
+    function toggleAccordion(btn) {
+      btn.classList.toggle('active');
+      const content = btn.nextElementSibling;
+      if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        content.style.maxHeight = '0px';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    }
+
+    function handleDesktopSearch(e) {
+      if (e.key === 'Enter') {
+        const q = document.getElementById('nav-search-input').value.trim();
+        if (q) {
+          window.location.href = `tienda.html?search=${encodeURIComponent(q)}`;
+        }
+      }
+    }
+
+    function handleMobileSearch(e) {
+      if (e.key === 'Enter') {
+        triggerMobileSearch();
+      }
+    }
+
+    function triggerMobileSearch() {
+      const q = document.getElementById('mobileSearchInput').value.trim();
+      if (q) {
+        window.location.href = `tienda.html?search=${encodeURIComponent(q)}`;
+      }
     }
   </script>
   <script src="js/cart.js"></script>

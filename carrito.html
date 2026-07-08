@@ -525,6 +525,48 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 /* Step visibility */
 .checkout-step { display: none; }
 .checkout-step.active { display: block; }
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 16px;
+  }
+  .nav-logo div {
+    display: none !important;
+  }
+  .nav-back span {
+    display: none;
+  }
+  .nav-back {
+    font-size: 0;
+    padding: 8px;
+  }
+  .nav-title {
+    font-size: 15px;
+  }
+  .stepper {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 0;
+  }
+  .step-line {
+    display: none;
+  }
+  .checkout-layout {
+    grid-template-columns: 1fr;
+    padding: 16px 12px 60px;
+    gap: 20px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-group.span2 {
+    grid-column: span 1;
+  }
+  .panel-body {
+    padding: 16px 14px;
+  }
+}
 </style>
 </head>
 <body>
@@ -533,7 +575,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 <nav class="nav">
   <a href="tienda.html" class="nav-back">
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-    Tienda
+    <span>Tienda</span>
   </a>
   <div class="nav-title">Checkout</div>
   <a href="index.html" class="nav-logo" style="display:flex; align-items:center; gap:14px;">

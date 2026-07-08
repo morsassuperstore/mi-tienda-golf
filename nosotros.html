@@ -36,11 +36,14 @@
       padding: 0;
     }
 
+    html {
+      overflow-x: clip;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--white);
       color: var(--text-dark);
-      overflow-x: hidden;
     }
 
     /* ─── ANNOUNCEMENT BAR ─── */
@@ -86,9 +89,9 @@
 
     .nav-logo img,
     .nav-logo svg {
-      width: 50px;
       height: 50px;
-      object-fit: cover;
+      width: auto;
+      object-fit: contain;
       border-radius: 8px;
     }
 
@@ -626,7 +629,7 @@
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="assets/logo morsas 2026.png" data-src-fallback="assets/logo morsas 2026" alt="Morsa's Proshop Logo">
+        <img src="assets/logo morsas 2026.png" data-src-fallback="assets/logo morsas 2026" alt="Morsa's Proshop Logo" style="height:50px;width:auto;border-radius:8px;object-fit:contain;">
         <div>
           <div class="nav-logo-text">Morsa's</div>
           <div class="nav-logo-sub">Proshop</div>
