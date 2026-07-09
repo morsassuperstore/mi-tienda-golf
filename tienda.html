@@ -1396,6 +1396,16 @@
       grid-template-columns: repeat(2, 1fr) !important;
       gap: 12px;
     }
+
+    /* PDV Responsive Tablet */
+    .pdv-product {
+      grid-template-columns: 1fr;
+      padding: 24px 20px 0;
+      gap: 32px;
+    }
+    .pdv-images {
+      padding-right: 0;
+    }
   }
 
   @media (max-width: 768px) {
@@ -1422,6 +1432,47 @@
       flex: 1;
       min-width: 120px;
     }
+
+    /* PDV Responsive Mobile */
+    .pdv-topbar {
+      padding: 12px 16px;
+      flex-wrap: wrap;
+    }
+    .pdv-breadcrumb {
+      width: 100%;
+      padding-left: 8px;
+    }
+    .pdv-breadcrumb span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 250px;
+    }
+    .pdv-product {
+      padding: 16px 16px 40px;
+      gap: 24px;
+    }
+    .pdv-images {
+      flex-direction: column-reverse;
+      gap: 16px;
+    }
+    .pdv-thumbs {
+      flex-direction: row;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .pdv-thumb {
+      width: 60px;
+      height: 70px;
+    }
+    .pdv-info {
+      padding-left: 0;
+    }
+    .pdv-name {
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
   }
 
   @media (max-width: 480px) {
