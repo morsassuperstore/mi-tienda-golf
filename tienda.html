@@ -870,13 +870,15 @@
     background: #f0eeea;
     position: relative;
     aspect-ratio: 4/5;
+    cursor: zoom-in;
   }
   .pdv-main-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top;
-    transition: transform 0.5s ease;
+    transition: transform 0.2s ease-out;
+    will-change: transform;
   }
   .pdv-main-img:hover { transform: scale(1.04); }
   .pdv-badge {
@@ -1589,7 +1591,7 @@
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align: middle; margin-right: 4px;"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
         Filtrar
       </button>
-      <div class="products-count" id="productsCount"><strong>56</strong> Productos</div>
+      <div class="products-count" id="productsCount"></div>
       <div class="active-filters" id="activeFilters"></div>
       <select class="sort-select" onchange="sortProducts(this.value)">
         <option value="featured">Destacados</option>
@@ -2278,8 +2280,12 @@ function showToast(msg) {
           <p style="color:var(--text-mid); font-size:15px; max-width:400px; margin:0 auto; line-height:1.6;">Estamos sincronizando nuestro inventario de la tienda física para ofrecerte lo mejor. Por favor, intenta recargar la página en unos minutos.</p>
         </div>
       `;
-      document.querySelector('.shop-header-count').innerHTML = '';
-      document.querySelector('.shop-header-title').textContent = 'Mantenimiento';
+      const pCount = document.getElementById('productsCount');
+      if (pCount) pCount.innerHTML = '';
+      const hCount = document.getElementById('headerCount');
+      if (hCount) hCount.textContent = 'Mantenimiento';
+      const pTitle = document.querySelector('.page-title');
+      if (pTitle) pTitle.textContent = 'Mantenimiento';
       return;
     }
 
@@ -2431,6 +2437,30 @@ function showToast(msg) {
         setTimeout(() => openModal(pid), 450);
       }
     }
+
+    // --- Image Zoom Logic ---
+    const imgWrap = document.querySelector('.pdv-main-img-wrap');
+    const mainImg = document.getElementById('pdvMainImg');
+    
+    if (imgWrap && mainImg) {
+      imgWrap.addEventListener('mousemove', (e) => {
+        const rect = imgWrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const xPercent = (x / rect.width) * 100;
+        const yPercent = (y / rect.height) * 100;
+        
+        mainImg.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+        mainImg.style.transform = 'scale(2.5)';
+      });
+      
+      imgWrap.addEventListener('mouseleave', () => {
+        mainImg.style.transformOrigin = 'center center';
+        mainImg.style.transform = 'scale(1)';
+      });
+    }
+
   });
 })();
 </script>

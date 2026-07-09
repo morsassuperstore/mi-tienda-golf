@@ -102,8 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         @media (max-width: 768px) {
             .whatsapp-float {
-                bottom: 16px !important;
-                right: 16px !important;
+                bottom: 20px !important;
+                right: 44px !important;
+                left: auto !important;
                 width: 50px !important;
                 height: 50px !important;
             }
