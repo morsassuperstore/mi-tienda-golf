@@ -49,12 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         /* 2. HEADER GLASSMORPHISM (Efecto Cristal en Scroll) */
         nav {
-            transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
         nav.nav-scrolled {
-            background: rgba(21, 25, 112, 0.85) !important;
-            -webkit-backdrop-filter: blur(16px);
-            backdrop-filter: blur(16px);
+            background: rgba(21, 25, 112, 0.97) !important;
             box-shadow: 0 4px 24px rgba(0,0,0,0.2);
         }
 
