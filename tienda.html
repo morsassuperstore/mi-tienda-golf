@@ -2130,6 +2130,18 @@ function openModal(id) {
     }
   } else { cWrap.style.display = 'none'; }
 
+  // Async fetch of full variations to get variation images
+  if (p.variations && p.variations.length > 0) {
+    fetch(`${CONFIG.API_URL}/morsa/v1/variations/${p.id}`)
+      .then(res => res.json())
+      .then(data => {
+         if (data && data.variations) {
+            p.fullVariations = data.variations;
+         }
+      })
+      .catch(e => console.error("Error fetching full variations:", e));
+  }
+
   // Sizes
   const sWrap = document.getElementById('pdvSizesWrap');
   const sEl   = document.getElementById('pdvSizes');
@@ -2296,6 +2308,19 @@ function pdvSelectColor(el, hex, colorNameRaw) {
       ).join('');
     } else {
       sEl.innerHTML = `<span style="font-size:13px;color:var(--text-mid)">Agotado en este color</span>`;
+    }
+    
+    // Si tenemos las fullVariations con imagen, cambiamos la imagen principal
+    if (currentProduct.fullVariations) {
+      const targetVar = currentProduct.fullVariations.find(v => {
+         const hasColor = v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
+         return hasColor && hasColor.value === colorNameRaw && v.image_src;
+      });
+      if (targetVar && targetVar.image_src) {
+        // Change main image without breaking the active thumbnail selection visually (or we can just update main)
+        const mainImg = document.getElementById('pdvMainImg');
+        mainImg.src = targetVar.image_src;
+      }
     }
   }
 }
