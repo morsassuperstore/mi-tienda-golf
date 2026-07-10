@@ -2120,9 +2120,9 @@ function openModal(id) {
   const cName = document.getElementById('pdvColorName');
   if (p.colors && p.colors.length) {
     cWrap.style.display = 'block';
-    cName.textContent = getColorName(p.colors[0]);
+    cName.innerHTML = `${getColorName(p.colors[0])} <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:var(--text-mid); text-decoration:underline;">Limpiar selección</a>`;
     cEl.innerHTML = p.colors.map((c,i) =>
-      `<span class="pdv-color-swatch${i===0?' active':''}" style="background:${getCssColor(c)}; border: 1px solid #ddd;" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}', '${c}')"></span>`
+      `<span class="pdv-color-swatch" style="background:${getCssColor(c)}; border: 1px solid #ddd;" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}', '${c}')"></span>`
     ).join('');
     // Trigger initial filter
     if (p.variations && p.variations.length) {
@@ -2273,7 +2273,7 @@ function pdvSwitchImg(thumb, src) {
 function pdvSelectColor(el, hex, colorNameRaw) {
   document.querySelectorAll('.pdv-color-swatch').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('pdvColorName').textContent = getColorName(hex);
+  document.getElementById('pdvColorName').innerHTML = `${getColorName(hex)} <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:var(--text-mid); text-decoration:underline;" id="pdvClearBtn">Limpiar selección</a>`;
   
   if (currentProduct && currentProduct.variations.length > 0 && colorNameRaw) {
     // Filtrar las variaciones que coinciden con el color seleccionado
@@ -2299,6 +2299,24 @@ function pdvSelectColor(el, hex, colorNameRaw) {
     }
   }
 }
+
+function pdvClearSelection(e) {
+  if (e) e.preventDefault();
+  // Limpiar colores seleccionados
+  document.querySelectorAll('.pdv-color-swatch').forEach(s => s.classList.remove('active'));
+  document.getElementById('pdvColorName').innerHTML = `Selecciona un color <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:var(--text-mid); text-decoration:underline; display:none;" id="pdvClearBtn">Limpiar selección</a>`;
+  
+  // Restaurar todas las tallas
+  if (currentProduct) {
+    const sEl = document.getElementById('pdvSizes');
+    if (currentProduct.sizes.length > 0) {
+      sEl.innerHTML = currentProduct.sizes.map(s =>
+        `<button class="pdv-size-btn" onclick="pdvSelectSize(this)">${s}</button>`
+      ).join('');
+    }
+  }
+}
+
 function pdvSelectSize(el) {
   document.querySelectorAll('.pdv-size-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
