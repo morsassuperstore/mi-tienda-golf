@@ -2020,6 +2020,22 @@ const colorNames = {
 };
 function getColorName(hex) { return colorNames[hex.toLowerCase()] || hex; }
 
+function getCssColor(name) {
+  const map = {
+    'blanco': '#ffffff',
+    'negro': '#000000',
+    'beige': '#f5f5dc',
+    'khaki': '#c3b091',
+    'rojo': '#e74c3c',
+    'azul': '#2980b9',
+    'verde': '#27ae60',
+    'gris': '#95a5a6',
+    'marino': '#1a2490',
+    'amarillo': '#f1c40f'
+  };
+  return map[name.toLowerCase()] || name;
+}
+
 // Seed reviews per product (static pool, augmented by user submissions)
 const reviewsDB = {};
 const reviewPool = [
@@ -2106,8 +2122,12 @@ function openModal(id) {
     cWrap.style.display = 'block';
     cName.textContent = getColorName(p.colors[0]);
     cEl.innerHTML = p.colors.map((c,i) =>
-      `<span class="pdv-color-swatch${i===0?' active':''}" style="background:${c}" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}')"></span>`
+      `<span class="pdv-color-swatch${i===0?' active':''}" style="background:${getCssColor(c)}; border: 1px solid #ddd;" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}', '${c}')"></span>`
     ).join('');
+    // Trigger initial filter
+    if (p.variations && p.variations.length) {
+      setTimeout(() => pdvSelectColor(cEl.firstChild, p.colors[0], p.colors[0]), 50);
+    }
   } else { cWrap.style.display = 'none'; }
 
   // Sizes
@@ -2250,10 +2270,34 @@ function pdvSwitchImg(thumb, src) {
   document.querySelectorAll('.pdv-thumb').forEach(t => t.classList.remove('active'));
   thumb.classList.add('active');
 }
-function pdvSelectColor(el, hex) {
+function pdvSelectColor(el, hex, colorNameRaw) {
   document.querySelectorAll('.pdv-color-swatch').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('pdvColorName').textContent = getColorName(hex);
+  
+  if (currentProduct && currentProduct.variations.length > 0 && colorNameRaw) {
+    // Filtrar las variaciones que coinciden con el color seleccionado
+    const matchingVars = currentProduct.variations.filter(v => {
+      const colorAttr = v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
+      return colorAttr && colorAttr.value === colorNameRaw;
+    });
+    
+    // Obtener tallas disponibles para ese color
+    const availableSizes = matchingVars.map(v => {
+      const sizeAttr = v.attributes.find(a => a.name === 'Talla' || a.name === 'Tallas');
+      return sizeAttr ? sizeAttr.value : null;
+    }).filter(s => s !== null);
+    
+    // Actualizar la interfaz de tallas
+    const sEl = document.getElementById('pdvSizes');
+    if (availableSizes.length > 0) {
+      sEl.innerHTML = availableSizes.map(s =>
+        `<button class="pdv-size-btn" onclick="pdvSelectSize(this)">${s}</button>`
+      ).join('');
+    } else {
+      sEl.innerHTML = `<span style="font-size:13px;color:var(--text-mid)">Agotado en este color</span>`;
+    }
+  }
 }
 function pdvSelectSize(el) {
   document.querySelectorAll('.pdv-size-btn').forEach(b => b.classList.remove('selected'));
@@ -2261,6 +2305,22 @@ function pdvSelectSize(el) {
 }
 function addToCartFromPDV() {
   if (!currentProduct) return;
+  
+  // Si el producto tiene tallas disponibles, obligar a seleccionar una
+  if (document.querySelectorAll('.pdv-size-btn').length > 0) {
+    const selectedSize = document.querySelector('.pdv-size-btn.selected');
+    if (!selectedSize) {
+      showToast('Por favor, selecciona una talla primero');
+      // Hacer un pequeño efecto visual para llamar la atención
+      const sizesWrap = document.getElementById('pdvSizes');
+      sizesWrap.style.border = '2px solid var(--error, #e74c3c)';
+      sizesWrap.style.padding = '5px';
+      sizesWrap.style.borderRadius = '8px';
+      setTimeout(() => { sizesWrap.style.border = 'none'; sizesWrap.style.padding = '0'; }, 2000);
+      return;
+    }
+  }
+
   addToCart(currentProduct.id);
 }
 function addToCartFromModal() { addToCartFromPDV(); }
@@ -2401,7 +2461,9 @@ function showToast(msg) {
       allGenders.add(foundGender);
       allBrands.add(foundBrand);
 
-      const pSizes = p.attributes?.find(a => a.name === 'Talla')?.terms?.map(t => t.name) || [];
+      const pSizes = p.attributes?.find(a => a.name === 'Talla' || a.name === 'Tallas')?.terms?.map(t => t.name) || [];
+      const pColors = p.attributes?.find(a => a.name === 'Colores' || a.name === 'Color')?.terms?.map(t => t.name) || [];
+      
       pSizes.forEach(s => allSizes.add(s));
 
       products.push({
@@ -2413,14 +2475,15 @@ function showToast(msg) {
         gender: foundGender,
         price: (parseFloat(p.prices?.price || 0) / Math.pow(10, p.prices?.currency_minor_unit || 2)).toFixed(2),
         oldPrice: p.on_sale ? (parseFloat(p.prices?.regular_price || 0) / Math.pow(10, p.prices?.currency_minor_unit || 2)).toFixed(2) : null,
-        colors: [],
+        colors: pColors,
         sizes: pSizes,
         badge: p.on_sale ? 'sale' : '',
         img: p.images?.[0]?.src || 'https://via.placeholder.com/400',
         img2: p.images?.[1]?.src || p.images?.[0]?.src || 'https://via.placeholder.com/400',
         allImages: p.images || [],
         desc: p.short_description?.replace(/(<([^>]+)>)/gi, "") || '',
-        fullDesc: p.description || p.short_description || ''
+        fullDesc: p.description || p.short_description || '',
+        variations: p.variations || []
       });
     });
 
