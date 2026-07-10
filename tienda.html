@@ -880,7 +880,9 @@
     transition: transform 0.2s ease-out;
     will-change: transform;
   }
-  .pdv-main-img:hover { transform: scale(1.04); }
+  @media (hover: hover) {
+    .pdv-main-img:hover { transform: scale(1.04); }
+  }
   .pdv-badge {
     position: absolute;
     top: 14px; left: 14px;
@@ -2622,6 +2624,9 @@ function showToast(msg) {
     
     if (imgWrap && mainImg) {
       imgWrap.addEventListener('mousemove', (e) => {
+        // Deshabilitar zoom en pantallas táctiles o móviles
+        if (window.innerWidth <= 991 || ('ontouchstart' in window)) return;
+        
         const rect = imgWrap.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
