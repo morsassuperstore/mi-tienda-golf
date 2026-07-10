@@ -2058,7 +2058,14 @@ function openModal(id) {
 
   // Thumbnails
   const thumbs = document.getElementById('pdvThumbs');
-  thumbs.innerHTML = [p.img, p.img2].map((src, i) =>
+  let imagesToRender = p.allImages && p.allImages.length > 0 
+    ? p.allImages.map(img => img.src) 
+    : [p.img, p.img2];
+  
+  // Filtrar duplicados
+  imagesToRender = [...new Set(imagesToRender)];
+
+  thumbs.innerHTML = imagesToRender.map((src, i) =>
     `<img class="pdv-thumb${i===0?' active':''}" src="${src}" alt="${p.name}" onclick="pdvSwitchImg(this,'${src}')">`
   ).join('');
 
@@ -2411,6 +2418,7 @@ function showToast(msg) {
         badge: p.on_sale ? 'sale' : '',
         img: p.images?.[0]?.src || 'https://via.placeholder.com/400',
         img2: p.images?.[1]?.src || p.images?.[0]?.src || 'https://via.placeholder.com/400',
+        allImages: p.images || [],
         desc: p.short_description?.replace(/(<([^>]+)>)/gi, "") || '',
         fullDesc: p.description || p.short_description || ''
       });
