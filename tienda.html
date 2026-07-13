@@ -1980,12 +1980,33 @@ function selectSize(btn) {
 function sortProducts(val) { filterProducts(); }
 
 // ─── CART ───
-function addToCart(id) {
+function addToCart(id, variationId = 0, attributes = {}) {
   const p = products.find(x => x.id === id);
   if (!p) return;
   
+  // Si el usuario presiona "Añadir al carrito" desde el catálogo, y es un producto con variaciones, abrimos el modal
+  if (variationId === 0 && (p.colors.length > 0 || p.sizes.length > 0)) {
+    openModal(id);
+    return;
+  }
+
+  let cartName = p.name;
+  if (attributes && Object.keys(attributes).length > 0) {
+    const attrsStr = Object.values(attributes).join(' - ');
+    cartName = `${p.name} (${attrsStr})`;
+  }
+
+  let cartImg = p.img;
+  let cartPrice = p.price;
+  
+  if (variationId > 0 && p.fullVariations) {
+    const foundVar = p.fullVariations.find(v => v.id === variationId);
+    if (foundVar && foundVar.image_src) cartImg = foundVar.image_src;
+    if (foundVar && foundVar.price) cartPrice = foundVar.price;
+  }
+
   // Llamamos a la API global del carrito (del archivo js/cart.js)
-  Cart.add(p.id, p.name, p.price, p.img);
+  Cart.add(p.id, cartName, cartPrice, cartImg, variationId, attributes);
   
   // Continuamos con la logica visual antigua (shipping bar, count, etc) por compatibilidad visual
   cartCount = Cart.items.reduce((acc, i) => acc + i.quantity, 0);
@@ -2302,6 +2323,10 @@ function pdvSelectColor(el, hex, colorNameRaw) {
   el.classList.add('active');
   document.getElementById('pdvColorName').innerHTML = `${getColorName(hex)} <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:var(--text-mid); text-decoration:underline;" id="pdvClearBtn">Limpiar selección</a>`;
   
+  if (currentProduct) {
+    currentProduct.selectedColorRaw = colorNameRaw;
+  }
+  
   if (currentProduct && currentProduct.variations.length > 0 && colorNameRaw) {
     // Filtrar las variaciones que coinciden con el color seleccionado
     const matchingVars = currentProduct.variations.filter(v => {
@@ -2346,6 +2371,8 @@ function pdvClearSelection(e) {
   document.querySelectorAll('.pdv-color-swatch').forEach(s => s.classList.remove('active'));
   document.getElementById('pdvColorName').innerHTML = `Selecciona un color <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:var(--text-mid); text-decoration:underline; display:none;" id="pdvClearBtn">Limpiar selección</a>`;
   
+  if (currentProduct) currentProduct.selectedColorRaw = null;
+  
   // Restaurar todas las tallas
   if (currentProduct) {
     const sEl = document.getElementById('pdvSizes');
@@ -2364,10 +2391,11 @@ function pdvSelectSize(el) {
 function addToCartFromPDV() {
   if (!currentProduct) return;
   
+  let selectedSize = null;
   // Si el producto tiene tallas disponibles, obligar a seleccionar una
   if (document.querySelectorAll('.pdv-size-btn').length > 0) {
-    const selectedSize = document.querySelector('.pdv-size-btn.selected');
-    if (!selectedSize) {
+    const selectedSizeBtn = document.querySelector('.pdv-size-btn.selected');
+    if (!selectedSizeBtn) {
       showToast('Por favor, selecciona una talla primero');
       // Hacer un pequeño efecto visual para llamar la atención
       const sizesWrap = document.getElementById('pdvSizes');
@@ -2377,9 +2405,35 @@ function addToCartFromPDV() {
       setTimeout(() => { sizesWrap.style.border = 'none'; sizesWrap.style.padding = '0'; }, 2000);
       return;
     }
+    selectedSize = selectedSizeBtn.textContent.trim();
   }
 
-  addToCart(currentProduct.id);
+  const selectedColor = currentProduct.selectedColorRaw || null;
+  let variationId = 0;
+  let attributes = {};
+
+  if (selectedSize) attributes['Talla'] = selectedSize;
+  if (selectedColor) attributes['Color'] = selectedColor;
+
+  if (currentProduct.fullVariations) {
+    const foundVar = currentProduct.fullVariations.find(v => {
+      let matches = true;
+      if (selectedColor) {
+        const hasColor = v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
+        if (!hasColor || hasColor.value !== selectedColor) matches = false;
+      }
+      if (selectedSize) {
+        const hasSize = v.attributes.find(a => a.name === 'Tallas' || a.name === 'Talla');
+        if (!hasSize || hasSize.value !== selectedSize) matches = false;
+      }
+      return matches;
+    });
+    if (foundVar) {
+      variationId = foundVar.id;
+    }
+  }
+
+  addToCart(currentProduct.id, variationId, attributes);
 }
 function addToCartFromModal() { addToCartFromPDV(); }
 function scrollCarousel(dir) {
