@@ -1980,12 +1980,12 @@ function selectSize(btn) {
 function sortProducts(val) { filterProducts(); }
 
 // ─── CART ───
-function addToCart(id, variationId = 0, attributes = {}) {
+function addToCart(id, variationId = 0, attributes = {}, fromModal = false) {
   const p = products.find(x => x.id === id);
   if (!p) return;
   
   // Si el usuario presiona "Añadir al carrito" desde el catálogo, y es un producto con variaciones, abrimos el modal
-  if (variationId === 0 && (p.colors.length > 0 || p.sizes.length > 0)) {
+  if (!fromModal && variationId === 0 && (p.colors.length > 0 || p.sizes.length > 0)) {
     openModal(id);
     return;
   }
@@ -2433,7 +2433,7 @@ function addToCartFromPDV() {
     }
   }
 
-  addToCart(currentProduct.id, variationId, attributes);
+  addToCart(currentProduct.id, variationId, attributes, true);
 }
 function addToCartFromModal() { addToCartFromPDV(); }
 function scrollCarousel(dir) {
