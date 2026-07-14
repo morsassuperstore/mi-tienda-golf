@@ -36,7 +36,6 @@ const Cart = {
             });
         }
         Cart.save();
-        alert('¡Agregado al carrito!');
     },
 
     remove: (index) => {

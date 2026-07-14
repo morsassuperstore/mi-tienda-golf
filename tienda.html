@@ -867,7 +867,7 @@
     flex: 1;
     border-radius: 14px;
     overflow: hidden;
-    background: #f0eeea;
+    background: transparent;
     position: relative;
     aspect-ratio: 4/5;
     cursor: zoom-in;
@@ -1243,7 +1243,7 @@
     pointer-events: none;
   }
 
-  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
 
   .toast-top {
     display: flex;
