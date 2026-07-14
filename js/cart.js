@@ -18,8 +18,8 @@ const Cart = {
     },
 
     add: (product_id, title, price, image, variation_id = 0, attributes = {}) => {
-        // Buscar si ya existe en el carrito
-        const index = Cart.items.findIndex(i => i.product_id === product_id && i.variation_id === variation_id);
+        // Buscar si ya existe en el carrito usando product_id y title (que ya incluye las opciones)
+        const index = Cart.items.findIndex(i => i.product_id === product_id && i.title === title);
         
         if (index > -1) {
             Cart.items[index].quantity += 1;
@@ -38,15 +38,16 @@ const Cart = {
         alert('¡Agregado al carrito!');
     },
 
-    remove: (product_id, variation_id = 0) => {
-        Cart.items = Cart.items.filter(i => !(i.product_id === product_id && i.variation_id === variation_id));
-        Cart.save();
+    remove: (index) => {
+        if(index >= 0 && index < Cart.items.length) {
+            Cart.items.splice(index, 1);
+            Cart.save();
+        }
     },
 
-    updateQuantity: (product_id, variation_id, quantity) => {
-        const item = Cart.items.find(i => i.product_id === product_id && i.variation_id === variation_id);
-        if (item) {
-            item.quantity = Math.max(1, parseInt(quantity));
+    updateQuantity: (index, quantity) => {
+        if(index >= 0 && index < Cart.items.length) {
+            Cart.items[index].quantity = Math.max(1, parseInt(quantity));
             Cart.save();
         }
     },

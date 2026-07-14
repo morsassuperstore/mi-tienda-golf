@@ -1077,7 +1077,7 @@ function renderCart() {
   shipProg.style.display = 'block';
   countLabel.textContent = Cart.items.length === 1 ? '1 producto' : `${Cart.items.length} productos`;
 
-  list.innerHTML = Cart.items.map(item => `
+  list.innerHTML = Cart.items.map((item, index) => `
     <div class="cart-item">
       <img class="cart-img" src="${item.image}" alt="${item.title}" onerror="this.style.background='#eee'">
       <div class="cart-details">
@@ -1088,11 +1088,11 @@ function renderCart() {
       <div class="cart-right">
         <div class="cart-price">$${(item.price * item.quantity).toFixed(2)}</div>
         <div class="cart-qty">
-          <button class="cart-qty-btn" onclick="changeQty(${item.product_id}, ${item.variation_id}, -1)">−</button>
+          <button class="cart-qty-btn" onclick="changeQty(${index}, -1)">−</button>
           <span class="cart-qty-num">${item.quantity}</span>
-          <button class="cart-qty-btn" onclick="changeQty(${item.product_id}, ${item.variation_id}, 1)">+</button>
+          <button class="cart-qty-btn" onclick="changeQty(${index}, 1)">+</button>
         </div>
-        <button class="cart-remove" onclick="removeItem(${item.product_id}, ${item.variation_id})">Eliminar</button>
+        <button class="cart-remove" onclick="removeItem(${index})">Eliminar</button>
       </div>
     </div>
   `).join('');
@@ -1174,14 +1174,14 @@ function updateSummary() {
 }
 
 // ── CART ACTIONS ──
-function changeQty(pid, vid, delta) {
-  const item = Cart.items.find(i => i.product_id === pid && i.variation_id === vid);
+function changeQty(index, delta) {
+  const item = Cart.items[index];
   if (!item) return;
-  Cart.updateQuantity(pid, vid, item.quantity + delta);
+  Cart.updateQuantity(index, item.quantity + delta);
   renderCart();
 }
-function removeItem(pid, vid) {
-  Cart.remove(pid, vid);
+function removeItem(index) {
+  Cart.remove(index);
   renderCart();
 }
 function clearCart() {
