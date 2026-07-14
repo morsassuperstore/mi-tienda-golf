@@ -1424,14 +1424,25 @@ async function sendWhatsAppNotification(orderNum, snapshot) {
   if (waBtn) waBtn.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
 }
 
+let isProcessingOrder = false;
+
 async function placeOrder() {
+  if (isProcessingOrder) return;
+  isProcessingOrder = true;
+
   const btn = document.getElementById('summary-cta');
   const btnLabel = document.getElementById('summary-cta-label');
+  const leftBtn = document.querySelector('.checkout-step.active .btn-checkout[onclick="placeOrder()"]');
 
   if (btn) {
     btn.disabled = true;
     btn.style.opacity = '0.7';
     btn.style.cursor = 'not-allowed';
+  }
+  if (leftBtn) {
+    leftBtn.disabled = true;
+    leftBtn.style.opacity = '0.7';
+    leftBtn.style.cursor = 'not-allowed';
   }
   if (btnLabel) {
     btnLabel.dataset.original = btnLabel.textContent;
