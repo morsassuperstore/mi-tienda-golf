@@ -1424,8 +1424,18 @@ async function sendWhatsAppNotification(orderNum, snapshot) {
 }
 
 async function placeOrder() {
-  const btn = document.querySelector('.btn-checkout[onclick="placeOrder()"]');
-  if (btn) btn.disabled = true;
+  const btn = document.getElementById('summary-cta');
+  const btnLabel = document.getElementById('summary-cta-label');
+
+  if (btn) {
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    btn.style.cursor = 'not-allowed';
+  }
+  if (btnLabel) {
+    btnLabel.dataset.original = btnLabel.textContent;
+    btnLabel.textContent = 'Procesando...';
+  }
 
   // Preparar los datos para el backend
   const checkoutData = {
@@ -1514,7 +1524,14 @@ async function placeOrder() {
     `;
     // Scroll smoothly to error
     errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    if (btn) btn.disabled = false;
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
+    }
+    if (btnLabel && btnLabel.dataset.original) {
+      btnLabel.textContent = btnLabel.dataset.original;
+    }
   }
 }
 
