@@ -1998,15 +1998,20 @@ function addToCart(id, variationId = 0, attributes = {}, fromModal = false) {
 
   let cartImg = p.img;
   let cartPrice = p.price;
+  let cartSku = p.sku || '';
   
-  if (variationId > 0 && p.fullVariations) {
-    const foundVar = p.fullVariations.find(v => v.variation_id === variationId);
-    if (foundVar && foundVar.image_src) cartImg = foundVar.image_src;
-    if (foundVar && foundVar.price) cartPrice = foundVar.price;
+  const variationsList = p.fullVariations || p.variations || [];
+  if (variationId > 0 && variationsList.length > 0) {
+    const foundVar = variationsList.find(v => (v.variation_id || v.id) === variationId);
+    if (foundVar) {
+      if (foundVar.image_src) cartImg = foundVar.image_src;
+      if (foundVar.price) cartPrice = foundVar.price;
+      if (foundVar.sku) cartSku = foundVar.sku;
+    }
   }
 
   // Llamamos a la API global del carrito (del archivo js/cart.js)
-  Cart.add(p.id, cartName, cartPrice, cartImg, variationId, attributes);
+  Cart.add(p.id, cartName, cartPrice, cartImg, variationId, attributes, cartSku);
   
   // Continuamos con la logica visual antigua (shipping bar, count, etc) por compatibilidad visual
   cartCount = Cart.items.reduce((acc, i) => acc + i.quantity, 0);
@@ -2581,6 +2586,7 @@ function showToast(msg) {
 
       products.push({
         id: p.id,
+        sku: p.sku || '',
         name: decodedName,
         brand: foundBrand,
         sport: foundSport,

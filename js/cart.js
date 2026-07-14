@@ -17,7 +17,7 @@ const Cart = {
         Cart.updateBadge();
     },
 
-    add: (product_id, title, price, image, variation_id = 0, attributes = {}) => {
+    add: (product_id, title, price, image, variation_id = 0, attributes = {}, sku = '') => {
         // Buscar si ya existe en el carrito usando product_id y title (que ya incluye las opciones)
         const index = Cart.items.findIndex(i => i.product_id === product_id && i.title === title);
         
@@ -31,6 +31,7 @@ const Cart = {
                 price: parseFloat(price),
                 image,
                 attributes,
+                sku,
                 quantity: 1
             });
         }
