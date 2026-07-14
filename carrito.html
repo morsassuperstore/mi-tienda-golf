@@ -1083,7 +1083,7 @@ function renderCart() {
       <div class="cart-details">
         <div class="cart-sport-tag">PRODUCTO</div>
         <div class="cart-name">${item.title}</div>
-        ${item.sku ? `<div style="font-size:11px;color:var(--text-mid);margin-top:2px;">SKU: ${item.sku}</div>` : (item.variation_id > 0 ? `<div style="font-size:11px;color:var(--text-mid);margin-top:2px;">ID de Variación: ${item.variation_id}</div>` : `<div style="font-size:11px;color:red;margin-top:2px;">Fallo al obtener ID (Revisar nombres de atributos)</div>`)}
+        ${item.sku ? `<div style="font-size:11px;color:var(--text-mid);margin-top:2px;">SKU: ${item.sku}</div>` : ''}
         <div class="cart-brand">Morsa's</div>
       </div>
       <div class="cart-right">
