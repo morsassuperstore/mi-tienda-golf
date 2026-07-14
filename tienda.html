@@ -2000,7 +2000,7 @@ function addToCart(id, variationId = 0, attributes = {}, fromModal = false) {
   let cartPrice = p.price;
   
   if (variationId > 0 && p.fullVariations) {
-    const foundVar = p.fullVariations.find(v => v.id === variationId);
+    const foundVar = p.fullVariations.find(v => v.variation_id === variationId);
     if (foundVar && foundVar.image_src) cartImg = foundVar.image_src;
     if (foundVar && foundVar.price) cartPrice = foundVar.price;
   }
@@ -2429,7 +2429,7 @@ function addToCartFromPDV() {
       return matches;
     });
     if (foundVar) {
-      variationId = foundVar.id;
+      variationId = foundVar.variation_id;
     }
   }
 
