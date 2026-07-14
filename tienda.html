@@ -2415,21 +2415,22 @@ function addToCartFromPDV() {
   if (selectedSize) attributes['Talla'] = selectedSize;
   if (selectedColor) attributes['Color'] = selectedColor;
 
-  if (currentProduct.fullVariations) {
-    const foundVar = currentProduct.fullVariations.find(v => {
+  const variationsList = currentProduct.fullVariations || currentProduct.variations || [];
+  if (variationsList.length > 0) {
+    const foundVar = variationsList.find(v => {
       let matches = true;
       if (selectedColor) {
         const hasColor = v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
-        if (!hasColor || hasColor.value !== selectedColor) matches = false;
+        if (!hasColor || String(hasColor.value).trim() !== String(selectedColor).trim()) matches = false;
       }
       if (selectedSize) {
         const hasSize = v.attributes.find(a => a.name === 'Tallas' || a.name === 'Talla');
-        if (!hasSize || hasSize.value !== selectedSize) matches = false;
+        if (!hasSize || String(hasSize.value).trim() !== String(selectedSize).trim()) matches = false;
       }
       return matches;
     });
     if (foundVar) {
-      variationId = foundVar.variation_id;
+      variationId = foundVar.variation_id || foundVar.id || 0;
     }
   }
 
