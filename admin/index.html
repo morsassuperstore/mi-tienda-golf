@@ -16,6 +16,15 @@
   </style>
 </head>
 <body>
+  <!-- Escuchador de depuración para rastrear la comunicación del login -->
+  <script>
+    window.addEventListener('message', (event) => {
+      console.log('--- DEPURACIÓN OAUTH ---');
+      console.log('Origen recibido:', event.origin);
+      console.log('Datos recibidos:', event.data);
+    }, false);
+  </script>
+
   <!-- Cargar Decap CMS desde CDN -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
