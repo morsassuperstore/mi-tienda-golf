@@ -25,7 +25,6 @@ collections:
           - label: "Barra de Anuncio Superior"
             name: "announcement_bar"
             widget: "string"
-          
           - label: "Banner Principal (Hero Cinematic)"
             name: "hero"
             widget: "object"
@@ -57,7 +56,6 @@ collections:
               - label: "Enlace Botón Secundario (Ruta o URL)"
                 name: "btn_secondary_link"
                 widget: "string"
-            
           - label: "Sección Deportes (Conteo de productos)"
             name: "sports"
             widget: "object"
@@ -71,7 +69,6 @@ collections:
               - label: "Texto Tenis"
                 name: "tenis_count"
                 widget: "string"
-            
           - label: "Sección Simulador"
             name: "simulator"
             widget: "object"
@@ -103,7 +100,6 @@ collections:
               - label: "Enlace Botón Secundario (Ruta o URL)"
                 name: "btn_secondary_link"
                 widget: "string"
-            
           - label: "Sucursales (¿Dónde Estamos?)"
             name: "locations"
             widget: "list"
