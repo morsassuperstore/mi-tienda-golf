@@ -1,0 +1,3 @@
+# Configuración de tipos MIME para cPanel / Apache
+AddType text/yaml .yml
+AddType text/yaml .yaml
