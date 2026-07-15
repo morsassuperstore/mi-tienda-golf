@@ -2567,7 +2567,13 @@ function showToast(msg) {
       let foundCatSlug = 'accesorios';
       let foundCatName = 'Accesorios';
       if (p.categories && p.categories.length > 0) {
-        const validCats = p.categories.filter(c => c.slug !== 'sin-categorizar');
+        const validCats = p.categories.filter(c => 
+          c.slug !== 'sin-categorizar' && 
+          c.slug !== 'tenis' && 
+          c.slug !== 'tennis' && 
+          c.slug !== 'padel' && 
+          c.slug !== 'golf'
+        );
         if (validCats.length > 0) {
           foundCatSlug = validCats[0].slug;
           foundCatName = validCats[0].name;
