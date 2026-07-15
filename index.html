@@ -1799,7 +1799,7 @@
         d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
       <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
       <line x1="12" y1="22.08" x2="12" y2="12" />
-    </svg> Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
+    </svg> <span id="announcement-text">Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra</span>
   </div>
 
   <!-- NAV -->
@@ -2230,19 +2230,19 @@
 
   <section class="hero-cinematic">
     <!-- VIDEO DE FONDO -->
-    <video class="hero-video-bg" autoplay loop muted playsinline poster="assets/extracted_img_1.jpg">
-      <source src="assets/hero-video.mp4" type="video/mp4">
+    <video class="hero-video-bg" id="hero-video" autoplay loop muted playsinline poster="assets/extracted_img_1.jpg">
+      <source id="hero-video-src" src="assets/hero-video.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
-      <div class="hero-eyebrow">Nueva Colección Temporada 2026</div>
-      <h1 class="hero-title">Juega Tu<br>Mejor <span class="gold">Partido</span></h1>
-      <p class="hero-subtitle">El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios
+      <div class="hero-eyebrow" id="hero-eyebrow">Nueva Colección Temporada 2026</div>
+      <h1 class="hero-title" id="hero-title">Juega Tu<br>Mejor <span class="gold">Partido</span></h1>
+      <p class="hero-subtitle" id="hero-subtitle">El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios
         premium — todo en un solo lugar.</p>
       <div class="hero-ctas">
-        <a href="tienda.html" class="btn-primary">Comprar Ahora →</a>
-        <a href="#sports" class="btn-outline">Explorar Deportes</a>
+        <a href="tienda.html" class="btn-primary" id="hero-btn-primary">Comprar Ahora →</a>
+        <a href="#sports" class="btn-outline" id="hero-btn-secondary">Explorar Deportes</a>
       </div>
     </div>
   </section>
@@ -2277,7 +2277,7 @@
             <div class="sport-card-content">
               <div class="sport-card-label">Deporte</div>
               <div class="sport-card-name">Golf</div>
-              <div class="sport-card-count">200+ productos · Equipos y Ropa</div>
+              <div class="sport-card-count" id="sport-golf-count">200+ productos · Equipos y Ropa</div>
               <span class="sport-card-btn" href="tienda.html?sport=golf">Ver Golf →</span>
             </div>
           </div>
@@ -2293,7 +2293,7 @@
             <div class="sport-card-content">
               <div class="sport-card-label">Deporte</div>
               <div class="sport-card-name">Pádel</div>
-              <div class="sport-card-count">150+ productos · Palas y Accesorios</div>
+              <div class="sport-card-count" id="sport-padel-count">150+ productos · Palas y Accesorios</div>
               <span class="sport-card-btn" href="tienda.html?sport=padel">Ver Pádel →</span>
             </div>
           </div>
@@ -2309,7 +2309,7 @@
             <div class="sport-card-content">
               <div class="sport-card-label">Deporte</div>
               <div class="sport-card-name">Tenis</div>
-              <div class="sport-card-count">120+ productos · Raquetas y Ropa</div>
+              <div class="sport-card-count" id="sport-tenis-count">120+ productos · Raquetas y Ropa</div>
               <span class="sport-card-btn" href="tienda.html?sport=tenis">Ver Tenis →</span>
             </div>
           </div>
@@ -2340,24 +2340,26 @@
       style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;">
       <div class="sim-content" style="z-index:2;">
         <div
+          id="sim-eyebrow"
           style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">
           Experiencia Exclusiva en Caracas</div>
         <h2
+          id="sim-title"
           style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1.05;letter-spacing:0.02em;margin-bottom:20px;color:#fff;">
           Prueba Tu Swing en Nuestro<br><span class="gold" style="color:var(--gold);">Simulador de Golf
             Profesional</span></h2>
-        <p style="font-size:15px;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:28px;">
+        <p id="sim-desc" style="font-size:15px;color:rgba(255,255,255,0.85);line-height:1.7;margin-bottom:28px;">
           En nuestra sede de <strong>La Tahona</strong>, ponemos a tu disposición tecnología de análisis de swing de
           última generación. Mide la velocidad de tu bola, el ángulo de lanzamiento y el spin en tiempo real para elegir
           el palo perfecto o perfeccionar tu juego.
         </p>
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
           <a href="https://wa.me/584128422837?text=Hola,%20me%20gustaría%20reservar%20una%20sesión%20en%20el%20simulador%20de%20swing."
-            target="_blank" class="btn-primary"
+            target="_blank" class="btn-primary" id="sim-btn-primary"
             style="background:var(--gold);color:var(--navy-deeper);border:none;box-shadow:0 4px 16px rgba(245,166,35,0.3);">
             Reservar Sesión
           </a>
-          <a href="#sports" class="btn-outline" style="border-color:rgba(255,255,255,0.3);color:#fff;">
+          <a href="#sports" class="btn-outline" id="sim-btn-secondary" style="border-color:rgba(255,255,255,0.3);color:#fff;">
             Ver Equipos de Golf
           </a>
         </div>
@@ -2365,7 +2367,7 @@
       <div class="sim-media" style="position:relative;z-index:2;">
         <div
           style="aspect-ratio:16/10;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 40px rgba(0,0,0,0.4);background:#000;">
-          <img src="assets/simulador-golf.jpg" data-src-fallback="assets/simulador-golf"
+          <img id="sim-img" src="assets/simulador-golf.jpg" data-src-fallback="assets/simulador-golf"
             alt="Simulador de golf en Morsa's Proshop" style="width:100%;height:100%;object-fit:cover;opacity:0.85;">
         </div>
         <div
@@ -2375,7 +2377,7 @@
             <div
               style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">
               Tecnología</div>
-            <div style="font-size:13px;font-weight:700;color:#fff;">Foresight Sports GCQuad</div>
+            <div id="sim-tech-badge" style="font-size:13px;font-weight:700;color:#fff;">Foresight Sports GCQuad</div>
           </div>
         </div>
       </div>
@@ -2761,7 +2763,7 @@
       }
     </style>
 
-    <div class="locations-grid">
+    <div class="locations-grid" id="locations-grid">
 
       <!-- La Tahona -->
       <div class="location-card">
@@ -2915,6 +2917,108 @@
   <script src="js/api.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // Cargar contenido dinámico del Home
+      fetch('data/home.json')
+        .then(res => res.json())
+        .then(data => {
+          if (data) {
+            // Announcement
+            const announceEl = document.getElementById('announcement-text');
+            if (announceEl) announceEl.textContent = data.announcement_bar;
+
+            // Hero
+            const eyebrowEl = document.getElementById('hero-eyebrow');
+            if (eyebrowEl) eyebrowEl.textContent = data.hero.eyebrow;
+
+            const titleEl = document.getElementById('hero-title');
+            if (titleEl) titleEl.innerHTML = data.hero.title;
+
+            const subtitleEl = document.getElementById('hero-subtitle');
+            if (subtitleEl) subtitleEl.textContent = data.hero.subtitle;
+
+            const btnPri = document.getElementById('hero-btn-primary');
+            if (btnPri) {
+              btnPri.textContent = data.hero.btn_primary_text;
+              btnPri.href = data.hero.btn_primary_link;
+            }
+
+            const btnSec = document.getElementById('hero-btn-secondary');
+            if (btnSec) {
+              btnSec.textContent = data.hero.btn_secondary_text;
+              btnSec.href = data.hero.btn_secondary_link;
+            }
+
+            const video = document.getElementById('hero-video');
+            const videoSrc = document.getElementById('hero-video-src');
+            if (video && videoSrc) {
+              video.poster = data.hero.video_poster;
+              videoSrc.src = data.hero.video_bg;
+              video.load();
+            }
+
+            // Sports
+            const sg = document.getElementById('sport-golf-count');
+            if (sg) sg.textContent = data.sports.golf_count;
+            const sp = document.getElementById('sport-padel-count');
+            if (sp) sp.textContent = data.sports.padel_count;
+            const st = document.getElementById('sport-tenis-count');
+            if (st) st.textContent = data.sports.tenis_count;
+
+            // Simulator
+            const sEyebrow = document.getElementById('sim-eyebrow');
+            if (sEyebrow) sEyebrow.textContent = data.simulator.eyebrow;
+
+            const sTitle = document.getElementById('sim-title');
+            if (sTitle) sTitle.innerHTML = data.simulator.title;
+
+            const sDesc = document.getElementById('sim-desc');
+            if (sDesc) sDesc.innerHTML = data.simulator.desc;
+
+            const sImg = document.getElementById('sim-img');
+            if (sImg) {
+              sImg.src = data.simulator.image;
+              sImg.setAttribute('data-src-fallback', data.simulator.image.replace(/\.[^/.]+$/, ""));
+            }
+
+            const sTech = document.getElementById('sim-tech-badge');
+            if (sTech) sTech.textContent = data.simulator.tech_badge;
+
+            const sBtnPri = document.getElementById('sim-btn-primary');
+            if (sBtnPri) {
+              sBtnPri.textContent = data.simulator.btn_primary_text;
+              sBtnPri.href = data.simulator.btn_primary_link;
+            }
+
+            const sBtnSec = document.getElementById('sim-btn-secondary');
+            if (sBtnSec) {
+              sBtnSec.textContent = data.simulator.btn_secondary_text;
+              sBtnSec.href = data.simulator.btn_secondary_link;
+            }
+
+            // Locations
+            const locGrid = document.getElementById('locations-grid');
+            if (locGrid && data.locations) {
+              locGrid.innerHTML = data.locations.map(loc => `
+                <div class="location-card">
+                  <iframe class="location-map" title="Mapa de ubicación de la tienda en ${loc.name}"
+                    src="${loc.map_url}"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                  </iframe>
+                  <div class="location-info">
+                    <span class="location-badge">${loc.badge}</span>
+                    <div class="location-name">${loc.name}</div>
+                    <div class="location-address">${loc.address}</div>
+                    <a href="${loc.directions_link}" target="_blank" class="location-btn">
+                      Cómo llegar →
+                    </a>
+                  </div>
+                </div>
+              `).join('');
+            }
+          }
+        })
+        .catch(err => console.error('Error al cargar contenido dinámico:', err));
+
       const container = document.getElementById('brand-logos-container');
       if (container && typeof CONFIG !== 'undefined' && CONFIG.BRANDS) {
         let track1HTML = '<div class="brand-logos-track">';

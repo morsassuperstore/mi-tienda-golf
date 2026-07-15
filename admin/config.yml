@@ -1,0 +1,63 @@
+# Configuración de Decap CMS para Morsa's Proshop
+backend:
+  name: github
+  repo: morsassuperstore/mi-tienda-golf
+  branch: main
+  # NOTA DE PRODUCCIÓN: Cuando pases la web a producción (morsasgolf.com), 
+  # recuerda cambiar la url base a: https://morsasgolf.com
+  base_url: https://dev.morsasgolf.com
+  auth_endpoint: publicador/api/oauth.php
+
+media_folder: "assets"
+public_folder: "assets"
+
+collections:
+  - name: "inicio"
+    label: "Página de Inicio"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "home"
+        label: "Contenido de la Página de Inicio"
+        file: "data/home.json"
+        fields:
+          - { label: "Barra de Anuncio Superior", name: "announcement_bar", widget: "string" }
+          
+          - label: "Banner Principal (Hero Cinematic)", name: "hero", widget: "object", fields: [
+              { label: "Cintillo Superior (Eyebrow)", name: "eyebrow", widget: "string" },
+              { label: "Título Principal (Soporta HTML)", name: "title", widget: "string" },
+              { label: "Subtítulo / Descripción", name: "subtitle", widget: "text" },
+              { label: "Video de Fondo", name: "video_bg", widget: "file" },
+              { label: "Imagen de Portada (Poster si no carga video)", name: "video_poster", widget: "image" },
+              { label: "Texto Botón Principal", name: "btn_primary_text", widget: "string" },
+              { label: "Enlace Botón Principal (Ruta o URL)", name: "btn_primary_link", widget: "string" },
+              { label: "Texto Botón Secundario", name: "btn_secondary_text", widget: "string" },
+              { label: "Enlace Botón Secundario (Ruta o URL)", name: "btn_secondary_link", widget: "string" }
+            ]
+            
+          - label: "Sección Deportes (Conteo de productos)", name: "sports", widget: "object", fields: [
+              { label: "Texto Golf", name: "golf_count", widget: "string" },
+              { label: "Texto Pádel", name: "padel_count", widget: "string" },
+              { label: "Texto Tenis", name: "tenis_count", widget: "string" }
+            ]
+            
+          - label: "Sección Simulador", name: "simulator", widget: "object", fields: [
+              { label: "Cintillo Superior (Eyebrow)", name: "eyebrow", widget: "string" },
+              { label: "Título de la Sección (Soporta HTML)", name: "title", widget: "string" },
+              { label: "Descripción", name: "desc", widget: "text" },
+              { label: "Imagen", name: "image", widget: "image" },
+              { label: "Leyenda de Tecnología (GCQuad)", name: "tech_badge", widget: "string" },
+              { label: "Texto Botón Principal", name: "btn_primary_text", widget: "string" },
+              { label: "Enlace Botón Principal (Ruta o URL)", name: "btn_primary_link", widget: "string" },
+              { label: "Texto Botón Secundario", name: "btn_secondary_text", widget: "string" },
+              { label: "Enlace Botón Secundario (Ruta o URL)", name: "btn_secondary_link", widget: "string" }
+            ]
+            
+          - label: "Sucursales (¿Dónde Estamos?)", name: "locations", widget: "list", fields: [
+              { label: "Cintillo (Ej: 📍 Caracas)", name: "badge", widget: "string" },
+              { label: "Nombre de la Sucursal", name: "name", widget: "string" },
+              { label: "Dirección Corta", name: "address", widget: "string" },
+              { label: "URL de Mapa de Google (Iframe Embed src)", name: "map_url", widget: "string" },
+              { label: "URL de Google Maps (Para botón 'Cómo llegar')", name: "directions_link", widget: "string" }
+            ]
