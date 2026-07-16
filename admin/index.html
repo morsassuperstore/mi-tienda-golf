@@ -18,61 +18,117 @@
   </style>
 </head>
 <body>
-  <!-- Escuchador de depuración para rastrear la comunicación del login -->
   <script>
-    window.addEventListener('message', (event) => {
-      console.log('--- DEPURACIÓN OAUTH ---');
-      console.log('Origen recibido:', event.origin);
-      console.log('Datos recibidos:', event.data);
-      // FORZAR EL LOGIN: Si Decap CMS falla al interceptar el mensaje (por problemas de dominios cruzados o timeouts),
-      // nosotros capturamos el token manualmente, lo guardamos en el localStorage y recargamos la página.
-      if (typeof event.data === 'string' && event.data.startsWith('authorization:github:success:')) {
-        try {
-          const jsonStr = event.data.replace('authorization:github:success:', '');
-          const data = JSON.parse(jsonStr);
-          
-          if (data.token) {
-            console.log("Token capturado manualmente. Guardando sesión y recargando...");
-            const userObj = {
-              token: data.token,
-              backend: "github"
-            };
-            
-            // Guardar en las dos claves por compatibilidad con versiones antiguas y nuevas
-            window.localStorage.setItem('decap-cms-user', JSON.stringify(userObj));
-            window.localStorage.setItem('netlify-cms-user', JSON.stringify(userObj));
-            
-            // Forzar recarga para que Decap CMS inicie sesión con el token guardado
-            window.location.reload();
-          }
-        } catch (e) {
-          console.error("Error forzando el login manual:", e);
-        }
-      }
-    }, false);
+    // POLYFILL INMUNE A SEGURIDAD (SERVER-BRIDGE):
+    // Dado que navegadores modernos y Edge en modo privado bloquean localStorage y postMessage
+    // entre pestañas tras redirecciones, usamos el propio servidor como puente temporal.
+    let authWindowRef = null;
+    let pollInterval = null;
+    const originalOpen = window.open;
 
-    // FALLBACK 2: Capturar token desde la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlToken = urlParams.get('token');
-    if (urlToken) {
-      console.log("Token encontrado en la URL. Guardando sesión...");
-      const userObj = { token: urlToken, backend: "github" };
-      window.localStorage.setItem('decap-cms-user', JSON.stringify(userObj));
-      window.localStorage.setItem('netlify-cms-user', JSON.stringify(userObj));
-      window.history.replaceState({}, document.title, window.location.pathname);
-      
-      // Como ahora estamos en el mismo dominio, podemos recargar la ventana padre y cerrar esta
-      if (window.opener) {
-        try {
-            window.opener.location.reload();
-        } catch(e) {}
-        window.close();
-      } else {
-        window.location.reload();
-      }
+    window.open = function(url, target, features) {
+        // Generar un ID único para esta sesión de login
+        const authId = Math.random().toString(36).substring(2, 15);
+        
+        // Agregar el state a la url
+        const separator = url.indexOf('?') !== -1 ? '&' : '?';
+        const newUrl = url + separator + 'state=' + authId;
+        
+        authWindowRef = originalOpen.call(window, newUrl, target, features);
+        
+        // Simular el apretón de manos inicial (Handshake) que Decap CMS espera.
+        // Decap CMS escucha 'authorizing:github' primero antes de habilitar el recibidor del token.
+        setTimeout(() => {
+            if (authWindowRef) {
+                const handshakeEvent = new MessageEvent('message', {
+                    data: 'authorizing:github',
+                    origin: window.location.origin
+                });
+                Object.defineProperty(handshakeEvent, 'source', {
+                    get: () => authWindowRef,
+                    configurable: true,
+                    enumerable: true
+                });
+                window.dispatchEvent(handshakeEvent);
+                console.log("¡Handshake 'authorizing:github' enviado a Decap CMS!");
+            }
+        }, 500);
+        
+        // Comenzar a consultar al servidor si el token ya llegó
+        startPolling(authId);
+        
+        return authWindowRef;
+    };
+
+    function startPolling(authId) {
+        if (pollInterval) clearInterval(pollInterval);
+        
+        pollInterval = setInterval(() => {
+            // Si el usuario cierra la ventanita manualmente, detenemos el sondeo
+            if (authWindowRef && authWindowRef.closed) {
+                clearInterval(pollInterval);
+            }
+            
+            fetch(`https://dev.morsasgolf.com/api/check_auth.php?state=${authId}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.token) {
+                        clearInterval(pollInterval);
+                        console.log("¡Token obtenido desde el servidor!");
+                        
+                        const message = 'authorization:github:success:' + JSON.stringify({
+                            token: data.token,
+                            provider: 'github'
+                        });
+                        
+                        if (authWindowRef) {
+                            // Simular el evento 'message' nativo que Decap CMS espera
+                            const fakeEvent = new MessageEvent('message', {
+                                data: message,
+                                origin: window.location.origin
+                            });
+                            
+                            // Hack definitivo: Forzar el getter de 'source' (que los navegadores protegen/anulan)
+                            // para que devuelva la referencia original del popup de login.
+                            Object.defineProperty(fakeEvent, 'source', {
+                                get: () => authWindowRef,
+                                configurable: true,
+                                enumerable: true
+                            });
+                            
+                            console.log("Despachando evento fake...", {
+                                data: fakeEvent.data,
+                                origin: fakeEvent.origin,
+                                source: fakeEvent.source,
+                                originalRef: authWindowRef,
+                                matches: fakeEvent.source === authWindowRef
+                            });
+                            
+                            window.dispatchEvent(fakeEvent);
+                            
+                            // Cerrar el popup de forma segura
+                            try {
+                                authWindowRef.close();
+                            } catch(e) {}
+                        }
+                    }
+                })
+                .catch(err => console.error("Error en sondeo de sesión:", err));
+        }, 1500);
     }
-  </script>
 
+    // Escuchador de depuración para ver si el evento fake llega y qué campos tiene
+    window.addEventListener('message', (e) => {
+        console.log("Mensaje detectado en ventana principal:", {
+            data: e.data,
+            origin: e.origin,
+            source: e.source,
+            authWindowRef: authWindowRef,
+            comparacion: e.source === authWindowRef
+        });
+    }, true); // Usar fase de captura
+  </script>
+  
   <!-- Cargar Decap CMS desde CDN -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
