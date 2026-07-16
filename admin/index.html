@@ -8,12 +8,184 @@
   <link href="config.yml?v=2" type="text/yaml" rel="cms-config-url" />
   <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" />
   <style>
-    /* Personalización visual opcional del panel para alinearlo al estilo de Morsas */
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=Bebas+Neue&display=swap');
+
+    /* Variables de marca */
+    :root {
+      --navy: #0e1a60;
+      --navy-dark: #0a0c3c;
+      --gold: #F5A623;
+      --gold-hover: #D48C12;
+      --bg: #f5f7fb;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+    }
+
+    /* Fuente global */
+    body, #nc-root {
+      font-family: 'Barlow', sans-serif !important;
+      background-color: var(--bg) !important;
+      color: var(--text) !important;
+    }
+
+    /* --- CABECERA (Header) --- */
+    #nc-root header {
+      background-color: var(--navy-dark) !important;
+      border-bottom: 2px solid var(--gold) !important;
+      box-shadow: 0 4px 12px rgba(10, 12, 60, 0.1) !important;
+    }
+
+    /* Logo de Morsa's Proshop */
     #nc-root .nc-app-layout-logo {
       font-family: 'Bebas Neue', sans-serif !important;
-      font-size: 22px !important;
+      font-size: 26px !important;
+      letter-spacing: 0.08em !important;
+      color: var(--gold) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+
+    /* Texto de links en la cabecera */
+    #nc-root header a, 
+    #nc-root header button {
+      color: rgba(255, 255, 255, 0.8) !important;
+      font-weight: 500 !important;
+      transition: color 0.2s, background-color 0.2s !important;
+    }
+
+    #nc-root header a:hover, 
+    #nc-root header button:hover {
+      color: var(--gold) !important;
+    }
+
+    /* --- MENÚ LATERAL (Sidebar) --- */
+    #nc-root aside, 
+    #nc-root nav[class*="Sidebar"] {
+      background-color: var(--white) !important;
+      border-right: 1px solid var(--border) !important;
+      padding-top: 20px !important;
+    }
+
+    /* Enlaces del Sidebar */
+    #nc-root aside a,
+    #nc-root nav[class*="Sidebar"] a {
+      font-family: 'Barlow Condensed', sans-serif !important;
+      font-size: 15px !important;
+      font-weight: 600 !important;
       letter-spacing: 0.05em !important;
-      color: #F5A623 !important;
+      text-transform: uppercase !important;
+      border-radius: 8px !important;
+      margin: 4px 12px !important;
+      padding: 10px 16px !important;
+      color: #64748b !important;
+      transition: all 0.2s ease !important;
+    }
+
+    /* Estado activo del Sidebar */
+    #nc-root aside a[class*="active"],
+    #nc-root nav[class*="Sidebar"] a[class*="active"],
+    #nc-root aside a:hover,
+    #nc-root nav[class*="Sidebar"] a:hover {
+      background-color: rgba(14, 26, 96, 0.06) !important;
+      color: var(--navy) !important;
+      border-left: 4px solid var(--gold) !important;
+    }
+
+    /* --- TARJETAS Y CONTENIDO (Main Content) --- */
+    #nc-root main {
+      background-color: var(--bg) !important;
+      padding: 30px !important;
+    }
+
+    /* Estilo para los títulos */
+    #nc-root h1, #nc-root h2 {
+      font-family: 'Barlow Condensed', sans-serif !important;
+      color: var(--navy-dark) !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.02em !important;
+    }
+
+    /* Tarjetas de Colección */
+    #nc-root div[class*="Card"], 
+    #nc-root div[class*="CollectionCard"] {
+      border-radius: 12px !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+      border: 1px solid var(--border) !important;
+      background-color: var(--white) !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    #nc-root div[class*="Card"]:hover, 
+    #nc-root div[class*="CollectionCard"]:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 15px -3px rgba(10, 12, 60, 0.05), 0 4px 6px -2px rgba(10, 12, 60, 0.03) !important;
+      border-color: rgba(245, 166, 35, 0.3) !important;
+    }
+
+    /* --- PÁGINA DE LOGIN (Login Screen) --- */
+    #nc-root section[class*="Login"] {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%) !important;
+      position: relative !important;
+    }
+
+    #nc-root section[class*="Login"]::before {
+      content: "" !important;
+      position: absolute !important;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(circle at 80% 20%, rgba(245, 166, 35, 0.15) 0%, transparent 50%) !important;
+      pointer-events: none !important;
+    }
+
+    /* Caja de Login */
+    #nc-root section[class*="Login"] > div {
+      background-color: var(--white) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2) !important;
+      border: 1.5px solid rgba(245, 166, 35, 0.2) !important;
+      padding: 40px !important;
+      width: 100% !important;
+      max-width: 420px !important;
+    }
+
+    /* Título de Login */
+    #nc-root section[class*="Login"] h1 {
+      font-family: 'Bebas Neue', sans-serif !important;
+      color: var(--navy-dark) !important;
+      font-size: 36px !important;
+      letter-spacing: 0.05em !important;
+      text-align: center !important;
+      margin-bottom: 24px !important;
+      text-transform: uppercase !important;
+    }
+
+    #nc-root section[class*="Login"] h1::after {
+      content: " PROSHOP" !important;
+      color: var(--gold) !important;
+    }
+
+    /* Botón de Autenticación GitHub */
+    #nc-root button[class*="LoginButton"] {
+      background-color: var(--navy) !important;
+      color: var(--white) !important;
+      font-family: 'Barlow Condensed', sans-serif !important;
+      font-weight: 700 !important;
+      font-size: 16px !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.08em !important;
+      border-radius: 10px !important;
+      padding: 14px 20px !important;
+      border: 2px solid transparent !important;
+      transition: all 0.2s ease !important;
+      box-shadow: 0 4px 6px rgba(14, 26, 96, 0.2) !important;
+    }
+
+    #nc-root button[class*="LoginButton"]:hover {
+      background-color: var(--gold) !important;
+      color: var(--navy-dark) !important;
+      box-shadow: 0 6px 12px rgba(245, 166, 35, 0.3) !important;
     }
   </style>
 </head>
