@@ -60,7 +60,16 @@
       window.localStorage.setItem('decap-cms-user', JSON.stringify(userObj));
       window.localStorage.setItem('netlify-cms-user', JSON.stringify(userObj));
       window.history.replaceState({}, document.title, window.location.pathname);
-      window.location.reload();
+      
+      // Como ahora estamos en el mismo dominio, podemos recargar la ventana padre y cerrar esta
+      if (window.opener) {
+        try {
+            window.opener.location.reload();
+        } catch(e) {}
+        window.close();
+      } else {
+        window.location.reload();
+      }
     }
   </script>
 
