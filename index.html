@@ -1851,10 +1851,10 @@
               </div>
               <div class="mega-col" style="border-right:none;padding-right:0;">
                 <div class="mega-featured">
-                  <img src="assets/destacado-golf.jpg" data-src-fallback="assets/destacado-golf" alt="Destacado Golf">
-                  <div class="mega-featured-label">Destacado</div>
-                  <div class="mega-featured-title">Driver Stealth 2 TaylorMade</div>
-                  <a href="tienda.html?cat=palos&sub=drivers" class="mega-featured-btn">Ver ahora →</a>
+                  <img id="mega-golf-img" src="assets/destacado-golf.jpg" data-src-fallback="assets/destacado-golf" alt="Destacado Golf">
+                  <div id="mega-golf-label" class="mega-featured-label">Destacado</div>
+                  <div id="mega-golf-title" class="mega-featured-title">Driver Stealth 2 TaylorMade</div>
+                  <a id="mega-golf-btn" href="tienda.html?cat=palos&sub=drivers" class="mega-featured-btn">Ver ahora →</a>
                 </div>
               </div>
             </div>
@@ -1885,11 +1885,11 @@
               </div>
               <div class="mega-col" style="border-right:none;padding-right:0;">
                 <div class="mega-featured">
-                  <img src="assets/destacado-padel.jpg" data-src-fallback="assets/destacado-padel"
+                  <img id="mega-padel-img" src="assets/destacado-padel.jpg" data-src-fallback="assets/destacado-padel"
                     alt="Destacado Pádel">
-                  <div class="mega-featured-label">Top ventas</div>
-                  <div class="mega-featured-title">Blade V10 Wilson</div>
-                  <a href="tienda.html?sport=padel" class="mega-featured-btn">Ver ahora →</a>
+                  <div id="mega-padel-label" class="mega-featured-label">Top ventas</div>
+                  <div id="mega-padel-title" class="mega-featured-title">Blade V10 Wilson</div>
+                  <a id="mega-padel-btn" href="tienda.html?sport=padel" class="mega-featured-btn">Ver ahora →</a>
                 </div>
               </div>
             </div>
@@ -1920,11 +1920,11 @@
               </div>
               <div class="mega-col" style="border-right:none;padding-right:0;">
                 <div class="mega-featured">
-                  <img src="assets/destacado-tenis.jpg" data-src-fallback="assets/destacado-tenis"
+                  <img id="mega-tenis-img" src="assets/destacado-tenis.jpg" data-src-fallback="assets/destacado-tenis"
                     alt="Destacado Tenis">
-                  <div class="mega-featured-label">Top ventas</div>
-                  <div class="mega-featured-title">Pure Drive Babolat</div>
-                  <a href="tienda.html?sport=tenis" class="mega-featured-btn">Ver ahora →</a>
+                  <div id="mega-tenis-label" class="mega-featured-label">Top ventas</div>
+                  <div id="mega-tenis-title" class="mega-featured-title">Pure Drive Babolat</div>
+                  <a id="mega-tenis-btn" href="tienda.html?sport=tenis" class="mega-featured-btn">Ver ahora →</a>
                 </div>
               </div>
             </div>
@@ -2269,7 +2269,7 @@
 
       <div class="sports-grid">
         <a href="tienda.html?sport=golf" class="sport-card">
-          <div class="sport-card-bg golf" data-bg-fallback="assets/card-golf"
+          <div id="sport-golf-card" class="sport-card-bg golf" data-bg-fallback="assets/card-golf"
             style="background-image:url('assets/card-golf.webp'); background-size:cover; background-position:center;">
             <div
               style="position:absolute;inset:0;background:linear-gradient(to top, rgba(14,26,96,0.92) 0%, rgba(14,26,96,0.3) 60%, transparent 100%);">
@@ -2285,7 +2285,7 @@
 
         <!-- Padel -->
         <a href="tienda.html?sport=padel" class="sport-card">
-          <div class="sport-card-bg padel" data-bg-fallback="assets/card-padel"
+          <div id="sport-padel-card" class="sport-card-bg padel" data-bg-fallback="assets/card-padel"
             style="background-image:url('assets/card-padel.jpg'); background-size:cover; background-position:center;">
             <div
               style="position:absolute;inset:0;background:linear-gradient(to top, rgba(12,29,85,0.92) 0%, rgba(12,29,85,0.3) 60%, transparent 100%);">
@@ -2301,7 +2301,7 @@
 
         <!-- Tennis -->
         <a href="tienda.html?sport=tenis" class="sport-card">
-          <div class="sport-card-bg tennis" data-bg-fallback="assets/card-tenis"
+          <div id="sport-tenis-card" class="sport-card-bg tennis" data-bg-fallback="assets/card-tenis"
             style="background-image:url('assets/card-tenis.jpg'); background-size:cover; background-position:center;">
             <div
               style="position:absolute;inset:0;background:linear-gradient(to top, rgba(9,15,64,0.92) 0%, rgba(9,15,64,0.3) 60%, transparent 100%);">
@@ -2956,13 +2956,80 @@
               video.load();
             }
 
-            // Sports
+            // Sports (Counts & Images)
             const sg = document.getElementById('sport-golf-count');
             if (sg) sg.textContent = data.sports.golf_count;
             const sp = document.getElementById('sport-padel-count');
             if (sp) sp.textContent = data.sports.padel_count;
             const st = document.getElementById('sport-tenis-count');
             if (st) st.textContent = data.sports.tenis_count;
+
+            const sgCard = document.getElementById('sport-golf-card');
+            if (sgCard && data.sports.golf_image) {
+              sgCard.style.backgroundImage = `url('${data.sports.golf_image}')`;
+              sgCard.setAttribute('data-bg-fallback', data.sports.golf_image.replace(/\.[^/.]+$/, ""));
+            }
+            const spCard = document.getElementById('sport-padel-card');
+            if (spCard && data.sports.padel_image) {
+              spCard.style.backgroundImage = `url('${data.sports.padel_image}')`;
+              spCard.setAttribute('data-bg-fallback', data.sports.padel_image.replace(/\.[^/.]+$/, ""));
+            }
+            const stCard = document.getElementById('sport-tenis-card');
+            if (stCard && data.sports.tenis_image) {
+              stCard.style.backgroundImage = `url('${data.sports.tenis_image}')`;
+              stCard.setAttribute('data-bg-fallback', data.sports.tenis_image.replace(/\.[^/.]+$/, ""));
+            }
+
+            // Menu Featured Products (Golf, Padel, Tenis)
+            if (data.menu_featured) {
+              // Golf
+              if (data.menu_featured.golf) {
+                const fGolf = data.menu_featured.golf;
+                const img = document.getElementById('mega-golf-img');
+                if (img) {
+                  img.src = fGolf.image;
+                  img.setAttribute('data-src-fallback', fGolf.image.replace(/\.[^/.]+$/, ""));
+                }
+                const lbl = document.getElementById('mega-golf-label');
+                if (lbl) lbl.textContent = fGolf.label;
+                const ttl = document.getElementById('mega-golf-title');
+                if (ttl) ttl.textContent = fGolf.title;
+                const btn = document.getElementById('mega-golf-btn');
+                if (btn) btn.href = fGolf.link;
+              }
+
+              // Padel
+              if (data.menu_featured.padel) {
+                const fPadel = data.menu_featured.padel;
+                const img = document.getElementById('mega-padel-img');
+                if (img) {
+                  img.src = fPadel.image;
+                  img.setAttribute('data-src-fallback', fPadel.image.replace(/\.[^/.]+$/, ""));
+                }
+                const lbl = document.getElementById('mega-padel-label');
+                if (lbl) lbl.textContent = fPadel.label;
+                const ttl = document.getElementById('mega-padel-title');
+                if (ttl) ttl.textContent = fPadel.title;
+                const btn = document.getElementById('mega-padel-btn');
+                if (btn) btn.href = fPadel.link;
+              }
+
+              // Tenis
+              if (data.menu_featured.tenis) {
+                const fTenis = data.menu_featured.tenis;
+                const img = document.getElementById('mega-tenis-img');
+                if (img) {
+                  img.src = fTenis.image;
+                  img.setAttribute('data-src-fallback', fTenis.image.replace(/\.[^/.]+$/, ""));
+                }
+                const lbl = document.getElementById('mega-tenis-label');
+                if (lbl) lbl.textContent = fTenis.label;
+                const ttl = document.getElementById('mega-tenis-title');
+                if (ttl) ttl.textContent = fTenis.title;
+                const btn = document.getElementById('mega-tenis-btn');
+                if (btn) btn.href = fTenis.link;
+              }
+            }
 
             // Simulator
             const sEyebrow = document.getElementById('sim-eyebrow');

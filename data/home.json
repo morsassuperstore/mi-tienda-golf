@@ -13,8 +13,31 @@
   },
   "sports": {
     "golf_count": "200+ productos · Equipos y Ropa",
+    "golf_image": "assets/card-golf.webp",
     "padel_count": "150+ productos · Palas y Accesorios",
-    "tenis_count": "120+ productos · Raquetas y Ropa"
+    "padel_image": "assets/card-padel.jpg",
+    "tenis_count": "120+ productos · Raquetas y Ropa",
+    "tenis_image": "assets/card-tenis.jpg"
+  },
+  "menu_featured": {
+    "golf": {
+      "label": "Destacado",
+      "title": "Driver Stealth 2 TaylorMade",
+      "image": "assets/destacado-golf.jpg",
+      "link": "tienda.html?cat=palos&sub=drivers"
+    },
+    "padel": {
+      "label": "Top ventas",
+      "title": "Blade V10 Wilson",
+      "image": "assets/destacado-padel.jpg",
+      "link": "tienda.html?sport=padel"
+    },
+    "tenis": {
+      "label": "Top ventas",
+      "title": "Pure Drive Babolat",
+      "image": "assets/destacado-tenis.jpg",
+      "link": "tienda.html?sport=tenis"
+    }
   },
   "simulator": {
     "eyebrow": "Experiencia Exclusiva en Caracas",
