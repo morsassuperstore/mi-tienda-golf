@@ -24,7 +24,44 @@
       console.log('--- DEPURACIÓN OAUTH ---');
       console.log('Origen recibido:', event.origin);
       console.log('Datos recibidos:', event.data);
+      // FORZAR EL LOGIN: Si Decap CMS falla al interceptar el mensaje (por problemas de dominios cruzados o timeouts),
+      // nosotros capturamos el token manualmente, lo guardamos en el localStorage y recargamos la página.
+      if (typeof event.data === 'string' && event.data.startsWith('authorization:github:success:')) {
+        try {
+          const jsonStr = event.data.replace('authorization:github:success:', '');
+          const data = JSON.parse(jsonStr);
+          
+          if (data.token) {
+            console.log("Token capturado manualmente. Guardando sesión y recargando...");
+            const userObj = {
+              token: data.token,
+              backend: "github"
+            };
+            
+            // Guardar en las dos claves por compatibilidad con versiones antiguas y nuevas
+            window.localStorage.setItem('decap-cms-user', JSON.stringify(userObj));
+            window.localStorage.setItem('netlify-cms-user', JSON.stringify(userObj));
+            
+            // Forzar recarga para que Decap CMS inicie sesión con el token guardado
+            window.location.reload();
+          }
+        } catch (e) {
+          console.error("Error forzando el login manual:", e);
+        }
+      }
     }, false);
+
+    // FALLBACK 2: Capturar token desde la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get('token');
+    if (urlToken) {
+      console.log("Token encontrado en la URL. Guardando sesión...");
+      const userObj = { token: urlToken, backend: "github" };
+      window.localStorage.setItem('decap-cms-user', JSON.stringify(userObj));
+      window.localStorage.setItem('netlify-cms-user', JSON.stringify(userObj));
+      window.history.replaceState({}, document.title, window.location.pathname);
+      window.location.reload();
+    }
   </script>
 
   <!-- Cargar Decap CMS desde CDN -->
