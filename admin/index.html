@@ -51,6 +51,23 @@
         }
       }
     }, false);
+
+    // FALLBACK 2: Capturar token desde la URL (por si la ventana emergente redirigió en vez de postMessage)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get('token');
+    if (urlToken) {
+      console.log("Token encontrado en la URL. Guardando sesión y limpiando URL...");
+      const userObj = {
+        token: urlToken,
+        backend: "github"
+      };
+      window.localStorage.setItem('decap-cms-user', JSON.stringify(userObj));
+      window.localStorage.setItem('netlify-cms-user', JSON.stringify(userObj));
+      
+      // Limpiar la URL y recargar
+      window.history.replaceState({}, document.title, window.location.pathname);
+      window.location.reload();
+    }
   </script>
 
   <!-- Cargar Decap CMS desde CDN -->
