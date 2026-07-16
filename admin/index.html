@@ -26,8 +26,6 @@
     /* Fuente global */
     body, #nc-root {
       font-family: 'Barlow', sans-serif !important;
-      background-color: var(--bg) !important;
-      color: var(--text) !important;
     }
 
     /* --- CABECERA (Header) --- */
@@ -62,16 +60,14 @@
     }
 
     /* --- MENÚ LATERAL (Sidebar) --- */
-    #nc-root aside, 
-    #nc-root nav[class*="Sidebar"] {
+    #nc-root aside {
       background-color: var(--white) !important;
       border-right: 1px solid var(--border) !important;
       padding-top: 20px !important;
     }
 
     /* Enlaces del Sidebar */
-    #nc-root aside a,
-    #nc-root nav[class*="Sidebar"] a {
+    #nc-root aside a {
       font-family: 'Barlow Condensed', sans-serif !important;
       font-size: 15px !important;
       font-weight: 600 !important;
@@ -86,18 +82,10 @@
 
     /* Estado activo del Sidebar */
     #nc-root aside a[class*="active"],
-    #nc-root nav[class*="Sidebar"] a[class*="active"],
-    #nc-root aside a:hover,
-    #nc-root nav[class*="Sidebar"] a:hover {
+    #nc-root aside a:hover {
       background-color: rgba(14, 26, 96, 0.06) !important;
       color: var(--navy) !important;
       border-left: 4px solid var(--gold) !important;
-    }
-
-    /* --- TARJETAS Y CONTENIDO (Main Content) --- */
-    #nc-root main {
-      background-color: var(--bg) !important;
-      padding: 30px !important;
     }
 
     /* Estilo para los títulos */
@@ -106,23 +94,6 @@
       color: var(--navy-dark) !important;
       font-weight: 700 !important;
       letter-spacing: 0.02em !important;
-    }
-
-    /* Tarjetas de Colección */
-    #nc-root div[class*="Card"], 
-    #nc-root div[class*="CollectionCard"] {
-      border-radius: 12px !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
-      border: 1px solid var(--border) !important;
-      background-color: var(--white) !important;
-      transition: transform 0.2s, box-shadow 0.2s !important;
-    }
-
-    #nc-root div[class*="Card"]:hover, 
-    #nc-root div[class*="CollectionCard"]:hover {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 10px 15px -3px rgba(10, 12, 60, 0.05), 0 4px 6px -2px rgba(10, 12, 60, 0.03) !important;
-      border-color: rgba(245, 166, 35, 0.3) !important;
     }
 
     /* --- PÁGINA DE LOGIN (Login Screen) --- */
