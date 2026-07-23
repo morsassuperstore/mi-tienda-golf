@@ -1996,8 +1996,11 @@ function selectCardColor(e, swatch, productId, color) {
       return hasColor && String(hasColor.value).trim() === String(color).trim() && v.image_src;
     });
     if (targetVar && targetVar.image_src) {
-      const img = card.querySelector('.img-main');
-      if (img) img.src = targetVar.image_src;
+      const imgMain = card.querySelector('.img-main');
+      const imgHover = card.querySelector('.img-hover');
+      if (imgMain) imgMain.src = targetVar.image_src;
+      // Change img-hover as well so the user sees it instantly while their mouse is still over the card
+      if (imgHover) imgHover.src = targetVar.image_src;
     }
   };
 
