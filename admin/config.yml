@@ -28,6 +28,7 @@ collections:
             name: "hero_video"
             widget: "file"
             required: false
+            default: ""
           - label: "Banners Principales (Carrusel)"
             name: "hero_banners"
             widget: "list"
@@ -40,13 +41,17 @@ collections:
                 name: "image_mobile"
                 widget: "image"
                 required: false
+                default: ""
               - label: "Enlace (A dónde lleva al hacer clic)"
                 name: "link"
                 widget: "string"
                 required: false
+                default: ""
               - label: "Texto Alternativo (Para SEO y ciegos)"
                 name: "alt"
                 widget: "string"
+                required: false
+                default: ""
           - label: "Sección Deportes (Conteo e Imágenes)"
             name: "sports"
             widget: "object"
@@ -118,6 +123,7 @@ collections:
                 name: "hours"
                 widget: "string"
                 required: false
+                default: ""
           - label: "Configuración de Pagos"
             name: "payment"
             widget: "object"

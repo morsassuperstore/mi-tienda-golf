@@ -1,5 +1,6 @@
 {
   "announcement_bar": "Envío gratis en pedidos mayores de €100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra",
+  "hero_video": "",
   "hero_banners": [
     {
       "image_desktop": "assets/extracted_img_1.jpg",
@@ -62,14 +63,16 @@
       "name": "La Lagunita Country Club",
       "address": "La Lagunita Country Club, El Hatillo, Caracas, Venezuela",
       "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.5!2d-66.8095085!3d10.4239054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af78a4783be17%3A0x89d3255d8f11fc2a!2sLagunita%20Country%20Club!5e0!3m2!1ses!2sve!4v1700000000001",
-      "directions_link": "https://www.google.com/maps/place/Lagunita+Country+Club/@10.4239054,-66.8095085,17z"
+      "directions_link": "https://www.google.com/maps/place/Lagunita+Country+Club/@10.4239054,-66.8095085,17z",
+      "hours": ""
     },
     {
       "badge": "📍 Guatire",
       "name": "Izcaragua Country Club",
       "address": "Izcaragua Country Club, Guatire, Miranda, Venezuela",
       "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.5!2d-66.6905314!3d10.4790032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a55ca952675ef%3A0x106b1693db6da309!2sIzcaragua%20Country%20Club!5e0!3m2!1ses!2sve!4v1700000000002",
-      "directions_link": "https://www.google.com/maps/place/Izcaragua+Country+Club/@10.4790032,-66.6905314,17z"
+      "directions_link": "https://www.google.com/maps/place/Izcaragua+Country+Club/@10.4790032,-66.6905314,17z",
+      "hours": ""
     }
   ]
 }
