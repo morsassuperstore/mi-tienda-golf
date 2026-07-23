@@ -990,7 +990,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
         </div>
         <div class="summary-row" id="sum-shipping-row">
           <span>Delivery</span>
-          <span id="sum-shipping">€3.00</span>
+          <span id="sum-shipping">€0.00</span>
         </div>
         <div class="summary-row total">
           <span>Total</span>
@@ -1049,7 +1049,7 @@ function getDiscount() {
   return Math.round(getSubtotal() * discountPct) / 100;
 }
 function getShipping() {
-  if (deliveryMethod === 'pickup') return 0;
+  if (deliveryMethod === 'pickup' || getSubtotal() === 0) return 0;
   const sub = getSubtotal() - getDiscount();
   return sub >= FREE_SHIPPING ? 0 : DELIVERY_COST;
 }
