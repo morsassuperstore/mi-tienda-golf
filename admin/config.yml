@@ -20,6 +20,8 @@ collections:
       - name: "home"
         label: "Contenido de la Página de Inicio"
         file: "data/home.json"
+        editor:
+          preview: false
         fields:
           - label: "Barra de Anuncio Superior"
             name: "announcement_bar"
