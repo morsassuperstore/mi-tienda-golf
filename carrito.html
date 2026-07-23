@@ -685,7 +685,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
                   🏪 Retiro en tienda
                   <span class="delivery-badge badge-store">GRATIS</span>
                 </div>
-                <div class="delivery-opt-desc">Morsa's Superstore — C.C. La Tahona, Caracas. Lunes a sábado 10am–7pm. Listo en 24 horas.</div>
+                <div class="delivery-opt-desc" id="pickup-desc">Morsa's Superstore — Listo en 24 horas.</div>
               </div>
             </label>
           </div>
@@ -882,7 +882,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
           <div class="payment-instructions visible">
             <div class="instr-title">Datos para pago móvil</div>
             <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
-              El monto en bolívares se calcula a tasa BCV del día. Al confirmar pedido te enviaremos el monto exacto por WhatsApp, o puedes escribirnos directamente al botón <strong>"Enviar pedido por WhatsApp"</strong> que se encuentra en la siguiente sección una vez confirmes el pedido para acelerar el proceso.
+              El monto en bolívares se calcula a la tasa BCV del Euro del día. Al confirmar pedido te enviaremos el monto exacto por WhatsApp, o puedes escribirnos directamente al botón <strong>"Enviar pedido por WhatsApp"</strong> que se encuentra en la siguiente sección una vez confirmes el pedido para acelerar el proceso.
             </div>
           </div>
         </div>
@@ -1199,7 +1199,7 @@ function applyCoupon() {
   if (COUPONS[code]) {
     discountApplied = true;
     discountPct = COUPONS[code];
-    msg.textContent = `✓ Código aplicado — ${discountPct}% de descuento`;
+    msg.textContent = `✓ Código aplicado — €{discountPct}% de descuento`;
     msg.className = 'coupon-msg ok';
     updateSummary();
   } else if (code === '') {
@@ -1315,10 +1315,10 @@ function selectDelivery(val) {
 }
 
 // ── PAYMENT ──
-const instrData = {
+let instrData = {
   zelle: {
     title: 'Instrucciones de pago — Zelle',
-    html: `<div class="instr-row"><span class="instr-label">Email Zelle</span><span class="instr-val">info@morsasgolf.com</span><button class="copy-btn" onclick="copyText('info@morsasgolf.com',this)">Copiar</button></div>
+    html: `<div class="instr-row"><span class="instr-label">Email Zelle</span><span class="instr-val" id="zelle-email-text">cargando...</span><button class="copy-btn" onclick="copyText(document.getElementById('zelle-email-text').textContent,this)">Copiar</button></div>
            <div class="instr-row"><span class="instr-label">Nombre</span><span class="instr-val">Morsa's Proshop LLC</span></div>
            <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">Envíanos el comprobante por WhatsApp para confirmar tu pedido.</div>`
   },
@@ -1330,7 +1330,7 @@ const instrData = {
   },
   cash: {
     title: 'Pago en efectivo',
-    html: `<div style="font-size:12px;color:var(--text-mid);line-height:1.6;">El pago en dólares se realiza <strong>al momento de la entrega</strong> (delivery) o al retirar en tienda. Ten el monto exacto listo.<br><br>💡 Aceptamos billetes de $1, $5, $10, $20, $50 y $100.</div>`
+    html: `<div style="font-size:12px;color:var(--text-mid);line-height:1.6;">El pago en efectivo se realiza <strong>al momento de la entrega</strong> (delivery) o al retirar en tienda. Ten el monto exacto listo.<br><br>💡 Aceptamos billetes de €1, €5, €10, €20, €50 y €100. También aceptamos dólares a la tasa de cambio del día.</div>`
   }
 };
 
@@ -1394,17 +1394,17 @@ function buildWhatsAppMessage(orderNum, snapshot) {
     `📦 Orden: *${orderNum}*`,
     '',
     '🛒 *Productos:*',
-    ...snapshot.items.map(i => `  • ${i.qty > 1 ? i.qty + '× ' : ''}${i.name} — $${(i.price * i.qty).toFixed(2)}`),
+    ...snapshot.items.map(i => `  • ${i.quantity > 1 ? i.quantity + '× ' : ''}${i.title} — €${(i.price * i.quantity).toFixed(2)}`),
     '',
-    `💰 Subtotal: $${snapshot.subtotal}`,
-    snapshot.discount > 0 ? `🏷️ Descuento: -$${snapshot.discount}` : null,
-    `🚚 Envío: ${snapshot.shipping === 0 ? 'GRATIS' : '$' + snapshot.shipping}`,
-    `✅ *Total: $${snapshot.total}*`,
+    `💰 Subtotal: €${snapshot.subtotal}`,
+    snapshot.discount > 0 ? `🏷️ Descuento: -€${snapshot.discount}` : null,
+    `🚚 Envío: ${snapshot.shipping === 0 ? 'GRATIS' : '€' + snapshot.shipping}`,
+    `✅ *Total: €${snapshot.total}*`,
     '',
     `📬 Entrega: *${snapshot.deliveryLabel}*`,
-    snapshot.deliveryMethod === 'delivery' ? `📍 ${snapshot.direccion}` : '📍 Retiro en La Tahona',
-    snapshot.deliveryMethod === 'delivery' ? `👤 ${snapshot.nombre}` : null,
-    snapshot.deliveryMethod === 'delivery' ? `📱 ${snapshot.telefono}` : null,
+    snapshot.deliveryMethod === 'delivery' ? `📍 ${snapshot.direccion}` : '📍 Retiro en tienda',
+    `👤 ${snapshot.nombre}`,
+    `📱 ${snapshot.telefono}`,
     '',
     `💳 Pago: *${snapshot.payLabel}*`,
   ].filter(l => l !== null).join('\n');

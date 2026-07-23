@@ -7,6 +7,19 @@
 <meta name="description" content="Explora el catálogo premium de Morsa's Proshop. Compra palos de golf, palas de pádel, raquetas de tenis, ropa deportiva y calzado de las mejores marcas en Venezuela con envío gratis.">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* Zoom & Swipe CSS */
+.zoom-active { cursor: zoom-out !important; }
+.pdv-main-img-wrap { cursor: zoom-in; overflow: hidden; position: relative; }
+.swipe-indicator {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.6); color: white; padding: 4px 10px; border-radius: 12px;
+  font-size: 11px; font-weight: bold; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+  display: flex; align-items: center; gap: 6px;
+}
+.swipe-indicator.show { opacity: 1; }
+@media (max-width: 991px) {
+  .pdv-main-img-wrap { cursor: default; }
+}
   :root {
     --navy: #2A2FA8;
     --navy-dark: #1E2280;
@@ -1504,7 +1517,7 @@
 
 <!-- ANNOUNCE BAR -->
 <div class="announce-bar">
-  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: text-bottom; margin-right: 4px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: text-bottom; margin-right: 4px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Envío gratis en pedidos mayores de €100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
 </div>
 
 <!-- NAV -->
@@ -1745,7 +1758,7 @@
 
       <div class="pdv-ship-note">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v5h-7V8z"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/></svg>
-        Envío gratis en pedidos mayores a <strong style="margin-left:3px">$100</strong>
+        Envío gratis en pedidos mayores a <strong style="margin-left:3px">€100</strong>
       </div>
 
       <div class="pdv-actions">
@@ -1869,7 +1882,7 @@ function renderProducts(list) {
 
   list.forEach(p => {
     const badgeHtml = p.badge ? `<span class="badge badge-${p.badge}">${p.badge === 'new' ? 'Nuevo' : p.badge === 'hot' ? 'Popular' : 'Oferta'}</span>` : '';
-    const oldPriceHtml = p.oldPrice ? `<span class="product-price-old">$${p.oldPrice}</span><span class="product-price-save">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>` : '';
+    const oldPriceHtml = p.oldPrice ? `<span class="product-price-old">€${p.oldPrice}</span><span class="product-price-save">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>` : '';
     const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" style="background:${getCssColor(c)}" data-color="${c}" onclick="selectCardColor(event, this, ${p.id}, '${c}')" title="${getColorName(c)}"></span>`).join('');
     const sizes = p.sizes.length ? p.sizes.map(s => `<span class="size-btn" onclick="event.stopPropagation();selectSize(this)">${s}</span>`).join('') : '';
     const sizesSection = p.sizes.length ? `<div class="product-sizes">${sizes}</div>` : '';
@@ -1890,7 +1903,7 @@ function renderProducts(list) {
           <div class="product-name">${p.name}</div>
           <div class="product-brand">${p.brand}</div>
           <div class="product-price-row">
-            <span class="product-price">$${p.price}</span>
+            <span class="product-price">€${p.price}</span>
             ${oldPriceHtml}
           </div>
           ${sizesSection}
@@ -2135,7 +2148,7 @@ function addToCart(id, variationId = 0, attributes = {}, fromModal = false, cust
   } else {
     bar.classList.remove('full');
     label.className = 'toast-shipping';
-    label.innerHTML = `Te faltan <strong>$${remaining.toFixed(0)}</strong> para <strong>envío gratis</strong>`;
+    label.innerHTML = `Te faltan <strong>€${remaining.toFixed(0)}</strong> para <strong>envío gratis</strong>`;
   }
 
   showToast(`"${p.name}" añadido al carrito`);
@@ -2253,10 +2266,10 @@ function openModal(id) {
 
   // Price
   const priceEl = document.getElementById('pdvPrice');
-  let ph = `<span class="pdv-price">$${p.price}</span>`;
+  let ph = `<span class="pdv-price">€${p.price}</span>`;
   if (p.oldPrice) {
-    ph += ` <span class="pdv-price-old">$${p.oldPrice}</span>`;
-    ph += ` <span class="pdv-save-chip">Ahorras $${p.oldPrice - p.price}</span>`;
+    ph += ` <span class="pdv-price-old">€${p.oldPrice}</span>`;
+    ph += ` <span class="pdv-save-chip">Ahorras €${p.oldPrice - p.price}</span>`;
   }
   priceEl.innerHTML = ph;
 
@@ -2323,7 +2336,7 @@ function openModal(id) {
       <div class="pdv-rel-info">
         <div class="pdv-rel-name">${r.name}</div>
         <div class="pdv-rel-brand">${r.brand}</div>
-        <div class="pdv-rel-price">$${r.price}</div>
+        <div class="pdv-rel-price">€${r.price}</div>
       </div>
     </div>
   `).join('');
@@ -2792,30 +2805,100 @@ function showToast(msg) {
       }
     }
 
-    // --- Image Zoom Logic ---
+    // --- Image Zoom & Swipe Logic ---
     const imgWrap = document.querySelector('.pdv-main-img-wrap');
     const mainImg = document.getElementById('pdvMainImg');
+    let isZoomed = false;
+    let touchStartX = 0;
+    let touchEndX = 0;
     
     if (imgWrap && mainImg) {
-      imgWrap.addEventListener('mousemove', (e) => {
-        // Deshabilitar zoom en pantallas táctiles o móviles
+      // Swipe Indicator
+      const swipeInd = document.createElement('div');
+      swipeInd.className = 'swipe-indicator';
+      swipeInd.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8l4 4-4 4M7 16l-4-4 4-4"/></svg> Desliza';
+      imgWrap.appendChild(swipeInd);
+
+      const checkSwipeIndicator = () => {
+        if (window.innerWidth <= 991 && activeProduct && activeProduct.images && activeProduct.images.length > 1) {
+          swipeInd.classList.add('show');
+          setTimeout(() => swipeInd.classList.remove('show'), 3000);
+        } else {
+          swipeInd.classList.remove('show');
+        }
+      };
+
+      // Desktop Click to Zoom
+      imgWrap.addEventListener('click', (e) => {
         if (window.innerWidth <= 991 || ('ontouchstart' in window)) return;
         
+        if (!isZoomed) {
+          const rect = imgWrap.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const xPercent = (x / rect.width) * 100;
+          const yPercent = (y / rect.height) * 100;
+          
+          mainImg.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+          mainImg.style.transform = 'scale(2.5)';
+          imgWrap.classList.add('zoom-active');
+          isZoomed = true;
+        } else {
+          mainImg.style.transformOrigin = 'center center';
+          mainImg.style.transform = 'scale(1)';
+          imgWrap.classList.remove('zoom-active');
+          isZoomed = false;
+        }
+      });
+      
+      // Pan when zoomed
+      imgWrap.addEventListener('mousemove', (e) => {
+        if (!isZoomed || window.innerWidth <= 991) return;
         const rect = imgWrap.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const xPercent = (x / rect.width) * 100;
-        const yPercent = (y / rect.height) * 100;
-        
+        const xPercent = ((e.clientX - rect.left) / rect.width) * 100;
+        const yPercent = ((e.clientY - rect.top) / rect.height) * 100;
         mainImg.style.transformOrigin = `${xPercent}% ${yPercent}%`;
-        mainImg.style.transform = 'scale(2.5)';
       });
       
       imgWrap.addEventListener('mouseleave', () => {
-        mainImg.style.transformOrigin = 'center center';
-        mainImg.style.transform = 'scale(1)';
+        if (isZoomed) {
+          mainImg.style.transformOrigin = 'center center';
+          mainImg.style.transform = 'scale(1)';
+          imgWrap.classList.remove('zoom-active');
+          isZoomed = false;
+        }
       });
+
+      // Swipe Gestures for Mobile Gallery Navigation
+      imgWrap.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, {passive: true});
+
+      imgWrap.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, {passive: true});
+
+      const handleSwipe = () => {
+        if (!activeProduct || !activeProduct.images || activeProduct.images.length <= 1) return;
+        
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+          // Swipe Left -> Next Image
+          let nextIdx = currentImageIndex + 1;
+          if (nextIdx >= activeProduct.images.length) nextIdx = 0;
+          setMainImage(activeProduct.images[nextIdx], nextIdx);
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+          // Swipe Right -> Prev Image
+          let prevIdx = currentImageIndex - 1;
+          if (prevIdx < 0) prevIdx = activeProduct.images.length - 1;
+          setMainImage(activeProduct.images[prevIdx], prevIdx);
+        }
+      };
+      
+      // Check indicator on load
+      setTimeout(checkSwipeIndicator, 500);
     }
 
   });

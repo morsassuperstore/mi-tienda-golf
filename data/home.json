@@ -1,16 +1,13 @@
 {
   "announcement_bar": "Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra",
-  "hero": {
-    "eyebrow": "Nueva Colección Temporada 2026",
-    "title": "Juega Tu<br>Mejor <span class=\"gold\">Partido</span>",
-    "subtitle": "El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios premium — todo en un solo lugar.",
-    "video_bg": "assets/hero-video.mp4",
-    "video_poster": "assets/extracted_img_1.jpg",
-    "btn_primary_text": "Comprar Ahora →",
-    "btn_primary_link": "tienda.html",
-    "btn_secondary_text": "Explorar Deportes",
-    "btn_secondary_link": "#sports"
-  },
+  "hero_banners": [
+    {
+      "image_desktop": "assets/extracted_img_1.jpg",
+      "image_mobile": "assets/extracted_img_1.jpg",
+      "link": "tienda.html",
+      "alt": "Nueva Colección 2026"
+    }
+  ],
   "sports": {
     "golf_count": "200+ productos · Equipos y Ropa",
     "golf_image": "assets/card-golf.webp",
@@ -43,12 +40,13 @@
     "eyebrow": "Experiencia Exclusiva en Caracas",
     "title": "Prueba Tu Swing en Nuestro<br><span class=\"gold\">Simulador de Golf Profesional</span>",
     "desc": "En nuestra sede de La Tahona, ponemos a tu disposición tecnología de análisis de swing de última generación. Mide la velocidad de tu bola, el ángulo de lanzamiento y el spin en tiempo real para elegir el palo perfecto o perfeccionar tu juego.",
-    "image": "assets/simulador-golf.jpg",
+    "image": "assets/simulador-hombre.png",
     "tech_badge": "Foresight Sports GCQuad",
     "btn_primary_text": "Reservar Sesión",
-    "btn_primary_link": "https://wa.me/584128422837?text=Hola,%20me%20gustaría%20reservar%20una%20sesión%20en%20el%20simulador%20de%20swing.",
-    "btn_secondary_text": "Ver Equipos de Golf",
-    "btn_secondary_link": "#sports"
+    "btn_primary_link": "https://wa.me/584128422837?text=Hola,%20me%20gustar%C3%ADa%20agendar%20un%20Fitting%20de%20Palos%20de%20Golf%20en%20el%20simulador."
+  },
+  "payment": {
+    "zelle_email": "info@morsasgolf.com"
   },
   "locations": [
     {
@@ -56,7 +54,8 @@
       "name": "La Tahona",
       "address": "Complejo Avepane, La Tahona, Caracas, Venezuela",
       "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.1!2d-66.857051!3d10.4409292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af7003a977cdb%3A0x58e61e9c9877dd15!2sMorsas%20Superstore!5e0!3m2!1ses!2sve!4v1700000000000",
-      "directions_link": "https://www.google.com/maps/place/Morsas+Superstore/@10.4409292,-66.857051,17z"
+      "directions_link": "https://www.google.com/maps/place/Morsas+Superstore/@10.4409292,-66.857051,17z",
+      "hours": "Lunes a Sábado: 10:00am – 7:00pm"
     },
     {
       "badge": "📍 El Hatillo",

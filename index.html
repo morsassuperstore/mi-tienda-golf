@@ -1201,13 +1201,7 @@
 
       100% {
         transform: translateX(-100%);
-      }
     }
-
-    .brand-logos-grid:hover .brand-logos-track {
-      animation-play-state: paused;
-    }
-
     .brand-logo-item {
       background: var(--white);
       border-radius: var(--radius-lg);
@@ -1799,7 +1793,7 @@
         d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
       <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
       <line x1="12" y1="22.08" x2="12" y2="12" />
-    </svg> <span id="announcement-text">Envío gratis en pedidos mayores de $100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra</span>
+    </svg> <span id="announcement-text">Envío gratis en pedidos mayores de €100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra</span>
   </div>
 
   <!-- NAV -->
@@ -2354,13 +2348,10 @@
           el palo perfecto o perfeccionar tu juego.
         </p>
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <a href="https://wa.me/584128422837?text=Hola,%20me%20gustaría%20reservar%20una%20sesión%20en%20el%20simulador%20de%20swing."
+          <a href="https://wa.me/584128422837?text=Hola,%20me%20gustar%C3%ADa%20agendar%20un%20Fitting%20de%20Palos%20de%20Golf%20en%20el%20simulador."
             target="_blank" class="btn-primary" id="sim-btn-primary"
             style="background:var(--gold);color:var(--navy-deeper);border:none;box-shadow:0 4px 16px rgba(245,166,35,0.3);">
             Reservar Sesión
-          </a>
-          <a href="#sports" class="btn-outline" id="sim-btn-secondary" style="border-color:rgba(255,255,255,0.3);color:#fff;">
-            Ver Equipos de Golf
           </a>
         </div>
       </div>
@@ -3056,12 +3047,6 @@
               sBtnPri.href = data.simulator.btn_primary_link;
             }
 
-            const sBtnSec = document.getElementById('sim-btn-secondary');
-            if (sBtnSec) {
-              sBtnSec.textContent = data.simulator.btn_secondary_text;
-              sBtnSec.href = data.simulator.btn_secondary_link;
-            }
-
             // Locations
             const locGrid = document.getElementById('locations-grid');
             if (locGrid && data.locations) {
@@ -3190,7 +3175,7 @@
                   <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
                     ${name}</div>
                   <div style="font-size:11px;color:#aaa;margin-bottom:6px;">${brand}</div>
-                  <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--navy);">$${price}</div>
+                  <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--navy);">€${price}</div>
                 </div>
               </a>
             `;
