@@ -329,8 +329,15 @@
   <!-- Cargar Decap CMS desde CDN -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // Desactivar de forma segura la plantilla de vista previa para evitar que renderice imágenes desproporcionadas
-    CMS.registerPreviewTemplate('home', function() { return null; });
+    // Registrar plantilla nula válida en React/Decap CMS para evitar el error #130
+    if (window.createClass && window.h) {
+      var DummyPreview = createClass({
+        render: function() {
+          return h('div', { style: { display: 'none' } }, '');
+        }
+      });
+      CMS.registerPreviewTemplate('home', DummyPreview);
+    }
   </script>
 
   <!-- Botón flotante de Guía de Ayuda para el Administrador -->

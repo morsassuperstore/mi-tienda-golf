@@ -2939,12 +2939,26 @@
               btnSec.href = data.hero.btn_secondary_link;
             }
 
+            // Hero (Banners o Video)
             const video = document.getElementById('hero-video');
             const videoSrc = document.getElementById('hero-video-src');
-            if (video && videoSrc) {
-              video.poster = data.hero.video_poster;
-              videoSrc.src = data.hero.video_bg;
-              video.load();
+            const heroCinematic = document.querySelector('.hero-cinematic');
+
+            if (data.hero_banners && data.hero_banners.length > 0 && data.hero_banners[0].image_desktop) {
+              const banner = data.hero_banners[0];
+              if (video) video.style.display = 'none';
+              if (heroCinematic) {
+                heroCinematic.style.backgroundImage = `url('${banner.image_desktop}')`;
+                heroCinematic.style.backgroundSize = 'cover';
+                heroCinematic.style.backgroundPosition = 'center';
+              }
+            } else if (video && videoSrc) {
+              const videoPath = data.hero_video || (data.hero && data.hero.video_bg) || 'assets/hero-video.mp4';
+              video.style.display = 'block';
+              if (videoSrc.getAttribute('src') !== videoPath) {
+                videoSrc.src = videoPath;
+                video.load();
+              }
             }
 
             // Sports (Counts & Images)
