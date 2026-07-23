@@ -673,9 +673,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
               <div class="delivery-opt-body">
                 <div class="delivery-opt-title">
                   🚗 Delivery a domicilio — Caracas
-                  <span class="delivery-badge badge-cost" id="delivery-cost-badge">$3.00</span>
+                  <span class="delivery-badge badge-cost" id="delivery-cost-badge">€3.00</span>
                 </div>
-                <div class="delivery-opt-desc">Entrega en las próximas 24 horas dentro de Caracas. Envío gratis en pedidos mayores a $100.</div>
+                <div class="delivery-opt-desc">Entrega en las próximas 24 horas dentro de Caracas. Envío gratis en pedidos mayores a €100.</div>
               </div>
             </label>
             <label class="delivery-opt" id="opt-pickup">
@@ -982,19 +982,19 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
         <!-- Totals -->
         <div class="summary-row">
           <span>Subtotal</span>
-          <span id="sum-subtotal">$0.00</span>
+          <span id="sum-subtotal">€0.00</span>
         </div>
         <div class="summary-row" id="sum-discount-row" style="display:none;">
           <span>Descuento (MORSA10)</span>
-          <span id="sum-discount" class="discount">-$0.00</span>
+          <span id="sum-discount" class="discount">-€0.00</span>
         </div>
         <div class="summary-row" id="sum-shipping-row">
           <span>Delivery</span>
-          <span id="sum-shipping">$3.00</span>
+          <span id="sum-shipping">€3.00</span>
         </div>
         <div class="summary-row total">
           <span>Total</span>
-          <span id="sum-total">$0.00</span>
+          <span id="sum-total">€0.00</span>
         </div>
 
         <button class="btn-checkout" onclick="goToStep(currentStep + 1)" id="summary-cta">
@@ -1087,7 +1087,7 @@ function renderCart() {
         <div class="cart-brand">Morsa's</div>
       </div>
       <div class="cart-right">
-        <div class="cart-price">$${(item.price * item.quantity).toFixed(2)}</div>
+        <div class="cart-price">€${(item.price * item.quantity).toFixed(2)}</div>
         <div class="cart-qty">
           <button class="cart-qty-btn" onclick="changeQty(${index}, -1)">−</button>
           <span class="cart-qty-num">${item.quantity}</span>
@@ -1113,7 +1113,7 @@ function updateShippingBar() {
     bar.classList.add('complete');
   } else {
     const rem = (FREE_SHIPPING - sub).toFixed(0);
-    msg.innerHTML = `Agrega <strong>$${rem} más</strong> para envío gratis`;
+    msg.innerHTML = `Agrega <strong>€${rem} más</strong> para envío gratis`;
     bar.classList.remove('complete');
   }
 }
@@ -1124,12 +1124,12 @@ function updateSummary() {
   const ship = getShipping();
   const total = getTotal();
 
-  document.getElementById('sum-subtotal').textContent = '$' + sub.toFixed(2);
-  document.getElementById('sum-total').textContent = '$' + total.toFixed(2);
+  document.getElementById('sum-subtotal').textContent = '€' + sub.toFixed(2);
+  document.getElementById('sum-total').textContent = '€' + total.toFixed(2);
 
   const discRow = document.getElementById('sum-discount-row');
   discRow.style.display = discountApplied ? 'flex' : 'none';
-  document.getElementById('sum-discount').textContent = '-$' + disc.toFixed(2);
+  document.getElementById('sum-discount').textContent = '-€' + disc.toFixed(2);
 
   const shipRow = document.getElementById('sum-shipping-row');
   const shipEl = document.getElementById('sum-shipping');
@@ -1143,7 +1143,7 @@ function updateSummary() {
       shipEl.style.fontWeight = '700';
       shipRow.classList.add('shipping-free');
     } else {
-      shipEl.textContent = '$' + ship.toFixed(2);
+      shipEl.textContent = '€' + ship.toFixed(2);
       shipEl.style.color = '';
       shipEl.style.fontWeight = '';
       shipRow.classList.remove('shipping-free');
@@ -1157,7 +1157,7 @@ function updateSummary() {
       badge.textContent = 'GRATIS';
       badge.className = 'delivery-badge badge-free';
     } else {
-      badge.textContent = '$3.00';
+      badge.textContent = '€3.00';
       badge.className = 'delivery-badge badge-cost';
     }
   }
@@ -1168,7 +1168,7 @@ function updateSummary() {
     mini.innerHTML = Cart.items.map(i => `
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-mid);padding:4px 0;">
         <span style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${i.quantity > 1 ? `${i.quantity}×` : ''} ${i.title}</span>
-        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">$${(i.price*i.quantity).toFixed(2)}</span>
+        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">€${(i.price*i.quantity).toFixed(2)}</span>
       </div>
     `).join('');
   }
@@ -1379,7 +1379,7 @@ function copyText(text, btn) {
 
 // ── CARD FORMAT ──
 function formatCard(el) {
-  el.value = el.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+  el.value = el.value.replace(/\D/g, '').replace(/(.{4})/g, '€1 ').trim();
 }
 
 // ── PLACE ORDER ──
