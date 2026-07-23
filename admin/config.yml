@@ -16,8 +16,6 @@ collections:
     label: "Página de Inicio"
     description: "Edita de forma visual los banners, imágenes, textos, promociones, sucursales y datos de pago de la portada."
     delete: false
-    editor:
-      preview: false
     files:
       - name: "home"
         label: "Contenido de la Página de Inicio"
@@ -29,6 +27,7 @@ collections:
           - label: "Banners Principales (Carrusel)"
             name: "hero_banners"
             widget: "list"
+            summary: "{{fields.alt}}"
             fields:
               - label: "Imagen de Banner (Obligatorio)"
                 name: "image_desktop"
@@ -94,6 +93,7 @@ collections:
           - label: "Sucursales (¿Dónde Estamos?)"
             name: "locations"
             widget: "list"
+            summary: "{{fields.name}}"
             fields:
               - label: "Cintillo (Ej: 📍 Caracas)"
                 name: "badge"

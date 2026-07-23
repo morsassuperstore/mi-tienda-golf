@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Ayuda CMS — Morsa's Proshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0e1a60;
+      --navy-dark: #0a0c3c;
+      --gold: #F5A623;
+      --gold-light: #ffc875;
+      --bg: #f4f6fa;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: white;
+      padding: 30px 20px;
+      border-bottom: 3px solid var(--gold);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .badge-guide {
+      background: rgba(245, 166, 35, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 24px 0 12px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    p {
+      margin-bottom: 14px;
+      font-size: 15px;
+      color: #334155;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    li strong {
+      color: var(--navy-dark);
+    }
+
+    /* ALERT BOXES */
+    .alert {
+      padding: 16px;
+      border-radius: 10px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .alert-tip {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      color: #1e40af;
+    }
+
+    .alert-important {
+      background: #fffbebf5;
+      border-left: 4px solid var(--gold);
+      color: #b45309;
+    }
+
+    /* CODE & KEYS */
+    code {
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .btn-back:hover {
+      background: var(--gold);
+      color: var(--navy-dark);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      MORSA'S <span>PROSHOP</span>
+    </div>
+    <div class="badge-guide">
+      📘 Guía de Administración Visual (Decap CMS)
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h1>Manual de Uso del Panel Visual</h1>
+    <p>Esta guía te explicará de forma muy sencilla cómo administrar imágenes, promociones, direcciones y datos de pago de la página web sin necesidad de tocar código técnico.</p>
+    
+    <div class="alert alert-important">
+      <strong>Acceso al Panel:</strong> Para entrar al administrador visual ve a <code>/admin/</code> e inicia sesión con tu usuario de GitHub.
+    </div>
+
+    <h2>🔑 1. ¿Qué puedes editar desde el Panel?</h2>
+    <ul>
+      <li><strong>📢 Barra de Anuncio Superior:</strong> Modifica la cinta promocional que aparece arriba en toda la web (ej: descuentos o envíos gratis).</li>
+      <li><strong>🖼️ Banners Principales (Hero):</strong> Cambia las fotos gigantes del carrusel de la portada, sus enlaces de destino y títulos.</li>
+      <li><strong>🎾 Sección Deportes:</strong> Actualiza las fotos de portada e información de las secciones de Golf, Pádel y Tenis.</li>
+      <li><strong>🏌️ Simulador de Swing:</strong> Modifica la imagen promocional del simulador, la descripción y el enlace de reservas a WhatsApp.</li>
+      <li><strong>📍 Sucursales & Direcciones:</strong> Administra las sedes (La Tahona, La Lagunita, Izcaragua), sus direcciones, horarios y mapas de Google.</li>
+      <li><strong>💳 Email de Zelle:</strong> Cambia la cuenta de correo de Zelle. Se actualizará inmediatamente en la pantalla de checkout.</li>
+      <li><strong>🍔 Menú Destacado:</strong> Cambia los productos e imágenes que aparecen dentro de los menús desplegables.</li>
+    </ul>
+
+    <h2>🖼️ 2. Consejos para Subir Imágenes</h2>
+    <p>Para garantizar que la página web cargue rápido en teléfonos y computadoras:</p>
+    <ul>
+      <li><strong>Formatos permitidos:</strong> Puedes subir fotos en <code>.webp</code>, <code>.jpg</code> o <code>.png</code>.</li>
+      <li><strong>Peso recomendado:</strong> Procura que las fotos no pesen más de <strong>300 KB</strong>. Puedes optimizarlas gratis en <a href="https://tinypng.com" target="_blank" style="color:var(--navy);font-weight:600;">TinyPNG.com</a> antes de subirlas.</li>
+      <li><strong>Fondos transparentes:</strong> Para logos o imágenes recortadas usa formato <code>.png</code> o <code>.webp</code>.</li>
+    </ul>
+
+    <div class="alert alert-tip">
+      <strong>¡Tip de publicación!</strong> Al terminar de hacer cambios en el panel, haz clic en el botón verde <strong>"Publish" (Publicar)</strong> ubicado en la parte superior derecha del panel para guardar los cambios en la web.
+    </div>
+
+    <h2>🛠️ 3. Respaldo Manual (Vía cPanel o FTP)</h2>
+    <p>Si alguna vez necesitas hacer un cambio técnico sin usar el panel visual:</p>
+    <ul>
+      <li>Todos los datos editables se guardan en el archivo: <code>data/home.json</code>. Puedes editar este archivo desde cPanel para cambiar cualquier texto o ruta.</li>
+      <li>Las imágenes base están respaldadas en la carpeta <code>assets/</code>.</li>
+    </ul>
+
+    <div style="margin-top: 30px; text-align: center;">
+      <a href="./" class="btn-back">← Volver al Panel CMS</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
