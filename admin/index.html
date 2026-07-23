@@ -187,6 +187,31 @@
       color: var(--navy-dark) !important;
       box-shadow: 0 6px 12px rgba(245, 166, 35, 0.3) !important;
     }
+
+    /* Ocultar la columna derecha de vista previa sin romper React */
+    div[class*="PreviewPaneFrameContainer"],
+    div[class*="PreviewPaneFrame"],
+    div[class*="Pane2"],
+    iframe[class*="PreviewFrame"] {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* Expandir la columna del formulario de edición al 100% del ancho */
+    div[class*="Pane1"],
+    div[class*="EditorControlPaneContainer"],
+    div[class*="ControlPaneContainer"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: 1 1 100% !important;
+    }
+
+    div[class*="PaneContainer"] {
+      display: block !important;
+    }
   </style>
 </head>
 <body>
@@ -303,6 +328,10 @@
   
   <!-- Cargar Decap CMS desde CDN -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Desactivar de forma segura la plantilla de vista previa para evitar que renderice imágenes desproporcionadas
+    CMS.registerPreviewTemplate('home', function() { return null; });
+  </script>
 
   <!-- Botón flotante de Guía de Ayuda para el Administrador -->
   <a href="ayuda.html" target="_blank" title="Ver Guía de Administración" style="position:fixed;bottom:24px;right:24px;z-index:999999;background:var(--navy-dark);color:var(--gold);padding:10px 18px;border-radius:30px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.05em;text-decoration:none;box-shadow:0 6px 20px rgba(10,12,60,0.3);border:1.5px solid var(--gold);display:inline-flex;align-items:center;gap:8px;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
