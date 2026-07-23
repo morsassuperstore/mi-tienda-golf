@@ -2003,7 +2003,8 @@ function selectCardColor(e, swatch, productId, color) {
   const p = products.find(x => x.id === productId);
   if (!p) return;
 
-  const updateImg = (vars) => {
+  const updateImgAndSizes = (vars) => {
+    // 1. Update image
     const targetVar = vars.find(v => {
       const hasColor = v.attributes && v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
       return hasColor && String(hasColor.value).trim() === String(color).trim() && v.image_src;
@@ -2012,20 +2013,41 @@ function selectCardColor(e, swatch, productId, color) {
       const imgMain = card.querySelector('.img-main');
       const imgHover = card.querySelector('.img-hover');
       if (imgMain) imgMain.src = targetVar.image_src;
-      // Change img-hover as well so the user sees it instantly while their mouse is still over the card
       if (imgHover) imgHover.src = targetVar.image_src;
+    }
+
+    // 2. Update sizes
+    const validSizes = new Set();
+    vars.forEach(v => {
+      const hasColor = v.attributes && v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
+      if (hasColor && String(hasColor.value).trim() === String(color).trim() && v.stock_status !== 'outofstock' && v.purchasable !== false) {
+        const hasSize = v.attributes.find(a => a.name === 'Tallas' || a.name === 'Talla');
+        if (hasSize) {
+          validSizes.add(String(hasSize.value).trim());
+        }
+      }
+    });
+
+    const sizesWrap = card.querySelector('.product-sizes');
+    if (sizesWrap) {
+      if (validSizes.size > 0) {
+        const sortedSizes = Array.from(validSizes).sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+        sizesWrap.innerHTML = sortedSizes.map(s => `<span class="size-btn" onclick="event.stopPropagation();selectSize(this)">${s}</span>`).join('');
+      } else {
+        sizesWrap.innerHTML = '<span style="font-size:12px;color:#999;padding:6px">Agotado en este color</span>';
+      }
     }
   };
 
   if (p.fullVariations) {
-    updateImg(p.fullVariations);
+    updateImgAndSizes(p.fullVariations);
   } else if (p.variations && p.variations.length > 0) {
     fetch(`${CONFIG.API_URL}/morsa/v1/variations/${p.id}`)
       .then(res => res.json())
       .then(data => {
          if (data && data.variations) {
             p.fullVariations = data.variations;
-            updateImg(data.variations);
+            updateImgAndSizes(data.variations);
          }
       })
       .catch(e => console.error("Error fetching full variations:", e));
