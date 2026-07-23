@@ -2077,11 +2077,13 @@ function addCardToCart(e, id) {
     }
   }
 
-  addToCart(id, variationId, attributes, true);
+  const imgMain = card.querySelector('.img-main');
+  const customImg = imgMain ? imgMain.src : null;
+  addToCart(id, variationId, attributes, true, customImg);
 }
 
 // ─── CART ───
-function addToCart(id, variationId = 0, attributes = {}, fromModal = false) {
+function addToCart(id, variationId = 0, attributes = {}, fromModal = false, customImg = null) {
   const p = products.find(x => x.id === id);
   if (!p) return;
   
@@ -2097,7 +2099,7 @@ function addToCart(id, variationId = 0, attributes = {}, fromModal = false) {
     cartName = `${p.name} (${attrsStr})`;
   }
 
-  let cartImg = p.img;
+  let cartImg = customImg || p.img;
   let cartPrice = p.price;
   let cartSku = p.sku || '';
   
@@ -2105,7 +2107,7 @@ function addToCart(id, variationId = 0, attributes = {}, fromModal = false) {
   if (variationId > 0 && variationsList.length > 0) {
     const foundVar = variationsList.find(v => (v.variation_id || v.id) === variationId);
     if (foundVar) {
-      if (foundVar.image_src) cartImg = foundVar.image_src;
+      if (foundVar.image_src && !customImg) cartImg = foundVar.image_src;
       if (foundVar.price) cartPrice = foundVar.price;
       if (foundVar.sku) cartSku = foundVar.sku;
     }
@@ -2542,7 +2544,9 @@ function addToCartFromPDV() {
     }
   }
 
-  addToCart(currentProduct.id, variationId, attributes, true);
+  const imgMain = document.getElementById('pdvMainImg');
+  const customImg = imgMain ? imgMain.src : null;
+  addToCart(currentProduct.id, variationId, attributes, true, customImg);
 }
 function addToCartFromModal() { addToCartFromPDV(); }
 function scrollCarousel(dir) {
