@@ -68,6 +68,7 @@
 
     /* Enlaces del Sidebar */
     #nc-root aside a {
+      display: block !important;
       font-family: 'Barlow Condensed', sans-serif !important;
       font-size: 15px !important;
       font-weight: 600 !important;
@@ -94,6 +95,34 @@
       color: var(--navy-dark) !important;
       font-weight: 700 !important;
       letter-spacing: 0.02em !important;
+    }
+
+    /* Estilos para las tarjetas de entradas (Listado de CMS) */
+    #nc-root [class*="AppMainContainer"] a[class*="Card"] {
+      border-radius: 12px !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.04) !important;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s !important;
+      background: var(--white) !important;
+    }
+    #nc-root [class*="AppMainContainer"] a[class*="Card"]:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.08) !important;
+      border-color: var(--gold) !important;
+    }
+    
+    /* Botones primarios del panel */
+    #nc-root button[class*="Button-button-default-primary"] {
+      background-color: var(--navy) !important;
+      color: var(--white) !important;
+      border-radius: 8px !important;
+      font-family: 'Barlow Condensed', sans-serif !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em !important;
+    }
+    #nc-root button[class*="Button-button-default-primary"]:hover {
+      background-color: var(--gold) !important;
+      color: var(--navy-dark) !important;
     }
 
     /* --- PÁGINA DE LOGIN (Login Screen) --- */

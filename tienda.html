@@ -1870,7 +1870,7 @@ function renderProducts(list) {
   list.forEach(p => {
     const badgeHtml = p.badge ? `<span class="badge badge-${p.badge}">${p.badge === 'new' ? 'Nuevo' : p.badge === 'hot' ? 'Popular' : 'Oferta'}</span>` : '';
     const oldPriceHtml = p.oldPrice ? `<span class="product-price-old">$${p.oldPrice}</span><span class="product-price-save">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>` : '';
-    const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" style="background:${c}" onclick="event.stopPropagation()"></span>`).join('');
+    const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" style="background:${getCssColor(c)}" onclick="event.stopPropagation()" title="${getColorName(c)}"></span>`).join('');
     const sizes = p.sizes.length ? p.sizes.map(s => `<span class="size-btn" onclick="event.stopPropagation();selectSize(this)">${s}</span>`).join('') : '';
     const sizesSection = p.sizes.length ? `<div class="product-sizes">${sizes}</div>` : '';
 
@@ -2057,22 +2057,24 @@ const colorNames = {
   '#3498db':'Azul Cielo', '#e67e22':'Naranja', '#1abc9c':'Turquesa',
   '#ecf0f1':'Gris Claro', '#95a5a6':'Gris', '#bdc3c7':'Plateado',
   '#f5f5f0':'Arena', '#d4a017':'Oro', '#2c3e50':'Azul Marino',
-  '#7f8c8d':'Gris Medio'
+  '#7f8c8d':'Gris Medio', '#9db1cc':'Blue Haze', '#6a737b':'Shark Grey'
 };
 function getColorName(hex) { return colorNames[hex.toLowerCase()] || hex; }
 
 function getCssColor(name) {
   const map = {
-    'blanco': '#ffffff',
-    'negro': '#000000',
+    'blanco': '#ffffff', 'blanca': '#ffffff', 'white': '#ffffff',
+    'negro': '#000000', 'negra': '#000000', 'black': '#000000',
     'beige': '#f5f5dc',
-    'khaki': '#c3b091',
-    'rojo': '#e74c3c',
-    'azul': '#2980b9',
-    'verde': '#27ae60',
-    'gris': '#95a5a6',
-    'marino': '#1a2490',
-    'amarillo': '#f1c40f'
+    'khaki': '#c3b091', 'caqui': '#c3b091',
+    'rojo': '#e74c3c', 'roja': '#e74c3c', 'red': '#e74c3c',
+    'azul': '#2980b9', 'blue': '#2980b9',
+    'verde': '#27ae60', 'green': '#27ae60',
+    'gris': '#95a5a6', 'grey': '#95a5a6', 'gray': '#95a5a6',
+    'marino': '#1a2490', 'navy': '#1a2490',
+    'amarillo': '#f1c40f', 'amarilla': '#f1c40f', 'yellow': '#f1c40f',
+    'blue haze': '#9db1cc',
+    'shark grey': '#6a737b'
   };
   return map[name.toLowerCase()] || name;
 }
