@@ -1903,7 +1903,7 @@ function renderProducts(list) {
 
   list.forEach(p => {
     const badgeHtml = p.badge ? `<span class="badge badge-${p.badge}">${p.badge === 'new' ? 'Nuevo' : p.badge === 'hot' ? 'Popular' : 'Oferta'}</span>` : '';
-    const oldPriceHtml = p.oldPrice ? `<span class="product-price-old">€${p.oldPrice}</span><span class="product-price-save">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>` : '';
+    const oldPriceHtml = p.oldPrice ? `<span class="product-price-old">Ref.${p.oldPrice}</span><span class="product-price-save">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>` : '';
     const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" style="background:${getCssColor(c)}" data-color="${c}" onclick="selectCardColor(event, this, ${p.id}, '${c}')" title="${getColorName(c)}"></span>`).join('');
     const sizes = p.sizes.length ? p.sizes.map(s => `<span class="size-btn" onclick="event.stopPropagation();selectSize(this)">${s}</span>`).join('') : '';
     const sizesSection = p.sizes.length ? `<div class="product-sizes">${sizes}</div>` : '';
@@ -1924,7 +1924,7 @@ function renderProducts(list) {
           <div class="product-name">${p.name}</div>
           <div class="product-brand">${p.brand}</div>
           <div class="product-price-row">
-            <span class="product-price">€${p.price}</span>
+            <span class="product-price">Ref.${p.price}</span>
             ${oldPriceHtml}
           </div>
           ${sizesSection}
@@ -2191,7 +2191,7 @@ function addToCart(id, variationId = 0, attributes = {}, fromModal = false, cust
   } else {
     bar.classList.remove('full');
     label.className = 'toast-shipping';
-    label.innerHTML = `Te faltan <strong>€${remaining.toFixed(0)}</strong> para <strong>envío gratis</strong>`;
+    label.innerHTML = `Te faltan <strong>Ref.${remaining.toFixed(0)}</strong> para <strong>envío gratis</strong>`;
   }
 
   showToast(`"${p.name}" añadido al carrito`);
@@ -2309,10 +2309,10 @@ function openModal(id) {
 
   // Price
   const priceEl = document.getElementById('pdvPrice');
-  let ph = `<span class="pdv-price">€${p.price}</span>`;
+  let ph = `<span class="pdv-price">Ref.${p.price}</span>`;
   if (p.oldPrice) {
-    ph += ` <span class="pdv-price-old">€${p.oldPrice}</span>`;
-    ph += ` <span class="pdv-save-chip">Ahorras €${p.oldPrice - p.price}</span>`;
+    ph += ` <span class="pdv-price-old">Ref.${p.oldPrice}</span>`;
+    ph += ` <span class="pdv-save-chip">Ahorras Ref.${p.oldPrice - p.price}</span>`;
   }
   priceEl.innerHTML = ph;
 
@@ -2379,7 +2379,7 @@ function openModal(id) {
       <div class="pdv-rel-info">
         <div class="pdv-rel-name">${r.name}</div>
         <div class="pdv-rel-brand">${r.brand}</div>
-        <div class="pdv-rel-price">€${r.price}</div>
+        <div class="pdv-rel-price">Ref.${r.price}</div>
       </div>
     </div>
   `).join('');

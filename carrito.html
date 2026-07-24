@@ -1008,19 +1008,19 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
         <!-- Totals -->
         <div class="summary-row">
           <span>Subtotal</span>
-          <span id="sum-subtotal">€0.00</span>
+          <span id="sum-subtotal">Ref.0.00</span>
         </div>
         <div class="summary-row" id="sum-discount-row" style="display:none;">
           <span>Descuento (MORSA10)</span>
-          <span id="sum-discount" class="discount">-€0.00</span>
+          <span id="sum-discount" class="discount">-Ref.0.00</span>
         </div>
         <div class="summary-row" id="sum-shipping-row">
           <span>Delivery</span>
-          <span id="sum-shipping">€0.00</span>
+          <span id="sum-shipping">Ref.0.00</span>
         </div>
         <div class="summary-row total">
           <span>Total</span>
-          <span id="sum-total">€0.00</span>
+          <span id="sum-total">Ref.0.00</span>
         </div>
 
         <button class="btn-checkout" onclick="goToStep(currentStep + 1)" id="summary-cta">
@@ -1114,7 +1114,7 @@ function renderCart() {
         <div class="cart-brand">Morsa's</div>
       </div>
       <div class="cart-right">
-        <div class="cart-price">€${(item.price * item.quantity).toFixed(2)}</div>
+        <div class="cart-price">Ref.${(item.price * item.quantity).toFixed(2)}</div>
         <div class="cart-qty">
           <button class="cart-qty-btn" onclick="changeQty(${index}, -1)">−</button>
           <span class="cart-qty-num">${item.quantity}</span>
