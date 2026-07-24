@@ -60,6 +60,8 @@ Para mantener la página web rápida y con excelente calidad visual:
 2. **Tamaño de archivo:** Procura que las fotos no pesen más de **300 KB**. Puedes optimizarlas gratis antes de subirlas en [TinyPNG.com](https://tinypng.com).
 3. **Fondo transparente:** Para los logos de marcas o imágenes como el simulador, se recomienda usar formato `.png` o `.webp` con fondo transparente.
 
+4. **Enlaces de WhatsApp:** En el campo de enlace para reservar el simulador (o cualquier botón de contacto), puedes escribir el texto del mensaje con **espacios normales y acentos** (ej: `https://wa.me/584128422837?text=Hola, me gustaría agendar un turno`). No es necesario escribir `%20` ni códigos complejos; el navegador del usuario se encargará de traducirlos automáticamente al hacer clic. *Nota: Asegúrate de que el enlace comience correctamente con `https://` y no tenga textos basura adelante (como `ulador.https://...`)*.
+
 ---
 
 ## 4. Método Alternativo / Respaldo Manual (Vía cPanel o FTP)
