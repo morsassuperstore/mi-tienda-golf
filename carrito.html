@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carrito — Morsa's Proshop</title>
-<meta name="description" content="Revisa tu carrito de compras en Morsa's Proshop. Finaliza tu pedido de equipos deportivos premium para golf, pádel y tenis en Caracas con opciones de pago flexibles.">
+<title>Carrito de Compras — Morsa's Proshop</title>
+<meta name="description" content="Revisa tu carrito de compras en Morsa's Proshop. Finaliza tu pedido de equipos deportivos premium para golf, pádel y tenis en Caracas.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://morsasgolf.com/carrito.html">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="assets/logo morsas 2026.png">
+<link rel="apple-touch-icon" href="assets/logo morsas 2026.png">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Carrito de Compras | Morsa's Proshop">
+<meta property="og:image" content="https://morsasgolf.com/assets/logo morsas 2026.png">
+<meta property="og:site_name" content="Morsa's Proshop">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -673,9 +686,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
               <div class="delivery-opt-body">
                 <div class="delivery-opt-title">
                   🚗 Delivery a domicilio — Caracas
-                  <span class="delivery-badge badge-cost" id="delivery-cost-badge">€3.00</span>
+                  <span class="delivery-badge badge-cost" id="delivery-cost-badge">Ref.3.00</span>
                 </div>
-                <div class="delivery-opt-desc">Entrega en las próximas 24 horas dentro de Caracas. Envío gratis en pedidos mayores a €100.</div>
+                <div class="delivery-opt-desc">Entrega en las próximas 24 horas dentro de Caracas. Envío gratis en pedidos mayores a Ref.100.</div>
               </div>
             </label>
             <label class="delivery-opt" id="opt-pickup">
@@ -880,9 +893,22 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
         <!-- Pago móvil instructions (hidden) -->
         <div id="pagomovil-form" style="display:none;margin-top:12px;">
           <div class="payment-instructions visible">
-            <div class="instr-title">Datos para pago móvil</div>
-            <div style="font-size:12px;color:var(--text-mid);line-height:1.6;">
-              El monto en bolívares se calcula a la tasa BCV del Euro del día. Al confirmar pedido te enviaremos el monto exacto por WhatsApp, o puedes escribirnos directamente al botón <strong>"Enviar pedido por WhatsApp"</strong> que se encuentra en la siguiente sección una vez confirmes el pedido para acelerar el proceso.
+            <div class="instr-title">Datos para pago móvil (Bolívares)</div>
+            <div style="font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:14px;">
+              El monto en bolívares se calcula a la tasa BCV del Euro del día que manejamos en tienda.
+              Para agilizar tu pedido, puedes indicar aquí la tasa que estás usando:
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <label style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-mid);white-space:nowrap;">Tasa Bs/Ref. que usa la tienda</label>
+              <input class="form-input" id="bs-rate" name="bs-rate" type="number" min="1" step="0.01"
+                placeholder="Ej: 95.50"
+                style="max-width:140px;"
+                oninput="updateBsTotal()"
+                aria-label="Tasa de cambio bolívares por referencia">
+            </div>
+            <div id="bs-total-preview" style="display:none;font-size:13px;color:var(--navy);font-weight:700;padding:8px 0;"></div>
+            <div style="font-size:11px;color:var(--text-mid);margin-top:4px;line-height:1.5;">
+              Si no conoces la tasa, no te preocupes. Al confirmar el pedido te enviaremos el monto exacto por WhatsApp.
             </div>
           </div>
         </div>
@@ -1113,7 +1139,7 @@ function updateShippingBar() {
     bar.classList.add('complete');
   } else {
     const rem = (FREE_SHIPPING - sub).toFixed(0);
-    msg.innerHTML = `Agrega <strong>€${rem} más</strong> para envío gratis`;
+    msg.innerHTML = `Agrega <strong>Ref.${rem} más</strong> para envío gratis`;
     bar.classList.remove('complete');
   }
 }
@@ -1124,12 +1150,12 @@ function updateSummary() {
   const ship = getShipping();
   const total = getTotal();
 
-  document.getElementById('sum-subtotal').textContent = '€' + sub.toFixed(2);
-  document.getElementById('sum-total').textContent = '€' + total.toFixed(2);
+  document.getElementById('sum-subtotal').textContent = 'Ref.' + sub.toFixed(2);
+  document.getElementById('sum-total').textContent = 'Ref.' + total.toFixed(2);
 
   const discRow = document.getElementById('sum-discount-row');
   discRow.style.display = discountApplied ? 'flex' : 'none';
-  document.getElementById('sum-discount').textContent = '-€' + disc.toFixed(2);
+  document.getElementById('sum-discount').textContent = '-Ref.' + disc.toFixed(2);
 
   const shipRow = document.getElementById('sum-shipping-row');
   const shipEl = document.getElementById('sum-shipping');
@@ -1143,7 +1169,7 @@ function updateSummary() {
       shipEl.style.fontWeight = '700';
       shipRow.classList.add('shipping-free');
     } else {
-      shipEl.textContent = '€' + ship.toFixed(2);
+      shipEl.textContent = 'Ref.' + ship.toFixed(2);
       shipEl.style.color = '';
       shipEl.style.fontWeight = '';
       shipRow.classList.remove('shipping-free');
@@ -1157,7 +1183,7 @@ function updateSummary() {
       badge.textContent = 'GRATIS';
       badge.className = 'delivery-badge badge-free';
     } else {
-      badge.textContent = '€3.00';
+      badge.textContent = 'Ref.3.00';
       badge.className = 'delivery-badge badge-cost';
     }
   }
@@ -1168,7 +1194,7 @@ function updateSummary() {
     mini.innerHTML = Cart.items.map(i => `
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-mid);padding:4px 0;">
         <span style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${i.quantity > 1 ? `${i.quantity}×` : ''} ${i.title}</span>
-        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">€${(i.price*i.quantity).toFixed(2)}</span>
+        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">Ref.${(i.price*i.quantity).toFixed(2)}</span>
       </div>
     `).join('');
   }
@@ -1199,7 +1225,7 @@ function applyCoupon() {
   if (COUPONS[code]) {
     discountApplied = true;
     discountPct = COUPONS[code];
-    msg.textContent = `✓ Código aplicado — €{discountPct}% de descuento`;
+    msg.textContent = `✓ Código aplicado — ${discountPct}% de descuento`;
     msg.className = 'coupon-msg ok';
     updateSummary();
   } else if (code === '') {
@@ -1330,7 +1356,7 @@ let instrData = {
   },
   cash: {
     title: 'Pago en efectivo',
-    html: `<div style="font-size:12px;color:var(--text-mid);line-height:1.6;">El pago en efectivo se realiza <strong>al momento de la entrega</strong> (delivery) o al retirar en tienda. Ten el monto exacto listo.<br><br>💡 Aceptamos billetes de €1, €5, €10, €20, €50 y €100. También aceptamos dólares a la tasa de cambio del día.</div>`
+    html: `<div style="font-size:12px;color:var(--text-mid);line-height:1.6;">El pago en efectivo se realiza <strong>al momento de la entrega</strong> (delivery) o al retirar en tienda. Ten el monto exacto listo.<br><br>💡 Aceptamos dólares en efectivo y también bolívares a la tasa de cambio del día que maneja la tienda.</div>`
   }
 };
 
@@ -1379,7 +1405,28 @@ function copyText(text, btn) {
 
 // ── CARD FORMAT ──
 function formatCard(el) {
-  el.value = el.value.replace(/\D/g, '').replace(/(.{4})/g, '€1 ').trim();
+  el.value = el.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+}
+
+// ── BS TOTAL PREVIEW (Pago móvil) ──
+function updateBsTotal() {
+  const rateInput = document.getElementById('bs-rate');
+  const preview   = document.getElementById('bs-total-preview');
+  if (!rateInput || !preview) return;
+
+  const rate = parseFloat(rateInput.value);
+  if (!rate || rate <= 0) {
+    preview.style.display = 'none';
+    return;
+  }
+
+  const total   = getTotal();
+  const bsTotal = (total * rate).toFixed(2);
+
+  // Format with thousand separators (Venezuelan convention: . for thousands, , for decimals)
+  const formatted = new Intl.NumberFormat('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(bsTotal);
+  preview.textContent = `💵 Total en Bs: ${formatted} Bs`;
+  preview.style.display = 'block';
 }
 
 // ── PLACE ORDER ──
@@ -1394,12 +1441,12 @@ function buildWhatsAppMessage(orderNum, snapshot) {
     `📦 Orden: *${orderNum}*`,
     '',
     '🛒 *Productos:*',
-    ...snapshot.items.map(i => `  • ${i.quantity > 1 ? i.quantity + '× ' : ''}${i.title} — €${(i.price * i.quantity).toFixed(2)}`),
+    ...snapshot.items.map(i => `  • ${i.quantity > 1 ? i.quantity + '× ' : ''}${i.title} — Ref.${(i.price * i.quantity).toFixed(2)}`),
     '',
-    `💰 Subtotal: €${snapshot.subtotal}`,
-    snapshot.discount > 0 ? `🏷️ Descuento: -€${snapshot.discount}` : null,
-    `🚚 Envío: ${snapshot.shipping === 0 ? 'GRATIS' : '€' + snapshot.shipping}`,
-    `✅ *Total: €${snapshot.total}*`,
+    `💰 Subtotal: Ref.${snapshot.subtotal}`,
+    snapshot.discount > 0 ? `🏷️ Descuento: -Ref.${snapshot.discount}` : null,
+    `🚚 Envío: ${snapshot.shipping === 0 ? 'GRATIS' : 'Ref.' + snapshot.shipping}`,
+    `✅ *Total: Ref.${snapshot.total}*`,
     '',
     `📬 Entrega: *${snapshot.deliveryLabel}*`,
     snapshot.deliveryMethod === 'delivery' ? `📍 ${snapshot.direccion}` : '📍 Retiro en tienda',
@@ -1407,6 +1454,9 @@ function buildWhatsAppMessage(orderNum, snapshot) {
     `📱 ${snapshot.telefono}`,
     '',
     `💳 Pago: *${snapshot.payLabel}*`,
+    snapshot.payLabel === 'Pago móvil' && snapshot.bsRate
+      ? `💵 Tasa Bs/Ref.: ${snapshot.bsRate} → Total Bs: ${snapshot.bsTotal}`
+      : null,
   ].filter(l => l !== null).join('\n');
   return lines;
 }
@@ -1508,6 +1558,12 @@ async function placeOrder() {
                         document.getElementById('f-sector')?.value,
                         document.getElementById('f-municipio')?.value
                       ].filter(Boolean).join(', ') || '—',
+      bsRate:         paymentMethod === 'pagomovil' ? (document.getElementById('bs-rate')?.value || null) : null,
+      bsTotal:        paymentMethod === 'pagomovil' ? (() => {
+                        const r = parseFloat(document.getElementById('bs-rate')?.value);
+                        if (!r) return null;
+                        return new Intl.NumberFormat('es-VE', { minimumFractionDigits: 2 }).format((getTotal() * r).toFixed(2)) + ' Bs';
+                      })() : null,
     };
 
     sendWhatsAppNotification(orderNum, snapshot);
