@@ -35,6 +35,7 @@ jobs:
             admin/**
             js/**
             *.html
+            *.php
           # Excluir archivos que NO deben subirse al servidor
           exclude: |
             **/.git/**
