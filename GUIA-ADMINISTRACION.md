@@ -50,6 +50,10 @@ Dentro del panel encontrarás la sección **"Página de Inicio"**. Al hacer clic
 * **Uso:** Administrar el listado de marcas patrocinadas/distribuidas en el banner de logotipos que se desliza continuamente en la portada y en "Sobre Nosotros". Puedes añadir nuevas marcas, reordenarlas arrastrándolas, editarlas o borrarlas.
 * **Campos:** Nombre de la marca y Logotipo de la marca (se recomienda imagen en formato `.png` o `.webp` con fondo transparente).
 
+### 👫 I. Sección "Colecciones por Género"
+* **Uso:** Cambiar las imágenes de portada de las tarjetas de **Caballeros** y **Damas** de la página de inicio.
+* **Campos:** Imagen de portada Caballeros e Imagen de portada Damas (se recomiendan fotos verticales o cuadradas).
+
 ---
 
 ## 3. Consejos para Subir Imágenes (Recomendaciones de Formato)
@@ -76,6 +80,7 @@ Si por alguna razón no tienes acceso al panel visual o necesitas hacer un cambi
    * `card-golf` / `card-padel` / `card-tenis`
    * `destacado-golf` / `destacado-padel` / `destacado-tenis`
    * `simulador-golf`
+   * `gender-men` / `gender-women`
 
 ---
 

@@ -2483,6 +2483,86 @@
       .carousel-btn-next { right: 12px; }
     }
 
+    /* ─── GENDER SPLIT ─── */
+    .gender-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 40px 32px 0;
+      max-width: calc(1320px - 64px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gender-card {
+      border-radius: var(--radius-lg);
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 52px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 4px 20px rgba(10, 12, 60, 0.12);
+    }
+
+    .gender-card:hover {
+      transform: translateY(-4px) scale(1.005);
+      box-shadow: 0 12px 36px rgba(10, 12, 60, 0.22);
+    }
+
+    .gender-card-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: repeating-linear-gradient(0deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 24px),
+                        repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 24px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .gender-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .gender-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .gender-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .gender-split {
+        grid-template-columns: 1fr;
+        margin: 30px 16px 0;
+      }
+      .gender-card {
+        min-height: 400px;
+        padding: 32px;
+      }
+      .gender-title {
+        font-size: 60px;
+      }
+    }
+
     /* ── FIX SUBMENU BACKGROUND ── */
     .mega-menu,
     .dropdown-menu {
@@ -2691,6 +2771,38 @@
       document.getElementById('prod-carousel').scrollBy({ left: dir * 600, behavior: 'smooth' });
     }
   </script>
+
+  <!-- ─── COMPRA POR GÉNERO ─── -->
+  <section id="gender-section" style="padding: 60px 0 20px 0;">
+    <div style="max-width:1320px; margin: 0 auto; padding: 0 32px 40px;">
+      <div class="section-eyebrow" style="color: var(--gold);">Compra por Género</div>
+      <h2 class="section-title">Equipamiento para <span class="gold">Todos</span></h2>
+    </div>
+
+    <div class="gender-split">
+      <!-- Caballeros -->
+      <a href="tienda.html?gender=caballeros" class="gender-card men" id="gender-men-card" data-bg-fallback="assets/gender-men" style="background-image: url('assets/gender-men.jpg');">
+        <div class="gender-card-pattern"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,12,60,0.92) 0%, rgba(10,12,60,0.3) 60%, transparent 100%); z-index:1;"></div>
+        <div class="gender-content">
+          <div class="gender-label">Colección</div>
+          <div class="gender-title">Caballeros</div>
+          <span class="btn-primary" style="font-size:12px; padding: 10px 22px; display:inline-block; border: none;">Ver Caballeros →</span>
+        </div>
+      </a>
+
+      <!-- Damas -->
+      <a href="tienda.html?gender=damas" class="gender-card women" id="gender-women-card" data-bg-fallback="assets/gender-women" style="background-image: url('assets/gender-women.jpg');">
+        <div class="gender-card-pattern"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,12,60,0.92) 0%, rgba(10,12,60,0.3) 60%, transparent 100%); z-index:1;"></div>
+        <div class="gender-content">
+          <div class="gender-label">Colección</div>
+          <div class="gender-title">Damas</div>
+          <span class="btn-primary" style="font-size:12px; padding: 10px 22px; display:inline-block; border: none;">Ver Damas →</span>
+        </div>
+      </a>
+    </div>
+  </section>
 
   <!-- ─── LOCATIONS ─── -->
   <section id="ubicaciones">
@@ -3526,6 +3638,20 @@
               if (sBtnPri) {
                 sBtnPri.textContent = data.simulator.btn_primary_text;
                 sBtnPri.href = data.simulator.btn_primary_link;
+              }
+            }
+
+            // Gender Collections
+            if (data.gender_collections) {
+              const menCard = document.getElementById('gender-men-card');
+              if (menCard && data.gender_collections.men_image) {
+                menCard.style.backgroundImage = `url('${data.gender_collections.men_image}')`;
+                menCard.setAttribute('data-bg-fallback', data.gender_collections.men_image.replace(/\.[^/.]+$/, ""));
+              }
+              const womenCard = document.getElementById('gender-women-card');
+              if (womenCard && data.gender_collections.women_image) {
+                womenCard.style.backgroundImage = `url('${data.gender_collections.women_image}')`;
+                womenCard.setAttribute('data-bg-fallback', data.gender_collections.women_image.replace(/\.[^/.]+$/, ""));
               }
             }
 

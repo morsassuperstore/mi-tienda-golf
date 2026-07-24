@@ -49,6 +49,10 @@
     "tenis_count": "120+ productos · Raquetas y Ropa",
     "tenis_image": "assets/card-tenis.jpg"
   },
+  "gender_collections": {
+    "men_image": "assets/gender-men.jpg",
+    "women_image": "assets/gender-women.jpg"
+  },
   "menu_featured": {
     "golf": {
       "label": "Destacado",
