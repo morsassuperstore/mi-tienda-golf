@@ -1052,9 +1052,10 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 <script src="js/cart.js"></script>
 
 <script>
-// ── CONSTANTS ──
-const FREE_SHIPPING = 100;
-const DELIVERY_COST = 3;
+// ── CONFIGURABLE GLOBALS ──
+let FREE_SHIPPING = 100;
+let DELIVERY_COST = 3;
+let MANUAL_EXCHANGE_RATE = null;
 
 // ── STATE ──
 let currentStep = 1;
@@ -1431,7 +1432,7 @@ function updateBsTotal() {
 
 // ── PLACE ORDER ──
 // ── WHATSAPP NOTIFICATION (CallMeBot + WA link backup) ──
-const WA_PHONE   = '584128422837';
+let WA_PHONE   = '584128422837';
 const WA_API_KEY = '1144889';
 
 function buildWhatsAppMessage(orderNum, snapshot) {
@@ -1606,6 +1607,103 @@ async function placeOrder() {
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
   renderCart();
+  
+  // Cargar configuraciones globales desde CMS
+  fetch('data/store_config.json', { cache: 'no-store' })
+    .then(res => {
+      if (!res.ok) throw new Error("No CMS data");
+      return res.json();
+    })
+    .then(data => {
+      if (!data) return;
+      
+      if (data.free_shipping_threshold !== undefined) FREE_SHIPPING = data.free_shipping_threshold;
+      if (data.delivery_cost !== undefined) DELIVERY_COST = data.delivery_cost;
+      if (data.whatsapp_number) WA_PHONE = data.whatsapp_number;
+      if (data.manual_exchange_rate) MANUAL_EXCHANGE_RATE = data.manual_exchange_rate;
+
+      // Hydrate instrData for standard payment methods
+      if (data.payment_zelle) {
+        instrData.zelle.html = `
+          <div class="instr-row"><span class="instr-label">Email Zelle</span><span class="instr-val" id="zelle-email-text">${data.payment_zelle.email}</span><button class="copy-btn" onclick="copyText(document.getElementById('zelle-email-text').textContent,this)">Copiar</button></div>
+          <div class="instr-row"><span class="instr-label">Nombre</span><span class="instr-val">${data.payment_zelle.name}</span></div>
+          <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">Envíanos el comprobante por WhatsApp para confirmar tu pedido.</div>`;
+      }
+      
+      if (data.payment_venmo) {
+        instrData.venmo.html = `
+          <div class="instr-row"><span class="instr-label">Usuario Venmo</span><span class="instr-val" id="venmo-user-text">${data.payment_venmo.user}</span><button class="copy-btn" onclick="copyText(document.getElementById('venmo-user-text').textContent,this)">Copiar</button></div>
+          <div class="instr-row"><span class="instr-label">Nombre</span><span class="instr-val">${data.payment_venmo.name}</span></div>
+          <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">Envíanos el comprobante por WhatsApp para confirmar tu pedido.</div>`;
+      }
+
+      // Hydrate the static pago movil block
+      if (data.payment_pagomovil) {
+        const pmContainer = document.getElementById('pagomovil-form');
+        if (pmContainer) {
+          const p = data.payment_pagomovil;
+          const rateInfo = MANUAL_EXCHANGE_RATE ? `<div class="instr-row" style="margin-bottom:10px;background:var(--gold-pale);"><span class="instr-label">Tasa de la tienda</span><span class="instr-val" style="color:var(--navy-deeper);font-weight:700;">${MANUAL_EXCHANGE_RATE} Bs/Ref</span></div>` : '';
+          
+          // Replace innerHTML preserving the ID structure where bs-rate logic resides, but add bank info
+          pmContainer.innerHTML = `
+            <div class="payment-instructions visible">
+              <div class="instr-title">Datos para pago móvil (Bolívares)</div>
+              ${rateInfo}
+              <div class="instr-row"><span class="instr-label">Banco</span><span class="instr-val">${p.bank}</span></div>
+              <div class="instr-row"><span class="instr-label">Cédula/RIF</span><span class="instr-val">${p.id}</span></div>
+              <div class="instr-row"><span class="instr-label">Teléfono</span><span class="instr-val">${p.phone}</span></div>
+              
+              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;margin:14px 0;">
+                Calcula tu pago fácilmente. Si quieres, indica la tasa que estás usando:
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                <label style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-mid);white-space:nowrap;">Tasa (Opcional)</label>
+                <input class="form-input" id="bs-rate" name="bs-rate" type="number" min="1" step="0.01"
+                  placeholder="Ej: 95.50" style="max-width:140px;" oninput="updateBsTotal()"
+                  aria-label="Tasa de cambio bolívares por referencia" value="${MANUAL_EXCHANGE_RATE || ''}">
+              </div>
+              <div id="bs-total-preview" style="display:none;font-size:13px;color:var(--navy);font-weight:700;padding:8px 0;"></div>
+              <div style="font-size:11px;color:var(--text-mid);margin-top:4px;line-height:1.5;">
+                Envía el pago exacto y comparte la referencia por WhatsApp.
+              </div>
+            </div>
+          `;
+          // Trigger initial calculation if manual rate was set
+          if (MANUAL_EXCHANGE_RATE) updateBsTotal();
+        }
+      }
+
+      // Hydrate the static USDT block
+      if (data.payment_binance) {
+        const usdtContainer = document.getElementById('usdt-form');
+        if (usdtContainer) {
+          usdtContainer.innerHTML = `
+            <div class="payment-instructions visible">
+              <div class="instr-title">Binance Pay / USDT</div>
+              <div class="instr-row">
+                <span class="instr-label">Binance ID / Correo</span>
+                <span class="instr-val" id="binance-text">${data.payment_binance.pay_id}</span>
+                <button class="copy-btn" onclick="copyText(document.getElementById('binance-text').textContent, this)">Copiar</button>
+              </div>
+              <div class="instr-row">
+                <span class="instr-label">Red</span>
+                <span class="instr-val">TRC20 o BEP20 (USDT)</span>
+              </div>
+              <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">
+                Envía exactamente el monto de tu orden. Comparte el hash de la transacción por WhatsApp para confirmar.
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // Re-trigger currently selected payment method to refresh view
+      selectPayment(paymentMethod);
+      
+      // Update cart calculations which may depend on shipping rates
+      updateSummary();
+    })
+    .catch(err => console.log('Usando configuración de carrito local', err));
 });
 </script>
 <script src="js/animations.js"></script>

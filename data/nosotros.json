@@ -1,0 +1,19 @@
+{
+  "eyebrow": "Sobre Nosotros",
+  "title": "Nuestra Historia & Pasión",
+  "subtitle": "Morsa's Proshop es el punto de encuentro definitivo para los apasionados del golf en Venezuela.",
+  "history_text": [
+    {
+      "paragraph": "Bienvenidos a <strong>Morsa’s Proshop</strong>, el punto de encuentro definitivo para los apasionados del golf en Venezuela. Fundada como una empresa familiar, hemos consolidado una trayectoria impecable basada en la confianza, el conocimiento experto y la curaduría del mejor equipamiento deportivo."
+    },
+    {
+      "paragraph": "Somos distribuidores autorizados de una completa selección de marcas líderes de nivel mundial como <strong>Mizuno, Big Max, Nippon Shaft, Piretti, Iomic</strong> y muchas otras firmas de renombre internacional. En nuestra tienda online y física, tendrás acceso a un inventario premium que incluye palos de golf de alta precisión, bolsas de diseño profesional, carritos de última tecnología, calzado y ropa de rendimiento."
+    },
+    {
+      "paragraph": "Creemos que cada swing es único. Por eso, nuestro equipo de asesores profesionales te acompaña de forma personalizada en cada decisión de compra, asegurando que encuentres la vara, el grip o el palo idóneo para perfeccionar tu handicap.<br><br>Nos enorgullece ofrecer una experiencia de compra impecable, respaldada por un sistema de envíos rápidos y seguros a nivel nacional. Si estás buscando una especificación técnica o un producto exclusivo que no encuentras en nuestro catálogo, nuestro equipo hará lo imposible por conseguirlo para ti.<br><br>Somos golfistas apasionados, y estamos aquí para ayudarte a dominar el campo."
+    }
+  ],
+  "main_image": "assets/extracted_img_1.jpg",
+  "badge_value": "100%",
+  "badge_label": "Pasión Familiar"
+}

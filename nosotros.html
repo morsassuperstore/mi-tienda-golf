@@ -660,17 +660,16 @@
   <!-- HERO SECTION -->
   <header class="about-hero">
     <div class="about-hero-inner">
-      <span class="about-eyebrow">Sobre Nosotros</span>
-      <h1 class="about-title">Nuestra Historia & Pasión</h1>
-      <p class="about-subtitle">Morsa's Proshop es el punto de encuentro definitivo para los apasionados del golf en
-        Venezuela.</p>
+      <span id="about-eyebrow" class="about-eyebrow">Sobre Nosotros</span>
+      <h1 id="about-title" class="about-title">Nuestra Historia & Pasión</h1>
+      <p id="about-subtitle" class="about-subtitle">Morsa's Proshop es el punto de encuentro definitivo para los apasionados del golf en Venezuela.</p>
     </div>
   </header>
 
   <!-- CONTENT SECTION -->
   <main class="about-layout">
     <div class="about-grid">
-      <div class="about-text-content">
+      <div id="about-history-content" class="about-text-content">
         <h3>Pasión por el Juego, Compromiso con tu Rendimiento</h3>
         <p>
           Bienvenidos a <strong>Morsa’s Proshop</strong>, el punto de encuentro definitivo para los apasionados del golf
@@ -684,7 +683,6 @@
           golf de alta precisión, bolsas de diseño profesional, carritos de última tecnología, calzado y ropa de
           rendimiento.
         </p>
-
         <h3>Asesoramiento de Expertos para Expertos</h3>
         <p>
           Creemos que cada swing es único. Por eso, nuestro equipo de asesores profesionales te acompaña de forma
@@ -703,12 +701,12 @@
 
       <div class="about-media">
         <div class="about-media-box">
-          <img src="assets/extracted_img_1.jpg" data-src-fallback="assets/destacado-golf"
+          <img id="about-main-image" src="assets/extracted_img_1.jpg" data-src-fallback="assets/extracted_img_1"
             alt="Morsa's Proshop Golf Layout">
         </div>
         <div class="about-badge-card">
-          <span class="about-badge-val">100%</span>
-          <span class="about-badge-lbl">Pasión Familiar</span>
+          <span id="about-badge-val" class="about-badge-val">100%</span>
+          <span id="about-badge-lbl" class="about-badge-lbl">Pasión Familiar</span>
         </div>
       </div>
     </div>
@@ -935,6 +933,40 @@
         }
         tryLoad();
       });
+
+      // Cargar contenido desde CMS
+      fetch('data/nosotros.json', { cache: 'no-store' })
+        .then(res => {
+          if (!res.ok) throw new Error("No CMS data");
+          return res.json();
+        })
+        .then(data => {
+          if (!data) return;
+          
+          if (data.eyebrow) document.getElementById('about-eyebrow').textContent = data.eyebrow;
+          if (data.title) document.getElementById('about-title').innerHTML = data.title;
+          if (data.subtitle) document.getElementById('about-subtitle').innerHTML = data.subtitle;
+          
+          if (data.history_text && Array.isArray(data.history_text)) {
+            const container = document.getElementById('about-history-content');
+            container.innerHTML = '';
+            data.history_text.forEach(block => {
+              const p = document.createElement('p');
+              p.innerHTML = block.paragraph;
+              container.appendChild(p);
+            });
+          }
+          
+          if (data.main_image) {
+            const img = document.getElementById('about-main-image');
+            img.src = data.main_image;
+            img.setAttribute('data-src-fallback', data.main_image.replace(/\.[^/.]+$/, ""));
+          }
+          
+          if (data.badge_value) document.getElementById('about-badge-val').textContent = data.badge_value;
+          if (data.badge_label) document.getElementById('about-badge-lbl').textContent = data.badge_label;
+        })
+        .catch(err => console.log('Usando contenido estático de nosotros', err));
     });
 
     function handleNewsletterSubmit(event) {

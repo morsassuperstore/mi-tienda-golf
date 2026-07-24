@@ -166,14 +166,6 @@ collections:
                 widget: "string"
                 required: false
                 default: ""
-          - label: "Configuración de Pagos"
-            name: "payment"
-            widget: "object"
-            required: false
-            fields:
-              - label: "Email de Zelle"
-                name: "zelle_email"
-                widget: "string"
           - label: "Productos Destacados del Menú"
             name: "menu_featured"
             widget: "object"
@@ -237,3 +229,126 @@ collections:
               - label: "Logotipo de la Marca"
                 name: "logo"
                 widget: "image"
+
+  - name: "nosotros"
+    label: "Nosotros"
+    description: "Edita el contenido de la página Sobre Nosotros (Historia, imágenes, valores)."
+    delete: false
+    files:
+      - name: "nosotros_page"
+        label: "Contenido de Nosotros"
+        file: "data/nosotros.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Cintillo (Ej: Sobre Nosotros)"
+            name: "eyebrow"
+            widget: "string"
+          - label: "Título Principal"
+            name: "title"
+            widget: "string"
+          - label: "Subtítulo"
+            name: "subtitle"
+            widget: "string"
+          - label: "Historia y Párrafos"
+            name: "history_text"
+            widget: "list"
+            fields:
+              - label: "Párrafo (Puedes usar etiquetas HTML fuertes como <strong>)"
+                name: "paragraph"
+                widget: "text"
+          - label: "Imagen Destacada"
+            name: "main_image"
+            widget: "image"
+          - label: "Insignia de la Imagen (Valor)"
+            name: "badge_value"
+            widget: "string"
+          - label: "Insignia de la Imagen (Etiqueta)"
+            name: "badge_label"
+            widget: "string"
+
+  - name: "configuracion"
+    label: "Configuración de Tienda"
+    description: "Parámetros globales, instrucciones de pago y redes sociales."
+    delete: false
+    files:
+      - name: "store_config"
+        label: "Datos de Tienda y Pagos"
+        file: "data/store_config.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Número de WhatsApp (Sin +, con código de país. Ej: 584128422837)"
+            name: "whatsapp_number"
+            widget: "string"
+          - label: "Monto Mínimo para Envío Gratis (Ref.)"
+            name: "free_shipping_threshold"
+            widget: "number"
+            value_type: "int"
+            default: 100
+          - label: "Costo de Envío (Delivery)"
+            name: "delivery_cost"
+            widget: "number"
+            value_type: "int"
+            default: 3
+          - label: "Tasa de Cambio Manual (Opcional, dejar vacío o 0 si el cajero lo ingresará)"
+            name: "manual_exchange_rate"
+            widget: "number"
+            value_type: "float"
+            required: false
+          - label: "Datos de Pago - Zelle"
+            name: "payment_zelle"
+            widget: "object"
+            fields:
+              - label: "Correo Zelle"
+                name: "email"
+                widget: "string"
+              - label: "Nombre del Titular"
+                name: "name"
+                widget: "string"
+          - label: "Datos de Pago - Venmo"
+            name: "payment_venmo"
+            widget: "object"
+            fields:
+              - label: "Usuario Venmo"
+                name: "user"
+                widget: "string"
+              - label: "Nombre del Titular"
+                name: "name"
+                widget: "string"
+          - label: "Datos de Pago Móvil"
+            name: "payment_pagomovil"
+            widget: "object"
+            fields:
+              - label: "Banco"
+                name: "bank"
+                widget: "string"
+              - label: "Cédula o RIF"
+                name: "id"
+                widget: "string"
+              - label: "Teléfono"
+                name: "phone"
+                widget: "string"
+          - label: "Datos de Binance / USDT"
+            name: "payment_binance"
+            widget: "object"
+            fields:
+              - label: "Binance Pay ID / Correo"
+                name: "pay_id"
+                widget: "string"
+          - label: "Redes Sociales"
+            name: "social_links"
+            widget: "object"
+            fields:
+              - label: "Enlace Instagram"
+                name: "instagram"
+                widget: "string"
+                required: false
+              - label: "Enlace Facebook"
+                name: "facebook"
+                widget: "string"
+                required: false
+              - label: "Enlace Twitter / X"
+                name: "twitter"
+                widget: "string"
+                required: false
