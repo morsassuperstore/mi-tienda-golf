@@ -2909,7 +2909,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       // Cargar contenido dinámico del Home
-      fetch('data/home.json?v=' + new Date().getTime())
+      fetch('data/home.json', { cache: 'no-store' })
         .then(res => res.json())
         .then(data => {
           if (data) {
