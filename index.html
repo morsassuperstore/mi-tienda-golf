@@ -2219,9 +2219,9 @@
     .carousel-wrap {
       position: relative;
       width: 100%;
-      height: 80vh;
-      min-height: 520px;
-      max-height: 850px;
+      height: 88vh;
+      min-height: 480px;
+      max-height: 780px;
       overflow: hidden;
       background: var(--navy-deeper);
       user-select: none;
@@ -2260,7 +2260,7 @@
       position: relative;
       z-index: 3;
       width: 50%;
-      padding: 0 0 0 6%;
+      padding: 0 0 0 80px;
       flex-shrink: 0;
       box-sizing: border-box;
     }
@@ -2488,27 +2488,8 @@
     }
   </style>
 
-  <section class="hero-cinematic">
-    <!-- VIDEO DE FONDO -->
-    <video class="hero-video-bg" id="hero-video" autoplay loop muted playsinline poster="assets/extracted_img_1.jpg">
-      <source id="hero-video-src" src="" type="video/mp4">
-    </video>
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-      <div class="hero-eyebrow" id="hero-eyebrow">Nueva Colección Temporada 2026</div>
-      <h1 class="hero-title" id="hero-title">Juega Tu<br>Mejor <span class="gold">Partido</span></h1>
-      <p class="hero-subtitle" id="hero-subtitle">El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios
-        premium — todo en un solo lugar.</p>
-      <div class="hero-ctas">
-        <a href="tienda.html" class="btn-primary" id="hero-btn-primary">Comprar Ahora →</a>
-        <a href="#sports" class="btn-outline" id="hero-btn-secondary">Explorar Deportes</a>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── CAROUSEL DE BANNERS (DINÁMICO) ─── -->
-  <div class="carousel-wrap" id="heroCarousel" style="display:none;">
+  <div class="carousel-wrap" id="heroCarousel">
     <div class="carousel-track" id="carouselTrack">
       <!-- Los slides se inyectan dinámicamente desde data/home.json -->
     </div>
@@ -3424,67 +3405,21 @@
             const announceEl = document.getElementById('announcement-text');
             if (announceEl) announceEl.textContent = data.announcement_bar;
 
-            // Hero (Banners o Video)
-            const video = document.getElementById('hero-video');
-            const videoSrc = document.getElementById('hero-video-src');
-            const heroCinematic = document.querySelector('.hero-cinematic');
+            // Hero (Carrusel de Banners)
             const heroCarousel = document.getElementById('heroCarousel');
-
-            if (data.hero_video) {
-              // Mostrar video
-              if (heroCarousel) heroCarousel.style.display = 'none';
-              if (heroCinematic) {
-                heroCinematic.style.display = 'flex';
-                // Cargar textos estáticos si existen para el video
-                if (data.hero) {
-                  const eyebrowEl = document.getElementById('hero-eyebrow');
-                  if (eyebrowEl) eyebrowEl.textContent = data.hero.eyebrow;
-
-                  const titleEl = document.getElementById('hero-title');
-                  if (titleEl) titleEl.innerHTML = data.hero.title;
-
-                  const subtitleEl = document.getElementById('hero-subtitle');
-                  if (subtitleEl) subtitleEl.textContent = data.hero.subtitle;
-
-                  const btnPri = document.getElementById('hero-btn-primary');
-                  if (btnPri) {
-                    btnPri.textContent = data.hero.btn_primary_text;
-                    btnPri.href = data.hero.btn_primary_link;
-                  }
-
-                  const btnSec = document.getElementById('hero-btn-secondary');
-                  if (btnSec) {
-                    btnSec.textContent = data.hero.btn_secondary_text;
-                    btnSec.href = data.hero.btn_secondary_link;
-                  }
-                }
-              }
-              if (video) video.style.display = 'block';
-              if (videoSrc) {
-                const videoPath = data.hero_video;
-                if (videoSrc.getAttribute('src') !== videoPath) {
-                  videoSrc.src = videoPath;
-                  video.load();
-                }
-              }
-            } else if (data.hero_banners && data.hero_banners.length > 0) {
-              // Mostrar carrusel
-              if (video) video.style.display = 'none';
-              if (heroCinematic) heroCinematic.style.display = 'none';
+            if (data.hero_banners && data.hero_banners.length > 0) {
               if (heroCarousel) {
                 heroCarousel.style.display = 'block';
                 renderHeroCarousel(data.hero_banners);
               }
             } else {
-              // Fallback: mostrar al menos la estructura cinemática estática con la primera imagen
-              if (heroCarousel) heroCarousel.style.display = 'none';
-              if (heroCinematic) {
-                heroCinematic.style.display = 'flex';
-                heroCinematic.style.backgroundImage = "url('assets/extracted_img_1.jpg')";
-                heroCinematic.style.backgroundSize = 'cover';
-                heroCinematic.style.backgroundPosition = 'center';
+              if (heroCarousel) {
+                heroCarousel.innerHTML = `
+                  <div style="text-align:center;padding:120px 20px;color:rgba(255,255,255,0.7);background:var(--navy-deeper);font-family:\'Barlow Condensed\',sans-serif;font-size:18px;">
+                    No hay banners cargados en la base de datos de inicio.
+                  </div>
+                `;
               }
-              if (video) video.style.display = 'none';
             }
 
             // Sports (Counts & Images)
