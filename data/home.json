@@ -2,43 +2,43 @@
   "announcement_bar": "Envío gratis en pedidos mayores de €100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra",
   "hero_banners": [
     {
-      "image_desktop": "assets/extracted_img_1.jpg",
       "image_mobile": "assets/extracted_img_1.jpg",
-      "link": "tienda.html",
+      "btn_secondary_link": "#sports",
       "alt": "Nueva Colección 2026",
       "eyebrow": "Nueva Colección Temporada 2026",
-      "title": "Juega Tu<br>Mejor <span class=\"gold\">Partido</span>",
-      "subtitle": "El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios premium — todo en un solo lugar.",
       "btn_primary_text": "Comprar Ahora →",
+      "subtitle": "El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios premium — todo en un solo lugar.",
+      "image_desktop": "assets/extracted_img_1.jpg",
+      "title": "Juega Tu<br>Mejor <span class=\"gold\">Partido</span>",
       "btn_primary_link": "tienda.html",
-      "btn_secondary_text": "Explorar Deportes",
-      "btn_secondary_link": "#sports"
+      "link": "tienda.html",
+      "btn_secondary_text": "Explorar Deportes"
     },
     {
-      "image_desktop": "assets/card-golf.webp",
       "image_mobile": "assets/card-golf.webp",
-      "link": "tienda.html?sport=golf",
+      "btn_secondary_link": "tienda.html?sport=golf&cat=accesorios",
       "alt": "Los Mejores Palos",
       "eyebrow": "Equipamiento de Alto Rendimiento",
-      "title": "Los Mejores<br><span class=\"gold\">Palos</span> del Mercado",
-      "subtitle": "Drivers, hierros, putters y más de marcas líderes como TaylorMade, Callaway y Titleist.",
       "btn_primary_text": "Ver Palos →",
+      "subtitle": "Drivers, hierros, putters y más de marcas líderes como TaylorMade, Callaway y Titleist.",
+      "image_desktop": "assets/card-golf.webp",
+      "title": "Los Mejores<br><span class=\"gold\">Palos</span> del Mercado",
       "btn_primary_link": "tienda.html?cat=palos",
-      "btn_secondary_text": "Accesorios de Golf",
-      "btn_secondary_link": "tienda.html?sport=golf&cat=accesorios"
+      "link": "tienda.html?sport=golf",
+      "btn_secondary_text": "Accesorios de Golf"
     },
     {
-      "image_desktop": "assets/card-padel.jpg",
       "image_mobile": "assets/card-padel.jpg",
-      "link": "tienda.html?sport=padel",
+      "btn_secondary_link": "",
       "alt": "Domina la Cancha",
       "eyebrow": "Colección Pádel & Tenis",
-      "title": "Domina la<br><span class=\"gold\">Cancha</span> con Estilo",
-      "subtitle": "Descubre las palas y raquetas más avanzadas del mercado, calzado especializado y conjuntos deportivos premium.",
       "btn_primary_text": "Ver Equipamiento →",
+      "subtitle": "Descubre las palas y raquetas más avanzadas del mercado, calzado especializado y conjuntos deportivos premium.",
+      "image_desktop": "assets/card-padel.jpg",
+      "title": "Domina la<br><span class=\"gold\">Cancha</span> con Estilo",
       "btn_primary_link": "tienda.html?sport=padel",
-      "btn_secondary_text": "",
-      "btn_secondary_link": ""
+      "link": "tienda.html?sport=padel",
+      "btn_secondary_text": ""
     }
   ],
   "sports": {
@@ -76,7 +76,7 @@
     "image": "assets/extracted_img_2.jpg",
     "tech_badge": "Foresight Sports GCQuad",
     "btn_primary_text": "Reservar Sesión",
-    "btn_primary_link": "https://wa.me/584128422837?text=Hola,%20me%20gustar%C3%ADa%20agendar%20un%20Fitting%20de%20Palos%20de%20Golf%20en%20el%20simulador."
+    "btn_primary_link": "https://wa.me/584128422837?text=Hola, me gustaría reservar una sesión en el simulador de golf"
   },
   "payment": {
     "zelle_email": "pagos@morsasgolf.com"
@@ -108,13 +108,37 @@
     }
   ],
   "brands": [
-    { "name": "Greg Norman", "logo": "assets/extracted_img_7.png" },
-    { "name": "Mizuno", "logo": "assets/extracted_img_8.png" },
-    { "name": "Callaway", "logo": "assets/extracted_img_9.png" },
-    { "name": "Wilson", "logo": "assets/extracted_img_10.webp" },
-    { "name": "New Balance", "logo": "assets/extracted_img_11.png" },
-    { "name": "Ping", "logo": "assets/extracted_img_12.jpg" },
-    { "name": "Nippon Shaft", "logo": "assets/extracted_img_13.jpg" },
-    { "name": "Big Max", "logo": "assets/bigmax.png" }
+    {
+      "name": "Greg Norman",
+      "logo": "assets/extracted_img_7.png"
+    },
+    {
+      "name": "Mizuno",
+      "logo": "assets/extracted_img_8.png"
+    },
+    {
+      "name": "Callaway",
+      "logo": "assets/extracted_img_9.png"
+    },
+    {
+      "name": "Wilson",
+      "logo": "assets/extracted_img_10.webp"
+    },
+    {
+      "name": "New Balance",
+      "logo": "assets/extracted_img_11.png"
+    },
+    {
+      "name": "Ping",
+      "logo": "assets/extracted_img_12.jpg"
+    },
+    {
+      "name": "Nippon Shaft",
+      "logo": "assets/extracted_img_13.jpg"
+    },
+    {
+      "name": "Big Max",
+      "logo": "assets/bigmax.png"
+    }
   ]
 }
