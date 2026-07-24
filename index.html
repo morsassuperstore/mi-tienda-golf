@@ -2215,6 +2215,271 @@
       }
     }
 
+    /* ─── CAROUSEL HERO ─── */
+    .carousel-wrap {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      min-height: 520px;
+      max-height: 850px;
+      overflow: hidden;
+      background: var(--navy-deeper);
+      user-select: none;
+    }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      justify-content: space-between;
+      background: linear-gradient(120deg, #090f40 0%, #132070 50%, #060a2e 100%);
+    }
+
+    .carousel-slide-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(245,166,35,0.02) 0px, rgba(245,166,35,0.02) 1px, transparent 1px, transparent 60px),
+        repeating-linear-gradient(-45deg, rgba(245,166,35,0.02) 0px, rgba(245,166,35,0.02) 1px, transparent 1px, transparent 60px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .carousel-slide-content {
+      position: relative;
+      z-index: 3;
+      width: 50%;
+      padding: 0 0 0 6%;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .carousel-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+    }
+
+    .carousel-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .carousel-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 7vw, 105px);
+      line-height: 0.95;
+      color: var(--white);
+      margin-bottom: 24px;
+      max-width: 700px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
+    }
+
+    .carousel-title .gold { color: var(--gold); }
+
+    .carousel-subtitle {
+      font-size: clamp(15px, 1.8vw, 20px);
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+      max-width: 520px;
+      margin-bottom: 36px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+    }
+
+    .carousel-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+    }
+
+    /* Active slide transitions */
+    .carousel-slide.active .carousel-eyebrow,
+    .carousel-slide.active .carousel-title,
+    .carousel-slide.active .carousel-subtitle,
+    .carousel-slide.active .carousel-ctas {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Image area (right side) */
+    .carousel-img-placeholder {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      background: rgba(255,255,255,0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.6s ease 0.3s;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .carousel-slide.active .carousel-img-placeholder { opacity: 1; }
+
+    .carousel-slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: transform 8s ease;
+    }
+
+    .carousel-slide.active .carousel-slide-img {
+      transform: scale(1.05);
+    }
+
+    /* Arrow buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(10, 12, 60, 0.6);
+      border: 1px solid rgba(245, 166, 35, 0.3);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--white);
+      font-size: 20px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    }
+
+    .carousel-btn:hover {
+      background: var(--gold);
+      color: var(--navy-deeper);
+      border-color: var(--gold);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-btn-prev { left: 24px; }
+    .carousel-btn-next { right: 24px; }
+
+    /* Dots */
+    .carousel-dots {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s, width 0.25s;
+      border: none;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--gold);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Progress bar */
+    .carousel-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--gold);
+      z-index: 10;
+      width: 0%;
+      transition: width linear;
+    }
+
+    /* RESPONSIVITY FOR CAROUSEL */
+    @media (max-width: 991px) {
+      .carousel-wrap {
+        height: 75vh;
+        min-height: 480px;
+      }
+      .carousel-slide {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .carousel-slide-content {
+        width: 100%;
+        padding: 0 24px;
+        z-index: 3;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      .carousel-img-placeholder {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      .carousel-slide-img {
+        opacity: 0.45;
+      }
+      .carousel-slide::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(10, 12, 60, 0.95) 0%, rgba(10, 12, 60, 0.6) 50%, rgba(10, 12, 60, 0.3) 100%);
+        z-index: 2;
+        pointer-events: none;
+      }
+      .carousel-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+      }
+      .carousel-btn-prev { left: 12px; }
+      .carousel-btn-next { right: 12px; }
+    }
+
     /* ── FIX SUBMENU BACKGROUND ── */
     .mega-menu,
     .dropdown-menu {
@@ -2226,7 +2491,7 @@
   <section class="hero-cinematic">
     <!-- VIDEO DE FONDO -->
     <video class="hero-video-bg" id="hero-video" autoplay loop muted playsinline poster="assets/extracted_img_1.jpg">
-      <source id="hero-video-src" src="assets/hero-video.mp4" type="video/mp4">
+      <source id="hero-video-src" src="" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
 
@@ -2241,6 +2506,23 @@
       </div>
     </div>
   </section>
+
+  <!-- ─── CAROUSEL DE BANNERS (DINÁMICO) ─── -->
+  <div class="carousel-wrap" id="heroCarousel" style="display:none;">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- Los slides se inyectan dinámicamente desde data/home.json -->
+    </div>
+    
+    <!-- Botones de Navegación -->
+    <button class="carousel-btn carousel-btn-prev" onclick="carouselMove(-1)" aria-label="Banner Anterior" title="Anterior">←</button>
+    <button class="carousel-btn carousel-btn-next" onclick="carouselMove(1)" aria-label="Banner Siguiente" title="Siguiente">→</button>
+    
+    <!-- Indicadores (Puntos) -->
+    <div class="carousel-dots" id="carouselDots"></div>
+    
+    <!-- Barra de Progreso -->
+    <div class="carousel-progress" id="carouselProgress"></div>
+  </div>
 
   <!-- ─── BRANDS ─── -->
   <div class="features-bg" style="background:#fff;border-bottom:1px solid #eee;">
@@ -2908,6 +3190,230 @@
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script>
+    let currentHeroSlide = 0;
+    let heroAutoplayTimer = null;
+    const HERO_AUTO_DELAY = 8000;
+
+    function handleResponsiveImages() {
+      const isMobile = window.innerWidth <= 768;
+      document.querySelectorAll('.carousel-slide-img').forEach(img => {
+        const mobileSrc = img.getAttribute('data-mobile-src');
+        const desktopSrc = img.src;
+        if (isMobile && mobileSrc) {
+          if (img.getAttribute('data-desktop-src') === null) {
+            img.setAttribute('data-desktop-src', desktopSrc);
+          }
+          if (img.src !== mobileSrc) {
+            img.src = mobileSrc;
+          }
+        } else {
+          const storedDesktopSrc = img.getAttribute('data-desktop-src');
+          if (storedDesktopSrc && img.src !== storedDesktopSrc) {
+            img.src = storedDesktopSrc;
+          }
+        }
+      });
+    }
+    window.addEventListener('resize', handleResponsiveImages);
+
+    function handleHeroKeyboard(e) {
+      if (e.key === 'ArrowLeft') goToSlide(currentHeroSlide - 1);
+      if (e.key === 'ArrowRight') goToSlide(currentHeroSlide + 1);
+    }
+
+    function goToSlide(index) {
+      const track = document.getElementById('carouselTrack');
+      if (!track) return;
+      
+      const slides = track.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const total = slides.length;
+      
+      if (total <= 1) return;
+      
+      slides[currentHeroSlide].classList.remove('active');
+      if (dots[currentHeroSlide]) dots[currentHeroSlide].classList.remove('active');
+      
+      currentHeroSlide = (index + total) % total;
+      
+      slides[currentHeroSlide].classList.add('active');
+      if (dots[currentHeroSlide]) dots[currentHeroSlide].classList.add('active');
+      
+      track.style.transform = 'translateX(-' + (currentHeroSlide * 100) + '%)';
+      
+      resetHeroAutoplay();
+    }
+
+    function resetHeroAutoplay() {
+      const progress = document.getElementById('carouselProgress');
+      
+      clearInterval(heroAutoplayTimer);
+      heroAutoplayTimer = setInterval(function() {
+        goToSlide(currentHeroSlide + 1);
+      }, HERO_AUTO_DELAY);
+      
+      if (progress) {
+        progress.style.transition = 'none';
+        progress.style.width = '0%';
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            progress.style.transition = 'width ' + HERO_AUTO_DELAY + 'ms linear';
+            progress.style.width = '100%';
+          });
+        });
+      }
+    }
+
+    window.carouselMove = function(dir) {
+      goToSlide(currentHeroSlide + dir);
+    };
+
+    function initHeroCarousel(totalSlides) {
+      const prevBtn = document.querySelector('.carousel-btn-prev');
+      const nextBtn = document.querySelector('.carousel-btn-next');
+      const dotsContainer = document.getElementById('carouselDots');
+      const progress = document.getElementById('carouselProgress');
+      
+      currentHeroSlide = 0;
+      
+      if (totalSlides <= 1) {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        if (dotsContainer) dotsContainer.style.display = 'none';
+        if (progress) progress.style.display = 'none';
+        return;
+      }
+      
+      if (prevBtn) prevBtn.style.display = 'flex';
+      if (nextBtn) nextBtn.style.display = 'flex';
+      if (dotsContainer) dotsContainer.style.display = 'flex';
+      if (progress) progress.style.display = 'block';
+      
+      resetHeroAutoplay();
+      
+      document.removeEventListener('keydown', handleHeroKeyboard);
+      document.addEventListener('keydown', handleHeroKeyboard);
+      
+      const track = document.getElementById('carouselTrack');
+      if (track) {
+        let touchStartX = 0;
+        track.addEventListener('touchstart', function(e) {
+          touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        
+        track.addEventListener('touchend', function(e) {
+          const diff = touchStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) {
+            goToSlide(currentHeroSlide + (diff > 0 ? 1 : -1));
+          }
+        });
+      }
+
+      // Inicializar imágenes adaptativas
+      handleResponsiveImages();
+    }
+
+    function renderHeroCarousel(banners) {
+      const track = document.getElementById('carouselTrack');
+      const dotsContainer = document.getElementById('carouselDots');
+      
+      if (!track) return;
+      
+      track.innerHTML = '';
+      if (dotsContainer) dotsContainer.innerHTML = '';
+      
+      banners.forEach((banner, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide' + (i === 0 ? ' active' : '');
+        
+        const pattern = document.createElement('div');
+        pattern.className = 'carousel-slide-pattern';
+        slide.appendChild(pattern);
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'carousel-slide-content';
+        
+        if (banner.eyebrow) {
+          const eyebrow = document.createElement('div');
+          eyebrow.className = 'carousel-eyebrow';
+          eyebrow.textContent = banner.eyebrow;
+          contentDiv.appendChild(eyebrow);
+        }
+        
+        if (banner.title) {
+          const title = document.createElement('h1');
+          title.className = 'carousel-title';
+          title.innerHTML = banner.title;
+          contentDiv.appendChild(title);
+        }
+        
+        if (banner.subtitle) {
+          const subtitle = document.createElement('p');
+          subtitle.className = 'carousel-subtitle';
+          subtitle.textContent = banner.subtitle;
+          contentDiv.appendChild(subtitle);
+        }
+        
+        const ctas = document.createElement('div');
+        ctas.className = 'carousel-ctas';
+        
+        if (banner.btn_primary_text && banner.btn_primary_link) {
+          const btnPri = document.createElement('a');
+          btnPri.className = 'btn-primary';
+          btnPri.textContent = banner.btn_primary_text;
+          btnPri.href = banner.btn_primary_link;
+          ctas.appendChild(btnPri);
+        } else if (banner.link) {
+          const btnPri = document.createElement('a');
+          btnPri.className = 'btn-primary';
+          btnPri.textContent = 'Ver Más →';
+          btnPri.href = banner.link;
+          ctas.appendChild(btnPri);
+        }
+        
+        if (banner.btn_secondary_text && banner.btn_secondary_link) {
+          const btnSec = document.createElement('a');
+          btnSec.className = 'btn-outline';
+          btnSec.textContent = banner.btn_secondary_text;
+          btnSec.href = banner.btn_secondary_link;
+          ctas.appendChild(btnSec);
+        }
+        
+        if (ctas.children.length > 0) {
+          contentDiv.appendChild(ctas);
+        }
+        
+        slide.appendChild(contentDiv);
+        
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'carousel-img-placeholder';
+        
+        const img = document.createElement('img');
+        img.className = 'carousel-slide-img';
+        img.src = banner.image_desktop;
+        img.alt = banner.alt || 'Morsas Proshop Banner';
+        
+        if (banner.image_mobile) {
+          img.setAttribute('data-mobile-src', banner.image_mobile);
+        }
+        
+        imgDiv.appendChild(img);
+        slide.appendChild(imgDiv);
+        
+        track.appendChild(slide);
+        
+        if (dotsContainer) {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Ir al banner ' + (i + 1));
+          dot.addEventListener('click', function() { goToSlide(i); });
+          dotsContainer.appendChild(dot);
+        }
+      });
+      
+      initHeroCarousel(banners.length);
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       // Cargar contenido dinámico del Home
       fetch('data/home.json', { cache: 'no-store' })
@@ -2918,50 +3424,67 @@
             const announceEl = document.getElementById('announcement-text');
             if (announceEl) announceEl.textContent = data.announcement_bar;
 
-            // Hero
-            if (data.hero) {
-              const eyebrowEl = document.getElementById('hero-eyebrow');
-              if (eyebrowEl) eyebrowEl.textContent = data.hero.eyebrow;
-
-              const titleEl = document.getElementById('hero-title');
-              if (titleEl) titleEl.innerHTML = data.hero.title;
-
-              const subtitleEl = document.getElementById('hero-subtitle');
-              if (subtitleEl) subtitleEl.textContent = data.hero.subtitle;
-
-              const btnPri = document.getElementById('hero-btn-primary');
-              if (btnPri) {
-                btnPri.textContent = data.hero.btn_primary_text;
-                btnPri.href = data.hero.btn_primary_link;
-              }
-
-              const btnSec = document.getElementById('hero-btn-secondary');
-              if (btnSec) {
-                btnSec.textContent = data.hero.btn_secondary_text;
-                btnSec.href = data.hero.btn_secondary_link;
-              }
-            }
-
             // Hero (Banners o Video)
             const video = document.getElementById('hero-video');
             const videoSrc = document.getElementById('hero-video-src');
             const heroCinematic = document.querySelector('.hero-cinematic');
+            const heroCarousel = document.getElementById('heroCarousel');
 
-            if (data.hero_banners && data.hero_banners.length > 0 && data.hero_banners[0].image_desktop) {
-              const banner = data.hero_banners[0];
-              if (video) video.style.display = 'none';
+            if (data.hero_video) {
+              // Mostrar video
+              if (heroCarousel) heroCarousel.style.display = 'none';
               if (heroCinematic) {
-                heroCinematic.style.backgroundImage = `url('${banner.image_desktop}')`;
+                heroCinematic.style.display = 'flex';
+                // Cargar textos estáticos si existen para el video
+                if (data.hero) {
+                  const eyebrowEl = document.getElementById('hero-eyebrow');
+                  if (eyebrowEl) eyebrowEl.textContent = data.hero.eyebrow;
+
+                  const titleEl = document.getElementById('hero-title');
+                  if (titleEl) titleEl.innerHTML = data.hero.title;
+
+                  const subtitleEl = document.getElementById('hero-subtitle');
+                  if (subtitleEl) subtitleEl.textContent = data.hero.subtitle;
+
+                  const btnPri = document.getElementById('hero-btn-primary');
+                  if (btnPri) {
+                    btnPri.textContent = data.hero.btn_primary_text;
+                    btnPri.href = data.hero.btn_primary_link;
+                  }
+
+                  const btnSec = document.getElementById('hero-btn-secondary');
+                  if (btnSec) {
+                    btnSec.textContent = data.hero.btn_secondary_text;
+                    btnSec.href = data.hero.btn_secondary_link;
+                  }
+                }
+              }
+              if (video) video.style.display = 'block';
+              if (videoSrc) {
+                const videoPath = data.hero_video;
+                if (videoSrc.getAttribute('src') !== videoPath) {
+                  videoSrc.src = videoPath;
+                  video.load();
+                }
+              }
+            } else if (data.hero_banners && data.hero_banners.length > 0) {
+              // Mostrar carrusel
+              if (video) video.style.display = 'none';
+              if (heroCinematic) heroCinematic.style.display = 'none';
+              if (heroCarousel) {
+                heroCarousel.style.display = 'block';
+                renderHeroCarousel(data.hero_banners);
+              }
+            } else {
+              // Fallback: mostrar al menos la estructura cinemática estática con la primera imagen
+              if (heroCarousel) heroCarousel.style.display = 'none';
+              if (heroCinematic) {
+                heroCinematic.style.display = 'flex';
+                heroCinematic.style.backgroundImage = "url('assets/extracted_img_1.jpg')";
                 heroCinematic.style.backgroundSize = 'cover';
                 heroCinematic.style.backgroundPosition = 'center';
               }
-            } else if (video && videoSrc) {
-              const videoPath = data.hero_video || (data.hero && data.hero.video_bg) || 'assets/hero-video.mp4';
-              video.style.display = 'block';
-              if (videoSrc.getAttribute('src') !== videoPath) {
-                videoSrc.src = videoPath;
-                video.load();
-              }
+              if (video) video.style.display = 'none';
             }
 
             // Sports (Counts & Images)

@@ -54,6 +54,41 @@ collections:
                 widget: "string"
                 required: false
                 default: ""
+              - label: "Cintillo del Banner (Opcional - Eyebrow)"
+                name: "eyebrow"
+                widget: "string"
+                required: false
+                default: ""
+              - label: "Título Principal (Opcional - Soporta HTML como <br>)"
+                name: "title"
+                widget: "string"
+                required: false
+                default: ""
+              - label: "Subtítulo / Descripción (Opcional)"
+                name: "subtitle"
+                widget: "string"
+                required: false
+                default: ""
+              - label: "Texto de Botón Principal (Opcional)"
+                name: "btn_primary_text"
+                widget: "string"
+                required: false
+                default: ""
+              - label: "Enlace de Botón Principal (Opcional)"
+                name: "btn_primary_link"
+                widget: "string"
+                required: false
+                default: ""
+              - label: "Texto de Botón Secundario (Opcional)"
+                name: "btn_secondary_text"
+                widget: "string"
+                required: false
+                default: ""
+              - label: "Enlace de Botón Secundario (Opcional)"
+                name: "btn_secondary_link"
+                widget: "string"
+                required: false
+                default: ""
           - label: "Sección Deportes (Conteo e Imágenes)"
             name: "sports"
             widget: "object"

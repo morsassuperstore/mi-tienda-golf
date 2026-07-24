@@ -6,7 +6,40 @@
       "image_desktop": "assets/extracted_img_1.jpg",
       "image_mobile": "assets/extracted_img_1.jpg",
       "link": "tienda.html",
-      "alt": "Nueva Colección 2026"
+      "alt": "Nueva Colección 2026",
+      "eyebrow": "Nueva Colección Temporada 2026",
+      "title": "Juega Tu<br>Mejor <span class=\"gold\">Partido</span>",
+      "subtitle": "El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios premium — todo en un solo lugar.",
+      "btn_primary_text": "Comprar Ahora →",
+      "btn_primary_link": "tienda.html",
+      "btn_secondary_text": "Explorar Deportes",
+      "btn_secondary_link": "#sports"
+    },
+    {
+      "image_desktop": "assets/card-golf.webp",
+      "image_mobile": "assets/card-golf.webp",
+      "link": "tienda.html?sport=golf",
+      "alt": "Los Mejores Palos",
+      "eyebrow": "Equipamiento de Alto Rendimiento",
+      "title": "Los Mejores<br><span class=\"gold\">Palos</span> del Mercado",
+      "subtitle": "Drivers, hierros, putters y más de marcas líderes como TaylorMade, Callaway y Titleist.",
+      "btn_primary_text": "Ver Palos →",
+      "btn_primary_link": "tienda.html?cat=palos",
+      "btn_secondary_text": "Accesorios de Golf",
+      "btn_secondary_link": "tienda.html?sport=golf&cat=accesorios"
+    },
+    {
+      "image_desktop": "assets/card-padel.jpg",
+      "image_mobile": "assets/card-padel.jpg",
+      "link": "tienda.html?sport=padel",
+      "alt": "Domina la Cancha",
+      "eyebrow": "Colección Pádel & Tenis",
+      "title": "Domina la<br><span class=\"gold\">Cancha</span> con Estilo",
+      "subtitle": "Descubre las palas y raquetas más avanzadas del mercado, calzado especializado y conjuntos deportivos premium.",
+      "btn_primary_text": "Ver Equipamiento →",
+      "btn_primary_link": "tienda.html?sport=padel",
+      "btn_secondary_text": "",
+      "btn_secondary_link": ""
     }
   ],
   "sports": {
