@@ -1,5 +1,4 @@
 {
-  "announcement_bar": "Envío gratis en pedidos mayores de €100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra",
   "hero_banners": [
     {
       "image_mobile": "assets/extracted_img_1.jpg",
@@ -8,7 +7,7 @@
       "eyebrow": "Nueva Colección Temporada 2026",
       "btn_primary_text": "Comprar Ahora →",
       "subtitle": "El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios premium — todo en un solo lugar.",
-      "image_desktop": "assets/extracted_img_1.jpg",
+      "image_desktop": "assets/extracted_img_5.webp",
       "title": "Juega Tu<br>Mejor <span class=\"gold\">Partido</span>",
       "btn_primary_link": "tienda.html",
       "link": "tienda.html",
@@ -41,38 +40,6 @@
       "btn_secondary_text": ""
     }
   ],
-  "sports": {
-    "golf_count": "200+ productos · Equipos y Ropa",
-    "golf_image": "assets/card-golf.webp",
-    "padel_count": "150+ productos · Palas y Accesorios",
-    "padel_image": "assets/card-padel.jpg",
-    "tenis_count": "120+ productos · Raquetas y Ropa",
-    "tenis_image": "assets/card-tenis.jpg"
-  },
-  "gender_collections": {
-    "men_image": "assets/gender-men.jpg",
-    "women_image": "assets/gender-women.jpg"
-  },
-  "menu_featured": {
-    "golf": {
-      "label": "Destacado",
-      "title": "Driver Stealth 2 TaylorMade",
-      "image": "assets/destacado-golf.jpg",
-      "link": "tienda.html?cat=palos&sub=drivers"
-    },
-    "padel": {
-      "label": "Top ventas",
-      "title": "Blade V10 Wilson",
-      "image": "assets/destacado-padel.jpg",
-      "link": "tienda.html?sport=padel"
-    },
-    "tenis": {
-      "label": "Top ventas",
-      "title": "Pure Drive Babolat",
-      "image": "assets/destacado-tenis.jpg",
-      "link": "tienda.html?sport=tenis"
-    }
-  },
   "simulator": {
     "eyebrow": "Experiencia Exclusiva en Caracas",
     "title": "Prueba Tu Swing en Nuestro<br><span class=\"gold\">Simulador de Golf Profesional</span>",
@@ -85,32 +52,6 @@
   "payment": {
     "zelle_email": "pagos@morsasgolf.com"
   },
-  "locations": [
-    {
-      "badge": "📍 Caracas",
-      "name": "La Tahona",
-      "address": "Complejo Avepane, La Tahona, Caracas, Venezuela",
-      "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.1!2d-66.857051!3d10.4409292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af7003a977cdb%3A0x58e61e9c9877dd15!2sMorsas%20Superstore!5e0!3m2!1ses!2sve!4v1700000000000",
-      "directions_link": "https://www.google.com/maps/place/Morsas+Superstore/@10.4409292,-66.857051,17z",
-      "hours": "Lunes a Sábado: 10:00am – 7:00pm"
-    },
-    {
-      "badge": "📍 El Hatillo",
-      "name": "La Lagunita Country Club",
-      "address": "La Lagunita Country Club, El Hatillo, Caracas, Venezuela",
-      "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.5!2d-66.8095085!3d10.4239054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af78a4783be17%3A0x89d3255d8f11fc2a!2sLagunita%20Country%20Club!5e0!3m2!1ses!2sve!4v1700000000001",
-      "directions_link": "https://www.google.com/maps/place/Lagunita+Country+Club/@10.4239054,-66.8095085,17z",
-      "hours": ""
-    },
-    {
-      "badge": "📍 Guatire",
-      "name": "Izcaragua Country Club",
-      "address": "Izcaragua Country Club, Guatire, Miranda, Venezuela",
-      "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.5!2d-66.6905314!3d10.4790032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a55ca952675ef%3A0x106b1693db6da309!2sIzcaragua%20Country%20Club!5e0!3m2!1ses!2sve!4v1700000000002",
-      "directions_link": "https://www.google.com/maps/place/Izcaragua+Country+Club/@10.4790032,-66.6905314,17z",
-      "hours": ""
-    }
-  ],
   "brands": [
     {
       "name": "Greg Norman",
@@ -144,5 +85,64 @@
       "name": "Big Max",
       "logo": "assets/bigmax.png"
     }
-  ]
+  ],
+  "menu_featured": {
+    "golf": {
+      "label": "Destacado",
+      "title": "Driver Stealth 2 TaylorMade",
+      "image": "assets/destacado-golf.jpg",
+      "link": "tienda.html?cat=palos&sub=drivers"
+    },
+    "padel": {
+      "label": "Top ventas",
+      "title": "Blade V10 Wilson",
+      "image": "assets/destacado-padel.jpg",
+      "link": "tienda.html?sport=padel"
+    },
+    "tenis": {
+      "label": "Top ventas",
+      "title": "Pure Drive Babolat",
+      "image": "assets/destacado-tenis.jpg",
+      "link": "tienda.html?sport=tenis"
+    }
+  },
+  "gender_collections": {
+    "men_image": "assets/gender-men.jpg",
+    "women_image": "assets/gender-women.jpg"
+  },
+  "announcement_bar": "Envío gratis en pedidos mayores de €100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra",
+  "locations": [
+    {
+      "badge": "📍 Caracas",
+      "name": "La Tahona",
+      "address": "Complejo Avepane, La Tahona, Caracas, Venezuela",
+      "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.1!2d-66.857051!3d10.4409292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af7003a977cdb%3A0x58e61e9c9877dd15!2sMorsas%20Superstore!5e0!3m2!1ses!2sve!4v1700000000000",
+      "directions_link": "https://www.google.com/maps/place/Morsas+Superstore/@10.4409292,-66.857051,17z",
+      "hours": "Lunes a Sábado: 10:00am – 7:00pm"
+    },
+    {
+      "badge": "📍 El Hatillo",
+      "name": "La Lagunita Country Club",
+      "address": "La Lagunita Country Club, El Hatillo, Caracas, Venezuela",
+      "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.5!2d-66.8095085!3d10.4239054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af78a4783be17%3A0x89d3255d8f11fc2a!2sLagunita%20Country%20Club!5e0!3m2!1ses!2sve!4v1700000000001",
+      "directions_link": "https://www.google.com/maps/place/Lagunita+Country+Club/@10.4239054,-66.8095085,17z",
+      "hours": ""
+    },
+    {
+      "badge": "📍 Guatire",
+      "name": "Izcaragua Country Club",
+      "address": "Izcaragua Country Club, Guatire, Miranda, Venezuela",
+      "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.5!2d-66.6905314!3d10.4790032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a55ca952675ef%3A0x106b1693db6da309!2sIzcaragua%20Country%20Club!5e0!3m2!1ses!2sve!4v1700000000002",
+      "directions_link": "https://www.google.com/maps/place/Izcaragua+Country+Club/@10.4790032,-66.6905314,17z",
+      "hours": ""
+    }
+  ],
+  "sports": {
+    "golf_count": "200+ productos · Equipos y Ropa",
+    "golf_image": "assets/card-golf.webp",
+    "padel_count": "150+ productos · Palas y Accesorios",
+    "padel_image": "assets/card-padel.jpg",
+    "tenis_count": "120+ productos · Raquetas y Ropa",
+    "tenis_image": "assets/card-tenis.jpg"
+  }
 }
