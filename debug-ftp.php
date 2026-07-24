@@ -1,14 +1,18 @@
 <?php
 header('Content-Type: text/plain');
 echo "FTP Deploy Debug Info:\n";
-echo "Current File Path: " . __FILE__ . "\n";
 echo "Current Directory: " . __DIR__ . "\n";
-echo "PHP Version: " . phpversion() . "\n";
-echo "Files in this directory:\n";
-$files = scandir(__DIR__);
-foreach ($files as $file) {
-    if ($file != '.' && $file != '..') {
-        echo "  - $file (" . date("F d Y H:i:s.", filemtime($file)) . ")\n";
-    }
+
+$json_path = __DIR__ . '/data/home.json';
+if (file_exists($json_path)) {
+    echo "data/home.json exists.\n";
+    echo "Last Modified: " . date("F d Y H:i:s.", filemtime($json_path)) . "\n";
+    echo "Size: " . filesize($json_path) . " bytes\n";
+    echo "Is Readable: " . (is_readable($json_path) ? 'Yes' : 'No') . "\n";
+    echo "File Contents:\n";
+    $content = file_get_contents($json_path);
+    echo $content . "\n";
+} else {
+    echo "data/home.json does NOT exist!\n";
 }
 ?>
