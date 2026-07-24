@@ -1,6 +1,6 @@
 {
   "announcement_bar": "Envío gratis en pedidos mayores de €100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra",
-  "hero_video": "",
+  "hero_video": "assets/hero-video.mp4",
   "hero_banners": [
     {
       "image_desktop": "assets/extracted_img_1.jpg",
