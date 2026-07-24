@@ -3549,30 +3549,34 @@
                 </div>
               `).join('');
             }
+
+            // Logotipos de Marcas (Loop)
+            const brandContainer = document.getElementById('brand-logos-container');
+            if (brandContainer) {
+              const brandsList = data.brands || (typeof CONFIG !== 'undefined' ? CONFIG.BRANDS : []);
+              if (brandsList && brandsList.length > 0) {
+                let track1HTML = '<div class="brand-logos-track">';
+                let track2HTML = '<div class="brand-logos-track" aria-hidden="true">';
+
+                brandsList.forEach(brand => {
+                  const itemHTML = `
+                    <div class="brand-logo-item">
+                      <img src="${brand.logo}" alt="${brand.name}" style="max-width:100%;max-height:36px;object-fit:contain;filter:grayscale(100%);opacity:0.65;transition:filter .2s,opacity .2s;">
+                    </div>
+                  `;
+                  track1HTML += itemHTML;
+                  track2HTML += itemHTML;
+                });
+
+                track1HTML += '</div>';
+                track2HTML += '</div>';
+
+                brandContainer.innerHTML = track1HTML + track2HTML;
+              }
+            }
           }
         })
         .catch(err => console.error('Error al cargar contenido dinámico:', err));
-
-      const container = document.getElementById('brand-logos-container');
-      if (container && typeof CONFIG !== 'undefined' && CONFIG.BRANDS) {
-        let track1HTML = '<div class="brand-logos-track">';
-        let track2HTML = '<div class="brand-logos-track" aria-hidden="true">';
-
-        CONFIG.BRANDS.forEach(brand => {
-          const itemHTML = `
-            <div class="brand-logo-item">
-              <img src="${brand.logo}" alt="${brand.name}" style="max-width:100%;max-height:36px;object-fit:contain;filter:grayscale(100%);opacity:0.65;transition:filter .2s,opacity .2s;">
-            </div>
-          `;
-          track1HTML += itemHTML;
-          track2HTML += itemHTML;
-        });
-
-        track1HTML += '</div>';
-        track2HTML += '</div>';
-
-        container.innerHTML = track1HTML + track2HTML;
-      }
 
       // Auto-resolución de extensiones de imagen (soporta .webp, .jpg, .jpeg, .png)
       const extensions = ['.webp', '.jpg', '.jpeg', '.png'];

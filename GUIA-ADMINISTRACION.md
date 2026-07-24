@@ -46,6 +46,10 @@ Dentro del panel encontrarás la sección **"Página de Inicio"**. Al hacer clic
 ### 🍔 G. Destacados del Menú Desplegable
 * **Uso:** Cambiar la imagen, el título y el producto promocional que se muestra dentro de los menús navegables de Golf, Pádel y Tenis.
 
+### 🏷️ H. Logotipos de Marcas (Loop Infinito)
+* **Uso:** Administrar el listado de marcas patrocinadas/distribuidas en el banner de logotipos que se desliza continuamente en la portada y en "Sobre Nosotros". Puedes añadir nuevas marcas, reordenarlas arrastrándolas, editarlas o borrarlas.
+* **Campos:** Nombre de la marca y Logotipo de la marca (se recomienda imagen en formato `.png` o `.webp` con fondo transparente).
+
 ---
 
 ## 3. Consejos para Subir Imágenes (Recomendaciones de Formato)
