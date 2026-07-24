@@ -1,0 +1,50 @@
+name: 🚀 Deploy a cPanel
+
+on:
+  push:
+    branches:
+      - main
+  # Permite ejecutarlo manualmente desde GitHub
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Sincronizar archivos a cPanel vía FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Descargar código del repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Necesario para detectar archivos cambiados
+
+      - name: 📤 Subir archivos a cPanel vía FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          protocol: ftps
+          local-dir: ./
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          # Solo sincroniza estos tipos de archivos (optimización)
+          include: |
+            data/**
+            assets/**
+            admin/**
+            js/**
+            *.html
+          # Excluir archivos que NO deben subirse al servidor
+          exclude: |
+            **/.git/**
+            **/.github/**
+            **/node_modules/**
+            *.zip
+            *.md
+            .gitignore
+          # Solo sube archivos que cambiaron (más rápido)
+          state-name: .ftp-deploy-sync-state.json
+          dry-run: false
+          log-level: standard
+          dangerous-clean-slate: false
