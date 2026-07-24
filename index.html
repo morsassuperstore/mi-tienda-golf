@@ -2918,25 +2918,27 @@
             if (announceEl) announceEl.textContent = data.announcement_bar;
 
             // Hero
-            const eyebrowEl = document.getElementById('hero-eyebrow');
-            if (eyebrowEl) eyebrowEl.textContent = data.hero.eyebrow;
+            if (data.hero) {
+              const eyebrowEl = document.getElementById('hero-eyebrow');
+              if (eyebrowEl) eyebrowEl.textContent = data.hero.eyebrow;
 
-            const titleEl = document.getElementById('hero-title');
-            if (titleEl) titleEl.innerHTML = data.hero.title;
+              const titleEl = document.getElementById('hero-title');
+              if (titleEl) titleEl.innerHTML = data.hero.title;
 
-            const subtitleEl = document.getElementById('hero-subtitle');
-            if (subtitleEl) subtitleEl.textContent = data.hero.subtitle;
+              const subtitleEl = document.getElementById('hero-subtitle');
+              if (subtitleEl) subtitleEl.textContent = data.hero.subtitle;
 
-            const btnPri = document.getElementById('hero-btn-primary');
-            if (btnPri) {
-              btnPri.textContent = data.hero.btn_primary_text;
-              btnPri.href = data.hero.btn_primary_link;
-            }
+              const btnPri = document.getElementById('hero-btn-primary');
+              if (btnPri) {
+                btnPri.textContent = data.hero.btn_primary_text;
+                btnPri.href = data.hero.btn_primary_link;
+              }
 
-            const btnSec = document.getElementById('hero-btn-secondary');
-            if (btnSec) {
-              btnSec.textContent = data.hero.btn_secondary_text;
-              btnSec.href = data.hero.btn_secondary_link;
+              const btnSec = document.getElementById('hero-btn-secondary');
+              if (btnSec) {
+                btnSec.textContent = data.hero.btn_secondary_text;
+                btnSec.href = data.hero.btn_secondary_link;
+              }
             }
 
             // Hero (Banners o Video)
@@ -2962,27 +2964,29 @@
             }
 
             // Sports (Counts & Images)
-            const sg = document.getElementById('sport-golf-count');
-            if (sg) sg.textContent = data.sports.golf_count;
-            const sp = document.getElementById('sport-padel-count');
-            if (sp) sp.textContent = data.sports.padel_count;
-            const st = document.getElementById('sport-tenis-count');
-            if (st) st.textContent = data.sports.tenis_count;
+            if (data.sports) {
+              const sg = document.getElementById('sport-golf-count');
+              if (sg) sg.textContent = data.sports.golf_count;
+              const sp = document.getElementById('sport-padel-count');
+              if (sp) sp.textContent = data.sports.padel_count;
+              const st = document.getElementById('sport-tenis-count');
+              if (st) st.textContent = data.sports.tenis_count;
 
-            const sgCard = document.getElementById('sport-golf-card');
-            if (sgCard && data.sports.golf_image) {
-              sgCard.style.backgroundImage = `url('${data.sports.golf_image}')`;
-              sgCard.setAttribute('data-bg-fallback', data.sports.golf_image.replace(/\.[^/.]+$/, ""));
-            }
-            const spCard = document.getElementById('sport-padel-card');
-            if (spCard && data.sports.padel_image) {
-              spCard.style.backgroundImage = `url('${data.sports.padel_image}')`;
-              spCard.setAttribute('data-bg-fallback', data.sports.padel_image.replace(/\.[^/.]+$/, ""));
-            }
-            const stCard = document.getElementById('sport-tenis-card');
-            if (stCard && data.sports.tenis_image) {
-              stCard.style.backgroundImage = `url('${data.sports.tenis_image}')`;
-              stCard.setAttribute('data-bg-fallback', data.sports.tenis_image.replace(/\.[^/.]+$/, ""));
+              const sgCard = document.getElementById('sport-golf-card');
+              if (sgCard && data.sports.golf_image) {
+                sgCard.style.backgroundImage = `url('${data.sports.golf_image}')`;
+                sgCard.setAttribute('data-bg-fallback', data.sports.golf_image.replace(/\.[^/.]+$/, ""));
+              }
+              const spCard = document.getElementById('sport-padel-card');
+              if (spCard && data.sports.padel_image) {
+                spCard.style.backgroundImage = `url('${data.sports.padel_image}')`;
+                spCard.setAttribute('data-bg-fallback', data.sports.padel_image.replace(/\.[^/.]+$/, ""));
+              }
+              const stCard = document.getElementById('sport-tenis-card');
+              if (stCard && data.sports.tenis_image) {
+                stCard.style.backgroundImage = `url('${data.sports.tenis_image}')`;
+                stCard.setAttribute('data-bg-fallback', data.sports.tenis_image.replace(/\.[^/.]+$/, ""));
+              }
             }
 
             // Menu Featured Products (Golf, Padel, Tenis)
@@ -3037,28 +3041,30 @@
             }
 
             // Simulator
-            const sEyebrow = document.getElementById('sim-eyebrow');
-            if (sEyebrow) sEyebrow.textContent = data.simulator.eyebrow;
+            if (data.simulator) {
+              const sEyebrow = document.getElementById('sim-eyebrow');
+              if (sEyebrow) sEyebrow.textContent = data.simulator.eyebrow;
 
-            const sTitle = document.getElementById('sim-title');
-            if (sTitle) sTitle.innerHTML = data.simulator.title;
+              const sTitle = document.getElementById('sim-title');
+              if (sTitle) sTitle.innerHTML = data.simulator.title;
 
-            const sDesc = document.getElementById('sim-desc');
-            if (sDesc) sDesc.innerHTML = data.simulator.desc;
+              const sDesc = document.getElementById('sim-desc');
+              if (sDesc) sDesc.innerHTML = data.simulator.desc;
 
-            const sImg = document.getElementById('sim-img');
-            if (sImg) {
-              sImg.src = data.simulator.image;
-              sImg.setAttribute('data-src-fallback', data.simulator.image.replace(/\.[^/.]+$/, ""));
-            }
+              const sImg = document.getElementById('sim-img');
+              if (sImg) {
+                sImg.src = data.simulator.image;
+                sImg.setAttribute('data-src-fallback', data.simulator.image.replace(/\.[^/.]+$/, ""));
+              }
 
-            const sTech = document.getElementById('sim-tech-badge');
-            if (sTech) sTech.textContent = data.simulator.tech_badge;
+              const sTech = document.getElementById('sim-tech-badge');
+              if (sTech) sTech.textContent = data.simulator.tech_badge;
 
-            const sBtnPri = document.getElementById('sim-btn-primary');
-            if (sBtnPri) {
-              sBtnPri.textContent = data.simulator.btn_primary_text;
-              sBtnPri.href = data.simulator.btn_primary_link;
+              const sBtnPri = document.getElementById('sim-btn-primary');
+              if (sBtnPri) {
+                sBtnPri.textContent = data.simulator.btn_primary_text;
+                sBtnPri.href = data.simulator.btn_primary_link;
+              }
             }
 
             // Locations
