@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de Tallas — Morsa's Proshop | Golf, Pádel y Tenis en Venezuela</title>
+  <meta name="description" content="Encuentra tu talla ideal en calzado, ropa, guantes y grips de golf, pádel y tenis. Guía completa de medidas para caballeros, damas y niños en Morsa's Proshop.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://morsasgolf.com/guia-tallas.html">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo morsas 2026.png">
+  <link rel="apple-touch-icon" href="assets/logo morsas 2026.png">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #2A2FA8;
+      --navy-dark: #1E2280;
+      --navy-deeper: #151970;
+      --gold: #F5A623;
+      --gold-light: #FBBF47;
+      --gold-pale: #FFF3D6;
+      --white: #FFFFFF;
+      --off-white: #F8F7F4;
+      --light-gray: #EFEFEF;
+      --text-dark: #0E1050;
+      --text-mid: #4A4F9E;
+      --radius: 6px;
+      --radius-lg: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      overflow-x: clip;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+    }
+
+    /* ─── ANNOUNCEMENT BAR ─── */
+    .announce-bar {
+      background: var(--gold);
+      color: var(--navy-deeper);
+      text-align: center;
+      padding: 9px 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(21, 25, 112, 0.18);
+    }
+
+    .nav-inner {
+      position: relative;
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      height: 74px;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .nav-logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .nav-logo-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 1px;
+      line-height: 1;
+    }
+
+    .nav-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav-back:hover {
+      color: var(--gold);
+    }
+
+    /* ─── HERO SECTION ─── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy-deeper) 0%, #0a0c3b 100%);
+      color: var(--white);
+      padding: 90px 32px 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(245, 166, 35, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .page-hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .page-subtitle {
+      font-size: 17px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ─── TABS & CONTENT ─── */
+    .content-layout {
+      max-width: 1100px;
+      margin: 60px auto 80px;
+      padding: 0 32px;
+    }
+
+    .tabs-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+      border-bottom: 2px solid var(--light-gray);
+      padding-bottom: 20px;
+    }
+
+    .tab-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border: 2px solid transparent;
+      border-radius: var(--radius);
+      background: var(--off-white);
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      background: var(--light-gray);
+    }
+
+    .tab-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+      box-shadow: 0 4px 12px rgba(42, 47, 168, 0.25);
+    }
+
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .guide-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      margin-bottom: 36px;
+    }
+
+    .guide-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: var(--navy-deeper);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .guide-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    /* ─── TABLES ─── */
+    .table-responsive {
+      overflow-x: auto;
+      margin-bottom: 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--light-gray);
+    }
+
+    .size-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .size-table th {
+      background: var(--navy-deeper);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 12px;
+    }
+
+    .size-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--light-gray);
+      color: #333;
+    }
+
+    .size-table tr:nth-child(even) {
+      background: var(--off-white);
+    }
+
+    .size-table tr:hover td {
+      background: rgba(245, 166, 35, 0.08);
+      font-weight: 600;
+    }
+
+    /* ─── TIPS BOX ─── */
+    .tip-box {
+      background: var(--gold-pale);
+      border-left: 4px solid var(--gold);
+      padding: 20px 24px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-top: 24px;
+    }
+
+    .tip-box svg {
+      flex-shrink: 0;
+      color: #B87600;
+      margin-top: 2px;
+    }
+
+    .tip-box-text h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--navy-deeper);
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .tip-box-text p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ─── HELP CTA ─── */
+    .help-cta {
+      background: var(--off-white);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+      border: 1px solid var(--light-gray);
+      margin-top: 40px;
+    }
+
+    .help-cta h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--navy-deeper);
+      margin-bottom: 10px;
+    }
+
+    .help-cta p {
+      font-size: 15px;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+    }
+
+    .btn-whatsapp:hover {
+      background: #1ebc59;
+      transform: translateY(-2px);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--light-gray);
+      padding: 80px 32px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: var(--navy-deeper);
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-brand-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(245, 166, 35, 0.1);
+      transition: background 0.2s;
+    }
+
+    .social-btn:hover {
+      background: rgba(245, 166, 35, 0.2);
+    }
+
+    .footer-col-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy-deeper);
+      margin-bottom: 20px;
+    }
+
+    .footer-col-links {
+      list-style: none;
+    }
+
+    .footer-col-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col-links a {
+      font-size: 14px;
+      color: #555;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-col-links a:hover {
+      color: var(--navy);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--light-gray);
+      padding-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .footer-payments {
+      display: flex;
+      gap: 8px;
+    }
+
+    .payment-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      color: #777;
+    }
+
+    @media (max-width: 992px) {
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .page-title {
+        font-size: 38px;
+      }
+      .guide-card {
+        padding: 24px;
+      }
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announce-bar">
+    Envío gratis en pedidos mayores de Ref.100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo morsas 2026.png" data-src-fallback="assets/logo morsas 2026" alt="Morsa's Proshop Logo">
+        <div>
+          <div class="nav-logo-text">Morsa's</div>
+          <div class="nav-logo-sub">Proshop</div>
+        </div>
+      </a>
+      <a href="index.html" class="nav-back">← Volver al Inicio</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="page-hero">
+    <div class="page-hero-inner">
+      <span class="page-eyebrow">Asesoría & Ajuste Perfecto</span>
+      <h1 class="page-title">Guía de Tallas y Medidas</h1>
+      <p class="page-subtitle">Encuentra la especificación ideal para maximizar tu comodidad, estilo y rendimiento en el campo de golf, pádel o tenis.</p>
+    </div>
+  </header>
+
+  <!-- CONTENT SECTION -->
+  <main class="content-layout">
+    
+    <!-- TABS NAV -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('calzado', this)">👟 Calzado Deportivo</button>
+      <button class="tab-btn" onclick="switchTab('ropa', this)">👕 Ropa & Textil</button>
+      <button class="tab-btn" onclick="switchTab('guantes', this)">🧤 Guantes de Golf</button>
+      <button class="tab-btn" onclick="switchTab('grips', this)">🏌️ Grips para Palos</button>
+    </div>
+
+    <!-- TAB 1: CALZADO -->
+    <div id="tab-calzado" class="tab-pane active">
+      <div class="guide-card">
+        <h3>Calzado de Golf, Pádel y Tenis (Mizuno & Más)</h3>
+        <p>Nuestro calzado deportivo está diseñado para brindar la máxima estabilidad, tracción y confort. Consulta esta tabla de conversión internacional para elegir tu número adecuado de acuerdo a tu medida habitual en US, EUR o centímetros.</p>
+        
+        <div class="table-responsive">
+          <table class="size-table">
+            <thead>
+              <tr>
+                <th>Talla US (Caballero)</th>
+                <th>Talla US (Dama)</th>
+                <th>Talla EUR (Europa)</th>
+                <th>Talla UK (Reino Unido)</th>
+                <th>Longitud del Pie (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>7.0</td><td>8.5</td><td>40.0</td><td>6.0</td><td>25.0 cm</td></tr>
+              <tr><td>7.5</td><td>9.0</td><td>40.5</td><td>6.5</td><td>25.5 cm</td></tr>
+              <tr><td>8.0</td><td>9.5</td><td>41.0</td><td>7.0</td><td>26.0 cm</td></tr>
+              <tr><td>8.5</td><td>10.0</td><td>42.0</td><td>7.5</td><td>26.5 cm</td></tr>
+              <tr><td>9.0</td><td>10.5</td><td>42.5</td><td>8.0</td><td>27.0 cm</td></tr>
+              <tr><td>9.5</td><td>11.0</td><td>43.0</td><td>8.5</td><td>27.5 cm</td></tr>
+              <tr><td>10.0</td><td>11.5</td><td>44.0</td><td>9.0</td><td>28.0 cm</td></tr>
+              <tr><td>10.5</td><td>12.0</td><td>44.5</td><td>9.5</td><td>28.5 cm</td></tr>
+              <tr><td>11.0</td><td>12.5</td><td>45.0</td><td>10.0</td><td>29.0 cm</td></tr>
+              <tr><td>11.5</td><td>13.0</td><td>46.0</td><td>10.5</td><td>29.5 cm</td></tr>
+              <tr><td>12.0</td><td>13.5</td><td>46.5</td><td>11.0</td><td>30.0 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tip-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div class="tip-box-text">
+            <h4>Recomendación para Calzado de Golf y Pádel</h4>
+            <p>Si utilizas calcetines deportivos gruesos o tobilleras reforzadas, te sugerimos elegir media talla (0.5 US) por encima de tu número de calzado de vestir habitual para evitar opresión en los dedos durante los giros de swing y desplazamientos laterales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: ROPA -->
+    <div id="tab-ropa" class="tab-pane">
+      <div class="guide-card">
+        <h3>Polos, Pantalones y Chaquetas Técnicas</h3>
+        <p>Nuestras prendas de golf y tenis cuentan con tecnología de corte ergonómico, elasticidad en 4 direcciones y protección UV. A continuación se presentan las medidas corporales estándar para caballeros y damas.</p>
+        
+        <h4 style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--navy);margin:20px 0 10px;">Caballeros (Polos & Chaquetas)</h4>
+        <div class="table-responsive">
+          <table class="size-table">
+            <thead>
+              <tr>
+                <th>Talla</th>
+                <th>Pecho (cm)</th>
+                <th>Cintura (cm)</th>
+                <th>Cadera (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>S (Pequeña)</strong></td><td>88 - 94 cm</td><td>74 - 79 cm</td><td>88 - 93 cm</td></tr>
+              <tr><td><strong>M (Mediana)</strong></td><td>95 - 102 cm</td><td>80 - 86 cm</td><td>94 - 100 cm</td></tr>
+              <tr><td><strong>L (Grande)</strong></td><td>103 - 110 cm</td><td>87 - 94 cm</td><td>101 - 107 cm</td></tr>
+              <tr><td><strong>XL (Extra Grande)</strong></td><td>111 - 118 cm</td><td>95 - 102 cm</td><td>108 - 115 cm</td></tr>
+              <tr><td><strong>XXL (2XL)</strong></td><td>119 - 126 cm</td><td>103 - 110 cm</td><td>116 - 123 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--navy);margin:30px 0 10px;">Damas (Polos, Faldas & Vestidos)</h4>
+        <div class="table-responsive">
+          <table class="size-table">
+            <thead>
+              <tr>
+                <th>Talla</th>
+                <th>Pecho (cm)</th>
+                <th>Cintura (cm)</th>
+                <th>Cadera (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>XS (Extra Pequeña)</strong></td><td>78 - 83 cm</td><td>60 - 65 cm</td><td>85 - 90 cm</td></tr>
+              <tr><td><strong>S (Pequeña)</strong></td><td>84 - 89 cm</td><td>66 - 71 cm</td><td>91 - 96 cm</td></tr>
+              <tr><td><strong>M (Mediana)</strong></td><td>90 - 95 cm</td><td>72 - 77 cm</td><td>97 - 102 cm</td></tr>
+              <tr><td><strong>L (Grande)</strong></td><td>96 - 103 cm</td><td>78 - 85 cm</td><td>103 - 109 cm</td></tr>
+              <tr><td><strong>XL (Extra Grande)</strong></td><td>104 - 111 cm</td><td>86 - 93 cm</td><td>110 - 117 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: GUANTES -->
+    <div id="tab-guantes" class="tab-pane">
+      <div class="guide-card">
+        <h3>Guantes de Golf: El Contacto con tu Swing</h3>
+        <p>Un guante de golf debe quedar ajustado como una segunda piel, sin arrugas ni holgura en la palma o los dedos. Recuerda la regla de oro: <strong>jugadores diestros usan el guante en la mano izquierda</strong>, mientras que los jugadores zurdos lo usan en la mano derecha.</p>
+
+        <div class="table-responsive">
+          <table class="size-table">
+            <thead>
+              <tr>
+                <th>Talla de Guante</th>
+                <th>Longitud desde la Muñeca al Dedo Medio (cm)</th>
+                <th>Circunferencia de la Palma (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>S (Pequeña)</strong></td><td>17.0 - 17.8 cm</td><td>19.0 - 20.0 cm</td></tr>
+              <tr><td><strong>M (Mediana)</strong></td><td>17.9 - 18.5 cm</td><td>20.1 - 21.0 cm</td></tr>
+              <tr><td><strong>ML (Mediana-Grande)</strong></td><td>18.6 - 19.2 cm</td><td>21.1 - 22.0 cm</td></tr>
+              <tr><td><strong>L (Grande)</strong></td><td>19.3 - 20.0 cm</td><td>22.1 - 23.0 cm</td></tr>
+              <tr><td><strong>XL (Extra Grande)</strong></td><td>20.1 - 21.0 cm</td><td>23.1 - 24.5 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tip-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div class="tip-box-text">
+            <h4>¿Qué significa la talla "Cadet" (Cadete)?</h4>
+            <p>Las tallas etiquetadas como <strong>Cadet</strong> (ej. Cadet M o Cadet ML) están diseñadas para jugadores que tienen la palma un poco más ancha y los dedos ligeramente más cortos que el estándar habitual.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: GRIPS -->
+    <div id="tab-grips" class="tab-pane">
+      <div class="guide-card">
+        <h3>Grips para Palos de Golf: Control y Precisión</h3>
+        <p>El grosor del grip es crucial para la mecánica de la muñeca durante el impacto. Un grip demasiado delgado puede provocar gancho (hook), mientras que uno demasiado grueso puede limitar la rotación de las manos causando slice.</p>
+
+        <div class="table-responsive">
+          <table class="size-table">
+            <thead>
+              <tr>
+                <th>Tamaño de Grip</th>
+                <th>Talla de Guante Recomendada</th>
+                <th>Perfil del Jugador / Uso Principal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Undersize (Junior / Damas)</strong></td><td>Damas S, M o Junior</td><td>Jugadores con manos pequeñas o jóvenes en formación.</td></tr>
+              <tr><td><strong>Standard (Estándar)</strong></td><td>Caballeros S, M, ML o Damas L</td><td>El grosor más común en palos de fábrica; ideal para el 70% de los golfistas.</td></tr>
+              <tr><td><strong>Midsize (Mediano)</strong></td><td>Caballeros L o XL</td><td>Manos grandes o jugadores con artritis que buscan menor tensión en los dedos.</td></tr>
+              <tr><td><strong>Jumbo / Oversize</strong></td><td>Caballeros XL o 2XL / Putters</td><td>Manos muy grandes o grips especializados para estabilizar las muñecas en el green (Putters).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- HELP CTA -->
+    <div class="help-cta">
+      <h3>¿Aún tienes dudas con tu talla?</h3>
+      <p>Nuestro equipo de asesores en Caracas está listo para ayudarte. Escríbenos por WhatsApp con tus medidas o consúltanos sobre el calce exacto de cualquier modelo de nuestro catálogo.</p>
+      <a href="https://wa.me/584128422837?text=Hola,%20tengo%20duda%20sobre%20mi%20talla%20en%20un%20producto." target="_blank" class="btn-whatsapp">
+        💬 Consultar con un Asesor por WhatsApp
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <!-- Brand -->
+        <div>
+          <div class="footer-brand-name">Morsa's Proshop</div>
+          <p class="footer-brand-desc">
+            El destino número uno de Venezuela para golf, pádel y tenis.
+            Equipos premium, ropa de alto rendimiento y servicio experto — en tienda y en línea.
+          </p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/morsasgolf/" target="_blank" class="social-btn" aria-label="Instagram">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #F5A623;">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Golf -->
+        <div>
+          <div class="footer-col-title">Golf</div>
+          <ul class="footer-col-links">
+            <li><a href="tienda.html?sport=golf&gender=caballeros">Golf Caballeros</a></li>
+            <li><a href="tienda.html?sport=golf&gender=damas">Golf Damas</a></li>
+            <li><a href="tienda.html?cat=palos&sport=golf">Palos de Golf</a></li>
+            <li><a href="tienda.html?cat=pelotas&sport=golf">Pelotas de Golf</a></li>
+            <li><a href="tienda.html?cat=maletas&sport=golf">Bolsas de Golf</a></li>
+            <li><a href="tienda.html?cat=accesorios">Accesorios</a></li>
+          </ul>
+        </div>
+
+        <!-- Padel & Tennis -->
+        <div>
+          <div class="footer-col-title">Padel & Tennis</div>
+          <ul class="footer-col-links">
+            <li><a href="tienda.html?cat=raquetas&sport=padel">Palas de Pádel</a></li>
+            <li><a href="tienda.html?cat=raquetas&sport=tenis">Raquetas de Tenis</a></li>
+            <li><a href="tienda.html?cat=ropa&sport=padel">Ropa de Pádel</a></li>
+            <li><a href="tienda.html?cat=ropa&sport=tenis">Ropa de Tenis</a></li>
+            <li><a href="tienda.html?cat=zapatos">Calzado</a></li>
+            <li><a href="tienda.html?cat=pelotas">Pelotas y Cuerdas</a></li>
+          </ul>
+        </div>
+
+        <!-- Info -->
+        <div>
+          <div class="footer-col-title">Help & Info</div>
+          <ul class="footer-col-links">
+            <li><a href="https://wa.me/584128422837?text=Hola,%20tengo%20una%20consulta." target="_blank">Contáctanos</a></li>
+            <li><a href="guia-tallas.html">Guía de Tallas</a></li>
+            <li><a href="envios.html">Política de Envíos</a></li>
+            <li><a href="devoluciones.html">Devoluciones</a></li>
+            <li><a href="index.html#ubicaciones">Nuestra Tienda</a></li>
+            <li><a href="nosotros.html">Sobre Morsa's</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2026 Morsa's Proshop · Caracas, Venezuela · Todos los derechos reservados</div>
+        <div class="footer-payments">
+          <span class="payment-badge">Visa</span>
+          <span class="payment-badge">Mastercard</span>
+          <span class="payment-badge">PayPal</span>
+          <span class="payment-badge">Zelle</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function switchTab(tabId, btnEl) {
+      // Ocultar todos los panes
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      // Quitar clase active de todos los botones
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      // Activar el seleccionado
+      const target = document.getElementById('tab-' + tabId);
+      if (target) {
+        target.classList.add('active');
+        if (btnEl) btnEl.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
