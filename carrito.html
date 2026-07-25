@@ -1114,7 +1114,7 @@ function renderCart() {
         <div class="cart-brand">Morsa's</div>
       </div>
       <div class="cart-right">
-        <div class="cart-price">Ref.${(item.price * item.quantity).toFixed(2)}</div>
+        <div class="cart-price">${formatPrice(item.price * item.quantity)}</div>
         <div class="cart-qty">
           <button class="cart-qty-btn" onclick="changeQty(${index}, -1)">−</button>
           <span class="cart-qty-num">${item.quantity}</span>
@@ -1140,7 +1140,7 @@ function updateShippingBar() {
     bar.classList.add('complete');
   } else {
     const rem = (FREE_SHIPPING - sub).toFixed(0);
-    msg.innerHTML = `Agrega <strong>Ref.${rem} más</strong> para envío gratis`;
+    msg.innerHTML = `Agrega <strong>${formatPrice(rem, 0)} más</strong> para envío gratis`;
     bar.classList.remove('complete');
   }
 }
@@ -1151,12 +1151,12 @@ function updateSummary() {
   const ship = getShipping();
   const total = getTotal();
 
-  document.getElementById('sum-subtotal').textContent = 'Ref.' + sub.toFixed(2);
-  document.getElementById('sum-total').textContent = 'Ref.' + total.toFixed(2);
+  document.getElementById('sum-subtotal').textContent = formatPrice(sub);
+  document.getElementById('sum-total').textContent = formatPrice(total);
 
   const discRow = document.getElementById('sum-discount-row');
   discRow.style.display = discountApplied ? 'flex' : 'none';
-  document.getElementById('sum-discount').textContent = '-Ref.' + disc.toFixed(2);
+  document.getElementById('sum-discount').textContent = '-' + formatPrice(disc);
 
   const shipRow = document.getElementById('sum-shipping-row');
   const shipEl = document.getElementById('sum-shipping');
@@ -1170,7 +1170,7 @@ function updateSummary() {
       shipEl.style.fontWeight = '700';
       shipRow.classList.add('shipping-free');
     } else {
-      shipEl.textContent = 'Ref.' + ship.toFixed(2);
+      shipEl.textContent = formatPrice(ship);
       shipEl.style.color = '';
       shipEl.style.fontWeight = '';
       shipRow.classList.remove('shipping-free');
@@ -1184,7 +1184,7 @@ function updateSummary() {
       badge.textContent = 'GRATIS';
       badge.className = 'delivery-badge badge-free';
     } else {
-      badge.textContent = 'Ref.3.00';
+      badge.textContent = formatPrice(DELIVERY_COST);
       badge.className = 'delivery-badge badge-cost';
     }
   }
@@ -1195,7 +1195,7 @@ function updateSummary() {
     mini.innerHTML = Cart.items.map(i => `
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-mid);padding:4px 0;">
         <span style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${i.quantity > 1 ? `${i.quantity}×` : ''} ${i.title}</span>
-        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">Ref.${(i.price*i.quantity).toFixed(2)}</span>
+        <span style="font-weight:700;color:var(--text-dark);flex-shrink:0;margin-left:8px;">${formatPrice(i.price * i.quantity)}</span>
       </div>
     `).join('');
   }
@@ -1442,12 +1442,12 @@ function buildWhatsAppMessage(orderNum, snapshot) {
     `📦 Orden: *${orderNum}*`,
     '',
     '🛒 *Productos:*',
-    ...snapshot.items.map(i => `  • ${i.quantity > 1 ? i.quantity + '× ' : ''}${i.title} — Ref.${(i.price * i.quantity).toFixed(2)}`),
+    ...snapshot.items.map(i => `  • ${i.quantity > 1 ? i.quantity + '× ' : ''}${i.title} — ${formatPrice(i.price * i.quantity)}`),
     '',
-    `💰 Subtotal: Ref.${snapshot.subtotal}`,
-    snapshot.discount > 0 ? `🏷️ Descuento: -Ref.${snapshot.discount}` : null,
-    `🚚 Envío: ${snapshot.shipping === 0 ? 'GRATIS' : 'Ref.' + snapshot.shipping}`,
-    `✅ *Total: Ref.${snapshot.total}*`,
+    `💰 Subtotal: ${formatPrice(snapshot.subtotal)}`,
+    snapshot.discount > 0 ? `🏷️ Descuento: -${formatPrice(snapshot.discount)}` : null,
+    `🚚 Envío: ${snapshot.shipping === 0 ? 'GRATIS' : formatPrice(snapshot.shipping)}`,
+    `✅ *Total: ${formatPrice(snapshot.total)}*`,
     '',
     `📬 Entrega: *${snapshot.deliveryLabel}*`,
     snapshot.deliveryMethod === 'delivery' ? `📍 ${snapshot.direccion}` : '📍 Retiro en tienda',

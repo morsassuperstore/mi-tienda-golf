@@ -20,7 +20,7 @@ Dentro del panel encontrarás la sección **"Página de Inicio"**. Al hacer clic
 
 ### 📢 A. Barra de Anuncio Superior
 * **Uso:** Cambiar la cinta de texto que aparece en la parte superior de toda la web.
-* **Ejemplo:** `Envío gratis en pedidos mayores de €100 · Usa el código MORSA10 para 10% de descuento`.
+* **Ejemplo:** `Envío gratis en pedidos mayores de Ref.100 · Usa el código MORSA10 para 10% de descuento`.
 
 ### 🖼️ B. Banners Principales (Carrusel Hero)
 * **Uso:** Cambiar las imágenes promocionales grandes de la portada.
@@ -81,6 +81,35 @@ Si por alguna razón no tienes acceso al panel visual o necesitas hacer un cambi
    * `destacado-golf` / `destacado-padel` / `destacado-tenis`
    * `simulador-golf`
    * `gender-men` / `gender-women`
+
+---
+
+## 5. Cómo cambiar el Símbolo de Moneda (Configuración)
+
+Tanto el sitio web (Front-End) como el conector de WordPress (Back-End) están preparados para que puedas cambiar el símbolo de moneda de forma centralizada sin tener que buscar e ir alterando código manual en las plantillas HTML:
+
+### A. Cambiar en el Front-End (Sitio Web)
+1. Abre el archivo `frontend-v2/js/config.js` en tu editor o administrador de archivos de cPanel.
+2. Localiza la propiedad `CURRENCY_SYMBOL` en el objeto `CONFIG` (por ejemplo, en la línea 5):
+   ```javascript
+   CURRENCY_SYMBOL: 'Ref.',
+   ```
+3. Cambia `'Ref.'` por el nuevo símbolo que desees (ej: `'€'` o `'$'`) y guarda el archivo. Todos los productos, el carrito y los cálculos usarán el nuevo símbolo de forma automática.
+
+### B. Cambiar en el Back-End (WordPress / WooCommerce)
+1. Abre el archivo de plugin `morsa-headless-connector/morsa-headless-connector.php` en tu cPanel.
+2. Al final del archivo verás la sección de configuración de moneda. Modifica las siguientes constantes según lo requieras:
+   ```php
+   // Símbolo personalizado a mostrar (Ej: 'Ref.', '€', '$')
+   define( 'MORSA_CUSTOM_SYMBOL', 'Ref.' );
+
+   // ¿Forzar este símbolo en todas las monedas de WooCommerce?
+   // true  = Muestra MORSA_CUSTOM_SYMBOL siempre (ej: muestra "Ref." aunque WooCommerce esté configurado internamente en Euros).
+   // false = Usa el símbolo de WooCommerce normal según la moneda activa en tu panel de WordPress.
+   define( 'MORSA_FORCE_CUSTOM_SYMBOL', true );
+   ```
+3. Guarda el archivo. Si cambiaste la opción de forzar a `false`, puedes ir al panel de WordPress, a **WooCommerce -> Ajustes -> General**, y elegir la moneda nativa de tu preferencia (Euro, USD, o la moneda personalizada "Referencia" que este plugin registra automáticamente).
+4. Recuerda limpiar la caché de WordPress (como LiteSpeed Cache) y de tu navegador para que los cambios se hagan visibles.
 
 ---
 
