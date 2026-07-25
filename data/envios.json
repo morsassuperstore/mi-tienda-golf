@@ -1,0 +1,47 @@
+{
+  "eyebrow": "Despachos Nacionales & Delivery",
+  "title": "Política de Envíos y Entregas",
+  "subtitle": "Nos aseguramos de que tus palos, raquetas y equipamiento lleguen en perfecto estado, estés donde estés.",
+  "policy_cards": [
+    {
+      "title": "Envíos en Caracas",
+      "text": "Ofrecemos servicio de delivery express en toda el área metropolitana de Caracas, con motorizado o transporte acondicionado para piezas grandes (como bolsas y carritos).",
+      "bullets": [
+        "<strong>Delivery Express:</strong> Entregas el mismo día o en menos de 24 horas hábiles.",
+        "<strong>Pickup en Tienda:</strong> Puedes retirar sin costo adicional en nuestras sedes del C.C. La Tahona, La Lagunita Country Club o Izcaragua."
+      ]
+    },
+    {
+      "title": "Envíos Nacionales (Venezuela)",
+      "text": "Despachamos a todos los estados del país trabajando con las empresas de encomiendas más responsables y reconocidas del territorio nacional.",
+      "bullets": [
+        "<strong>Empresas aliadas:</strong> MRW, Zoom, Tealca y Domesa.",
+        "<strong>Modalidad:</strong> Cobro en destino (COD) o pre-pagado según la agencia seleccionada.",
+        "<strong>Rastreo:</strong> Te enviaremos el número de guía por WhatsApp / correo tan pronto el paquete sea despachado."
+      ]
+    },
+    {
+      "title": "Tiempos de Entrega",
+      "text": "Procesamos los pedidos inmediatamente tras confirmar el pago en nuestro sistema. Nuestros tiempos estimados de tránsito son los siguientes:",
+      "bullets": [
+        "<strong>Caracas:</strong> 24 a 48 horas hábiles.",
+        "<strong>Ciudades Principales (Valencia, Maracaibo, Barquisimeto):</strong> 2 a 3 días hábiles.",
+        "<strong>Otras regiones:</strong> 3 a 5 días hábiles."
+      ]
+    },
+    {
+      "title": "Tarifas y Envío Gratis",
+      "text": "Para premiar a nuestra comunidad deportiva, contamos con políticas de envío gratuito en compras que cumplan con el monto mínimo promocional.",
+      "bullets": [
+        "<strong>Envío Gratis:</strong> Aplicable a compras superiores a <strong>Ref. 100</strong> en todo el territorio nacional (ciertas condiciones aplican para artículos de sobrepeso extra).",
+        "<strong>Seguro de Carga:</strong> Todos los paquetes de alto valor viajan asegurados por el 100% de su costo."
+      ]
+    }
+  ],
+  "packaging_title": "Embalaje Especializado para Palos y Varas de Golf",
+  "packaging_text": "Sabemos que un driver de carbono o un juego de hierros forjados requiere un cuidado extremo. En <strong>Morsa's Proshop</strong> utilizamos tubos de cartón reforzado y cajas hechas a medida, con protección interior de burbujas y soportes laterales, garantizando que tus palos lleguen con la alineación y el acabado intactos.",
+  "cta_title": "¿Tienes una urgencia para tu torneo este fin de semana?",
+  "cta_desc": "Contáctanos directamente por WhatsApp para gestionar un despacho urgente o coordinar una entrega especial directamente en el club de campo.",
+  "cta_btn_text": "💬 Coordinar Envío por WhatsApp",
+  "cta_btn_link": "https://wa.me/584128422837?text=Hola,%20necesito%20coordinar%20un%20envío%20o%20entrega%20especial."
+}

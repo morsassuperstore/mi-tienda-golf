@@ -518,9 +518,9 @@
   <!-- HERO SECTION -->
   <header class="page-hero">
     <div class="page-hero-inner">
-      <span class="page-eyebrow">Tranquilidad & Respaldo Oficial</span>
-      <h1 class="page-title">Cambios, Garantías y Devoluciones</h1>
-      <p class="page-subtitle">Como distribuidores oficiales, garantizamos el 100% de originalidad en todos nuestros productos. Tu satisfacción es nuestra prioridad.</p>
+      <span class="page-eyebrow" id="dev-eyebrow">Tranquilidad & Respaldo Oficial</span>
+      <h1 class="page-title" id="dev-title">Cambios, Garantías y Devoluciones</h1>
+      <p class="page-subtitle" id="dev-subtitle">Como distribuidores oficiales, garantizamos el 100% de originalidad en todos nuestros productos. Tu satisfacción es nuestra prioridad.</p>
     </div>
   </header>
 
@@ -529,7 +529,7 @@
     
     <!-- STEPS -->
     <div class="steps-section">
-      <h2 class="section-title">¿Cómo Solicitar un Cambio?</h2>
+      <h2 class="section-title" id="dev-steps-title">¿Cómo Solicitar un Cambio?</h2>
       <div class="steps-grid">
         <div class="step-card">
           <span class="step-number">01</span>
@@ -581,9 +581,9 @@
 
     <!-- HELP CTA -->
     <div class="help-cta">
-      <h3>¿Necesitas gestionar un cambio ahora mismo?</h3>
-      <p>Nuestro equipo de atención al cliente está disponible vía WhatsApp para asesorarte de forma rápida y sencilla en todo el proceso de sustitución o garantía.</p>
-      <a href="https://wa.me/584128422837?text=Hola,%20deseo%20gestionar%20un%20cambio%20o%20devolución%20de%20un%20producto." target="_blank" class="btn-whatsapp">
+      <h3 id="dev-cta-title">¿Necesitas gestionar un cambio ahora mismo?</h3>
+      <p id="dev-cta-desc">Nuestro equipo de atención al cliente está disponible vía WhatsApp para asesorarte de forma rápida y sencilla en todo el proceso de sustitución o garantía.</p>
+      <a href="https://wa.me/584128422837?text=Hola,%20deseo%20gestionar%20un%20cambio%20o%20devolución%20de%20un%20producto." target="_blank" class="btn-whatsapp" id="dev-cta-btn">
         💬 Solicitar Cambio por WhatsApp
       </a>
     </div>
@@ -664,5 +664,26 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('data/devoluciones.json', { cache: 'no-store' })
+        .then(res => {
+          if (!res.ok) throw new Error("No CMS data");
+          return res.json();
+        })
+        .then(data => {
+          if (!data) return;
+          if (data.eyebrow) document.getElementById('dev-eyebrow').textContent = data.eyebrow;
+          if (data.title) document.getElementById('dev-title').innerHTML = data.title;
+          if (data.subtitle) document.getElementById('dev-subtitle').innerHTML = data.subtitle;
+          if (data.steps_title) document.getElementById('dev-steps-title').innerHTML = data.steps_title;
+          if (data.cta_title) document.getElementById('dev-cta-title').innerHTML = data.cta_title;
+          if (data.cta_desc) document.getElementById('dev-cta-desc').innerHTML = data.cta_desc;
+          if (data.cta_btn_text) document.getElementById('dev-cta-btn').textContent = data.cta_btn_text;
+          if (data.cta_btn_link) document.getElementById('dev-cta-btn').href = data.cta_btn_link;
+        })
+        .catch(err => console.log('Usando contenido estático en Devoluciones', err));
+    });
+  </script>
 </body>
 </html>

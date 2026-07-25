@@ -499,9 +499,9 @@
   <!-- HERO SECTION -->
   <header class="page-hero">
     <div class="page-hero-inner">
-      <span class="page-eyebrow">Despachos Nacionales & Delivery</span>
-      <h1 class="page-title">Política de Envíos y Entregas</h1>
-      <p class="page-subtitle">Nos aseguramos de que tus palos, raquetas y equipamiento lleguen en perfecto estado, estés donde estés.</p>
+      <span class="page-eyebrow" id="envios-eyebrow">Despachos Nacionales & Delivery</span>
+      <h1 class="page-title" id="envios-title">Política de Envíos y Entregas</h1>
+      <p class="page-subtitle" id="envios-subtitle">Nos aseguramos de que tus palos, raquetas y equipamiento lleguen en perfecto estado, estés donde estés.</p>
     </div>
   </header>
 
@@ -570,16 +570,16 @@
         📦
       </div>
       <div class="full-card-content">
-        <h3>Embalaje Especializado para Palos y Varas de Golf</h3>
-        <p>Sabemos que un driver de carbono o un juego de hierros forjados requiere un cuidado extremo. En <strong>Morsa's Proshop</strong> utilizamos tubos de cartón reforzado y cajas hechas a medida, con protección interior de burbujas y soportes laterales, garantizando que tus palos lleguen con la alineación y el acabado intactos.</p>
+        <h3 id="envios-pkg-title">Embalaje Especializado para Palos y Varas de Golf</h3>
+        <p id="envios-pkg-text">Sabemos que un driver de carbono o un juego de hierros forjados requiere un cuidado extremo. En <strong>Morsa's Proshop</strong> utilizamos tubos de cartón reforzado y cajas hechas a medida, con protección interior de burbujas y soportes laterales, garantizando que tus palos lleguen con la alineación y el acabado intactos.</p>
       </div>
     </div>
 
     <!-- HELP CTA -->
     <div class="help-cta">
-      <h3>¿Tienes una urgencia para tu torneo este fin de semana?</h3>
-      <p>Contáctanos directamente por WhatsApp para gestionar un despacho urgente o coordinar una entrega especial directamente en el club de campo.</p>
-      <a href="https://wa.me/584128422837?text=Hola,%20necesito%20coordinar%20un%20envío%20o%20entrega%20especial." target="_blank" class="btn-whatsapp">
+      <h3 id="envios-cta-title">¿Tienes una urgencia para tu torneo este fin de semana?</h3>
+      <p id="envios-cta-desc">Contáctanos directamente por WhatsApp para gestionar un despacho urgente o coordinar una entrega especial directamente en el club de campo.</p>
+      <a href="https://wa.me/584128422837?text=Hola,%20necesito%20coordinar%20un%20envío%20o%20entrega%20especial." target="_blank" class="btn-whatsapp" id="envios-cta-btn">
         💬 Coordinar Envío por WhatsApp
       </a>
     </div>
@@ -660,5 +660,27 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('data/envios.json', { cache: 'no-store' })
+        .then(res => {
+          if (!res.ok) throw new Error("No CMS data");
+          return res.json();
+        })
+        .then(data => {
+          if (!data) return;
+          if (data.eyebrow) document.getElementById('envios-eyebrow').textContent = data.eyebrow;
+          if (data.title) document.getElementById('envios-title').innerHTML = data.title;
+          if (data.subtitle) document.getElementById('envios-subtitle').innerHTML = data.subtitle;
+          if (data.packaging_title) document.getElementById('envios-pkg-title').innerHTML = data.packaging_title;
+          if (data.packaging_text) document.getElementById('envios-pkg-text').innerHTML = data.packaging_text;
+          if (data.cta_title) document.getElementById('envios-cta-title').innerHTML = data.cta_title;
+          if (data.cta_desc) document.getElementById('envios-cta-desc').innerHTML = data.cta_desc;
+          if (data.cta_btn_text) document.getElementById('envios-cta-btn').textContent = data.cta_btn_text;
+          if (data.cta_btn_link) document.getElementById('envios-cta-btn').href = data.cta_btn_link;
+        })
+        .catch(err => console.log('Usando contenido estático en Envíos', err));
+    });
+  </script>
 </body>
 </html>

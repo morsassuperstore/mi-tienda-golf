@@ -1,0 +1,46 @@
+{
+  "eyebrow": "Tranquilidad & Respaldo Oficial",
+  "title": "Cambios, Garantías y Devoluciones",
+  "subtitle": "Como distribuidores oficiales, garantizamos el 100% de originalidad en todos nuestros productos. Tu satisfacción es nuestra prioridad.",
+  "steps_title": "¿Cómo Solicitar un Cambio?",
+  "steps": [
+    {
+      "number": "01",
+      "title": "Contáctanos",
+      "text": "Escríbenos por WhatsApp o correo dentro de los primeros <strong>15 días continuos</strong> a la recepción de tu compra indicando tu número de pedido y el motivo del cambio."
+    },
+    {
+      "number": "02",
+      "title": "Entrega del Producto",
+      "text": "Lleva el artículo directamente a cualquiera de nuestras tiendas en Caracas o envíalo por encomienda en su empaque original sin indicios de uso."
+    },
+    {
+      "number": "03",
+      "title": "Cambio o Nota de Crédito",
+      "text": "Una vez verificado el estado del producto, procederemos con el cambio inmediato por la nueva talla/artículo o generaremos una nota de crédito a tu favor."
+    }
+  ],
+  "policy_cards": [
+    {
+      "title": "Condiciones para Cambios",
+      "text": "Para garantizar que todos nuestros clientes reciban equipos impecables, el producto sujeto a cambio debe cumplir con los siguientes requisitos:",
+      "bullets": [
+        "Estar en perfecto estado, sin signos de uso en cancha ni lavado.",
+        "Conservar todas las etiquetas, manuales y accesorios originales intactos.",
+        "En palos de golf y raquetas: los plásticos protectores del grip y la cabeza (o vara) no deben haber sido removidos."
+      ]
+    },
+    {
+      "title": "Garantías de Fabricante",
+      "text": "Al adquirir tus productos en <strong>Morsa's Proshop</strong> cuentas con el respaldo directo de marcas internacionales como Mizuno, Big Max, Callaway y Nippon Shaft.",
+      "bullets": [
+        "Cubrimos defectos de fábrica en soldaduras, costuras o fallas estructurales en varas y raquetas bajo inspección previa.",
+        "La garantía no cubre daños por golpes accidentales, mal uso o desgaste natural por impacto en el juego."
+      ]
+    }
+  ],
+  "cta_title": "¿Necesitas gestionar un cambio ahora mismo?",
+  "cta_desc": "Nuestro equipo de atención al cliente está disponible vía WhatsApp para asesorarte de forma rápida y sencilla en todo el proceso de sustitución o garantía.",
+  "cta_btn_text": "💬 Solicitar Cambio por WhatsApp",
+  "cta_btn_link": "https://wa.me/584128422837?text=Hola,%20deseo%20gestionar%20un%20cambio%20o%20devolución%20de%20un%20producto."
+}

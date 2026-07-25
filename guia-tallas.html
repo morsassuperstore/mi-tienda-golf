@@ -551,9 +551,9 @@
   <!-- HERO SECTION -->
   <header class="page-hero">
     <div class="page-hero-inner">
-      <span class="page-eyebrow">Asesoría & Ajuste Perfecto</span>
-      <h1 class="page-title">Guía de Tallas y Medidas</h1>
-      <p class="page-subtitle">Encuentra la especificación ideal para maximizar tu comodidad, estilo y rendimiento en el campo de golf, pádel o tenis.</p>
+      <span class="page-eyebrow" id="tallas-eyebrow">Asesoría & Ajuste Perfecto</span>
+      <h1 class="page-title" id="tallas-title">Guía de Tallas y Medidas</h1>
+      <p class="page-subtitle" id="tallas-subtitle">Encuentra la especificación ideal para maximizar tu comodidad, estilo y rendimiento en el campo de golf, pádel o tenis.</p>
     </div>
   </header>
 
@@ -724,9 +724,9 @@
 
     <!-- HELP CTA -->
     <div class="help-cta">
-      <h3>¿Aún tienes dudas con tu talla?</h3>
-      <p>Nuestro equipo de asesores en Caracas está listo para ayudarte. Escríbenos por WhatsApp con tus medidas o consúltanos sobre el calce exacto de cualquier modelo de nuestro catálogo.</p>
-      <a href="https://wa.me/584128422837?text=Hola,%20tengo%20duda%20sobre%20mi%20talla%20en%20un%20producto." target="_blank" class="btn-whatsapp">
+      <h3 id="tallas-cta-title">¿Aún tienes dudas con tu talla?</h3>
+      <p id="tallas-cta-desc">Nuestro equipo de asesores en Caracas está listo para ayudarte. Escríbenos por WhatsApp con tus medidas o consúltanos sobre el calce exacto de cualquier modelo de nuestro catálogo.</p>
+      <a href="https://wa.me/584128422837?text=Hola,%20tengo%20duda%20sobre%20mi%20talla%20en%20un%20producto." target="_blank" class="btn-whatsapp" id="tallas-cta-btn">
         💬 Consultar con un Asesor por WhatsApp
       </a>
     </div>
@@ -809,18 +809,34 @@
 
   <script>
     function switchTab(tabId, btnEl) {
-      // Ocultar todos los panes
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
-      // Quitar clase active de todos los botones
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
       
-      // Activar el seleccionado
       const target = document.getElementById('tab-' + tabId);
       if (target) {
         target.classList.add('active');
         if (btnEl) btnEl.classList.add('active');
       }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('data/guia-tallas.json', { cache: 'no-store' })
+        .then(res => {
+          if (!res.ok) throw new Error("No CMS data");
+          return res.json();
+        })
+        .then(data => {
+          if (!data) return;
+          if (data.eyebrow) document.getElementById('tallas-eyebrow').textContent = data.eyebrow;
+          if (data.title) document.getElementById('tallas-title').innerHTML = data.title;
+          if (data.subtitle) document.getElementById('tallas-subtitle').innerHTML = data.subtitle;
+          if (data.cta_title) document.getElementById('tallas-cta-title').innerHTML = data.cta_title;
+          if (data.cta_desc) document.getElementById('tallas-cta-desc').innerHTML = data.cta_desc;
+          if (data.cta_btn_text) document.getElementById('tallas-cta-btn').textContent = data.cta_btn_text;
+          if (data.cta_btn_link) document.getElementById('tallas-cta-btn').href = data.cta_btn_link;
+        })
+        .catch(err => console.log('Usando contenido estático en Guía de Tallas', err));
+    });
   </script>
 </body>
 </html>
