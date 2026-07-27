@@ -5,8 +5,8 @@ backend:
   branch: main
   # NOTA DE PRODUCCIÓN: Cuando pases la web a producción (morsasgolf.com), 
   # recuerda cambiar la url base a: https://morsasgolf.com
-  base_url: https://admin-dev.morsasgolf.com
-  auth_endpoint: publicador/api/oauth.php
+  base_url: https://dev.morsasgolf.com
+  auth_endpoint: api/oauth.php
 
 media_folder: "assets"
 public_folder: "assets"
