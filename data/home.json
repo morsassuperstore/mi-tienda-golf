@@ -19,7 +19,7 @@
       "alt": "Los Mejores Palos",
       "eyebrow": "Equipamiento de Alto Rendimiento",
       "btn_primary_text": "Ver Palos →",
-      "subtitle": "Drivers, hierros, putters y más de marcas líderes como TaylorMade, Callaway y Titleist.",
+      "subtitle": "Drivers, maderas, hierros putters de marcas líderes como Mizuno, Callaway, Ping y Cleveland. ",
       "image_desktop": "assets/card-golf.webp",
       "title": "Los Mejores<br><span class=\"gold\">Palos</span> del Mercado",
       "btn_primary_link": "tienda.html?cat=palos",
@@ -29,10 +29,10 @@
     {
       "image_mobile": "assets/card-padel.jpg",
       "btn_secondary_link": "",
-      "alt": "Domina la Cancha",
+      "alt": "Puro Padel! ",
       "eyebrow": "Colección Pádel & Tenis",
       "btn_primary_text": "Ver Equipamiento →",
-      "subtitle": "Descubre las palas y raquetas más avanzadas del mercado, calzado especializado y conjuntos deportivos premium.",
+      "subtitle": "Palas y raquetas Wilson más avanzadas del mercado, calzado Mizuno y New balance y conjuntos deportivos premium.",
       "image_desktop": "assets/card-padel.jpg",
       "title": "Domina la<br><span class=\"gold\">Cancha</span> con Estilo",
       "btn_primary_link": "tienda.html?sport=padel",
@@ -110,7 +110,7 @@
     "men_image": "assets/gender-men.jpg",
     "women_image": "assets/gender-women.jpg"
   },
-  "announcement_bar": "@morsassuperstore.com Tenemos delivery! Envíos gratis en compras a partir de Ref.100 ",
+  "announcement_bar": "@morsassuperstore Tenemos delivery! Envíos gratis en compras a partir de Ref.100 ",
   "locations": [
     {
       "badge": "📍 Caracas",
