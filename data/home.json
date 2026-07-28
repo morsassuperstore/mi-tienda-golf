@@ -7,7 +7,7 @@
       "eyebrow": "Nueva Colección Temporada 2026",
       "btn_primary_text": "Comprar Ahora →",
       "subtitle": "El destino número uno para golf, pádel y tenis en Venezuela. Equipos, ropa y accesorios premium — todo en un solo lugar.",
-      "image_desktop": "assets/extracted_img_5.webp",
+      "image_desktop": "assets/extracted_img_3.jpg",
       "title": "Juega Tu<br>Mejor <span class=\"gold\">Partido</span>",
       "btn_primary_link": "tienda.html",
       "link": "tienda.html",
@@ -19,7 +19,7 @@
       "alt": "Los Mejores Palos",
       "eyebrow": "Equipamiento de Alto Rendimiento",
       "btn_primary_text": "Ver Palos →",
-      "subtitle": "Drivers, hierros, putters y más de marcas líderes como TaylorMade, Callaway y Titleist.",
+      "subtitle": "Drivers, maderas, hierros putters de marcas líderes como Mizuno, Callaway, Ping y Cleveland. ",
       "image_desktop": "assets/card-golf.webp",
       "title": "Los Mejores<br><span class=\"gold\">Palos</span> del Mercado",
       "btn_primary_link": "tienda.html?cat=palos",
@@ -29,10 +29,10 @@
     {
       "image_mobile": "assets/card-padel.jpg",
       "btn_secondary_link": "",
-      "alt": "Domina la Cancha",
+      "alt": "Puro Padel! ",
       "eyebrow": "Colección Pádel & Tenis",
       "btn_primary_text": "Ver Equipamiento →",
-      "subtitle": "Descubre las palas y raquetas más avanzadas del mercado, calzado especializado y conjuntos deportivos premium.",
+      "subtitle": "Palas y raquetas Wilson más avanzadas del mercado, calzado Mizuno y New balance y conjuntos deportivos premium.",
       "image_desktop": "assets/card-padel.jpg",
       "title": "Domina la<br><span class=\"gold\">Cancha</span> con Estilo",
       "btn_primary_link": "tienda.html?sport=padel",
@@ -42,10 +42,10 @@
   ],
   "simulator": {
     "eyebrow": "Experiencia Exclusiva en Caracas",
-    "title": "Prueba Tu Swing en Nuestro<br><span class=\"gold\">Simulador de Golf Profesional</span>",
-    "desc": "En nuestra sede de La Tahona, ponemos a tu disposición tecnología de análisis de swing de última generación. Mide la velocidad de tu bola, el ángulo de lanzamiento y el spin en tiempo real para elegir el palo perfecto o perfeccionar tu juego.",
+    "title": "Prueba los palos antes de comprar! En Nuestro<br><span class=\"gold\">Simulador de Golf</span>",
+    "desc": "En nuestra sede de La Tahona, ponemos a tu disposición un area de simulador para que entiendas de primera mano la data de tu juego, caracteristicas como la velocidad de tu swing, el angulo de ataque, el spin factor, entre otros.  Si buscas comprar un driver, madera o inclusive un set de hierros vivas la senacion de cada golpe y puedas entender la flexibilidad y peso de shaft que mas se adapte a ti! ",
     "image": "assets/extracted_img_2.jpg",
-    "tech_badge": "Foresight Sports GCQuad",
+    "tech_badge": "Fitting - Demos - Simulador ",
     "btn_primary_text": "Reservar Sesión",
     "btn_primary_link": "https://wa.me/584128422837?text=Hola, me gustaría reservar una sesión en el simulador de golf"
   },
@@ -110,11 +110,11 @@
     "men_image": "assets/gender-men.jpg",
     "women_image": "assets/gender-women.jpg"
   },
-  "announcement_bar": "Envío gratis en pedidos mayores de Ref.100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra",
+  "announcement_bar": "@morsassuperstore Tenemos delivery! Envíos gratis en compras a partir de Ref.100 ",
   "locations": [
     {
       "badge": "📍 Caracas",
-      "name": "La Tahona",
+      "name": "Morsas Superstore  - La Tahona",
       "address": "Complejo Avepane, La Tahona, Caracas, Venezuela",
       "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.1!2d-66.857051!3d10.4409292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af7003a977cdb%3A0x58e61e9c9877dd15!2sMorsas%20Superstore!5e0!3m2!1ses!2sve!4v1700000000000",
       "directions_link": "https://www.google.com/maps/place/Morsas+Superstore/@10.4409292,-66.857051,17z",
@@ -122,7 +122,7 @@
     },
     {
       "badge": "📍 El Hatillo",
-      "name": "La Lagunita Country Club",
+      "name": "Morsa's Pro Shop - La Lagunita Country Club",
       "address": "La Lagunita Country Club, El Hatillo, Caracas, Venezuela",
       "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3923.5!2d-66.8095085!3d10.4239054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af78a4783be17%3A0x89d3255d8f11fc2a!2sLagunita%20Country%20Club!5e0!3m2!1ses!2sve!4v1700000000001",
       "directions_link": "https://www.google.com/maps/place/Lagunita+Country+Club/@10.4239054,-66.8095085,17z",
@@ -130,7 +130,7 @@
     },
     {
       "badge": "📍 Guatire",
-      "name": "Izcaragua Country Club",
+      "name": "Morsa's Pro Shop - Izcaragua Country Club",
       "address": "Izcaragua Country Club, Guatire, Miranda, Venezuela",
       "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.5!2d-66.6905314!3d10.4790032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a55ca952675ef%3A0x106b1693db6da309!2sIzcaragua%20Country%20Club!5e0!3m2!1ses!2sve!4v1700000000002",
       "directions_link": "https://www.google.com/maps/place/Izcaragua+Country+Club/@10.4790032,-66.6905314,17z",
@@ -138,11 +138,11 @@
     }
   ],
   "sports": {
-    "golf_count": "200+ productos · Equipos y Ropa",
+    "golf_count": " Equipos y Vestimenta",
     "golf_image": "assets/card-golf.webp",
-    "padel_count": "150+ productos · Palas y Accesorios",
+    "padel_count": " Palas y Accesorios",
     "padel_image": "assets/card-padel.jpg",
-    "tenis_count": "120+ productos · Raquetas y Ropa",
+    "tenis_count": " Raquetas y Vestimenta",
     "tenis_image": "assets/card-tenis.jpg"
   }
 }
