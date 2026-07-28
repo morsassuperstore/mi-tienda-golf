@@ -1,0 +1,135 @@
+{
+  "announcement_text": "Envío gratis en pedidos mayores de Ref.100 · Usa el código MORSA10 y obtén 10% de descuento en tu primera compra",
+  "items": [
+    {
+      "title": "Golf",
+      "url": "tienda.html?sport=golf",
+      "type": "mega",
+      "columns": [
+        {
+          "title": "Palos de Golf",
+          "links": [
+            { "text": "Drivers", "url": "tienda.html?cat=palos&sub=drivers" },
+            { "text": "Maderas", "url": "tienda.html?cat=palos&sub=maderas" },
+            { "text": "Híbridos", "url": "tienda.html?cat=palos&sub=hibridos" },
+            { "text": "Hierros", "url": "tienda.html?cat=palos&sub=hierros" },
+            { "text": "Wedges", "url": "tienda.html?cat=palos&sub=wedges" },
+            { "text": "Putters", "url": "tienda.html?cat=palos&sub=putters" }
+          ]
+        },
+        {
+          "title": "Pelotas & Accesorios",
+          "links": [
+            { "text": "Pelotas de Golf", "url": "tienda.html?cat=pelotas&sport=golf" },
+            { "text": "Guantes", "url": "tienda.html?cat=accesorios&sub=guantes-golf" },
+            { "text": "Grips", "url": "tienda.html?cat=accesorios&sub=grips" },
+            { "text": "Tees & Marcadores", "url": "tienda.html?cat=accesorios&sub=tees" }
+          ]
+        },
+        {
+          "title": "Calzado & Bolsas",
+          "links": [
+            { "text": "Zapatos Golf", "url": "tienda.html?cat=zapatos&sport=golf" },
+            { "text": "Bolsas / Maletas", "url": "tienda.html?cat=maletas&sport=golf" }
+          ]
+        },
+        {
+          "title": "Ropa de Golf",
+          "links": [
+            { "text": "Caballeros Golf", "url": "tienda.html?gender=caballeros&sport=golf&cat=ropa" },
+            { "text": "Damas Golf", "url": "tienda.html?gender=damas&sport=golf&cat=ropa" }
+          ]
+        }
+      ],
+      "featured": {
+        "image": "assets/destacado-golf.jpg",
+        "label": "Destacado",
+        "title": "Driver Stealth 2 TaylorMade",
+        "url": "tienda.html?cat=palos&sub=drivers"
+      }
+    },
+    {
+      "title": "Pádel",
+      "url": "tienda.html?sport=padel",
+      "type": "mega",
+      "columns": [
+        {
+          "title": "Equipamiento",
+          "links": [
+            { "text": "Palas de Pádel", "url": "tienda.html?cat=raquetas&sport=padel" },
+            { "text": "Pelotas de Pádel", "url": "tienda.html?cat=pelotas&sport=padel" },
+            { "text": "Grips", "url": "tienda.html?cat=accesorios&sub=grips&sport=padel" }
+          ]
+        },
+        {
+          "title": "Calzado & Ropa",
+          "links": [
+            { "text": "Calzado Pádel", "url": "tienda.html?cat=zapatos&sport=padel" },
+            { "text": "Ropa Caballeros", "url": "tienda.html?sport=padel&gender=caballeros&cat=ropa" },
+            { "text": "Ropa Damas", "url": "tienda.html?sport=padel&gender=damas&cat=ropa" }
+          ]
+        },
+        {
+          "title": "Accesorios",
+          "links": [
+            { "text": "Bolsas & Fundas", "url": "tienda.html?cat=accesorios&sport=padel" },
+            { "text": "Gorras & Viseras", "url": "tienda.html?cat=accesorios&sub=gorras" }
+          ]
+        }
+      ],
+      "featured": {
+        "image": "assets/destacado-padel.jpg",
+        "label": "Top ventas",
+        "title": "Blade V10 Wilson",
+        "url": "tienda.html?sport=padel"
+      }
+    },
+    {
+      "title": "Tenis",
+      "url": "tienda.html?sport=tenis",
+      "type": "mega",
+      "columns": [
+        {
+          "title": "Equipamiento",
+          "links": [
+            { "text": "Raquetas", "url": "tienda.html?cat=raquetas&sport=tenis" },
+            { "text": "Pelotas de Tenis", "url": "tienda.html?cat=pelotas&sport=tenis" },
+            { "text": "Grips & Cuerdas", "url": "tienda.html?cat=accesorios&sub=grips&sport=tenis" }
+          ]
+        },
+        {
+          "title": "Calzado & Ropa",
+          "links": [
+            { "text": "Calzado Tenis", "url": "tienda.html?cat=zapatos&sport=tenis" },
+            { "text": "Ropa Caballeros", "url": "tienda.html?sport=tenis&gender=caballeros&cat=ropa" },
+            { "text": "Ropa Damas", "url": "tienda.html?sport=tenis&gender=damas&cat=ropa" }
+          ]
+        },
+        {
+          "title": "Accesorios",
+          "links": [
+            { "text": "Raqueteros", "url": "tienda.html?cat=accesorios&sport=tenis" },
+            { "text": "Gorras & Muñequeras", "url": "tienda.html?cat=accesorios&sub=gorras" }
+          ]
+        }
+      ],
+      "featured": {
+        "image": "assets/destacado-tenis.jpg",
+        "label": "Top ventas",
+        "title": "Pure Drive Babolat",
+        "url": "tienda.html?sport=tenis"
+      }
+    },
+    {
+      "title": "Niños",
+      "url": "tienda.html?gender=ninos",
+      "type": "simple",
+      "section_title": "Equipamiento & Ropa",
+      "links": [
+        { "text": "Palos Junior", "url": "tienda.html?cat=palos&gender=ninos" },
+        { "text": "Ropa Junior", "url": "tienda.html?cat=ropa&gender=ninos" },
+        { "text": "Calzado Junior", "url": "tienda.html?cat=zapatos&gender=ninos" }
+      ]
+    }
+  ]
+}

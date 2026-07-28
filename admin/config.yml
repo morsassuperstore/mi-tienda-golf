@@ -12,6 +12,93 @@ media_folder: "assets"
 public_folder: "assets"
 
 collections:
+  - name: "navegacion"
+    label: "Menú de Navegación"
+    description: "Edita el texto del anuncio superior y las pestañas del menú principal (Golf, Pádel, Tenis, etc.)."
+    delete: false
+    files:
+      - name: "menu_main"
+        label: "Estructura del Menú Principal"
+        file: "data/menu.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Texto del Anuncio Superior"
+            name: "announcement_text"
+            widget: "string"
+          - label: "Pestañas del Menú Principal"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Título de la Pestaña (ej. Golf, Pádel)"
+                name: "title"
+                widget: "string"
+              - label: "Enlace Principal (ej. tienda.html?sport=golf)"
+                name: "url"
+                widget: "string"
+              - label: "Tipo de Menú"
+                name: "type"
+                widget: "select"
+                options:
+                  - label: "Mega Menú (Columnas + Producto Destacado)"
+                    value: "mega"
+                  - label: "Desplegable Simple"
+                    value: "simple"
+              - label: "Título de Sección (Solo para Desplegable Simple)"
+                name: "section_title"
+                widget: "string"
+                required: false
+              - label: "Columnas del Mega Menú"
+                name: "columns"
+                widget: "list"
+                required: false
+                summary: "{{fields.title}}"
+                fields:
+                  - label: "Título de la Columna"
+                    name: "title"
+                    widget: "string"
+                  - label: "Enlaces de la Columna"
+                    name: "links"
+                    widget: "list"
+                    summary: "{{fields.text}}"
+                    fields:
+                      - label: "Texto del Enlace"
+                        name: "text"
+                        widget: "string"
+                      - label: "Ruta / URL del Enlace"
+                        name: "url"
+                        widget: "string"
+              - label: "Producto Destacado (Mega Menú)"
+                name: "featured"
+                widget: "object"
+                required: false
+                fields:
+                  - label: "Imagen"
+                    name: "image"
+                    widget: "image"
+                  - label: "Etiqueta (ej. Destacado, Top Ventas)"
+                    name: "label"
+                    widget: "string"
+                  - label: "Título del Producto"
+                    name: "title"
+                    widget: "string"
+                  - label: "Enlace de Destino"
+                    name: "url"
+                    widget: "string"
+              - label: "Enlaces Simples (Solo para Desplegable Simple)"
+                name: "links"
+                widget: "list"
+                required: false
+                summary: "{{fields.text}}"
+                fields:
+                  - label: "Texto del Enlace"
+                    name: "text"
+                    widget: "string"
+                  - label: "Ruta / URL del Enlace"
+                    name: "url"
+                    widget: "string"
+
   - name: "inicio"
     label: "Página de Inicio"
     description: "Edita de forma visual los banners, imágenes, textos, promociones, sucursales y datos de pago de la portada."
