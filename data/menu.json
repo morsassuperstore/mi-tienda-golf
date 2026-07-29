@@ -53,6 +53,10 @@
             {
               "text": "Tees & Marcadores",
               "url": "tienda.html?cat=accesorios&sub=tees"
+            },
+            {
+              "text": "Paraguas",
+              "url": "tienda.html?cat=accesorios&sub=paraguas"
             }
           ]
         },
@@ -197,8 +201,8 @@
               "text": "Pelotas "
             },
             {
-              "text": "Sudadera",
-              "url": "tienda.html?cat=accesorios&sub=sudadera"
+              "text": "Sudaderas",
+              "url": "tienda.html?cat=accesorios&sub=sudaderas"
             }
           ]
         }
