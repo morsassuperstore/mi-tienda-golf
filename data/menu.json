@@ -36,7 +36,7 @@
           ]
         },
         {
-          "title": "Pelotas & Accesorios",
+          "title": "Accesorios",
           "links": [
             {
               "text": "Pelotas de Golf",
@@ -57,15 +57,15 @@
           ]
         },
         {
-          "title": "Calzado & Bolsas",
+          "title": "Maletas & Carritos",
           "links": [
             {
-              "text": "Zapatos Golf",
-              "url": "tienda.html?cat=zapatos&sport=golf"
+              "text": "Maletas",
+              "url": "tienda.html?cat=maletas&sport=golf"
             },
             {
-              "text": "Bolsas / Maletas",
-              "url": "tienda.html?cat=maletas&sport=golf"
+              "text": "Carritos ",
+              "url": "tienda.html?cat=carritos&sport=golf"
             }
           ]
         },
@@ -73,12 +73,16 @@
           "title": "Ropa de Golf",
           "links": [
             {
-              "text": "Caballeros Golf",
+              "text": "Caballeros ",
               "url": "tienda.html?gender=caballeros&sport=golf&cat=ropa"
             },
             {
-              "text": "Damas Golf",
+              "text": "Damas ",
               "url": "tienda.html?gender=damas&sport=golf&cat=ropa"
+            },
+            {
+              "url": "tienda.html?cat=zapatos&sport=golf",
+              "text": "Zapatos "
             }
           ]
         }
@@ -99,16 +103,8 @@
           "title": "Equipamiento",
           "links": [
             {
-              "text": "Palas de Pádel",
+              "text": "Palas",
               "url": "tienda.html?cat=raquetas&sport=padel"
-            },
-            {
-              "text": "Pelotas de Pádel",
-              "url": "tienda.html?cat=pelotas&sport=padel"
-            },
-            {
-              "text": "Grips",
-              "url": "tienda.html?cat=accesorios&sub=grips&sport=padel"
             }
           ]
         },
@@ -133,12 +129,16 @@
           "title": "Accesorios",
           "links": [
             {
-              "text": "Bolsas & Estuches",
-              "url": "tienda.html?cat=accesorios&sport=padel"
+              "text": "Grips",
+              "url": "tienda.html?cat=accesorios&sub=grips&sport=padel"
             },
             {
               "text": "Gorras & Viseras",
               "url": "tienda.html?cat=accesorios&sub=gorras"
+            },
+            {
+              "text": "Pelotas ",
+              "url": "tienda.html?cat=accesorios&sub=pelotas&sport=padel"
             }
           ]
         }
@@ -161,14 +161,6 @@
             {
               "text": "Raquetas",
               "url": "tienda.html?cat=raquetas&sport=tenis"
-            },
-            {
-              "text": "Pelotas de Tenis",
-              "url": "tienda.html?cat=pelotas&sport=tenis"
-            },
-            {
-              "text": "Grips & Cuerdas",
-              "url": "tienda.html?cat=accesorios&sub=grips&sport=tenis"
             }
           ]
         },
@@ -193,12 +185,20 @@
           "title": "Accesorios",
           "links": [
             {
-              "text": "Raqueteros",
-              "url": "tienda.html?cat=accesorios&sport=tenis"
+              "text": "Grips",
+              "url": "tienda.html?cat=accesorios&sport=grips"
             },
             {
-              "text": "Gorras & Muñequeras",
+              "text": "Gorras",
               "url": "tienda.html?cat=accesorios&sub=gorras"
+            },
+            {
+              "url": "tienda.html?cat=accesorios&sub=pelotas",
+              "text": "Pelotas "
+            },
+            {
+              "text": "Sudadera",
+              "url": "tienda.html?cat=accesorios&sub=sudadera"
             }
           ]
         }
