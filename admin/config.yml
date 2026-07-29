@@ -58,17 +58,21 @@ collections:
                   - label: "Título de la Columna"
                     name: "title"
                     widget: "string"
+                    required: false
                   - label: "Enlaces de la Columna"
                     name: "links"
                     widget: "list"
+                    required: false
                     summary: "{{fields.text}}"
                     fields:
                       - label: "Texto del Enlace"
                         name: "text"
                         widget: "string"
+                        required: false
                       - label: "Ruta / URL del Enlace"
                         name: "url"
                         widget: "string"
+                        required: false
               - label: "Producto Destacado (Mega Menú)"
                 name: "featured"
                 widget: "object"
@@ -77,15 +81,19 @@ collections:
                   - label: "Imagen"
                     name: "image"
                     widget: "image"
+                    required: false
                   - label: "Etiqueta (ej. Destacado, Top Ventas)"
                     name: "label"
                     widget: "string"
+                    required: false
                   - label: "Título del Producto"
                     name: "title"
                     widget: "string"
+                    required: false
                   - label: "Enlace de Destino"
                     name: "url"
                     widget: "string"
+                    required: false
               - label: "Enlaces Simples (Solo para Desplegable Simple)"
                 name: "links"
                 widget: "list"
@@ -95,9 +103,11 @@ collections:
                   - label: "Texto del Enlace"
                     name: "text"
                     widget: "string"
+                    required: false
                   - label: "Ruta / URL del Enlace"
                     name: "url"
                     widget: "string"
+                    required: false
 
   - name: "inicio"
     label: "Página de Inicio"
