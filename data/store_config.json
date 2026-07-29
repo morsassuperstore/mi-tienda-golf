@@ -1,27 +1,27 @@
 {
-  "whatsapp_number": "584128422837",
-  "free_shipping_threshold": 100,
-  "delivery_cost": 3,
-  "manual_exchange_rate": null,
   "payment_zelle": {
-    "email": "pagos@morsasgolf.com",
+    "email": "info@morsasgolf.com",
     "name": "Morsa's Proshop LLC"
   },
-  "payment_venmo": {
-    "user": "@mariafernanda-nunez",
-    "name": "Maria Fernanda Nunez"
-  },
+  "manual_exchange_rate": null,
   "payment_pagomovil": {
-    "bank": "Banesco",
-    "id": "J-500212345",
+    "bank": "Banco de Venezuela ",
+    "id": "J-508203003",
     "phone": "04128422837"
-  },
-  "payment_binance": {
-    "pay_id": "pagos@morsasgolf.com"
   },
   "social_links": {
     "instagram": "https://instagram.com/morsasgolf",
     "facebook": "",
     "twitter": ""
+  },
+  "payment_venmo": {
+    "user": "@mariafernanda-nunez",
+    "name": "Maria Fernanda Nunez"
+  },
+  "free_shipping_threshold": 100,
+  "whatsapp_number": "584128422837",
+  "delivery_cost": 3,
+  "payment_binance": {
+    "pay_id": "ID: 364212398"
   }
 }
