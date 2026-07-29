@@ -15,7 +15,7 @@
     },
     {
       "image_mobile": "assets/card-golf.webp",
-      "btn_secondary_link": "tienda.html?sport=golf&cat=accesorios",
+      "btn_secondary_link": "",
       "alt": "Palos de Golf",
       "eyebrow": "Equipamiento de Alto Rendimiento",
       "btn_primary_text": "Comprar ahora →",
@@ -24,7 +24,7 @@
       "title": "Los Mejores<br><span class=\"gold\">Palos</span> del Mercado",
       "btn_primary_link": "tienda.html?cat=palos",
       "link": "tienda.html?sport=golf",
-      "btn_secondary_text": "Accesorios de Golf"
+      "btn_secondary_text": ""
     },
     {
       "image_mobile": "assets/card-padel.jpg",
