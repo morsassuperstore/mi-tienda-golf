@@ -38,6 +38,19 @@
       "btn_primary_link": "tienda.html?sport=padel",
       "link": "tienda.html?sport=padel",
       "btn_secondary_text": ""
+    },
+    {
+      "image_mobile": "assets/934a377a-4091-429a-bb4f-7ecb8cd0080e.jpeg",
+      "btn_secondary_link": "",
+      "alt": "",
+      "eyebrow": "",
+      "btn_primary_text": "Reservar sesion ",
+      "subtitle": "Practica tu swing en nuestra area de simulador",
+      "image_desktop": "assets/3b5488cf-2c64-4a40-9452-8df8224e69ef.jpeg",
+      "title": "SIMULADOR<br> DE<span class=\"gold\"> GOLF </span>",
+      "btn_primary_link": "https://wa.me/584128422837?text=Hola, me gustaría reservar una sesión en el simulador de golf",
+      "link": "",
+      "btn_secondary_text": ""
     }
   ],
   "simulator": {
