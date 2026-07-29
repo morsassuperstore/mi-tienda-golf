@@ -51,6 +51,19 @@
       "btn_primary_link": "https://wa.me/584128422837?text=Hola, me gustaría reservar una sesión en el simulador de golf",
       "link": "",
       "btn_secondary_text": ""
+    },
+    {
+      "image_mobile": "assets/card-tenis.jpg",
+      "btn_secondary_link": "",
+      "alt": "Tennis",
+      "eyebrow": "",
+      "btn_primary_text": "Ver Equipamiento →",
+      "subtitle": "Raquetas, pelotas y grips para mantener al tope tu juego! ",
+      "image_desktop": "assets/card-tenis.jpg",
+      "title": "EL  <br><span class=\"gold\">DEPORTE</span> REY",
+      "btn_primary_link": "tienda.html?sport=tennis",
+      "link": "tienda.html?sport=tennis",
+      "btn_secondary_text": ""
     }
   ],
   "simulator": {
