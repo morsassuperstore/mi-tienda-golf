@@ -110,9 +110,6 @@ collections:
         editor:
           preview: false
         fields:
-          - label: "Barra de Anuncio Superior"
-            name: "announcement_bar"
-            widget: "string"
           - label: "Banners Principales (Carrusel)"
             name: "hero_banners"
             widget: "list"

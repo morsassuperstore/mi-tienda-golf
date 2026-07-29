@@ -3406,10 +3406,6 @@
         .then(res => res.json())
         .then(data => {
           if (data) {
-            // Announcement
-            const announceEl = document.getElementById('announcement-text');
-            if (announceEl) announceEl.textContent = data.announcement_bar;
-
             // Hero (Carrusel de Banners)
             const heroCarousel = document.getElementById('heroCarousel');
             if (data.hero_banners && data.hero_banners.length > 0) {
