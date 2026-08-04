@@ -2843,9 +2843,11 @@ function openZoomModal() {
 
   if (zoomTitle) zoomTitle.textContent = currentProduct.name;
 
-  let imagesToRender = currentProduct.allImages && currentProduct.allImages.length > 0 
-    ? currentProduct.allImages.map(img => img.src) 
-    : [currentProduct.img, currentProduct.img2].filter(Boolean);
+  let imagesToRender = currentGalleryImages && currentGalleryImages.length > 0
+    ? currentGalleryImages
+    : (currentProduct.allImages && currentProduct.allImages.length > 0 
+      ? currentProduct.allImages.map(img => img.src) 
+      : [currentProduct.img, currentProduct.img2].filter(Boolean));
 
   imagesToRender = [...new Set(imagesToRender)];
 
