@@ -2817,8 +2817,14 @@ function pdvSelectColor(el, hex, colorNameRaw) {
     // Actualizar galería solo con imágenes de este color
     let colorImages = [];
     matchingVars.forEach(v => {
+      // 1. Imagen principal de la variación
       if (v.image_src) colorImages.push(v.image_src);
-      else if (v.image && v.image.src) colorImages.push(v.image.src); // Soporte para formato Woo estandar
+      else if (v.image && v.image.src) colorImages.push(v.image.src); // Soporte formato Woo original
+      
+      // 2. Galería adicional de la variación (desde el nuevo plugin)
+      if (v.gallery_images && Array.isArray(v.gallery_images)) {
+        v.gallery_images.forEach(img => colorImages.push(img));
+      }
     });
     
     if (colorImages.length > 0) {
