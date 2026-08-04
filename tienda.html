@@ -865,43 +865,99 @@
   /* Main Lululemon Product Layout */
   .pdv-product {
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 58% 42%;
     max-width: 1320px;
     margin: 0 auto;
-    padding: 40px 40px 0;
+    padding: 32px 40px 0;
     gap: 48px;
     width: 100%;
     align-items: start;
   }
 
-  /* Image Stream Column (Left - Lululemon Vertical Stream) */
+  /* Image Column (Lululemon Layout: Single Main Image + Horizontal Thumbnails + Magnifying Zoom Button) */
   .pdv-images {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    position: relative;
   }
-  .pdv-photo-stream {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .pdv-photo-item {
+  .pdv-main-img-wrap {
     position: relative;
     width: 100%;
     aspect-ratio: 4/5;
     background: #f9fafb;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .pdv-photo-item img {
+  .pdv-main-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: transform 0.4s ease;
+    transition: opacity 0.2s ease, transform 0.3s ease;
   }
-  .pdv-photo-item:hover img {
-    transform: scale(1.03);
+  
+  /* Botón Lupa de Zoom (Lululemon Magnifying Glass Button) */
+  .pdv-zoom-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    color: #111827;
+    z-index: 5;
+  }
+  .pdv-zoom-btn:hover {
+    background: #111827;
+    color: #ffffff;
+    border-color: #111827;
+    transform: scale(1.05);
+  }
+
+  /* Miniaturas Horizontales */
+  .pdv-thumbs-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-behavior: smooth;
+  }
+  .pdv-thumbs-row::-webkit-scrollbar {
+    height: 4px;
+  }
+  .pdv-thumbs-row::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+  }
+  .pdv-thumb {
+    width: 72px;
+    height: 86px;
+    flex-shrink: 0;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: #f3f4f6;
+    transition: all 0.15s ease;
+  }
+  .pdv-thumb:hover {
+    border-color: #9ca3af;
+  }
+  .pdv-thumb.active {
+    border-color: #111827;
+    box-shadow: 0 0 0 1px #111827;
   }
 
   .pdv-badge {
@@ -916,6 +972,88 @@
     padding: 5px 14px;
     border-radius: 100px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 5;
+  }
+
+  /* Modal de Zoom a Pantalla Completa (Lululemon Zoom Modal) */
+  .pdv-zoom-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+  .pdv-zoom-modal.open {
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+  }
+  .pdv-zoom-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    z-index: 10;
+  }
+  .pdv-zoom-back {
+    background: none;
+    border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pdv-zoom-back:hover { text-decoration: underline; }
+  .pdv-zoom-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+  }
+  .pdv-zoom-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #111827;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  .pdv-zoom-body {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+  .pdv-zoom-img-item {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f9fafb;
+  }
+  .pdv-zoom-img-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
   }
 
   /* Info Column (Right - Sticky Lululemon Sidebar) */
@@ -1768,10 +1906,16 @@
 
   <!-- Product section -->
   <div class="pdv-product">
-    <!-- Images left (Lululemon Photo Stream) -->
-    <div class="pdv-images" style="position:relative;">
-      <div class="pdv-badge" id="pdvBadge" style="display:none"></div>
-      <div class="pdv-photo-stream" id="pdvPhotoStream"></div>
+    <!-- Images left (Lululemon Main Image + Zoom Lupa + Horizontal Thumbnails) -->
+    <div class="pdv-images">
+      <div class="pdv-main-img-wrap">
+        <img class="pdv-main-img" id="pdvMainImg" src="" alt="">
+        <div class="pdv-badge" id="pdvBadge" style="display:none"></div>
+        <button class="pdv-zoom-btn" onclick="openZoomModal()" title="Ver fotos ampliadas">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </button>
+      </div>
+      <div class="pdv-thumbs-row" id="pdvThumbs"></div>
     </div>
 
     <!-- Info right (Sticky Purchase Column) -->
@@ -1814,11 +1958,11 @@
         </a>
       </div>
 
-      <!-- Accordions estilo Lululemon -->
+      <!-- Accordions estilo Lululemon sin emojis -->
       <div class="pdv-accordions">
         <div class="pdv-accordion-item open">
           <button class="pdv-accordion-btn" onclick="togglePDVAccordion(this)">
-            🧵 Características & Tejido <span class="pdv-accordion-icon">+</span>
+            Características & Tejido <span class="pdv-accordion-icon">+</span>
           </button>
           <div class="pdv-accordion-content">
             <div id="pdvDesc"></div>
@@ -1827,7 +1971,7 @@
         </div>
         <div class="pdv-accordion-item">
           <button class="pdv-accordion-btn" onclick="togglePDVAccordion(this)">
-            🚚 Envíos & Retiro en Tienda <span class="pdv-accordion-icon">+</span>
+            Envíos & Retiro en Tienda <span class="pdv-accordion-icon">+</span>
           </button>
           <div class="pdv-accordion-content">
             Delivery express en Caracas (entrega en 24 horas) y envíos nacionales asegurados a toda Venezuela por MRW, Zoom y Tealca. Retiro gratuito en nuestras tiendas de La Tahona, La Lagunita e Izcaragua.
@@ -1835,7 +1979,7 @@
         </div>
         <div class="pdv-accordion-item">
           <button class="pdv-accordion-btn" onclick="togglePDVAccordion(this)">
-            🛡️ Garantía & Autenticidad Morsa's <span class="pdv-accordion-icon">+</span>
+            Garantía & Autenticidad Morsa's <span class="pdv-accordion-icon">+</span>
           </button>
           <div class="pdv-accordion-content">
             Garantía 100% de productos originales importados directamente de fabricantes oficiales (Mizuno, Callaway, Wilson, Big Max, Taylormade, Babolat). Cobertura contra defectos de manufactura y cambio de talla simplificado.
@@ -1900,6 +2044,19 @@
 
 </div>
 
+<!-- Modal de Zoom a Pantalla Completa (Lululemon Zoom View) -->
+<div class="pdv-zoom-modal" id="pdvZoomModal">
+  <div class="pdv-zoom-header">
+    <button class="pdv-zoom-back" onclick="closeZoomModal()">
+      ‹ Volver al Producto
+    </button>
+    <div class="pdv-zoom-title" id="pdvZoomTitle"></div>
+    <button class="pdv-zoom-close" onclick="closeZoomModal()" aria-label="Cerrar modal">✕</button>
+  </div>
+  <div class="pdv-zoom-body" id="pdvZoomBody">
+    <!-- Fotos gigantes de alta resolución en flujo vertical -->
+  </div>
+</div>
 
 <!-- TOAST -->
 <div class="toast" id="toast">
@@ -2237,7 +2394,7 @@ function addToCart(id, variationId = 0, attributes = {}, fromModal = false, cust
   if (remaining <= 0) {
     bar.classList.add('full');
     label.className = 'toast-shipping free';
-    label.innerHTML = '<strong>🎉 ¡Tienes envío gratis!</strong>';
+    label.innerHTML = '<strong>¡Tienes envío gratis!</strong>';
   } else {
     bar.classList.remove('full');
     label.className = 'toast-shipping';
@@ -2334,8 +2491,14 @@ function openModal(id) {
   // Breadcrumb
   document.getElementById('pdvBreadName').textContent = p.name;
 
-  // Lululemon Vertical Photo Stream
-  const photoStream = document.getElementById('pdvPhotoStream');
+  // Main image & horizontal thumbnails
+  const mainImg = document.getElementById('pdvMainImg');
+  if (mainImg) {
+    mainImg.src = p.img;
+    mainImg.alt = p.name;
+  }
+
+  const thumbsRow = document.getElementById('pdvThumbs');
   let imagesToRender = p.allImages && p.allImages.length > 0 
     ? p.allImages.map(img => img.src) 
     : [p.img, p.img2].filter(Boolean);
@@ -2343,11 +2506,9 @@ function openModal(id) {
   // Filtrar duplicados
   imagesToRender = [...new Set(imagesToRender)];
 
-  if (photoStream) {
-    photoStream.innerHTML = imagesToRender.map((src, i) =>
-      `<div class="pdv-photo-item">
-        <img src="${src}" alt="${p.name} - Vista ${i+1}" loading="${i===0?'eager':'lazy'}">
-      </div>`
+  if (thumbsRow) {
+    thumbsRow.innerHTML = imagesToRender.map((src, i) =>
+      `<img class="pdv-thumb${i===0?' active':''}" src="${src}" alt="${p.name} - ${i+1}" onclick="pdvSwitchImg(this,'${src}')">`
     ).join('');
   }
 
@@ -2357,11 +2518,11 @@ function openModal(id) {
   if (p.badge && badgeMap[p.badge]) {
     badge.textContent = badgeMap[p.badge];
     badge.style.display = 'block';
-    badge.style.background = p.badge === 'sale' ? '#c0392b' : 'var(--navy)';
+    badge.style.background = p.badge === 'sale' ? '#c0392b' : '#111827';
   } else { badge.style.display = 'none'; }
 
-  // Sport tag
-  const sportMap = { golf:'⛳ Golf', padel:'🎾 Pádel', tenis:'🎾 Tenis' };
+  // Sport tag (Sin emojis)
+  const sportMap = { golf:'Golf', padel:'Pádel', tenis:'Tenis' };
   const catMap = { ropa:'Ropa', palos:'Palos', zapatos:'Zapatos', accesorios:'Accesorios', pelotas:'Pelotas', maletas:'Maletas', raquetas:'Raquetas/Palas' };
   document.getElementById('pdvSport').textContent = (sportMap[p.sport]||p.sport) + '  ·  ' + (catMap[p.cat]||p.cat);
   document.getElementById('pdvName').textContent = p.name;
@@ -2546,22 +2707,25 @@ function toggleSidebar() {
 function pdvSwitchImg(thumb, src) {
   document.getElementById('pdvMainImg').src = src;
   document.querySelectorAll('.pdv-thumb').forEach(t => t.classList.remove('active'));
-  thumb.classList.add('active');
+  if (thumb) thumb.classList.add('active');
 }
+
 function pdvSelectColor(el, hex, colorNameRaw) {
   document.querySelectorAll('.pdv-color-swatch').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('pdvColorName').innerHTML = `${getColorName(hex)} <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:var(--text-mid); text-decoration:underline;" id="pdvClearBtn">Limpiar selección</a>`;
+  if (el) el.classList.add('active');
+  
+  const displayColor = colorNameRaw || getColorName(hex);
+  document.getElementById('pdvColorName').innerHTML = `${displayColor} <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:#6b7280; text-decoration:underline;" id="pdvClearBtn">Limpiar selección</a>`;
   
   if (currentProduct) {
-    currentProduct.selectedColorRaw = colorNameRaw;
+    currentProduct.selectedColorRaw = colorNameRaw || hex;
   }
   
-  if (currentProduct && currentProduct.variations.length > 0 && colorNameRaw) {
+  if (currentProduct && currentProduct.variations && currentProduct.variations.length > 0 && colorNameRaw) {
     // Filtrar las variaciones que coinciden con el color seleccionado
     const matchingVars = currentProduct.variations.filter(v => {
       const colorAttr = v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
-      return colorAttr && colorAttr.value === colorNameRaw;
+      return colorAttr && String(colorAttr.value).toLowerCase() === String(colorNameRaw).toLowerCase();
     });
     
     // Obtener tallas disponibles para ese color
@@ -2572,27 +2736,49 @@ function pdvSelectColor(el, hex, colorNameRaw) {
     
     // Actualizar la interfaz de tallas
     const sEl = document.getElementById('pdvSizes');
-    if (availableSizes.length > 0) {
+    if (availableSizes.length > 0 && sEl) {
       sEl.innerHTML = availableSizes.map(s =>
         `<button class="pdv-size-btn" onclick="pdvSelectSize(this)">${s}</button>`
       ).join('');
-    } else {
-      sEl.innerHTML = `<span style="font-size:13px;color:var(--text-mid)">Agotado en este color</span>`;
     }
     
-    // Si tenemos las fullVariations con imagen, cambiamos la imagen principal
-    if (currentProduct.fullVariations) {
-      const targetVar = currentProduct.fullVariations.find(v => {
-         const hasColor = v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
-         return hasColor && hasColor.value === colorNameRaw && v.image_src;
-      });
-      if (targetVar && targetVar.image_src) {
-        // Change main image without breaking the active thumbnail selection visually (or we can just update main)
-        const mainImg = document.getElementById('pdvMainImg');
-        mainImg.src = targetVar.image_src;
-      }
+    // Cambiar la imagen principal si la variación tiene imagen
+    const targetVar = matchingVars.find(v => v.image_src);
+    if (targetVar && targetVar.image_src) {
+      const mainImg = document.getElementById('pdvMainImg');
+      if (mainImg) mainImg.src = targetVar.image_src;
     }
   }
+}
+
+function openZoomModal() {
+  if (!currentProduct) return;
+  const zoomModal = document.getElementById('pdvZoomModal');
+  const zoomTitle = document.getElementById('pdvZoomTitle');
+  const zoomBody  = document.getElementById('pdvZoomBody');
+
+  if (zoomTitle) zoomTitle.textContent = currentProduct.name;
+
+  let imagesToRender = currentProduct.allImages && currentProduct.allImages.length > 0 
+    ? currentProduct.allImages.map(img => img.src) 
+    : [currentProduct.img, currentProduct.img2].filter(Boolean);
+
+  imagesToRender = [...new Set(imagesToRender)];
+
+  if (zoomBody) {
+    zoomBody.innerHTML = imagesToRender.map((src, i) =>
+      `<div class="pdv-zoom-img-item">
+        <img src="${src}" alt="${currentProduct.name} - Vista ampliada ${i+1}" loading="lazy">
+      </div>`
+    ).join('');
+  }
+
+  if (zoomModal) zoomModal.classList.add('open');
+}
+
+function closeZoomModal() {
+  const zoomModal = document.getElementById('pdvZoomModal');
+  if (zoomModal) zoomModal.classList.remove('open');
 }
 
 function pdvClearSelection(e) {
