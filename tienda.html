@@ -67,6 +67,10 @@
     background: var(--off-white);
     color: var(--text-dark);
   }
+  
+  .no-scroll {
+    overflow: hidden !important;
+  }
 
   /* ─── ANNOUNCE BAR ─── */
   .announce-bar {
@@ -925,10 +929,36 @@
     transform: scale(1.05);
   }
 
+  /* Botones de Navegación de Galería (Lululemon Arrows) */
+  .pdv-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    color: #111827;
+    z-index: 5;
+  }
+  .pdv-arrow:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+  }
+  .pdv-arrow-left { left: 16px; }
+  .pdv-arrow-right { right: 16px; }
+
   /* Miniaturas Horizontales */
   .pdv-thumbs-row {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     overflow-x: auto;
     padding-bottom: 6px;
     scroll-behavior: smooth;
@@ -941,12 +971,12 @@
     border-radius: 4px;
   }
   .pdv-thumb {
-    width: 72px;
-    height: 86px;
+    width: 56px;
+    height: 68px;
     flex-shrink: 0;
     object-fit: cover;
     object-position: center;
-    border-radius: 6px;
+    border-radius: 4px;
     border: 2px solid transparent;
     cursor: pointer;
     background: #f3f4f6;
@@ -1908,10 +1938,19 @@
   <div class="pdv-product">
     <!-- Images left (Lululemon Main Image + Zoom Lupa + Horizontal Thumbnails) -->
     <div class="pdv-images">
-      <div class="pdv-main-img-wrap">
+      <div class="pdv-main-img-wrap" style="cursor: zoom-in;" onclick="openZoomModal()">
         <img class="pdv-main-img" id="pdvMainImg" src="" alt="">
         <div class="pdv-badge" id="pdvBadge" style="display:none"></div>
-        <button class="pdv-zoom-btn" onclick="openZoomModal()" title="Ver fotos ampliadas">
+        
+        <!-- Flechas de navegación -->
+        <button class="pdv-arrow pdv-arrow-left" onclick="event.stopPropagation(); pdvPrevImg()" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="pdv-arrow pdv-arrow-right" onclick="event.stopPropagation(); pdvNextImg()" aria-label="Siguiente">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <button class="pdv-zoom-btn" onclick="event.stopPropagation(); openZoomModal()" title="Ver fotos ampliadas">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
         </button>
       </div>
@@ -2480,6 +2519,22 @@ function getReviews(id) {
   return reviewsDB[id];
 }
 
+let currentGalleryImages = [];
+let currentGalleryIndex = 0;
+
+function pdvUpdateGalleryRender() {
+  const thumbsRow = document.getElementById('pdvThumbs');
+  if (thumbsRow) {
+    thumbsRow.innerHTML = currentGalleryImages.map((src, i) =>
+      `<img class="pdv-thumb${i===currentGalleryIndex?' active':''}" src="${src}" alt="Vista ${i+1}" onclick="pdvSwitchImg(this,'${src}')">`
+    ).join('');
+  }
+  const mainImg = document.getElementById('pdvMainImg');
+  if (mainImg && currentGalleryImages.length > 0) {
+    mainImg.src = currentGalleryImages[currentGalleryIndex];
+  }
+}
+
 function openModal(id) {
   const p = products.find(x => x.id === id);
   if (!p) return;
@@ -2491,26 +2546,15 @@ function openModal(id) {
   // Breadcrumb
   document.getElementById('pdvBreadName').textContent = p.name;
 
-  // Main image & horizontal thumbnails
-  const mainImg = document.getElementById('pdvMainImg');
-  if (mainImg) {
-    mainImg.src = p.img;
-    mainImg.alt = p.name;
-  }
-
-  const thumbsRow = document.getElementById('pdvThumbs');
+  // Inicializar Galería Principal
   let imagesToRender = p.allImages && p.allImages.length > 0 
     ? p.allImages.map(img => img.src) 
     : [p.img, p.img2].filter(Boolean);
   
-  // Filtrar duplicados
-  imagesToRender = [...new Set(imagesToRender)];
+  currentGalleryImages = [...new Set(imagesToRender)];
+  currentGalleryIndex = 0;
+  pdvUpdateGalleryRender();
 
-  if (thumbsRow) {
-    thumbsRow.innerHTML = imagesToRender.map((src, i) =>
-      `<img class="pdv-thumb${i===0?' active':''}" src="${src}" alt="${p.name} - ${i+1}" onclick="pdvSwitchImg(this,'${src}')">`
-    ).join('');
-  }
 
   // Badge
   const badge = document.getElementById('pdvBadge');
@@ -2619,7 +2663,8 @@ function openModal(id) {
   document.getElementById('pdvWrBody').value = '';
 
   overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.documentElement.classList.add('no-scroll');
+  document.body.classList.add('no-scroll');
 }
 
 function renderReviews(id) {
@@ -2688,7 +2733,8 @@ function submitReview() {
 
 function closePDV() {
   document.getElementById('pdvOverlay').classList.remove('open');
-  document.body.style.overflow = '';
+  document.documentElement.classList.remove('no-scroll');
+  document.body.classList.remove('no-scroll');
   currentProduct = null;
 }
 // keep backward compat alias
@@ -2700,14 +2746,32 @@ function toggleSidebar() {
   if (sidebar && overlay) {
     sidebar.classList.toggle('open');
     overlay.classList.toggle('open');
-    document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+    if (sidebar.classList.contains('open')) {
+      document.documentElement.classList.add('no-scroll');
+      document.body.classList.add('no-scroll');
+    } else {
+      document.documentElement.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll');
+    }
   }
 }
 
 function pdvSwitchImg(thumb, src) {
-  document.getElementById('pdvMainImg').src = src;
-  document.querySelectorAll('.pdv-thumb').forEach(t => t.classList.remove('active'));
-  if (thumb) thumb.classList.add('active');
+  currentGalleryIndex = currentGalleryImages.indexOf(src);
+  if (currentGalleryIndex === -1) currentGalleryIndex = 0;
+  pdvUpdateGalleryRender();
+}
+
+function pdvPrevImg() {
+  if (currentGalleryImages.length <= 1) return;
+  currentGalleryIndex = (currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+  pdvUpdateGalleryRender();
+}
+
+function pdvNextImg() {
+  if (currentGalleryImages.length <= 1) return;
+  currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
+  pdvUpdateGalleryRender();
 }
 
 function pdvSelectColor(el, hex, colorNameRaw) {
@@ -2742,11 +2806,16 @@ function pdvSelectColor(el, hex, colorNameRaw) {
       ).join('');
     }
     
-    // Cambiar la imagen principal si la variación tiene imagen
-    const targetVar = matchingVars.find(v => v.image_src);
-    if (targetVar && targetVar.image_src) {
-      const mainImg = document.getElementById('pdvMainImg');
-      if (mainImg) mainImg.src = targetVar.image_src;
+    // Actualizar galería solo con imágenes de este color
+    let colorImages = [];
+    matchingVars.forEach(v => {
+      if (v.image_src) colorImages.push(v.image_src);
+    });
+    
+    if (colorImages.length > 0) {
+      currentGalleryImages = [...new Set(colorImages)];
+      currentGalleryIndex = 0;
+      pdvUpdateGalleryRender();
     }
   }
 }
