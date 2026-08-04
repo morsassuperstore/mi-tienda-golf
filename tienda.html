@@ -802,17 +802,16 @@
   .page-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
   .page-btn.arrow { width: auto; padding: 0 14px; gap: 5px; }
 
-  /* ─── PRODUCT DETAIL MODAL ─── */
-  /* ─── PRODUCT DETAIL VIEW (full-screen slide-over) ─── */
+  /* ─── PRODUCT DETAIL VIEW (PDP - LULULEMON STYLE) ─── */
   .pdv-overlay {
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: var(--off-white);
+    background: #ffffff;
     display: flex;
     flex-direction: column;
     transform: translateY(100%);
-    transition: transform 0.42s cubic-bezier(.22,.8,.34,1);
+    transition: transform 0.4s cubic-bezier(.16, 1, 0.3, 1);
     overflow-y: auto;
     pointer-events: none;
     visibility: hidden;
@@ -823,246 +822,275 @@
     visibility: visible;
   }
 
-  /* Top bar */
+  /* Top bar minimalista */
   .pdv-topbar {
     position: sticky;
     top: 0;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid #eee;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e5e7eb;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 28px;
+    gap: 16px;
+    padding: 14px 40px;
   }
   .pdv-back {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     background: none;
     border: none;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--navy);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #111827;
     cursor: pointer;
-    padding: 6px 12px;
-    border-radius: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
     transition: background 0.15s;
   }
-  .pdv-back:hover { background: #eef0ff; }
+  .pdv-back:hover { background: #f3f4f6; }
   .pdv-breadcrumb {
-    font-size: 12px;
-    color: #aaa;
+    font-size: 13px;
+    color: #6b7280;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
   }
-  .pdv-breadcrumb span { color: var(--text-dark); font-weight: 600; }
+  .pdv-breadcrumb span { color: #111827; font-weight: 600; }
 
-  /* Main product section */
+  /* Main Lululemon Product Layout */
   .pdv-product {
     display: grid;
-    grid-template-columns: 55% 45%;
-    max-width: 1200px;
+    grid-template-columns: 60% 40%;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 32px 28px 0;
-    gap: 0;
+    padding: 40px 40px 0;
+    gap: 48px;
     width: 100%;
+    align-items: start;
   }
 
-  /* Image column */
+  /* Image Stream Column (Left - Lululemon Vertical Stream) */
   .pdv-images {
     display: flex;
-    gap: 12px;
-    padding-right: 40px;
+    flex-direction: column;
+    gap: 16px;
   }
-  .pdv-thumbs {
+  .pdv-photo-stream {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    flex-shrink: 0;
+    gap: 20px;
   }
-  .pdv-thumb {
-    width: 68px; height: 80px;
-    object-fit: cover;
-    object-position: top;
-    border-radius: 8px;
-    border: 2px solid transparent;
-    cursor: pointer;
-    background: #e8e8e4;
-    transition: border-color 0.15s, transform 0.15s;
-  }
-  .pdv-thumb:hover { transform: scale(1.05); }
-  .pdv-thumb.active { border-color: var(--navy); box-shadow: 0 0 0 1px var(--navy); }
-  .pdv-main-img-wrap {
-    flex: 1;
-    border-radius: 14px;
-    overflow: hidden;
-    background: transparent;
+  .pdv-photo-item {
     position: relative;
+    width: 100%;
     aspect-ratio: 4/5;
-    cursor: zoom-in;
+    background: #f9fafb;
+    border-radius: 10px;
+    overflow: hidden;
   }
-  .pdv-main-img {
+  .pdv-photo-item img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
-    transition: transform 0.2s ease-out;
-    will-change: transform;
+    transition: transform 0.4s ease;
   }
-  @media (hover: hover) {
-    .pdv-main-img:hover { transform: scale(1.04); }
-  }
-  .pdv-badge {
-    position: absolute;
-    top: 14px; left: 14px;
-    background: var(--navy);
-    color: var(--gold);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px; font-weight: 800;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 4px 11px;
-    border-radius: 100px;
+  .pdv-photo-item:hover img {
+    transform: scale(1.03);
   }
 
-  /* Info column */
+  .pdv-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: #111827;
+    color: #F5A623;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  /* Info Column (Right - Sticky Lululemon Sidebar) */
   .pdv-info {
-    padding-left: 12px;
+    position: sticky;
+    top: 80px;
     display: flex;
     flex-direction: column;
     gap: 0;
+    padding-bottom: 40px;
   }
   .pdv-sport-tag {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px; font-weight: 800;
-    letter-spacing: 0.22em;
+    font-size: 11px; font-weight: 800;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: #D4AF37;
     margin-bottom: 6px;
   }
   .pdv-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 38px;
-    color: var(--text-dark);
-    line-height: 1;
-    margin-bottom: 4px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
   }
   .pdv-brand {
-    font-size: 12px; color: #aaa;
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
   }
   .pdv-rating-row {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
-  .pdv-stars { color: var(--gold); font-size: 14px; letter-spacing: 1px; }
-  .pdv-rating-count { font-size: 12px; color: #888; }
+  .pdv-stars { color: #F5A623; font-size: 15px; letter-spacing: 2px; }
+  .pdv-rating-count { font-size: 13px; color: #6b7280; text-decoration: underline; cursor: pointer; }
   .pdv-price-row {
     display: flex;
     align-items: baseline;
-    gap: 10px;
-    margin-bottom: 18px;
+    gap: 12px;
+    margin-bottom: 24px;
   }
-  .pdv-price { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--navy); line-height: 1; }
-  .pdv-price-old { font-size: 20px; color: #bbb; text-decoration: line-through; font-family: 'Barlow Condensed', sans-serif; }
+  .pdv-price { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 700; color: #111827; line-height: 1; }
+  .pdv-price-old { font-size: 20px; color: #9ca3af; text-decoration: line-through; font-family: 'Plus Jakarta Sans', sans-serif; }
   .pdv-save-chip {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 12px; font-weight: 700;
-    background: #e8f5ed; color: #2d8a55;
-    padding: 3px 9px; border-radius: 100px;
+    background: #ecfdf5; color: #047857;
+    padding: 4px 10px; border-radius: 100px;
   }
-  .pdv-divider { border: none; border-top: 1px solid #eee; margin: 2px 0 16px; }
+  .pdv-divider { border: none; border-top: 1px solid #e5e7eb; margin: 8px 0 20px; }
 
   .pdv-section-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px; font-weight: 800;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--text-mid);
-    margin-bottom: 9px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
     display: flex; justify-content: space-between; align-items: center;
   }
   .pdv-section-label a {
-    font-weight: 500; text-transform: none; letter-spacing: 0;
-    font-size: 11px; color: #aaa; cursor: pointer; text-decoration: underline;
+    font-weight: 600; text-transform: none; letter-spacing: 0;
+    font-size: 12px; color: #111827; cursor: pointer; text-decoration: underline;
   }
 
-  /* Colors */
-  .pdv-colors { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  /* Color Swatches (Lululemon Circular Swatches) */
+  .pdv-colors { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
   .pdv-color-swatch {
-    width: 30px; height: 30px; border-radius: 50%;
-    border: 3px solid #fff;
-    box-shadow: 0 0 0 1.5px #ccc;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 1px #d1d5db;
     cursor: pointer;
-    transition: box-shadow 0.15s, transform 0.15s;
+    transition: all 0.2s ease;
   }
-  .pdv-color-swatch:hover { transform: scale(1.14); }
-  .pdv-color-swatch.active { box-shadow: 0 0 0 2.5px var(--navy); }
+  .pdv-color-swatch:hover { transform: scale(1.1); box-shadow: 0 0 0 2px #111827; }
+  .pdv-color-swatch.active { box-shadow: 0 0 0 2px #111827; transform: scale(1.1); }
 
-  /* Sizes */
-  .pdv-sizes { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+  /* Size Selector (Lululemon Grid Tiles) */
+  .pdv-sizes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
   .pdv-size-btn {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px; font-weight: 700;
-    padding: 9px 14px;
-    border: 1.5px solid #ddd; border-radius: 8px;
-    cursor: pointer; color: var(--text-dark); background: var(--white);
-    transition: all 0.12s; min-width: 48px; text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    padding: 10px 18px;
+    border: 1.5px solid #e5e7eb; border-radius: 6px;
+    cursor: pointer; color: #111827; background: #ffffff;
+    transition: all 0.15s ease; min-width: 52px; text-align: center;
   }
-  .pdv-size-btn:hover { border-color: var(--navy); color: var(--navy); background: #f0f2ff; }
-  .pdv-size-btn.selected { border-color: var(--navy); background: var(--navy); color: #fff; }
+  .pdv-size-btn:hover { border-color: #111827; background: #f9fafb; }
+  .pdv-size-btn.selected { border-color: #111827; background: #111827; color: #ffffff; }
 
-  /* Description */
-  .pdv-desc { font-size: 13.5px; color: var(--text-mid); line-height: 1.7; margin-bottom: 16px; }
-  .pdv-features {
-    list-style: none; padding: 0; margin: 0 0 18px;
-    display: flex; flex-direction: column; gap: 5px;
-  }
-  .pdv-features li {
-    font-size: 12.5px; color: var(--text-mid);
-    display: flex; align-items: flex-start; gap: 7px; line-height: 1.45;
-  }
-  .pdv-features li::before { content:"✓"; color: var(--gold); font-weight: 800; flex-shrink: 0; }
+  /* Description & Features */
+  .pdv-desc { font-size: 14px; color: #4b5563; line-height: 1.7; margin-bottom: 20px; }
 
   .pdv-ship-note {
-    display: flex; align-items: center; gap: 8px;
-    background: #f0f7f3; border: 1px solid #c6e8d4;
-    border-radius: 8px; padding: 9px 13px;
-    font-size: 12px; color: #2d7a50; font-weight: 600;
-    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+    background: #f0fdf4; border: 1px solid #bbf7d0;
+    border-radius: 8px; padding: 12px 16px;
+    font-size: 13px; color: #166534; font-weight: 600;
+    margin-bottom: 24px;
   }
 
-  /* Action buttons */
-  .pdv-actions { display: flex; flex-direction: column; gap: 9px; }
+  /* Action Buttons (Lululemon Dark Full-Width CTA) */
+  .pdv-actions { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
   .pdv-btn-add {
-    background: var(--gold); color: var(--navy-deeper);
-    border: none; border-radius: 10px;
-    padding: 16px 24px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 15px; font-weight: 800; letter-spacing: 0.1em;
+    background: #111827; color: #ffffff;
+    border: none; border-radius: 8px;
+    padding: 18px 28px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: background 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 14px rgba(17, 24, 39, 0.15);
+  }
+  .pdv-btn-add:hover { background: #1f2937; transform: translateY(-1px); }
+  .pdv-btn-wish {
+    background: #ffffff; color: #111827;
+    border: 1.5px solid #111827; border-radius: 8px;
+    padding: 14px 28px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
     text-transform: uppercase; cursor: pointer;
     display: flex; align-items: center; justify-content: center; gap: 8px;
-    transition: background 0.15s, transform 0.12s;
+    transition: all 0.15s ease;
   }
-  .pdv-btn-add:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .pdv-btn-wish {
-    background: #fff; color: var(--navy);
-    border: 1.5px solid var(--navy); border-radius: 10px;
-    padding: 13px 24px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
-    text-transform: uppercase; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 7px;
-    transition: all 0.15s;
+  .pdv-btn-wish:hover { background: #111827; color: #ffffff; }
+
+  /* Accordions estilo Lululemon */
+  .pdv-accordions {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e5e7eb;
   }
-  .pdv-btn-wish:hover { background: var(--navy); color: #fff; }
+  .pdv-accordion-item {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .pdv-accordion-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    cursor: pointer;
+    text-align: left;
+  }
+  .pdv-accordion-content {
+    display: none;
+    padding-bottom: 16px;
+    font-size: 13.5px;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+  .pdv-accordion-item.open .pdv-accordion-content {
+    display: block;
+  }
+  .pdv-accordion-icon {
+    font-size: 18px;
+    transition: transform 0.2s ease;
+  }
+  .pdv-accordion-item.open .pdv-accordion-icon {
+    transform: rotate(45deg);
+  }
 
   /* ── RELATED CAROUSEL ── */
   .pdv-related {
@@ -1740,42 +1768,35 @@
 
   <!-- Product section -->
   <div class="pdv-product">
-    <!-- Images left -->
-    <div class="pdv-images">
-      <div class="pdv-thumbs" id="pdvThumbs"></div>
-      <div class="pdv-main-img-wrap">
-        <img class="pdv-main-img" id="pdvMainImg" src="" alt="">
-        <div class="pdv-badge" id="pdvBadge" style="display:none"></div>
-      </div>
+    <!-- Images left (Lululemon Photo Stream) -->
+    <div class="pdv-images" style="position:relative;">
+      <div class="pdv-badge" id="pdvBadge" style="display:none"></div>
+      <div class="pdv-photo-stream" id="pdvPhotoStream"></div>
     </div>
 
-    <!-- Info right -->
+    <!-- Info right (Sticky Purchase Column) -->
     <div class="pdv-info">
       <div class="pdv-sport-tag" id="pdvSport"></div>
       <div class="pdv-name" id="pdvName"></div>
       <div class="pdv-brand" id="pdvBrand"></div>
       <div class="pdv-rating-row">
         <span class="pdv-stars">★★★★★</span>
-        <span class="pdv-rating-count" id="pdvRatingCount">(0 reseñas)</span>
+        <span class="pdv-rating-count" id="pdvRatingCount" onclick="scrollToPDVReviews()">(0 reseñas)</span>
       </div>
       <div class="pdv-price-row" id="pdvPrice"></div>
       <hr class="pdv-divider">
 
       <!-- Color -->
       <div id="pdvColorsWrap">
-        <div class="pdv-section-label">Color — <span id="pdvColorName" style="font-weight:500;text-transform:none;letter-spacing:0;font-size:11px;color:#888;margin-left:0"></span></div>
+        <div class="pdv-section-label">Color: <span id="pdvColorName" style="font-weight:600;color:#111827;"></span></div>
         <div class="pdv-colors" id="pdvColors"></div>
       </div>
 
       <!-- Size -->
       <div id="pdvSizesWrap">
-        <div class="pdv-section-label">Talla <a>Guía de tallas →</a></div>
+        <div class="pdv-section-label">Selecciona tu Talla <a href="guia-tallas.html" target="_blank">Guía de tallas →</a></div>
         <div class="pdv-sizes" id="pdvSizes"></div>
       </div>
-
-      <!-- Description -->
-      <div class="pdv-desc" id="pdvDesc"></div>
-      <ul class="pdv-features" id="pdvFeatures"></ul>
 
       <div class="pdv-ship-note">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v5h-7V8z"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/></svg>
@@ -1787,10 +1808,39 @@
           <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           Añadir al Carrito
         </button>
-        <a href="carrito.html" class="pdv-btn-wish" style="text-decoration:none;background:var(--gold);color:var(--navy-deeper);border:none;" onmouseover="this.style.background='var(--gold-light)';this.style.color='var(--navy-deeper)'" onmouseout="this.style.background='var(--gold)';this.style.color='var(--navy-deeper)'">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <a href="carrito.html" class="pdv-btn-wish" style="text-decoration:none;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           Ir al Carrito
         </a>
+      </div>
+
+      <!-- Accordions estilo Lululemon -->
+      <div class="pdv-accordions">
+        <div class="pdv-accordion-item open">
+          <button class="pdv-accordion-btn" onclick="togglePDVAccordion(this)">
+            🧵 Características & Tejido <span class="pdv-accordion-icon">+</span>
+          </button>
+          <div class="pdv-accordion-content">
+            <div id="pdvDesc"></div>
+            <ul class="pdv-features" id="pdvFeatures" style="margin-top:12px;"></ul>
+          </div>
+        </div>
+        <div class="pdv-accordion-item">
+          <button class="pdv-accordion-btn" onclick="togglePDVAccordion(this)">
+            🚚 Envíos & Retiro en Tienda <span class="pdv-accordion-icon">+</span>
+          </button>
+          <div class="pdv-accordion-content">
+            Delivery express en Caracas (entrega en 24 horas) y envíos nacionales asegurados a toda Venezuela por MRW, Zoom y Tealca. Retiro gratuito en nuestras tiendas de La Tahona, La Lagunita e Izcaragua.
+          </div>
+        </div>
+        <div class="pdv-accordion-item">
+          <button class="pdv-accordion-btn" onclick="togglePDVAccordion(this)">
+            🛡️ Garantía & Autenticidad Morsa's <span class="pdv-accordion-icon">+</span>
+          </button>
+          <div class="pdv-accordion-content">
+            Garantía 100% de productos originales importados directamente de fabricantes oficiales (Mizuno, Callaway, Wilson, Big Max, Taylormade, Babolat). Cobertura contra defectos de manufactura y cambio de talla simplificado.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2208,6 +2258,20 @@ function toggleWish(btn) {
   btn.classList.toggle('active');
 }
 
+function togglePDVAccordion(btn) {
+  const item = btn.closest('.pdv-accordion-item');
+  if (item) {
+    item.classList.toggle('open');
+  }
+}
+
+function scrollToPDVReviews() {
+  const reviewsEl = document.querySelector('.pdv-reviews');
+  if (reviewsEl) {
+    reviewsEl.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
 // ─── PRODUCT DETAIL VIEW ───
 const colorNames = {
   '#1a2490':'Navy', '#fff':'Blanco', '#ffffff':'Blanco', '#2d7a2d':'Verde',
@@ -2270,22 +2334,22 @@ function openModal(id) {
   // Breadcrumb
   document.getElementById('pdvBreadName').textContent = p.name;
 
-  // Main image
-  const mainImg = document.getElementById('pdvMainImg');
-  mainImg.src = p.img; mainImg.alt = p.name;
-
-  // Thumbnails
-  const thumbs = document.getElementById('pdvThumbs');
+  // Lululemon Vertical Photo Stream
+  const photoStream = document.getElementById('pdvPhotoStream');
   let imagesToRender = p.allImages && p.allImages.length > 0 
     ? p.allImages.map(img => img.src) 
-    : [p.img, p.img2];
+    : [p.img, p.img2].filter(Boolean);
   
   // Filtrar duplicados
   imagesToRender = [...new Set(imagesToRender)];
 
-  thumbs.innerHTML = imagesToRender.map((src, i) =>
-    `<img class="pdv-thumb${i===0?' active':''}" src="${src}" alt="${p.name}" onclick="pdvSwitchImg(this,'${src}')">`
-  ).join('');
+  if (photoStream) {
+    photoStream.innerHTML = imagesToRender.map((src, i) =>
+      `<div class="pdv-photo-item">
+        <img src="${src}" alt="${p.name} - Vista ${i+1}" loading="${i===0?'eager':'lazy'}">
+      </div>`
+    ).join('');
+  }
 
   // Badge
   const badge = document.getElementById('pdvBadge');
