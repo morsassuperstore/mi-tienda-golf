@@ -2608,6 +2608,11 @@ function openModal(id) {
       .then(data => {
          if (data && data.variations) {
             p.fullVariations = data.variations;
+            // Si ya hay un color seleccionado (o se auto-seleccionó el primero), re-filtrar imágenes ahora que tenemos los datos completos
+            if (currentProduct && currentProduct.id === p.id && currentProduct.selectedColorRaw) {
+               const activeSwatch = document.querySelector('.pdv-color-swatch.active');
+               pdvSelectColor(activeSwatch, currentProduct.selectedColorRaw, currentProduct.selectedColorRaw);
+            }
          }
       })
       .catch(e => console.error("Error fetching full variations:", e));
@@ -2785,17 +2790,20 @@ function pdvSelectColor(el, hex, colorNameRaw) {
     currentProduct.selectedColorRaw = colorNameRaw || hex;
   }
   
-  if (currentProduct && currentProduct.variations && currentProduct.variations.length > 0 && colorNameRaw) {
+  const varsToUse = currentProduct.fullVariations || currentProduct.variations;
+  
+  if (currentProduct && varsToUse && varsToUse.length > 0 && colorNameRaw) {
     // Filtrar las variaciones que coinciden con el color seleccionado
-    const matchingVars = currentProduct.variations.filter(v => {
-      const colorAttr = v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
-      return colorAttr && String(colorAttr.value).toLowerCase() === String(colorNameRaw).toLowerCase();
+    const matchingVars = varsToUse.filter(v => {
+      const colorAttr = (v.attributes || []).find(a => a.name === 'Colores' || a.name === 'Color');
+      const attrVal = colorAttr ? (colorAttr.option || colorAttr.value) : null;
+      return attrVal && String(attrVal).toLowerCase() === String(colorNameRaw).toLowerCase();
     });
     
     // Obtener tallas disponibles para ese color
     const availableSizes = matchingVars.map(v => {
-      const sizeAttr = v.attributes.find(a => a.name === 'Talla' || a.name === 'Tallas');
-      return sizeAttr ? sizeAttr.value : null;
+      const sizeAttr = (v.attributes || []).find(a => a.name === 'Talla' || a.name === 'Tallas');
+      return sizeAttr ? (sizeAttr.option || sizeAttr.value) : null;
     }).filter(s => s !== null);
     
     // Actualizar la interfaz de tallas
@@ -2810,6 +2818,7 @@ function pdvSelectColor(el, hex, colorNameRaw) {
     let colorImages = [];
     matchingVars.forEach(v => {
       if (v.image_src) colorImages.push(v.image_src);
+      else if (v.image && v.image.src) colorImages.push(v.image.src); // Soporte para formato Woo estandar
     });
     
     if (colorImages.length > 0) {
