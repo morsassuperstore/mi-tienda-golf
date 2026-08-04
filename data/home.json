@@ -5,7 +5,7 @@
       "btn_secondary_link": "#sports",
       "alt": "Nueva Colección 2026",
       "eyebrow": "Nueva Colección Temporada 2026",
-      "btn_primary_text": "Comprar Ahora →",
+      "btn_primary_text": "Comprar ahora →",
       "subtitle": "Colecciones 2026 al estilo mas puro del golfista con vestimenta premium. ",
       "image_desktop": "assets/extracted_img_3.jpg",
       "title": "Elegancia <br> Y <span class=\"gold\"> Comodidad </span>",
@@ -15,23 +15,23 @@
     },
     {
       "image_mobile": "assets/card-golf.webp",
-      "btn_secondary_link": "tienda.html?sport=golf&cat=accesorios",
+      "btn_secondary_link": "",
       "alt": "Palos de Golf",
       "eyebrow": "Equipamiento de Alto Rendimiento",
-      "btn_primary_text": "Ver Palos →",
+      "btn_primary_text": "Comprar ahora →",
       "subtitle": "Drivers, maderas, hierros y putters de marcas líderes como Mizuno, Callaway, Ping, Cleveland y TaylorMade ",
       "image_desktop": "assets/card-golf.webp",
       "title": "Los Mejores<br><span class=\"gold\">Palos</span> del Mercado",
       "btn_primary_link": "tienda.html?cat=palos",
       "link": "tienda.html?sport=golf",
-      "btn_secondary_text": "Accesorios de Golf"
+      "btn_secondary_text": ""
     },
     {
       "image_mobile": "assets/card-padel.jpg",
       "btn_secondary_link": "",
       "alt": "Puro Padel! ",
       "eyebrow": "Colección de Pádel ",
-      "btn_primary_text": "Ver Equipamiento →",
+      "btn_primary_text": "Comprar ahora →",
       "subtitle": "Palas Wilson más avanzadas del mercado, calzado Mizuno, New balance y conjuntos deportivos premium.",
       "image_desktop": "assets/card-padel.jpg",
       "title": "Sacala <br><span class=\"gold\">X3</span> con Estilo",
@@ -42,7 +42,7 @@
     {
       "image_mobile": "assets/934a377a-4091-429a-bb4f-7ecb8cd0080e.jpeg",
       "btn_secondary_link": "",
-      "alt": "",
+      "alt": "SIMULADOR",
       "eyebrow": "SIMULADOR ",
       "btn_primary_text": "Reservar sesion ",
       "subtitle": "Practica tu swing en nuestra area de simulador",
@@ -57,12 +57,38 @@
       "btn_secondary_link": "",
       "alt": "Tennis",
       "eyebrow": "",
-      "btn_primary_text": "Ver Equipamiento →",
+      "btn_primary_text": "Comprar ahora →",
       "subtitle": "Raquetas, pelotas y grips para mantener al tope tu juego! ",
       "image_desktop": "assets/card-tenis.jpg",
-      "title": "EL  <br><span class=\"gold\">DEPORTE</span> REY",
+      "title": "EL  <br><span class=\"gold\">DEPORTE</span> REY DE RAQUETA",
       "btn_primary_link": "tienda.html?sport=tennis",
       "link": "tienda.html?sport=tennis",
+      "btn_secondary_text": ""
+    },
+    {
+      "image_mobile": "assets/73c1152d-ae5c-4516-9c71-b2424b977c29.jpeg",
+      "btn_secondary_link": "",
+      "alt": "Tienda de golf, tennis y padel ",
+      "eyebrow": "La tienda de golf por excelencia ",
+      "btn_primary_text": "Ubicacion",
+      "subtitle": "Estamos ubicados en La Tahona, dentro del complejo AVEPANE ",
+      "image_desktop": "assets/36bda477-8f32-4504-8704-1537373bb0ad.jpeg",
+      "title": "VISITANOS! ",
+      "btn_primary_link": "https://www.google.com/maps/place/Morsas+Superstore/@10.4409292,-66.8596259,17z/data=!3m1!4b1!4m6!3m5!1s0x8c2af7003a977cdb:0x58e61e9c9877dd15!8m2!3d10.4409292!4d-66.857051!16s%2Fg%2F11z3dn5h9j?entry=ttu&g_ep=EgoyMDI2MDcyNi4wIKXMDSoASAFQAw%3D%3D",
+      "link": "",
+      "btn_secondary_text": ""
+    },
+    {
+      "image_mobile": "assets/img_5655.jpg",
+      "btn_secondary_link": "",
+      "alt": "New Balance ",
+      "eyebrow": "Coleccion New Balance ",
+      "btn_primary_text": "Comprar ahora ",
+      "subtitle": "Ropa deportiva New Balance para damas y caballeros ",
+      "image_desktop": "assets/img_5655.jpg",
+      "title": "New Balance ",
+      "btn_primary_link": "tienda.html",
+      "link": "tienda.html",
       "btn_secondary_text": ""
     }
   ],
@@ -144,7 +170,7 @@
       "address": "Complejo Avepane, La Tahona, Caracas, Venezuela",
       "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.1!2d-66.857051!3d10.4409292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2af7003a977cdb%3A0x58e61e9c9877dd15!2sMorsas%20Superstore!5e0!3m2!1ses!2sve!4v1700000000000",
       "directions_link": "https://www.google.com/maps/place/Morsas+Superstore/@10.4409292,-66.857051,17z",
-      "hours": "Lunes a Sábado: 10:00am – 7:00pm"
+      "hours": "Lunes a Sábado: 9:00am – 7:00pm"
     },
     {
       "badge": "📍 El Hatillo",
