@@ -261,52 +261,51 @@
     margin: 0 auto;
     padding: 32px;
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 28px;
+    grid-template-columns: 300px 1fr;
+    gap: 32px;
     align-items: start;
   }
 
   /* ─── SIDEBAR FILTERS ─── */
   .sidebar {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--light-gray);
+    background: transparent;
+    border: none;
     position: sticky;
     top: 80px;
-    overflow: hidden;
   }
 
   .sidebar-header {
-    background: var(--navy-deeper);
-    padding: 16px 20px;
+    background: transparent;
+    padding: 0 0 16px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 2px solid var(--navy-deeper);
   }
 
   .sidebar-title {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--navy-deeper);
   }
 
   .sidebar-clear {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
+    color: var(--text-mid);
     cursor: pointer;
     background: none;
     border: none;
     transition: color 0.15s;
   }
 
-  .sidebar-clear:hover { color: var(--gold); }
+  .sidebar-clear:hover { color: var(--navy); }
 
   .filter-group {
     border-bottom: 1px solid var(--light-gray);
