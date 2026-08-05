@@ -315,16 +315,17 @@
   .filter-group:last-child { border-bottom: none; }
 
   .filter-group-header {
-    padding: 14px 20px;
+    padding: 18px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     -webkit-user-select: none;
     user-select: none;
-    transition: background 0.15s;
+    transition: opacity 0.15s;
+    cursor: pointer;
   }
 
-  .filter-group-header:hover { background: var(--off-white); }
+  .filter-group-header:hover { opacity: 0.7; }
 
   .filter-group-title {
     font-family: 'Barlow Condensed', sans-serif;
@@ -344,7 +345,7 @@
   .filter-group.open .filter-chevron { transform: rotate(180deg); }
 
   .filter-body {
-    padding: 4px 20px 16px;
+    padding: 0 0 20px;
     display: none;
   }
 
@@ -445,14 +446,15 @@
   .products-area { flex: 1; }
 
   .products-toolbar {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--light-gray);
-    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--light-gray);
+    border-radius: 0;
+    padding: 10px 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     gap: 16px;
   }
 
@@ -518,13 +520,12 @@
     gap: 16px;
   }
 
-  /* ─── PRODUCT CARD ─── */
+  /* ─── PRODUCT CARD (Minimalista) ─── */
   .product-card {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--light-gray);
-    overflow: hidden;
-    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+    border: none;
+    overflow: visible;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -533,8 +534,7 @@
   }
 
   .product-card:hover {
-    box-shadow: 0 12px 24px rgba(21, 27, 41, 0.08);
-    transform: translateY(-4px);
+    transform: translateY(-2px);
   }
 
   /* Image container with hover swap */
@@ -542,7 +542,8 @@
     position: relative;
     aspect-ratio: 1/1;
     overflow: hidden;
-    background: var(--white);
+    background: var(--off-white);
+    border-radius: var(--radius);
   }
 
   .product-img-wrap img {
@@ -550,9 +551,13 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    padding: 10px;
-    transition: opacity 0.4s;
+    object-fit: cover;
+    padding: 0; /* Lululemon style usually fills the box */
+    transition: opacity 0.4s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .product-card:hover .product-img-wrap img {
+    transform: scale(1.04);
   }
 
   .product-img-wrap .img-hover {
@@ -640,21 +645,20 @@
 
   /* Product info */
   .product-info {
-    padding: 14px 14px 0;
+    padding: 16px 4px 0;
     flex: 1;
     display: flex;
     flex-direction: column;
   }
 
-  .product-sport {
+  .product-brand {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--navy);
-    opacity: 0.6;
-    margin-bottom: 3px;
+    color: var(--text-mid);
+    margin-bottom: 4px;
   }
 
   .product-name {
@@ -663,13 +667,11 @@
     font-weight: 600;
     color: var(--text-dark);
     line-height: 1.3;
-    margin-bottom: 3px;
-  }
-
-  .product-brand {
-    font-size: 12px;
-    color: #999;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .product-price-row {
@@ -680,10 +682,10 @@
   }
 
   .product-price {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--navy);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
   }
 
   .product-price-old {
