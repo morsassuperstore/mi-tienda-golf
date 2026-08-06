@@ -28,14 +28,7 @@ jobs:
           protocol: ftps
           local-dir: ./
           server-dir: ${{ secrets.FTP_REMOTE_DIR }}
-          # Solo sincroniza estos tipos de archivos (optimización)
-          include: |
-            data/**
-            assets/**
-            admin/**
-            js/**
-            *.html
-            *.php
+
           # Excluir archivos que NO deben subirse al servidor
           exclude: |
             **/.git/**
