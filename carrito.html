@@ -1415,8 +1415,9 @@ function updateBsTotal() {
   const preview   = document.getElementById('bs-total-preview');
   if (!rateInput || !preview) return;
 
-  const rate = parseFloat(rateInput.value);
-  if (!rate || rate <= 0) {
+  const rawVal = (rateInput.value || '').toString().replace(',', '.');
+  const rate = parseFloat(rawVal);
+  if (!rate || rate <= 0 || isNaN(rate)) {
     preview.style.display = 'none';
     return;
   }
@@ -1561,8 +1562,9 @@ async function placeOrder() {
                       ].filter(Boolean).join(', ') || '—',
       bsRate:         paymentMethod === 'pagomovil' ? (document.getElementById('bs-rate')?.value || null) : null,
       bsTotal:        paymentMethod === 'pagomovil' ? (() => {
-                        const r = parseFloat(document.getElementById('bs-rate')?.value);
-                        if (!r) return null;
+                        const raw = (document.getElementById('bs-rate')?.value || '').toString().replace(',', '.');
+                        const r = parseFloat(raw);
+                        if (!r || isNaN(r)) return null;
                         return new Intl.NumberFormat('es-VE', { minimumFractionDigits: 2 }).format((getTotal() * r).toFixed(2)) + ' Bs';
                       })() : null,
     };

@@ -3059,15 +3059,34 @@ function showToast(msg) {
         foundBrand = matched ? matched.split(' ').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ') : 'Otras Marcas';
       }
 
-      // Extract Sport
+      // Extract Sport (Prioritizing WooCommerce Categories)
       let foundSport = 'golf';
-      if (textToSearch.includes('PADEL') || textToSearch.includes('PÁDEL') || textToSearch.includes('PALA')) foundSport = 'padel';
-      else if (textToSearch.includes('TENIS') || textToSearch.includes('RAQUETA')) foundSport = 'tenis';
+      const catSlugs = (p.categories || []).map(c => (c.slug || '').toLowerCase());
+      if (catSlugs.includes('padel')) {
+        foundSport = 'padel';
+      } else if (catSlugs.includes('tenis') || catSlugs.includes('tennis')) {
+        foundSport = 'tenis';
+      } else if (catSlugs.includes('golf')) {
+        foundSport = 'golf';
+      } else if (textToSearch.includes('PADEL') || textToSearch.includes('PÁDEL') || textToSearch.includes('PALA')) {
+        foundSport = 'padel';
+      } else if (textToSearch.includes('TENIS') || textToSearch.includes('RAQUETA')) {
+        foundSport = 'tenis';
+      }
       
-      // Extract Gender
+      // Extract Gender (Prioritizing WooCommerce Categories)
       let foundGender = 'caballeros';
-      if (textToSearch.includes('DAMA') || textToSearch.includes('MUJER') || textToSearch.includes('LADIES')) foundGender = 'damas';
-      else if (textToSearch.includes('NIÑ') || textToSearch.includes('JUNIOR') || textToSearch.includes('KIDS') || textToSearch.includes('YOUTH')) foundGender = 'ninos';
+      if (catSlugs.includes('damas') || catSlugs.includes('mujer') || catSlugs.includes('ladies')) {
+        foundGender = 'damas';
+      } else if (catSlugs.includes('ninos') || catSlugs.includes('junior') || catSlugs.includes('kids')) {
+        foundGender = 'ninos';
+      } else if (catSlugs.includes('caballeros') || catSlugs.includes('hombre') || catSlugs.includes('men')) {
+        foundGender = 'caballeros';
+      } else if (textToSearch.includes('DAMA') || textToSearch.includes('MUJER') || textToSearch.includes('LADIES')) {
+        foundGender = 'damas';
+      } else if (textToSearch.includes('NIÑ') || textToSearch.includes('JUNIOR') || textToSearch.includes('KIDS') || textToSearch.includes('YOUTH')) {
+        foundGender = 'ninos';
+      }
 
       // Extract Category
       let foundCatSlug = 'accesorios';
