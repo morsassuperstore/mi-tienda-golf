@@ -593,3 +593,54 @@ collections:
                 name: "twitter"
                 widget: "string"
                 required: false
+
+  - name: "popup_promo"
+    label: "Popup Promocional"
+    description: "Configura avisos emergentes de promociones para fechas especiales (Día de la Madre, Padre, Navidad, Black Friday, etc.)."
+    delete: false
+    files:
+      - name: "popup_data"
+        label: "Ajustes del Popup"
+        file: "data/popup_promo.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Activar Popup en la Tienda"
+            name: "enabled"
+            widget: "boolean"
+            default: false
+          - label: "Cintillo / Etiqueta Superior"
+            name: "eyebrow"
+            widget: "string"
+            default: "OFERTA DE TEMPORADA"
+          - label: "Título Principal"
+            name: "title"
+            widget: "string"
+            default: "¡Promoción Especial!"
+          - label: "Descripción / Mensaje"
+            name: "desc"
+            widget: "text"
+            default: "Aprovecha descuentos exclusivos por tiempo limitado en artículos seleccionados de nuestra tienda."
+          - label: "Código de Cupón (Opcional - Mostrará botón interactivo para copiar)"
+            name: "coupon_code"
+            widget: "string"
+            required: false
+            default: ""
+          - label: "Imagen Promocional (Opcional)"
+            name: "image"
+            widget: "image"
+            required: false
+            default: ""
+          - label: "Texto del Botón Principal"
+            name: "btn_text"
+            widget: "string"
+            default: "Ver Ofertas"
+          - label: "Enlace del Botón"
+            name: "btn_link"
+            widget: "string"
+            default: "tienda.html"
+          - label: "Segundos de espera antes de mostrarse"
+            name: "delay_seconds"
+            widget: "number"
+            value_type: "int"
+            default: 3

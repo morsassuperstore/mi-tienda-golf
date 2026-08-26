@@ -1,0 +1,11 @@
+{
+  "enabled": false,
+  "eyebrow": "PROMOCIÓN ESPECIAL",
+  "title": "¡Celebra con Nosotros!",
+  "desc": "Disfruta de hasta un 20% de descuento en equipos y ropa deportiva seleccionada por tiempo limitado.",
+  "coupon_code": "MORSA20",
+  "image": "assets/extracted_img_9.png",
+  "btn_text": "Ver Ofertas Especiales",
+  "btn_link": "tienda.html",
+  "delay_seconds": 3
+}

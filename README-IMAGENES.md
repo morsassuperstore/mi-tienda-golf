@@ -17,5 +17,6 @@ Ahora el sitio web cuenta con un **Panel Visual de Administración (Decap CMS)**
   * Datos de contacto, mapa y direcciones de sucursales
   * Email de Zelle para pagos
   * Imágenes destacadas de los menús
+  * **Popup Promocional (Avisos de ofertas y días especiales)**
 
 Para más detalles sobre los formatos recomendados, peso de imágenes y respaldos por cPanel, consulta **[GUIA-ADMINISTRACION.md](GUIA-ADMINISTRACION.md)**.

@@ -54,6 +54,22 @@ Dentro del panel encontrarás la sección **"Página de Inicio"**. Al hacer clic
 * **Uso:** Cambiar las imágenes de portada de las tarjetas de **Caballeros** y **Damas** de la página de inicio.
 * **Campos:** Imagen de portada Caballeros e Imagen de portada Damas (se recomiendan fotos verticales o cuadradas).
 
+### 🎁 J. Popup Promocional (Avisos y Fechas Especiales)
+* **Uso:** Crear avisos emergentes automáticos para fechas clave (Día de las Madres, Día del Padre, Black Friday, Navidad, rebajas de temporada o cupones de descuento).
+* **Campos disponibles en el panel:**
+  * `Activar Popup en la Tienda`: Interruptor para encender o apagar la promoción con 1 clic sin borrar tus textos.
+  * `Cintillo / Etiqueta Superior`: Texto pequeño decorativo (ej. *"ESPECIAL DÍA DE LAS MADRES 🌸"* o *"OFERTA FLASH"*).
+  * `Título Principal`: El encabezado de la oferta (ej. *"¡20% de Descuento en Golf y Pádel!"*).
+  * `Descripción / Mensaje`: Condiciones o detalle de la promoción.
+  * `Código de Cupón`: (Opcional) Si escribes un código (ej. `MAMA2026`), el popup creará automáticamente una caja con un botón interactivo para que el cliente lo copie con un clic.
+  * `Imagen Promocional`: (Opcional) Fotografía o flyer vertical/cuadrado del evento.
+  * `Texto y Enlace del Botón`: Botón principal (ej. *"Ver Ofertas"* hacia `tienda.html?sport=golf`).
+  * `Segundos de espera`: Tiempo antes de aparecer en pantalla (recomendado: `3` a `5` segundos).
+* **Dimensiones recomendadas para la imagen del Popup:**
+  * **Tamaño óptimo:** `600 × 750 px` (Proporción vertical 4:5) o `800 × 800 px` (Cuadrada).
+  * **Peso máximo sugerido:** Menor a `350 KB` en formato `.webp` o `.jpg`.
+* **Comportamiento inteligente:** El popup cuenta con memoria de sesión; si el usuario lo cierra con la **X**, no volverá a interrumpirlo en cada página durante su visita.
+
 ---
 
 ## 3. Consejos para Subir Imágenes (Recomendaciones de Formato)
