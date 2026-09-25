@@ -746,24 +746,37 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
           </div>
         </div>
 
+        <!-- Anti-Spam Honeypot (invisible para humanos) -->
+        <input type="text" name="website_hp" id="website_hp" style="display:none !important;" tabindex="-1" autocomplete="off">
+
         <!-- Pickup form (hidden by default) -->
         <div id="pickup-form" style="display:none;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de contacto</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de contacto y retiro</div>
           <div class="form-grid" style="margin-bottom:16px;">
             <div class="form-group">
               <label class="form-label">Nombre</label>
-              <input class="form-input" id="p-nombre" name="p-nombre" aria-label="Nombre para retiro" type="text" placeholder="Tu nombre completo">
+              <input class="form-input" id="p-nombre" name="p-nombre" aria-label="Nombre para retiro" type="text" placeholder="Tu nombre completo" oninput="clearError('p-nombre')">
+              <span class="field-error" id="err-p-nombre">Este campo es obligatorio</span>
             </div>
             <div class="form-group">
               <label class="form-label">Teléfono / WhatsApp</label>
-              <input class="form-input" id="p-telefono" name="p-telefono" aria-label="Teléfono para retiro" type="tel" placeholder="+58 414 000 0000">
+              <input class="form-input" id="p-telefono" name="p-telefono" aria-label="Teléfono para retiro" type="tel" placeholder="+58 414 000 0000" oninput="clearError('p-telefono')">
+              <span class="field-error" id="err-p-telefono">Este campo es obligatorio</span>
+            </div>
+            <div class="form-group span2">
+              <label class="form-label">Sede o Pro-Shop de Retiro</label>
+              <select class="form-input" id="p-sede" name="p-sede" aria-label="Sede de retiro">
+                <option value="C.C. La Tahona (Tienda Principal y Simulador)">C.C. La Tahona — Tienda Principal y Simulador de Swing</option>
+                <option value="La Lagunita Country Club (Pro-Shop)">La Lagunita Country Club — Pro-Shop Oficial</option>
+                <option value="Izcaragua Country Club (Pro-Shop)">Izcaragua Country Club — Pro-Shop Oficial</option>
+              </select>
             </div>
           </div>
           <div style="background:#e8eaff;border:1.5px solid #c0c4ff;border-radius:10px;padding:14px 16px;font-size:13px;color:var(--navy);">
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;">📍 Morsa's Superstore</div>
-            <div style="font-weight:600;margin-bottom:2px;">C.C. La Tahona, Caracas</div>
-            <div style="font-size:12px;color:#555;margin-bottom:4px;">Lunes a Sábado: 10:00am – 7:00pm</div>
-            <div style="font-size:12px;color:#555;">Te avisaremos por WhatsApp cuando tu pedido esté listo para retirar.</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;">📍 Retiro Oficial en Pro-Shop</div>
+            <div style="font-weight:600;margin-bottom:2px;">Sede seleccionada coordinada con tu asesor</div>
+            <div style="font-size:12px;color:#555;margin-bottom:4px;">Horario habitual: Lunes a Sábado 10:00am – 7:00pm</div>
+            <div style="font-size:12px;color:#555;">Te avisaremos por WhatsApp en cuanto tu equipamiento esté listo para entrega o fitting.</div>
           </div>
         </div>
 
@@ -1047,6 +1060,19 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
 </div><!-- end checkout-layout -->
 
+<footer style="text-align:center; padding: 24px 16px 40px; font-size:12px; color:#888;">
+  <div style="display:flex; justify-content:center; gap:18px; margin-bottom:8px; flex-wrap:wrap;">
+    <a href="politica-privacidad.html" style="color:#555; text-decoration:none; font-weight:600;">Política de Privacidad</a>
+    <span>·</span>
+    <a href="terminos.html" style="color:#555; text-decoration:none; font-weight:600;">Términos y Condiciones</a>
+    <span>·</span>
+    <a href="devoluciones.html" style="color:#555; text-decoration:none; font-weight:600;">Garantías y Cambios</a>
+    <span>·</span>
+    <a href="envios.html" style="color:#555; text-decoration:none; font-weight:600;">Política de Envíos</a>
+  </div>
+  <div>© 2026 Morsa's Proshop · Caracas, Venezuela · Almacenamiento local para carrito sin rastreo invasivo</div>
+</footer>
+
 <script src="js/config.js"></script>
 <script src="js/api.js"></script>
 <script src="js/cart.js"></script>
@@ -1249,24 +1275,51 @@ function clearError(id) {
   if (err) err.classList.remove('visible');
 }
 
+function isValidPhone(phone) {
+  if (!phone) return false;
+  const cleaned = phone.replace(/[\s\-\(\)\.]/g, '');
+  return /^(\+?[0-9]{8,16})$/.test(cleaned);
+}
+
 // ── SHIPPING VALIDATION ──
 function validateShipping() {
+  // Anti-Spam Honeypot Check
+  if (document.getElementById('website_hp')?.value) {
+    console.warn('Spam submission detected by honeypot.');
+    return;
+  }
+
   if (deliveryMethod === 'pickup') {
     const nombre = document.getElementById('p-nombre').value.trim();
     const telefono = document.getElementById('p-telefono').value.trim();
     let valid = true;
-    [['p-nombre', nombre], ['p-telefono', telefono]].forEach(([id, val]) => {
-      const el = document.getElementById(id);
-      const err = document.getElementById('err-' + id);
-      if (!val) {
-        el.classList.add('invalid');
-        if (err) err.classList.add('visible');
-        valid = false;
-      } else {
-        el.classList.remove('invalid');
-        if (err) err.classList.remove('visible');
-      }
-    });
+
+    const elNom = document.getElementById('p-nombre');
+    const errNom = document.getElementById('err-p-nombre');
+    if (!nombre) {
+      elNom.classList.add('invalid');
+      if (errNom) { errNom.textContent = 'Este campo es obligatorio'; errNom.classList.add('visible'); }
+      valid = false;
+    } else {
+      elNom.classList.remove('invalid');
+      if (errNom) errNom.classList.remove('visible');
+    }
+
+    const elTel = document.getElementById('p-telefono');
+    const errTel = document.getElementById('err-p-telefono');
+    if (!telefono) {
+      elTel.classList.add('invalid');
+      if (errTel) { errTel.textContent = 'Este campo es obligatorio'; errTel.classList.add('visible'); }
+      valid = false;
+    } else if (!isValidPhone(telefono)) {
+      elTel.classList.add('invalid');
+      if (errTel) { errTel.textContent = 'Ingresa un teléfono válido con código de área (ej: +58 412... o +1...)'; errTel.classList.add('visible'); }
+      valid = false;
+    } else {
+      elTel.classList.remove('invalid');
+      if (errTel) errTel.classList.remove('visible');
+    }
+
     if (valid) goToStep(3);
     return;
   }
@@ -1286,7 +1339,11 @@ function validateShipping() {
     const err = document.getElementById('err-' + id);
     if (!val) {
       el.classList.add('invalid');
-      if (err) err.classList.add('visible');
+      if (err) { err.textContent = 'Este campo es obligatorio'; err.classList.add('visible'); }
+      valid = false;
+    } else if (id === 'f-telefono' && !isValidPhone(val)) {
+      el.classList.add('invalid');
+      if (err) { err.textContent = 'Ingresa un teléfono válido con código de área (ej: +58 412... o +1...)'; err.classList.add('visible'); }
       valid = false;
     } else {
       el.classList.remove('invalid');
@@ -1431,55 +1488,59 @@ function updateBsTotal() {
   preview.style.display = 'block';
 }
 
-// ── PLACE ORDER ──
-// ── WHATSAPP NOTIFICATION (CallMeBot + WA link backup) ──
-let WA_PHONE   = '584128422837';
-const WA_API_KEY = '1144889';
+// ── WHATSAPP NOTIFICATION ──
+let WA_PHONE = '584128422837';
 
 function buildWhatsAppMessage(orderNum, snapshot) {
   const lines = [
-    '🛍️ *NUEVO PEDIDO — Morsas Proshop*',
+    '🏌️ *Nuevo Pedido — Morsa\'s Proshop*',
     '━━━━━━━━━━━━━━━━━━━━',
-    `📦 Orden: *${orderNum}*`,
+    `📦 Orden: *#${orderNum}*`,
     '',
     '🛒 *Productos:*',
-    ...snapshot.items.map(i => `  • ${i.quantity > 1 ? i.quantity + '× ' : ''}${i.title} — ${formatPrice(i.price * i.quantity)}`),
-    '',
+    ...snapshot.items.map(i => `  • ${i.quantity}x ${i.title} — ${formatPrice(i.price * i.quantity)}`),
+    '-------------------------------------------',
     `💰 Subtotal: ${formatPrice(snapshot.subtotal)}`,
     snapshot.discount > 0 ? `🏷️ Descuento: -${formatPrice(snapshot.discount)}` : null,
-    `🚚 Envío: ${snapshot.shipping === 0 ? 'GRATIS' : formatPrice(snapshot.shipping)}`,
-    `✅ *Total: ${formatPrice(snapshot.total)}*`,
+    `🚚 Envío: ${parseFloat(snapshot.shipping) === 0 ? 'GRATIS' : formatPrice(snapshot.shipping)}`,
+    `✅ *Total Estimado: ${formatPrice(snapshot.total)}*`,
     '',
-    `📬 Entrega: *${snapshot.deliveryLabel}*`,
-    snapshot.deliveryMethod === 'delivery' ? `📍 ${snapshot.direccion}` : '📍 Retiro en tienda',
-    `👤 ${snapshot.nombre}`,
-    `📱 ${snapshot.telefono}`,
-    '',
-    `💳 Pago: *${snapshot.payLabel}*`,
+    `👤 *Cliente:* ${snapshot.nombre}`,
+    `📱 *Teléfono:* ${snapshot.telefono}`,
+    `📬 *Entrega:* ${snapshot.deliveryLabel}`,
+    snapshot.deliveryMethod === 'delivery'
+      ? `📍 *Dirección:* ${snapshot.direccion}`
+      : `📍 *Sede de retiro:* ${snapshot.sede || 'C.C. La Tahona, Caracas'}`,
+    `💳 *Método de Pago:* ${snapshot.payLabel}`,
     snapshot.payLabel === 'Pago móvil' && snapshot.bsRate
-      ? `💵 Tasa Bs/Ref.: ${snapshot.bsRate} → Total Bs: ${snapshot.bsTotal}`
+      ? `💵 *Tasa BCV:* ${snapshot.bsRate} Bs/Ref. → Total: ${snapshot.bsTotal}`
       : null,
+    '━━━━━━━━━━━━━━━━━━━━',
+    '💬 _Enviado desde el catálogo digital de Morsa\'s Proshop_'
   ].filter(l => l !== null).join('\n');
   return lines;
 }
 
-async function sendWhatsAppNotification(orderNum, snapshot) {
+function sendWhatsAppNotification(orderNum, snapshot) {
   const msg = buildWhatsAppMessage(orderNum, snapshot);
-  try {
-    const url = `https://api.callmebot.com/whatsapp.php?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}&apikey=${WA_API_KEY}`;
-    await fetch(url, { mode: 'no-cors' });
-  } catch(e) {
-    console.warn('CallMeBot error:', e);
-  }
-  // Also update the WA button as backup
   const waBtn = document.getElementById('wa-notify-btn');
-  if (waBtn) waBtn.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+  const waUrl = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+  if (waBtn) {
+    waBtn.href = waUrl;
+  }
 }
 
 let isProcessingOrder = false;
 
 async function placeOrder() {
   if (isProcessingOrder) return;
+
+  // Anti-Spam Honeypot Check
+  if (document.getElementById('website_hp')?.value) {
+    console.warn('Spam order aborted.');
+    return;
+  }
+
   isProcessingOrder = true;
 
   const btn = document.getElementById('summary-cta');
@@ -1530,14 +1591,15 @@ async function placeOrder() {
     const orderNum = result.order_id || 'MP-' + Math.floor(100000 + Math.random() * 900000);
     document.getElementById('conf-order-num').textContent = orderNum;
 
-    const pickupNames = { delivery: 'Delivery a domicilio — Caracas', pickup: 'Retiro en tienda — La Tahona' };
+    const pickupNames = { delivery: 'Delivery a domicilio — Caracas', pickup: 'Retiro en Pro-Shop' };
     const payNames    = { zelle:'Zelle', cash:'Dólares en efectivo', stripe:'Tarjeta internacional (Stripe)', venmo:'Venmo', pagomovil:'Pago móvil', usdt:'USDT / Binance' };
 
     document.getElementById('conf-subtitle').textContent =
-      `Gracias por tu compra. Coordinaremos el ${deliveryMethod === 'pickup' ? 'retiro en tienda' : 'delivery'} y el pago por ${payNames[paymentMethod]} por WhatsApp en los próximos minutos.`;
+      `Gracias por tu compra. Coordinaremos el ${deliveryMethod === 'pickup' ? 'retiro en Pro-Shop' : 'delivery'} y el pago por ${payNames[paymentMethod]} por WhatsApp en los próximos minutos.`;
 
     if (deliveryMethod === 'pickup') {
-      document.getElementById('conf-step3-text').textContent = 'Puedes retirar tu pedido en Morsa\'s Superstore, C.C. La Tahona, cuando te avisemos.';
+      const selectedSede = document.getElementById('p-sede')?.value || 'C.C. La Tahona';
+      document.getElementById('conf-step3-text').textContent = `Puedes retirar tu pedido en: ${selectedSede}, cuando te avisemos.`;
     }
 
     // Build snapshot for WhatsApp notification
@@ -1552,6 +1614,7 @@ async function placeOrder() {
       total:          getTotal().toFixed(2),
       deliveryMethod,
       deliveryLabel:  pickupNames[deliveryMethod],
+      sede:           deliveryMethod === 'pickup' ? (document.getElementById('p-sede')?.value || 'C.C. La Tahona') : null,
       payLabel:       payNames[paymentMethod],
       nombre:         document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '—',
       telefono:       document.getElementById(deliveryMethod === 'delivery' ? 'f-telefono' : 'p-telefono')?.value || '—',

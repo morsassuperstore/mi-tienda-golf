@@ -1735,6 +1735,93 @@
       text-align: center;
     }
   }
+
+  /* ─── SITE FOOTER ─── */
+  footer {
+    background: var(--navy-deeper);
+    color: var(--white);
+    padding: 60px 32px 30px;
+    border-top: 3px solid var(--gold);
+    margin-top: 60px;
+  }
+  .footer-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .footer-brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .footer-brand-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 18px;
+  }
+  .footer-col-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .footer-col-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .footer-col-links a {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-col-links a:hover { color: var(--white); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-payments {
+    display: flex;
+    gap: 8px;
+  }
+  .payment-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  @media (max-width: 992px) {
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+  @media (max-width: 576px) {
+    .footer-top { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -1916,6 +2003,83 @@
 
   </div><!-- end products-area -->
 </div><!-- end shop-layout -->
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <!-- Brand -->
+      <div>
+        <div class="footer-brand-name">Morsa's Proshop</div>
+        <p class="footer-brand-desc">
+          El destino número uno de Venezuela para golf, pádel y tenis.
+          Equipos premium, ropa de alto rendimiento y servicio experto — en tienda y en línea.
+        </p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/morsasgolf/" target="_blank" class="social-btn" aria-label="Instagram"
+            style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(245,166,35,0.1);transition:background 0.2s;">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              style="color: #F5A623;">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Golf -->
+      <div>
+        <div class="footer-col-title">Golf</div>
+        <ul class="footer-col-links">
+          <li><a href="tienda.html?sport=golf&gender=caballeros">Golf Caballeros</a></li>
+          <li><a href="tienda.html?sport=golf&gender=damas">Golf Damas</a></li>
+          <li><a href="tienda.html?cat=palos&sport=golf">Palos de Golf</a></li>
+          <li><a href="tienda.html?cat=pelotas&sport=golf">Pelotas de Golf</a></li>
+          <li><a href="tienda.html?cat=maletas&sport=golf">Bolsas de Golf</a></li>
+          <li><a href="tienda.html?cat=accesorios">Accesorios</a></li>
+        </ul>
+      </div>
+
+      <!-- Padel & Tennis -->
+      <div>
+        <div class="footer-col-title">Padel & Tennis</div>
+        <ul class="footer-col-links">
+          <li><a href="tienda.html?cat=raquetas&sport=padel">Palas de Pádel</a></li>
+          <li><a href="tienda.html?cat=raquetas&sport=tenis">Raquetas de Tenis</a></li>
+          <li><a href="tienda.html?cat=ropa&sport=padel">Ropa de Pádel</a></li>
+          <li><a href="tienda.html?cat=ropa&sport=tenis">Ropa de Tenis</a></li>
+          <li><a href="tienda.html?cat=zapatos">Calzado</a></li>
+          <li><a href="tienda.html?cat=pelotas">Balls & Strings</a></li>
+        </ul>
+      </div>
+
+      <!-- Info -->
+      <div>
+        <div class="footer-col-title">Legal & Soporte</div>
+        <ul class="footer-col-links">
+          <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+          <li><a href="terminos.html">Términos y Condiciones</a></li>
+          <li><a href="devoluciones.html">Garantías y Cambios</a></li>
+          <li><a href="envios.html">Política de Envíos</a></li>
+          <li><a href="guia-tallas.html">Guía de Tallas</a></li>
+          <li><a href="nosotros.html">Sobre Morsa's</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">© 2026 Morsa's Proshop · Caracas, Venezuela · Todos los derechos reservados</div>
+      <div class="footer-payments">
+        <span class="payment-badge">Visa</span>
+        <span class="payment-badge">Mastercard</span>
+        <span class="payment-badge">PayPal</span>
+        <span class="payment-badge">Zelle</span>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <!-- ─── PRODUCT DETAIL VIEW ─── -->
 <div class="pdv-overlay" id="pdvOverlay">
