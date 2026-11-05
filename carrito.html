@@ -803,7 +803,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
           <label class="payment-opt selected" onclick="selectPayment('zelle')">
             <input type="radio" name="payment" value="zelle" checked>
-            <div class="payment-icon" style="background:#5c35cc15;">💜</div>
+            <div class="payment-icon" style="background:#7414CA15;color:#7414CA;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M13.8 2h-3.6v3.2H6v3.8h7.8l-7.8 7.8V22h3.6v-3.2H18v-3.8h-7.8l7.8-7.8V2h-4.2z"/></svg>
+            </div>
             <div class="payment-body">
               <div class="payment-name">Zelle</div>
               <div class="payment-desc">Transferencia desde banco en EE.UU. — Inmediata</div>
@@ -812,7 +814,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
           <label class="payment-opt" onclick="selectPayment('cash')">
             <input type="radio" name="payment" value="cash">
-            <div class="payment-icon" style="background:#27ae6015;">💵</div>
+            <div class="payment-icon" style="background:#10B98115;color:#10B981;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 10.2v3.6M10.8 11.2c.4-.5 1.8-.6 2.2.2.4.8-.8 1.2-1 1.4-.6.3-.5 1.2.8 1.2"/></svg>
+            </div>
             <div class="payment-body">
               <div class="payment-name">Dólares en efectivo</div>
               <div class="payment-desc">Pago al momento del delivery o al retirar en tienda</div>
@@ -821,7 +825,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
           <label class="payment-opt" onclick="selectPayment('stripe')">
             <input type="radio" name="payment" value="stripe">
-            <div class="payment-icon" style="background:#635bff15;">💳</div>
+            <div class="payment-icon" style="background:#635BFF15;color:#635BFF;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="15" r="1.2" fill="currentColor"/><circle cx="11" cy="15" r="1.2" fill="currentColor"/></svg>
+            </div>
             <div class="payment-body">
               <div class="payment-name">Tarjeta internacional</div>
               <div class="payment-desc">Visa / Mastercard via Stripe — Cargo en USD</div>
@@ -830,7 +836,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
           <label class="payment-opt" onclick="selectPayment('venmo')">
             <input type="radio" name="payment" value="venmo">
-            <div class="payment-icon" style="background:#3d95ce15;">💙</div>
+            <div class="payment-icon" style="background:#008CFF15;color:#008CFF;">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.8 3c.4 1 .6 2.2.6 3.6 0 4.5-3.8 10.3-6.9 14.4H6.8L4 4.5l5.2-.5 1.6 12.3c1.5-2.5 3.3-6.4 3.3-8.8 0-1.4-.2-2.4-.6-3.1L18.8 3z"/></svg>
+            </div>
             <div class="payment-body">
               <div class="payment-name">Venmo</div>
               <div class="payment-desc">Transferencia desde app Venmo (EE.UU.)</div>
@@ -839,7 +847,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
           <label class="payment-opt" onclick="selectPayment('pagomovil')">
             <input type="radio" name="payment" value="pagomovil">
-            <div class="payment-icon" style="background:#e74c3c15;">🏦</div>
+            <div class="payment-icon" style="background:#E11D4815;color:#E11D48;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><line x1="10" y1="5" x2="14" y2="5"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>
+            </div>
             <div class="payment-body">
               <div class="payment-name">Pago móvil</div>
               <div class="payment-desc">Escribe por WhatsApp para confirmar el monto en bolívares</div>
@@ -848,7 +858,9 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
           <label class="payment-opt" onclick="selectPayment('usdt')">
             <input type="radio" name="payment" value="usdt">
-            <div class="payment-icon" style="background:#26a17b15;">₮</div>
+            <div class="payment-icon" style="background:#26A17B15;color:#26A17B;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.14 7.37v-.01h3.33v1.89h-3.33v1.17c2.3.1 4.02.6 4.02 1.2s-1.72 1.1-4.02 1.2v3.68h-2.28v-3.68c-2.3-.1-4.02-.6-4.02-1.2s1.72-1.1 4.02-1.2v-1.17H7.53V9.36h3.33V7.5h2.28v1.87zm-1.14 4.88c-1.95 0-3.53-.34-3.53-.75s1.58-.75 3.53-.75 3.53.34 3.53.75-1.58.75-3.53.75z"/></svg>
+            </div>
             <div class="payment-body">
               <div class="payment-name">USDT — Binance</div>
               <div class="payment-desc">Crypto USDT (TRC20 o BEP20) via Binance Pay</div>
@@ -1058,13 +1070,25 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
           Compra segura — datos protegidos
         </div>
 
-        <div style="display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap;">
-          <span style="font-size:18px;" title="Zelle">💜</span>
-          <span style="font-size:18px;" title="Dólares">💵</span>
-          <span style="font-size:18px;" title="Stripe">💳</span>
-          <span style="font-size:18px;" title="Venmo">💙</span>
-          <span style="font-size:18px;" title="Pago Móvil">🏦</span>
-          <span style="font-size:18px;" title="USDT">₮</span>
+        <div style="display:flex;justify-content:center;gap:14px;margin-top:14px;flex-wrap:wrap;align-items:center;opacity:0.7;">
+          <span title="Zelle" style="color:#7414CA;display:flex;align-items:center;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M13.8 2h-3.6v3.2H6v3.8h7.8l-7.8 7.8V22h3.6v-3.2H18v-3.8h-7.8l7.8-7.8V2h-4.2z"/></svg>
+          </span>
+          <span title="Dólares en efectivo" style="color:#10B981;display:flex;align-items:center;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+          </span>
+          <span title="Tarjeta de Crédito / Débito (Stripe)" style="color:#635BFF;display:flex;align-items:center;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          </span>
+          <span title="Venmo" style="color:#008CFF;display:flex;align-items:center;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M18.8 3c.4 1 .6 2.2.6 3.6 0 4.5-3.8 10.3-6.9 14.4H6.8L4 4.5l5.2-.5 1.6 12.3c1.5-2.5 3.3-6.4 3.3-8.8 0-1.4-.2-2.4-.6-3.1L18.8 3z"/></svg>
+          </span>
+          <span title="Pago Móvil" style="color:#E11D48;display:flex;align-items:center;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="3"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>
+          </span>
+          <span title="USDT — Binance" style="color:#26A17B;display:flex;align-items:center;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.14 7.37v-.01h3.33v1.89h-3.33v1.17c2.3.1 4.02.6 4.02 1.2s-1.72 1.1-4.02 1.2v3.68h-2.28v-3.68c-2.3-.1-4.02-.6-4.02-1.2s1.72-1.1 4.02-1.2v-1.17H7.53V9.36h3.33V7.5h2.28v1.87zm-1.14 4.88c-1.95 0-3.53-.34-3.53-.75s1.58-.75 3.53-.75 3.53.34 3.53.75-1.58.75-3.53.75z"/></svg>
+          </span>
         </div>
       </div>
     </div>
