@@ -898,7 +898,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
             </div>
             <div class="form-group">
               <label class="form-label">Fecha de vencimiento</label>
-              <input class="form-input" id="card-expiry" name="card-expiry" aria-label="Fecha de vencimiento" type="text" placeholder="MM / AA" maxlength="7">
+              <input class="form-input" id="card-expiry" name="card-expiry" aria-label="Fecha de vencimiento" type="text" placeholder="MM / AA" maxlength="7" oninput="formatExpiry(this)">
             </div>
             <div class="form-group">
               <label class="form-label">CVV</label>
@@ -1566,6 +1566,14 @@ function copyText(text, btn) {
 function formatCard(el) {
   el.value = el.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
 }
+function formatExpiry(el) {
+  let val = el.value.replace(/\D/g, '');
+  if (val.length >= 2) {
+    el.value = val.substring(0, 2) + ' / ' + val.substring(2, 4);
+  } else {
+    el.value = val;
+  }
+}
 
 // ── BS TOTAL PREVIEW (Pago móvil) ──
 function updateBsTotal() {
@@ -1643,6 +1651,60 @@ async function placeOrder() {
   if (document.getElementById('website_hp')?.value) {
     console.warn('Spam order aborted.');
     return;
+  }
+
+  // Limpiar errores previos
+  const prevError = document.getElementById('checkout-error');
+  if (prevError) prevError.remove();
+
+  // Validación de campos de tarjeta para Stripe
+  if (paymentMethod === 'stripe') {
+    const numInput  = document.getElementById('card-number');
+    const expInput  = document.getElementById('card-expiry');
+    const cvvInput  = document.getElementById('card-cvv');
+    const nameInput = document.getElementById('card-name');
+
+    const num  = (numInput?.value || '').replace(/\s+/g, '');
+    const exp  = (expInput?.value || '').trim();
+    const cvv  = (cvvInput?.value || '').trim();
+    const name = (nameInput?.value || '').trim();
+
+    let cardValid = true;
+    [numInput, expInput, cvvInput, nameInput].forEach(el => el?.classList.remove('invalid'));
+
+    if (!num || num.length < 13 || !/^\d+$/.test(num)) {
+      numInput?.classList.add('invalid');
+      cardValid = false;
+    }
+    if (!exp || !/^\d{2}\s*\/\s*\d{2}$/.test(exp)) {
+      expInput?.classList.add('invalid');
+      cardValid = false;
+    }
+    if (!cvv || cvv.length < 3 || !/^\d+$/.test(cvv)) {
+      cvvInput?.classList.add('invalid');
+      cardValid = false;
+    }
+    if (!name) {
+      nameInput?.classList.add('invalid');
+      cardValid = false;
+    }
+
+    if (!cardValid) {
+      let errBox = document.getElementById('checkout-error');
+      if (!errBox) {
+        errBox = document.createElement('div');
+        errBox.id = 'checkout-error';
+        errBox.style = "background: #fff0f0; border: 1px solid #ffcccc; color: #c0392b; padding: 12px 16px; border-radius: var(--radius); margin-bottom: 20px; font-size: 14px; font-weight: 500; display:flex; gap:12px; align-items:center;";
+        const formWrap = document.querySelector('.checkout-col-left') || document.body;
+        formWrap.insertBefore(errBox, formWrap.firstChild);
+      }
+      errBox.innerHTML = `
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <div>Por favor ingresa los datos de tu tarjeta (número, vencimiento, CVV y nombre) para continuar.</div>
+      `;
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
   }
 
   isProcessingOrder = true;
@@ -1791,6 +1853,38 @@ async function placeOrder() {
 
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
+  // Detección de retorno exitoso desde pasarela Stripe
+  const urlParams = new URLSearchParams(window.location.search);
+  const returnOrderId = urlParams.get('order_id');
+  const returnStatus  = urlParams.get('status');
+
+  if (returnOrderId && returnStatus === 'completed') {
+    Cart.clear();
+    goToStep(4);
+    const orderNum = 'MP-' + returnOrderId;
+    const numEl = document.getElementById('conf-order-num');
+    if (numEl) numEl.textContent = orderNum;
+
+    const subEl = document.getElementById('conf-subtitle');
+    if (subEl) {
+      subEl.textContent = '¡Pago recibido con éxito vía Tarjeta Internacional (Stripe)! Tu pedido está confirmado y nuestro equipo de operaciones ha sido notificado para despachar tu compra.';
+    }
+
+    const waBtn = document.getElementById('wa-notify-btn');
+    if (waBtn) {
+      const msg = [
+        '🏌️ *Nuevo Pedido Confirmado — Morsa\'s Proshop*',
+        '━━━━━━━━━━━━━━━━━━━━',
+        `📦 Orden: *#${orderNum}*`,
+        '💳 *Método:* Tarjeta internacional (Stripe) — Aprobado ✅',
+        '━━━━━━━━━━━━━━━━━━━━',
+        '💬 _Enviado desde el catálogo digital de Morsa\'s Proshop_'
+      ].join('\n');
+      waBtn.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+    }
+    return;
+  }
+
   renderCart();
   
   // Cargar configuraciones globales desde CMS
