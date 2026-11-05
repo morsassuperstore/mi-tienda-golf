@@ -1,4 +1,8 @@
 {
+  "enable_iva": true,
+  "tax_iva_pct": 16,
+  "enable_igtf": false,
+  "igtf_pct": 3,
   "payment_zelle": {
     "email": "info@morsasgolf.com",
     "name": "Morsa's Proshop LLC"

@@ -1027,9 +1027,21 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
           <span>Descuento (MORSA10)</span>
           <span id="sum-discount" class="discount">-Ref.0.00</span>
         </div>
+        <div class="summary-row" id="sum-iva-row" style="display:none;">
+          <span id="sum-iva-label">IVA (16%)</span>
+          <span id="sum-iva" style="color:var(--text-dark);font-weight:600;">+Ref.0.00</span>
+        </div>
         <div class="summary-row" id="sum-shipping-row">
           <span>Delivery</span>
           <span id="sum-shipping">Ref.0.00</span>
+        </div>
+        <div class="summary-row" id="sum-igtf-row" style="display:none;">
+          <span id="sum-igtf-label">IGTF (3%)</span>
+          <span id="sum-igtf" style="color:var(--text-dark);font-weight:600;">+Ref.0.00</span>
+        </div>
+        <div class="summary-row" id="sum-stripe-fee-row" style="display:none;">
+          <span>Comisión tarjeta internacional</span>
+          <span id="sum-stripe-fee" style="color:var(--text-dark);font-weight:600;">+Ref.0.00</span>
         </div>
         <div class="summary-row total">
           <span>Total</span>
@@ -1082,6 +1094,10 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 let FREE_SHIPPING = 100;
 let DELIVERY_COST = 3;
 let MANUAL_EXCHANGE_RATE = null;
+let ENABLE_IVA = true;
+let TAX_IVA_PCT = 16;
+let ENABLE_IGTF = false;
+let IGTF_PCT = 3;
 
 // ── STATE ──
 let currentStep = 1;
@@ -1101,13 +1117,35 @@ function getDiscount() {
   if (!discountApplied) return 0;
   return Math.round(getSubtotal() * discountPct) / 100;
 }
+function getIva() {
+  if (!ENABLE_IVA) return 0;
+  const base = getSubtotal() - getDiscount();
+  if (base <= 0) return 0;
+  return Math.round(base * (TAX_IVA_PCT / 100) * 100) / 100;
+}
+function isDivisaMethod() {
+  return ['stripe', 'zelle', 'cash', 'venmo', 'usdt'].includes(paymentMethod);
+}
+function getIgtf() {
+  if (!ENABLE_IGTF || !isDivisaMethod()) return 0;
+  const base = getSubtotal() - getDiscount() + getIva() + getShipping();
+  if (base <= 0) return 0;
+  return Math.round(base * (IGTF_PCT / 100) * 100) / 100;
+}
 function getShipping() {
   if (deliveryMethod === 'pickup' || getSubtotal() === 0) return 0;
   const sub = getSubtotal() - getDiscount();
   return sub >= FREE_SHIPPING ? 0 : DELIVERY_COST;
 }
+function getStripeFee() {
+  if (paymentMethod !== 'stripe') return 0;
+  const base = getSubtotal() - getDiscount() + getIva() + getIgtf() + getShipping();
+  if (base <= 0) return 0;
+  // 2.9% + $0.30 tarifa fija de Stripe
+  return Math.round((base * 0.029 + 0.30) * 100) / 100;
+}
 function getTotal() {
-  return getSubtotal() - getDiscount() + getShipping();
+  return getSubtotal() - getDiscount() + getIva() + getIgtf() + getShipping() + getStripeFee();
 }
 
 // ── RENDER CART ITEMS ──
@@ -1184,6 +1222,19 @@ function updateSummary() {
   discRow.style.display = discountApplied ? 'flex' : 'none';
   document.getElementById('sum-discount').textContent = '-' + formatPrice(disc);
 
+  const ivaRow = document.getElementById('sum-iva-row');
+  const iva = getIva();
+  if (ivaRow) {
+    if (iva > 0) {
+      ivaRow.style.display = 'flex';
+      const label = document.getElementById('sum-iva-label');
+      if (label) label.textContent = `IVA (${TAX_IVA_PCT}%)`;
+      document.getElementById('sum-iva').textContent = '+' + formatPrice(iva);
+    } else {
+      ivaRow.style.display = 'none';
+    }
+  }
+
   const shipRow = document.getElementById('sum-shipping-row');
   const shipEl = document.getElementById('sum-shipping');
   if (deliveryMethod === 'pickup') {
@@ -1200,6 +1251,30 @@ function updateSummary() {
       shipEl.style.color = '';
       shipEl.style.fontWeight = '';
       shipRow.classList.remove('shipping-free');
+    }
+  }
+
+  const igtfRow = document.getElementById('sum-igtf-row');
+  const igtf = getIgtf();
+  if (igtfRow) {
+    if (igtf > 0) {
+      igtfRow.style.display = 'flex';
+      const label = document.getElementById('sum-igtf-label');
+      if (label) label.textContent = `IGTF (${IGTF_PCT}%)`;
+      document.getElementById('sum-igtf').textContent = '+' + formatPrice(igtf);
+    } else {
+      igtfRow.style.display = 'none';
+    }
+  }
+
+  const feeRow = document.getElementById('sum-stripe-fee-row');
+  const stripeFee = getStripeFee();
+  if (feeRow) {
+    if (stripeFee > 0) {
+      feeRow.style.display = 'flex';
+      document.getElementById('sum-stripe-fee').textContent = '+' + formatPrice(stripeFee);
+    } else {
+      feeRow.style.display = 'none';
     }
   }
 
@@ -1449,6 +1524,8 @@ function selectPayment(val) {
   } else {
     instrBox.classList.remove('visible');
   }
+
+  updateSummary();
 }
 
 // ── COPY ──
@@ -1502,7 +1579,10 @@ function buildWhatsAppMessage(orderNum, snapshot) {
     '-------------------------------------------',
     `💰 Subtotal: ${formatPrice(snapshot.subtotal)}`,
     snapshot.discount > 0 ? `🏷️ Descuento: -${formatPrice(snapshot.discount)}` : null,
+    snapshot.iva > 0 ? `🏛️ IVA (${snapshot.ivaPct}%): +${formatPrice(snapshot.iva)}` : null,
     `🚚 Envío: ${parseFloat(snapshot.shipping) === 0 ? 'GRATIS' : formatPrice(snapshot.shipping)}`,
+    snapshot.igtf > 0 ? `🏛️ IGTF (${snapshot.igtfPct}%): +${formatPrice(snapshot.igtf)}` : null,
+    snapshot.stripeFee > 0 ? `💳 Comisión tarjeta internacional: +${formatPrice(snapshot.stripeFee)}` : null,
     `✅ *Total Estimado: ${formatPrice(snapshot.total)}*`,
     '',
     `👤 *Cliente:* ${snapshot.nombre}`,
@@ -1563,6 +1643,8 @@ async function placeOrder() {
   }
 
   // Preparar los datos para el backend
+  const ivaAmount = getIva();
+  const igtfAmount = getIgtf();
   const checkoutData = {
     payment_method: paymentMethod,
     line_items: Cart.items.map(item => ({
@@ -1570,6 +1652,12 @@ async function placeOrder() {
       quantity: item.quantity,
       variation_id: item.variation_id
     })),
+    taxes: {
+      iva_pct: ENABLE_IVA ? TAX_IVA_PCT : 0,
+      iva_amount: ivaAmount,
+      igtf_pct: (ENABLE_IGTF && isDivisaMethod()) ? IGTF_PCT : 0,
+      igtf_amount: igtfAmount
+    },
     billing: {
       first_name: document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '',
       phone: document.getElementById(deliveryMethod === 'delivery' ? 'f-telefono' : 'p-telefono')?.value || '',
@@ -1606,11 +1694,19 @@ async function placeOrder() {
     const sub  = getSubtotal();
     const disc = getDiscount();
     const ship = getShipping();
+    const fee  = getStripeFee();
+    const iva  = getIva();
+    const igtf = getIgtf();
     const snapshot = {
       items:          [...Cart.items],
       subtotal:       sub.toFixed(2),
       discount:       disc.toFixed(2),
+      iva:            iva.toFixed(2),
+      ivaPct:         TAX_IVA_PCT,
       shipping:       ship,
+      igtf:           igtf.toFixed(2),
+      igtfPct:        IGTF_PCT,
+      stripeFee:      fee,
       total:          getTotal().toFixed(2),
       deliveryMethod,
       deliveryLabel:  pickupNames[deliveryMethod],
@@ -1682,6 +1778,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       if (!data) return;
       
+      if (data.enable_iva !== undefined) ENABLE_IVA = Boolean(data.enable_iva);
+      if (data.tax_iva_pct !== undefined) TAX_IVA_PCT = parseFloat(data.tax_iva_pct) || 16;
+      if (data.enable_igtf !== undefined) ENABLE_IGTF = Boolean(data.enable_igtf);
+      if (data.igtf_pct !== undefined) IGTF_PCT = parseFloat(data.igtf_pct) || 3;
       if (data.free_shipping_threshold !== undefined) FREE_SHIPPING = data.free_shipping_threshold;
       if (data.delivery_cost !== undefined) DELIVERY_COST = data.delivery_cost;
       if (data.whatsapp_number) WA_PHONE = data.whatsapp_number;

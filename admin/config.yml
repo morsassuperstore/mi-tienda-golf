@@ -532,6 +532,24 @@ collections:
             widget: "number"
             value_type: "int"
             default: 3
+          - label: "Activar IVA en Compras"
+            name: "enable_iva"
+            widget: "boolean"
+            default: true
+          - label: "Porcentaje de IVA (%)"
+            name: "tax_iva_pct"
+            widget: "number"
+            value_type: "float"
+            default: 16
+          - label: "Activar IGTF (3% en Divisas / Cripto)"
+            name: "enable_igtf"
+            widget: "boolean"
+            default: false
+          - label: "Porcentaje de IGTF (%)"
+            name: "igtf_pct"
+            widget: "number"
+            value_type: "float"
+            default: 3
           - label: "Tasa de Cambio Manual (Opcional, dejar vacío o 0 si el cajero lo ingresará)"
             name: "manual_exchange_rate"
             widget: "number"
