@@ -706,18 +706,26 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
         <!-- Delivery address form -->
         <div id="delivery-form">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de contacto y dirección</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de contacto, facturación y entrega</div>
           <div class="form-grid" style="margin-bottom:12px;">
             <div class="form-group">
-              <label class="form-label">Nombre</label>
-              <input class="form-input" id="f-nombre" name="nombre" aria-label="Nombre" type="text" placeholder="Tu nombre completo" oninput="clearError('f-nombre')"><span class="field-error" id="err-f-nombre">Este campo es obligatorio</span>
+              <label class="form-label">Nombre o Razón Social</label>
+              <input class="form-input" id="f-nombre" name="nombre" aria-label="Nombre" type="text" placeholder="Tu nombre completo o empresa" oninput="clearError('f-nombre')"><span class="field-error" id="err-f-nombre">Este campo es obligatorio</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Cédula o RIF (para Factura Fiscal)</label>
+              <input class="form-input" id="f-documento" name="documento" aria-label="Cédula o RIF" type="text" placeholder="Ej: V-12345678 o J-123456789" oninput="clearError('f-documento')"><span class="field-error" id="err-f-documento">Ingresa tu Cédula o RIF</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Correo Electrónico (para Factura y Recibo)</label>
+              <input class="form-input" id="f-email" name="email" aria-label="Correo Electrónico" type="email" placeholder="tu@email.com" oninput="clearError('f-email')"><span class="field-error" id="err-f-email">Ingresa un correo electrónico válido</span>
             </div>
             <div class="form-group">
               <label class="form-label">Teléfono / WhatsApp</label>
               <input class="form-input" id="f-telefono" name="telefono" aria-label="Teléfono" type="tel" placeholder="+58 414 000 0000" oninput="clearError('f-telefono')"><span class="field-error" id="err-f-telefono">Este campo es obligatorio</span>
             </div>
             <div class="form-group span2">
-              <label class="form-label">Dirección</label>
+              <label class="form-label">Dirección de Entrega</label>
               <input class="form-input" id="f-direccion" name="direccion" aria-label="Dirección" type="text" placeholder="Calle, edificio, piso, apartamento..." oninput="clearError('f-direccion')"><span class="field-error" id="err-f-direccion">Este campo es obligatorio</span>
             </div>
             <div class="form-group">
@@ -751,12 +759,22 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
 
         <!-- Pickup form (hidden by default) -->
         <div id="pickup-form" style="display:none;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de contacto y retiro</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Datos de contacto, facturación y retiro</div>
           <div class="form-grid" style="margin-bottom:16px;">
             <div class="form-group">
-              <label class="form-label">Nombre</label>
-              <input class="form-input" id="p-nombre" name="p-nombre" aria-label="Nombre para retiro" type="text" placeholder="Tu nombre completo" oninput="clearError('p-nombre')">
+              <label class="form-label">Nombre o Razón Social</label>
+              <input class="form-input" id="p-nombre" name="p-nombre" aria-label="Nombre para retiro" type="text" placeholder="Tu nombre completo o empresa" oninput="clearError('p-nombre')">
               <span class="field-error" id="err-p-nombre">Este campo es obligatorio</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Cédula o RIF (para Factura Fiscal)</label>
+              <input class="form-input" id="p-documento" name="p-documento" aria-label="Cédula o RIF para retiro" type="text" placeholder="Ej: V-12345678 o J-123456789" oninput="clearError('p-documento')">
+              <span class="field-error" id="err-p-documento">Ingresa tu Cédula o RIF</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Correo Electrónico (para Factura y Recibo)</label>
+              <input class="form-input" id="p-email" name="p-email" aria-label="Correo para retiro" type="email" placeholder="tu@email.com" oninput="clearError('p-email')">
+              <span class="field-error" id="err-p-email">Ingresa un correo electrónico válido</span>
             </div>
             <div class="form-group">
               <label class="form-label">Teléfono / WhatsApp</label>
@@ -1379,6 +1397,11 @@ function isValidPhone(phone) {
   return /^(\+?[0-9]{8,16})$/.test(cleaned);
 }
 
+function isValidEmail(email) {
+  if (!email) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
 // ── SHIPPING VALIDATION ──
 function validateShipping() {
   // Anti-Spam Honeypot Check
@@ -1388,47 +1411,56 @@ function validateShipping() {
   }
 
   if (deliveryMethod === 'pickup') {
-    const nombre = document.getElementById('p-nombre').value.trim();
-    const telefono = document.getElementById('p-telefono').value.trim();
+    const fields = [
+      { id: 'p-nombre',    val: document.getElementById('p-nombre')?.value.trim() },
+      { id: 'p-documento', val: document.getElementById('p-documento')?.value.trim() },
+      { id: 'p-email',     val: document.getElementById('p-email')?.value.trim() },
+      { id: 'p-telefono',  val: document.getElementById('p-telefono')?.value.trim() },
+    ];
     let valid = true;
 
-    const elNom = document.getElementById('p-nombre');
-    const errNom = document.getElementById('err-p-nombre');
-    if (!nombre) {
-      elNom.classList.add('invalid');
-      if (errNom) { errNom.textContent = 'Este campo es obligatorio'; errNom.classList.add('visible'); }
-      valid = false;
-    } else {
-      elNom.classList.remove('invalid');
-      if (errNom) errNom.classList.remove('visible');
-    }
+    fields.forEach(({ id, val }) => {
+      const el = document.getElementById(id);
+      const err = document.getElementById('err-' + id);
+      if (!val) {
+        el?.classList.add('invalid');
+        if (err) { err.textContent = 'Este campo es obligatorio'; err.classList.add('visible'); }
+        valid = false;
+      } else if (id === 'p-telefono' && !isValidPhone(val)) {
+        el?.classList.add('invalid');
+        if (err) { err.textContent = 'Ingresa un teléfono válido con código de área (ej: +58 412... o +1...)'; err.classList.add('visible'); }
+        valid = false;
+      } else if (id === 'p-email' && !isValidEmail(val)) {
+        el?.classList.add('invalid');
+        if (err) { err.textContent = 'Ingresa un correo electrónico válido (ej: cliente@gmail.com)'; err.classList.add('visible'); }
+        valid = false;
+      } else if (id === 'p-documento' && val.length < 5) {
+        el?.classList.add('invalid');
+        if (err) { err.textContent = 'Ingresa una Cédula o RIF válido (ej: V-12345678)'; err.classList.add('visible'); }
+        valid = false;
+      } else {
+        el?.classList.remove('invalid');
+        if (err) err.classList.remove('visible');
+      }
+    });
 
-    const elTel = document.getElementById('p-telefono');
-    const errTel = document.getElementById('err-p-telefono');
-    if (!telefono) {
-      elTel.classList.add('invalid');
-      if (errTel) { errTel.textContent = 'Este campo es obligatorio'; errTel.classList.add('visible'); }
-      valid = false;
-    } else if (!isValidPhone(telefono)) {
-      elTel.classList.add('invalid');
-      if (errTel) { errTel.textContent = 'Ingresa un teléfono válido con código de área (ej: +58 412... o +1...)'; errTel.classList.add('visible'); }
-      valid = false;
-    } else {
-      elTel.classList.remove('invalid');
-      if (errTel) errTel.classList.remove('visible');
+    if (!valid) {
+      document.getElementById('pickup-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
     }
-
-    if (valid) goToStep(3);
+    goToStep(3);
     return;
   }
 
   // Delivery fields
   const fields = [
-    { id: 'f-nombre',    val: document.getElementById('f-nombre').value.trim() },
-    { id: 'f-telefono',  val: document.getElementById('f-telefono').value.trim() },
-    { id: 'f-direccion', val: document.getElementById('f-direccion').value.trim() },
-    { id: 'f-sector',    val: document.getElementById('f-sector').value.trim() },
-    { id: 'f-municipio', val: document.getElementById('f-municipio').value },
+    { id: 'f-nombre',    val: document.getElementById('f-nombre')?.value.trim() },
+    { id: 'f-documento', val: document.getElementById('f-documento')?.value.trim() },
+    { id: 'f-email',     val: document.getElementById('f-email')?.value.trim() },
+    { id: 'f-telefono',  val: document.getElementById('f-telefono')?.value.trim() },
+    { id: 'f-direccion', val: document.getElementById('f-direccion')?.value.trim() },
+    { id: 'f-sector',    val: document.getElementById('f-sector')?.value.trim() },
+    { id: 'f-municipio', val: document.getElementById('f-municipio')?.value },
   ];
 
   let valid = true;
@@ -1436,21 +1468,29 @@ function validateShipping() {
     const el = document.getElementById(id);
     const err = document.getElementById('err-' + id);
     if (!val) {
-      el.classList.add('invalid');
+      el?.classList.add('invalid');
       if (err) { err.textContent = 'Este campo es obligatorio'; err.classList.add('visible'); }
       valid = false;
     } else if (id === 'f-telefono' && !isValidPhone(val)) {
-      el.classList.add('invalid');
+      el?.classList.add('invalid');
       if (err) { err.textContent = 'Ingresa un teléfono válido con código de área (ej: +58 412... o +1...)'; err.classList.add('visible'); }
       valid = false;
+    } else if (id === 'f-email' && !isValidEmail(val)) {
+      el?.classList.add('invalid');
+      if (err) { err.textContent = 'Ingresa un correo electrónico válido (ej: cliente@gmail.com)'; err.classList.add('visible'); }
+      valid = false;
+    } else if (id === 'f-documento' && val.length < 5) {
+      el?.classList.add('invalid');
+      if (err) { err.textContent = 'Ingresa una Cédula o RIF válido (ej: V-12345678)'; err.classList.add('visible'); }
+      valid = false;
     } else {
-      el.classList.remove('invalid');
+      el?.classList.remove('invalid');
       if (err) err.classList.remove('visible');
     }
   });
 
   if (!valid) {
-    document.getElementById('delivery-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('delivery-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
   goToStep(3);
@@ -1621,9 +1661,11 @@ function buildWhatsAppMessage(orderNum, snapshot) {
     `🚚 Envío: ${parseFloat(snapshot.shipping) === 0 ? 'GRATIS' : formatPrice(snapshot.shipping)}`,
     snapshot.igtf > 0 ? `🏛️ IGTF (${snapshot.igtfPct}%): +${formatPrice(snapshot.igtf)}` : null,
     snapshot.stripeFee > 0 ? `💳 Comisión tarjeta internacional: +${formatPrice(snapshot.stripeFee)}` : null,
-    `✅ *Total Estimado: ${formatPrice(snapshot.total)}*`,
+    `✅ *Total: ${formatPrice(snapshot.total)}*`,
     '',
     `👤 *Cliente:* ${snapshot.nombre}`,
+    snapshot.documento && snapshot.documento !== '—' ? `📄 *Cédula/RIF:* ${snapshot.documento}` : null,
+    snapshot.email && snapshot.email !== '—' ? `✉️ *Email:* ${snapshot.email}` : null,
     `📱 *Teléfono:* ${snapshot.telefono}`,
     `📬 *Entrega:* ${snapshot.deliveryLabel}`,
     snapshot.deliveryMethod === 'delivery'
@@ -1693,6 +1735,12 @@ async function placeOrder() {
   // Preparar los datos para el backend
   const ivaAmount = getIva();
   const igtfAmount = getIgtf();
+  const isDelivery = deliveryMethod === 'delivery';
+  const nombreVal = document.getElementById(isDelivery ? 'f-nombre' : 'p-nombre')?.value.trim() || '';
+  const docVal = document.getElementById(isDelivery ? 'f-documento' : 'p-documento')?.value.trim() || '';
+  const emailVal = document.getElementById(isDelivery ? 'f-email' : 'p-email')?.value.trim() || '';
+  const telVal = document.getElementById(isDelivery ? 'f-telefono' : 'p-telefono')?.value.trim() || '';
+
   const checkoutData = {
     payment_method: paymentMethod,
     line_items: Cart.items.map(item => ({
@@ -1707,17 +1755,19 @@ async function placeOrder() {
       igtf_amount: igtfAmount
     },
     billing: {
-      first_name: document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '',
-      phone: document.getElementById(deliveryMethod === 'delivery' ? 'f-telefono' : 'p-telefono')?.value || '',
-      address_1: document.getElementById('f-direccion')?.value || 'Retiro en Tienda',
-      city: document.getElementById('f-sector')?.value || 'Caracas',
-      state: document.getElementById('f-municipio')?.value || ''
+      first_name: nombreVal,
+      email: emailVal,
+      phone: telVal,
+      identification: docVal,
+      address_1: document.getElementById('f-direccion')?.value.trim() || 'Retiro en Tienda',
+      city: document.getElementById('f-sector')?.value.trim() || 'Caracas',
+      state: document.getElementById('f-municipio')?.value || 'Distrito Capital'
     },
     shipping: {
-      first_name: document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '',
-      address_1: document.getElementById('f-direccion')?.value || 'Retiro en Tienda',
-      city: document.getElementById('f-sector')?.value || 'Caracas',
-      state: document.getElementById('f-municipio')?.value || ''
+      first_name: nombreVal,
+      address_1: document.getElementById('f-direccion')?.value.trim() || 'Retiro en Tienda',
+      city: document.getElementById('f-sector')?.value.trim() || 'Caracas',
+      state: document.getElementById('f-municipio')?.value || 'Distrito Capital'
     }
   };
 
@@ -1760,8 +1810,10 @@ async function placeOrder() {
       deliveryLabel:  pickupNames[deliveryMethod],
       sede:           deliveryMethod === 'pickup' ? (document.getElementById('p-sede')?.value || 'C.C. La Tahona') : null,
       payLabel:       payNames[paymentMethod],
-      nombre:         document.getElementById(deliveryMethod === 'delivery' ? 'f-nombre' : 'p-nombre')?.value || '—',
-      telefono:       document.getElementById(deliveryMethod === 'delivery' ? 'f-telefono' : 'p-telefono')?.value || '—',
+      nombre:         nombreVal || '—',
+      documento:      docVal || '—',
+      email:          emailVal || '—',
+      telefono:       telVal || '—',
       direccion:      [
                         document.getElementById('f-direccion')?.value,
                         document.getElementById('f-sector')?.value,
@@ -1775,6 +1827,14 @@ async function placeOrder() {
                         return new Intl.NumberFormat('es-VE', { minimumFractionDigits: 2 }).format((getTotal() * r).toFixed(2)) + ' Bs';
                       })() : null,
     };
+
+    // Guardar snapshot en sessionStorage antes de redirigir a Stripe
+    try {
+      sessionStorage.setItem('morsa_last_order_snapshot', JSON.stringify({
+        orderNum,
+        snapshot
+      }));
+    } catch (e) {}
 
     sendWhatsAppNotification(orderNum, snapshot);
 
@@ -1832,16 +1892,28 @@ document.addEventListener('DOMContentLoaded', () => {
       subEl.textContent = '¡Pago recibido con éxito vía Tarjeta Internacional (Stripe)! Tu pedido está confirmado y nuestro equipo de operaciones ha sido notificado para despachar tu compra.';
     }
 
+    let stored = null;
+    try {
+      stored = JSON.parse(sessionStorage.getItem('morsa_last_order_snapshot') || 'null');
+    } catch (e) {}
+
     const waBtn = document.getElementById('wa-notify-btn');
     if (waBtn) {
-      const msg = [
-        '🏌️ *Nuevo Pedido Confirmado — Morsa\'s Proshop*',
-        '━━━━━━━━━━━━━━━━━━━━',
-        `📦 Orden: *#${orderNum}*`,
-        '💳 *Método:* Tarjeta internacional (Stripe) — Aprobado ✅',
-        '━━━━━━━━━━━━━━━━━━━━',
-        '💬 _Enviado desde el catálogo digital de Morsa\'s Proshop_'
-      ].join('\n');
+      let msg = '';
+      if (stored && stored.snapshot) {
+        const snap = stored.snapshot;
+        snap.payLabel = 'Tarjeta internacional (Stripe) — Aprobado ✅';
+        msg = buildWhatsAppMessage(orderNum, snap);
+      } else {
+        msg = [
+          '🏌️ *Nuevo Pedido Confirmado — Morsa\'s Proshop*',
+          '━━━━━━━━━━━━━━━━━━━━',
+          `📦 Orden: *#${orderNum}*`,
+          '💳 *Método:* Tarjeta internacional (Stripe) — Aprobado ✅',
+          '━━━━━━━━━━━━━━━━━━━━',
+          '💬 _Enviado desde el catálogo digital de Morsa\'s Proshop_'
+        ].join('\n');
+      }
       waBtn.href = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
     }
     return;
