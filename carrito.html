@@ -681,7 +681,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
         <div style="margin-bottom:18px;">
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;">Método de entrega</div>
           <div class="delivery-opts">
-            <label class="delivery-opt selected" id="opt-delivery">
+            <label class="delivery-opt selected" id="opt-delivery" onclick="selectDelivery('delivery')">
               <input type="radio" name="delivery" value="delivery" checked onchange="selectDelivery('delivery')">
               <div class="delivery-opt-body">
                 <div class="delivery-opt-title">
@@ -691,7 +691,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
                 <div class="delivery-opt-desc">Entrega en las próximas 24 horas dentro de Caracas. Envío gratis en pedidos mayores a Ref.100.</div>
               </div>
             </label>
-            <label class="delivery-opt" id="opt-pickup">
+            <label class="delivery-opt" id="opt-pickup" onclick="selectDelivery('pickup')">
               <input type="radio" name="delivery" value="pickup" onchange="selectDelivery('pickup')">
               <div class="delivery-opt-body">
                 <div class="delivery-opt-title">
@@ -1494,11 +1494,18 @@ function goToStep(n) {
 // ── DELIVERY ──
 function selectDelivery(val) {
   deliveryMethod = val;
-  document.getElementById('opt-delivery').classList.toggle('selected', val === 'delivery');
-  document.getElementById('opt-pickup').classList.toggle('selected', val === 'pickup');
-  document.getElementById('delivery-form').style.display = val === 'delivery' ? 'block' : 'none';
-  document.getElementById('pickup-form').style.display = val === 'pickup' ? 'block' : 'none';
-  document.getElementById('sum-shipping-row').style.display = val === 'pickup' ? 'none' : 'flex';
+  const deliveryRadio = document.querySelector('input[name="delivery"][value="delivery"]');
+  const pickupRadio = document.querySelector('input[name="delivery"][value="pickup"]');
+  if (deliveryRadio) deliveryRadio.checked = (val === 'delivery');
+  if (pickupRadio) pickupRadio.checked = (val === 'pickup');
+  document.getElementById('opt-delivery')?.classList.toggle('selected', val === 'delivery');
+  document.getElementById('opt-pickup')?.classList.toggle('selected', val === 'pickup');
+  const dForm = document.getElementById('delivery-form');
+  const pForm = document.getElementById('pickup-form');
+  if (dForm) dForm.style.display = val === 'delivery' ? 'block' : 'none';
+  if (pForm) pForm.style.display = val === 'pickup' ? 'block' : 'none';
+  const sumShipRow = document.getElementById('sum-shipping-row');
+  if (sumShipRow) sumShipRow.style.display = val === 'pickup' ? 'none' : 'flex';
   updateSummary();
 }
 
