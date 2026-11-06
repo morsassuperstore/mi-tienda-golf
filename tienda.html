@@ -2328,8 +2328,8 @@ function renderProducts(list) {
     grid.innerHTML += `
       <div class="product-card" onclick="openModal(${p.id})">
         <div class="product-img-wrap">
-          <img class="img-main" src="${p.img}" alt="${p.name}" loading="lazy">
-          <img class="img-hover" src="${p.img2}" alt="${p.name}" loading="lazy">
+          <img class="img-main" src="${p.img}" ${p.imgSrcset ? `srcset="${p.imgSrcset}" sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px"` : ''} alt="${p.name}" loading="lazy">
+          <img class="img-hover" src="${p.img2}" ${p.img2Srcset ? `srcset="${p.img2Srcset}" sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px"` : ''} alt="${p.name}" loading="lazy">
           <div class="product-badges">${badgeHtml}</div>
           <button class="product-wish" onclick="event.stopPropagation();toggleWish(this)" aria-label="Favorito">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -3317,8 +3317,11 @@ function showToast(msg) {
         colors: pColors,
         sizes: pSizes,
         badge: p.on_sale ? 'sale' : '',
-        img: p.images?.[0]?.src || 'https://via.placeholder.com/400',
-        img2: p.images?.[1]?.src || p.images?.[0]?.src || 'https://via.placeholder.com/400',
+        img: API.getCardImageUrl(p.images?.[0]),
+        img2: p.images?.[1] ? API.getCardImageUrl(p.images[1]) : API.getCardImageUrl(p.images?.[0]),
+        imgSrcset: p.images?.[0]?.srcset || '',
+        img2Srcset: p.images?.[1]?.srcset || '',
+        originalImg: p.images?.[0]?.src || 'https://via.placeholder.com/400',
         allImages: p.images || [],
         desc: p.short_description?.replace(/(<([^>]+)>)/gi, "") || '',
         fullDesc: p.description || p.short_description || '',
