@@ -1974,7 +1974,7 @@
       </button>
       <div class="products-count" id="productsCount"></div>
       <div class="active-filters" id="activeFilters"></div>
-      <select class="sort-select" onchange="sortProducts(this.value)">
+      <select class="sort-select" id="sortSelect" onchange="sortProducts(this.value)">
         <option value="featured">Destacados</option>
         <option value="price-asc">Precio: Menor a Mayor</option>
         <option value="price-desc">Precio: Mayor a Menor</option>
@@ -2357,7 +2357,14 @@ function renderProducts(list) {
   });
 }
 
-// ─── FILTER LOGIC ───
+// ─── FILTER & SORT LOGIC ───
+let currentSort = 'featured';
+
+function sortProducts(val) {
+  currentSort = val || 'featured';
+  filterProducts();
+}
+
 function filterProducts() {
   const searchVal = document.getElementById('searchInput').value.toLowerCase();
   const priceMin = parseFloat(document.getElementById('priceMin').value) || 0;
@@ -2379,6 +2386,22 @@ function filterProducts() {
     if (searchVal && !p.name.toLowerCase().includes(searchVal) && !p.brand.toLowerCase().includes(searchVal)) return false;
     return true;
   });
+
+  // Aplicar ordenamiento seleccionado
+  const sortSelect = document.getElementById('sortSelect');
+  const sortVal = sortSelect ? sortSelect.value : currentSort;
+
+  if (sortVal === 'price-asc') {
+    filtered.sort((a, b) => (parseFloat(a.price) || 0) - (parseFloat(b.price) || 0));
+  } else if (sortVal === 'price-desc') {
+    filtered.sort((a, b) => (parseFloat(b.price) || 0) - (parseFloat(a.price) || 0));
+  } else if (sortVal === 'newest') {
+    filtered.sort((a, b) => b.id - a.id);
+  } else if (sortVal === 'name') {
+    filtered.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'es', { sensitivity: 'base' }));
+  } else if (sortVal === 'featured') {
+    filtered.sort((a, b) => (a._originalIndex ?? 0) - (b._originalIndex ?? 0));
+  }
 
   renderProducts(filtered);
   updateActiveFilterTags(sportChecks, catChecks, genderChecks, brandChecks, sizeChecks);
@@ -2411,6 +2434,9 @@ function clearAllFilters() {
   document.getElementById('priceMin').value = '';
   document.getElementById('priceMax').value = '';
   document.getElementById('searchInput').value = '';
+  const sortSel = document.getElementById('sortSelect');
+  if (sortSel) sortSel.value = 'featured';
+  currentSort = 'featured';
   filterProducts();
 }
 
@@ -2427,8 +2453,6 @@ function selectSize(btn) {
   btn.closest('.product-sizes').querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
 }
-
-function sortProducts(val) { filterProducts(); }
 
 // ─── CARD INTERACTIONS ───
 function selectCardColor(e, swatch, productId, color) {
@@ -3280,6 +3304,7 @@ function showToast(msg) {
       pSizes.forEach(s => allSizes.add(s));
 
       products.push({
+        _originalIndex: products.length,
         id: p.id,
         sku: p.sku || '',
         name: decodedName,
