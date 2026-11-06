@@ -1943,6 +1943,29 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.log('Usando configuración de carrito local', err));
 });
+
+// Desbloquear botones si el usuario regresa con el botón Atrás del navegador
+window.addEventListener('pageshow', () => {
+  isProcessingOrder = false;
+  const btn = document.getElementById('summary-cta');
+  const btnLabel = document.getElementById('summary-cta-label');
+  const leftBtn = document.querySelector('.checkout-step.active .btn-checkout[onclick="placeOrder()"]');
+  const leftLabel = document.getElementById('step3-left-btn-label');
+
+  if (btn) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+  }
+  if (leftBtn) {
+    leftBtn.disabled = false;
+    leftBtn.style.opacity = '1';
+    leftBtn.style.cursor = 'pointer';
+  }
+  const defaultLabel = paymentMethod === 'stripe' ? 'Pagar con Tarjeta (Stripe) →' : 'Confirmar Pedido';
+  if (btnLabel) btnLabel.textContent = defaultLabel;
+  if (leftLabel) leftLabel.textContent = defaultLabel;
+});
 </script>
 <script src="js/menu.js"></script>
 <script src="js/animations.js"></script>
