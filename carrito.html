@@ -782,12 +782,15 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
               <span class="field-error" id="err-p-telefono">Este campo es obligatorio</span>
             </div>
             <div class="form-group span2">
-              <label class="form-label">Sede o Pro-Shop de Retiro</label>
-              <select class="form-input" id="p-sede" name="p-sede" aria-label="Sede de retiro">
-                <option value="C.C. La Tahona (Tienda Principal y Simulador)">C.C. La Tahona — Tienda Principal y Simulador de Swing</option>
-                <option value="La Lagunita Country Club (Pro-Shop)">La Lagunita Country Club — Pro-Shop Oficial</option>
-                <option value="Izcaragua Country Club (Pro-Shop)">Izcaragua Country Club — Pro-Shop Oficial</option>
-              </select>
+              <label class="form-label">Sede de Retiro Oficial</label>
+              <div style="background:#f4f5f9;border:1.5px solid #dcdfe8;border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px;">
+                <span style="font-size:20px;">🏪</span>
+                <div>
+                  <div style="font-weight:700;color:var(--navy-deeper);font-size:14px;">Morsas Superstore La Tahona (Complejo Avepane)</div>
+                  <div style="font-size:12px;color:var(--text-mid);">C.C. La Tahona, Nivel PB — Tienda Principal y Simulador</div>
+                </div>
+              </div>
+              <input type="hidden" id="p-sede" name="p-sede" value="Morsas Superstore La Tahona (Complejo Avepane)">
             </div>
           </div>
           <div style="background:#e8eaff;border:1.5px solid #c0c4ff;border-radius:10px;padding:14px 16px;font-size:13px;color:var(--navy);">
@@ -1014,8 +1017,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.845L0 24l6.335-1.509A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.371l-.36-.214-3.727.888.924-3.638-.235-.374A9.818 9.818 0 1112 21.818z"/></svg>
             Enviar pedido por WhatsApp
           </a>
-          <div style="font-size:11px;color:#aaa;max-width:300px;text-align:center;line-height:1.5;">
-            Toca el botón para enviarnos los detalles de tu pedido y coordinar el pago.
+          <div style="font-size:11px;color:#aaa;max-width:320px;text-align:center;line-height:1.5;">
+            Si WhatsApp no se abrió automáticamente, toca el botón para enviarnos los detalles de tu compra y coordinar el despacho.
           </div>
           <a href="tienda.html" class="btn-back-shop">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1670,7 +1673,7 @@ function buildWhatsAppMessage(orderNum, snapshot) {
     `📬 *Entrega:* ${snapshot.deliveryLabel}`,
     snapshot.deliveryMethod === 'delivery'
       ? `📍 *Dirección:* ${snapshot.direccion}`
-      : `📍 *Sede de retiro:* ${snapshot.sede || 'C.C. La Tahona, Caracas'}`,
+      : `📍 *Sede de retiro:* ${snapshot.sede || 'Morsas Superstore La Tahona (Complejo Avepane)'}`,
     `💳 *Método de Pago:* ${snapshot.payLabel}`,
     snapshot.payLabel === 'Pago móvil' && snapshot.bsRate
       ? `💵 *Tasa BCV:* ${snapshot.bsRate} Bs/Ref. → Total: ${snapshot.bsTotal}`
@@ -1784,7 +1787,7 @@ async function placeOrder() {
       `Gracias por tu compra. Coordinaremos el ${deliveryMethod === 'pickup' ? 'retiro en Pro-Shop' : 'delivery'} y el pago por ${payNames[paymentMethod]} por WhatsApp en los próximos minutos.`;
 
     if (deliveryMethod === 'pickup') {
-      const selectedSede = document.getElementById('p-sede')?.value || 'C.C. La Tahona';
+      const selectedSede = document.getElementById('p-sede')?.value || 'Morsas Superstore La Tahona (Complejo Avepane)';
       document.getElementById('conf-step3-text').textContent = `Puedes retirar tu pedido en: ${selectedSede}, cuando te avisemos.`;
     }
 
@@ -1808,7 +1811,7 @@ async function placeOrder() {
       total:          getTotal().toFixed(2),
       deliveryMethod,
       deliveryLabel:  pickupNames[deliveryMethod],
-      sede:           deliveryMethod === 'pickup' ? (document.getElementById('p-sede')?.value || 'C.C. La Tahona') : null,
+      sede:           deliveryMethod === 'pickup' ? (document.getElementById('p-sede')?.value || 'Morsas Superstore La Tahona (Complejo Avepane)') : null,
       payLabel:       payNames[paymentMethod],
       nombre:         nombreVal || '—',
       documento:      docVal || '—',
@@ -1846,6 +1849,13 @@ async function placeOrder() {
 
     goToStep(4);
     Cart.clear();
+
+    // Redirigir / abrir WhatsApp automáticamente con todos los datos precargados
+    const msg = buildWhatsAppMessage(orderNum, snapshot);
+    const waUrl = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+    try {
+      window.open(waUrl, '_blank');
+    } catch (e) {}
 
   } catch (err) {
     let errorBox = document.getElementById('checkout-error');

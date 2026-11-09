@@ -1,5 +1,5 @@
 {
-  "enable_iva": true,
+  "enable_iva": false,
   "tax_iva_pct": 16,
   "enable_igtf": false,
   "igtf_pct": 3,

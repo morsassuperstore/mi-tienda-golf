@@ -535,7 +535,7 @@ collections:
           - label: "Activar IVA en Compras"
             name: "enable_iva"
             widget: "boolean"
-            default: true
+            default: false
           - label: "Porcentaje de IVA (%)"
             name: "tax_iva_pct"
             widget: "number"

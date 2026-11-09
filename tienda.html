@@ -876,11 +876,11 @@
   /* Main Lululemon Product Layout */
   .pdv-product {
     display: grid;
-    grid-template-columns: 58% 42%;
-    max-width: 1320px;
+    grid-template-columns: 46% 54%;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 32px 40px 0;
-    gap: 48px;
+    padding: 24px 32px 0;
+    gap: 36px;
     width: 100%;
     align-items: start;
   }
@@ -889,14 +889,19 @@
   .pdv-images {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
   }
   .pdv-main-img-wrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 4/5;
-    background: #f9fafb;
+    max-height: 480px;
+    aspect-ratio: 1/1;
+    background: #ffffff;
+    border: 1px solid #edf0f5;
     border-radius: 12px;
     overflow: hidden;
     display: flex;
@@ -906,8 +911,9 @@
   .pdv-main-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
+    padding: 10px;
     transition: opacity 0.2s ease, transform 0.3s ease;
   }
   
@@ -2454,6 +2460,8 @@ function selectSize(btn) {
   btn.classList.add('selected');
 }
 
+const normalizeStr = s => (s || '').toString().toLowerCase().replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
+
 // ─── CARD INTERACTIONS ───
 function selectCardColor(e, swatch, productId, color) {
   e.stopPropagation();
@@ -2468,24 +2476,35 @@ function selectCardColor(e, swatch, productId, color) {
   const updateImgAndSizes = (vars) => {
     // 1. Update image
     const targetVar = vars.find(v => {
-      const hasColor = v.attributes && v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
-      return hasColor && String(hasColor.value).trim() === String(color).trim() && v.image_src;
+      const hasColor = (v.attributes || []).find(a => /color/i.test(a.name));
+      const val = hasColor ? (hasColor.value || hasColor.option || hasColor.slug) : '';
+      return hasColor && normalizeStr(val) === normalizeStr(color) && (v.image_src || (v.image && v.image.src));
     });
-    if (targetVar && targetVar.image_src) {
-      const imgMain = card.querySelector('.img-main');
-      const imgHover = card.querySelector('.img-hover');
-      if (imgMain) imgMain.src = targetVar.image_src;
-      if (imgHover) imgHover.src = targetVar.image_src;
+    if (targetVar) {
+      const varImg = targetVar.image_src || targetVar.image?.src;
+      if (varImg) {
+        const imgMain = card.querySelector('.img-main');
+        const imgHover = card.querySelector('.img-hover');
+        if (imgMain) {
+          imgMain.src = varImg;
+          imgMain.removeAttribute('srcset');
+        }
+        if (imgHover) {
+          imgHover.src = varImg;
+          imgHover.removeAttribute('srcset');
+        }
+      }
     }
 
     // 2. Update sizes
     const validSizes = new Set();
     vars.forEach(v => {
-      const hasColor = v.attributes && v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
-      if (hasColor && String(hasColor.value).trim() === String(color).trim() && v.stock_status !== 'outofstock' && v.purchasable !== false) {
-        const hasSize = v.attributes.find(a => a.name === 'Tallas' || a.name === 'Talla');
+      const hasColor = (v.attributes || []).find(a => /color/i.test(a.name));
+      const val = hasColor ? (hasColor.value || hasColor.option || hasColor.slug) : '';
+      if (hasColor && normalizeStr(val) === normalizeStr(color) && v.stock_status !== 'outofstock' && v.purchasable !== false) {
+        const hasSize = (v.attributes || []).find(a => /talla/i.test(a.name));
         if (hasSize) {
-          validSizes.add(String(hasSize.value).trim());
+          validSizes.add(String(hasSize.value || hasSize.option || hasSize.name).trim());
         }
       }
     });
@@ -2988,17 +3007,17 @@ function pdvSelectColor(el, hex, colorNameRaw) {
   const varsToUse = currentProduct.fullVariations || currentProduct.variations;
   
   if (currentProduct && varsToUse && varsToUse.length > 0 && colorNameRaw) {
-    // Filtrar las variaciones que coinciden con el color seleccionado
+    // Filtrar las variaciones que coinciden con el color seleccionado (normalizando nombres y slugs)
     const matchingVars = varsToUse.filter(v => {
-      const colorAttr = (v.attributes || []).find(a => a.name === 'Colores' || a.name === 'Color');
-      const attrVal = colorAttr ? (colorAttr.option || colorAttr.value) : null;
-      return attrVal && String(attrVal).toLowerCase() === String(colorNameRaw).toLowerCase();
+      const colorAttr = (v.attributes || []).find(a => /color/i.test(a.name));
+      const attrVal = colorAttr ? (colorAttr.option || colorAttr.value || colorAttr.slug) : null;
+      return attrVal && normalizeStr(attrVal) === normalizeStr(colorNameRaw);
     });
     
     // Obtener tallas disponibles para ese color
     const availableSizes = matchingVars.map(v => {
-      const sizeAttr = (v.attributes || []).find(a => a.name === 'Talla' || a.name === 'Tallas');
-      return sizeAttr ? (sizeAttr.option || sizeAttr.value) : null;
+      const sizeAttr = (v.attributes || []).find(a => /talla/i.test(a.name));
+      return sizeAttr ? (sizeAttr.option || sizeAttr.value || sizeAttr.name) : null;
     }).filter(s => s !== null);
     
     // Actualizar la interfaz de tallas
@@ -3009,21 +3028,27 @@ function pdvSelectColor(el, hex, colorNameRaw) {
       ).join('');
     }
     
-    // Actualizar galería solo con imágenes de este color
+    // Actualizar galería: imagen del color seleccionado al inicio + fotos generales del producto
     let colorImages = [];
     matchingVars.forEach(v => {
-      // 1. Imagen principal de la variación
-      if (v.image_src) colorImages.push(v.image_src);
-      else if (v.image && v.image.src) colorImages.push(v.image.src); // Soporte formato Woo original
-      
-      // 2. Galería adicional de la variación (desde el nuevo plugin)
+      const vImg = v.image_src || v.image?.src;
+      if (vImg && !colorImages.includes(vImg)) colorImages.push(vImg);
       if (v.gallery_images && Array.isArray(v.gallery_images)) {
-        v.gallery_images.forEach(img => colorImages.push(img));
+        v.gallery_images.forEach(img => { if (img && !colorImages.includes(img)) colorImages.push(img); });
       }
+    });
+
+    // Mantener fotos generales del producto para que el carrusel no quede recortado a una sola foto
+    const baseImages = (currentProduct.allImages && currentProduct.allImages.length > 0)
+      ? currentProduct.allImages.map(img => img.src)
+      : [currentProduct.originalImg || currentProduct.img, currentProduct.img2].filter(Boolean);
+
+    baseImages.forEach(img => {
+      if (img && !colorImages.includes(img)) colorImages.push(img);
     });
     
     if (colorImages.length > 0) {
-      currentGalleryImages = [...new Set(colorImages)];
+      currentGalleryImages = colorImages;
       currentGalleryIndex = 0;
       pdvUpdateGalleryRender();
     }
@@ -3113,26 +3138,34 @@ function addToCartFromPDV() {
   if (selectedColor) attributes['Color'] = selectedColor;
 
   const variationsList = currentProduct.fullVariations || currentProduct.variations || [];
+  let customImg = null;
+
   if (variationsList.length > 0) {
     const foundVar = variationsList.find(v => {
       let matches = true;
       if (selectedColor) {
-        const hasColor = v.attributes.find(a => a.name === 'Colores' || a.name === 'Color');
-        if (!hasColor || String(hasColor.value).trim() !== String(selectedColor).trim()) matches = false;
+        const hasColor = (v.attributes || []).find(a => /color/i.test(a.name));
+        const colorVal = hasColor ? (hasColor.value || hasColor.option || hasColor.slug) : '';
+        if (!hasColor || normalizeStr(colorVal) !== normalizeStr(selectedColor)) matches = false;
       }
       if (selectedSize) {
-        const hasSize = v.attributes.find(a => a.name === 'Tallas' || a.name === 'Talla');
-        if (!hasSize || String(hasSize.value).trim() !== String(selectedSize).trim()) matches = false;
+        const hasSize = (v.attributes || []).find(a => /talla/i.test(a.name));
+        const sizeVal = hasSize ? (hasSize.value || hasSize.option || hasSize.slug) : '';
+        if (!hasSize || normalizeStr(sizeVal) !== normalizeStr(selectedSize)) matches = false;
       }
       return matches;
     });
     if (foundVar) {
       variationId = foundVar.variation_id || foundVar.id || 0;
+      if (foundVar.image_src) customImg = foundVar.image_src;
+      else if (foundVar.image?.src) customImg = foundVar.image.src;
     }
   }
 
-  const imgMain = document.getElementById('pdvMainImg');
-  const customImg = imgMain ? imgMain.src : null;
+  if (!customImg) {
+    const imgMain = document.getElementById('pdvMainImg');
+    customImg = imgMain ? imgMain.src : (currentProduct.img || null);
+  }
   addToCart(currentProduct.id, variationId, attributes, true, customImg);
 }
 function addToCartFromModal() { addToCartFromPDV(); }
