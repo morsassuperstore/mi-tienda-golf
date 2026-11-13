@@ -938,22 +938,8 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white
         <!-- Pago móvil instructions (hidden) -->
         <div id="pagomovil-form" style="display:none;margin-top:12px;">
           <div class="payment-instructions visible">
-            <div class="instr-title">Datos para pago móvil (Bolívares)</div>
-            <div style="font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:14px;">
-              El monto en bolívares se calcula a la tasa BCV de Referencia del día que manejamos en tienda.
-              Para agilizar tu pedido, puedes indicar aquí la tasa que estás usando:
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-              <label style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-mid);white-space:nowrap;">Tasa Bs/Ref. que usa la tienda</label>
-              <input class="form-input" id="bs-rate" name="bs-rate" type="number" min="1" step="0.01"
-                placeholder="Ej: 95.50"
-                style="max-width:140px;"
-                oninput="updateBsTotal()"
-                aria-label="Tasa de cambio bolívares por referencia">
-            </div>
-            <div id="bs-total-preview" style="display:none;font-size:13px;color:var(--navy);font-weight:700;padding:8px 0;"></div>
-            <div style="font-size:11px;color:var(--text-mid);margin-top:4px;line-height:1.5;">
-              Si no conoces la tasa, no te preocupes. Al confirmar el pedido te enviaremos el monto exacto por WhatsApp.
+            <div style="font-size:13px;color:var(--navy-deeper);font-weight:600;line-height:1.6;">
+              Para pago en bolívares comunicarse directamente por whatsapp para compartir los datos y el monto de la compra
             </div>
           </div>
         </div>
@@ -1964,41 +1950,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div style="font-size:11px;color:var(--text-mid);margin-top:8px;line-height:1.5;">Envíanos el comprobante por WhatsApp para confirmar tu pedido.</div>`;
       }
 
-      // Hydrate the static pago movil block
-      if (data.payment_pagomovil) {
-        const pmContainer = document.getElementById('pagomovil-form');
-        if (pmContainer) {
-          const p = data.payment_pagomovil;
-          const rateInfo = MANUAL_EXCHANGE_RATE ? `<div class="instr-row" style="margin-bottom:10px;background:var(--gold-pale);"><span class="instr-label">Tasa de la tienda</span><span class="instr-val" style="color:var(--navy-deeper);font-weight:700;">${MANUAL_EXCHANGE_RATE} Bs/Ref</span></div>` : '';
-          
-          // Replace innerHTML preserving the ID structure where bs-rate logic resides, but add bank info
-          pmContainer.innerHTML = `
-            <div class="payment-instructions visible">
-              <div class="instr-title">Datos para pago móvil (Bolívares)</div>
-              ${rateInfo}
-              <div class="instr-row"><span class="instr-label">Banco</span><span class="instr-val">${p.bank}</span></div>
-              <div class="instr-row"><span class="instr-label">Cédula/RIF</span><span class="instr-val">${p.id}</span></div>
-              <div class="instr-row"><span class="instr-label">Teléfono</span><span class="instr-val">${p.phone}</span></div>
-              
-              <div style="font-size:12px;color:var(--text-mid);line-height:1.6;margin:14px 0;">
-                Calcula tu pago fácilmente. Si quieres, indica la tasa que estás usando:
-              </div>
-              <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-                <label style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-mid);white-space:nowrap;">Tasa (Opcional)</label>
-                <input class="form-input" id="bs-rate" name="bs-rate" type="number" min="1" step="0.01"
-                  placeholder="Ej: 95.50" style="max-width:140px;" oninput="updateBsTotal()"
-                  aria-label="Tasa de cambio bolívares por referencia" value="${MANUAL_EXCHANGE_RATE || ''}">
-              </div>
-              <div id="bs-total-preview" style="display:none;font-size:13px;color:var(--navy);font-weight:700;padding:8px 0;"></div>
-              <div style="font-size:11px;color:var(--text-mid);margin-top:4px;line-height:1.5;">
-                Envía el pago exacto y comparte la referencia por WhatsApp.
-              </div>
-            </div>
-          `;
-          // Trigger initial calculation if manual rate was set
-          if (MANUAL_EXCHANGE_RATE) updateBsTotal();
-        }
-      }
+      // Pago móvil ahora muestra solo el mensaje directo de WhatsApp (sin datos bancarios ni tasa)
 
       // Hydrate the static USDT block
       if (data.payment_binance) {

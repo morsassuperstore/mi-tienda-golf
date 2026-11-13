@@ -636,16 +636,27 @@
   .product-card:hover .product-colors { opacity: 1; transform: translateY(0); }
 
   .color-swatch {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid var(--white);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--navy-deeper);
+    border: 1px solid #d1d5db;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
     cursor: pointer;
-    transition: transform 0.15s;
+    transition: all 0.15s;
+    white-space: nowrap;
   }
 
-  .color-swatch:hover, .color-swatch.active { transform: scale(1.25); }
+  .color-swatch:hover, .color-swatch.active {
+    background: var(--navy-deeper);
+    color: var(--white);
+    border-color: var(--navy-deeper);
+  }
 
   /* Product info */
   .product-info {
@@ -1169,17 +1180,22 @@
     font-size: 12px; color: #111827; cursor: pointer; text-decoration: underline;
   }
 
-  /* Color Swatches (Lululemon Circular Swatches) */
-  .pdv-colors { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+  /* Color Swatches (Text Pill Buttons) */
+  .pdv-colors { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
   .pdv-color-swatch {
-    width: 32px; height: 32px; border-radius: 50%;
-    border: 2px solid #ffffff;
-    box-shadow: 0 0 0 1px #d1d5db;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 16px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #111827;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
   }
-  .pdv-color-swatch:hover { transform: scale(1.1); box-shadow: 0 0 0 2px #111827; }
-  .pdv-color-swatch.active { box-shadow: 0 0 0 2px #111827; transform: scale(1.1); }
+  .pdv-color-swatch:hover { border-color: #111827; background: #f9fafb; }
+  .pdv-color-swatch.active { background: #111827; color: #ffffff; border-color: #111827; }
 
   /* Size Selector (Lululemon Grid Tiles) */
   .pdv-sizes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
@@ -2327,7 +2343,7 @@ function renderProducts(list) {
   list.forEach(p => {
     const badgeHtml = p.badge ? `<span class="badge badge-${p.badge}">${p.badge === 'new' ? 'Nuevo' : p.badge === 'hot' ? 'Popular' : 'Oferta'}</span>` : '';
     const oldPriceHtml = p.oldPrice ? `<span class="product-price-old">${formatPrice(p.oldPrice)}</span><span class="product-price-save">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>` : '';
-    const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" style="background:${getCssColor(c)}" data-color="${c}" onclick="selectCardColor(event, this, ${p.id}, '${c}')" title="${getColorName(c)}"></span>`).join('');
+    const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" data-color="${c}" onclick="selectCardColor(event, this, ${p.id}, '${c}')" title="${getColorName(c)}">${c}</span>`).join('');
     const sizes = p.sizes.length ? p.sizes.map(s => `<span class="size-btn" onclick="event.stopPropagation();selectSize(this)">${s}</span>`).join('') : '';
     const sizesSection = p.sizes.length ? `<div class="product-sizes">${sizes}</div>` : '';
 
@@ -2807,7 +2823,7 @@ function openModal(id) {
     cWrap.style.display = 'block';
     cName.innerHTML = `${getColorName(p.colors[0])} <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:var(--text-mid); text-decoration:underline;">Limpiar selección</a>`;
     cEl.innerHTML = p.colors.map((c,i) =>
-      `<span class="pdv-color-swatch" style="background:${getCssColor(c)}; border: 1px solid #ddd;" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}', '${c}')"></span>`
+      `<span class="pdv-color-swatch" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}', '${c}')">${c}</span>`
     ).join('');
     // Trigger initial filter
     if (p.variations && p.variations.length) {
