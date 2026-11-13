@@ -2476,7 +2476,7 @@ function selectSize(btn) {
   btn.classList.add('selected');
 }
 
-const normalizeStr = s => (s || '').toString().toLowerCase().replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
+const normalizeStr = s => (s || '').toString().replace(/\s*\(T\d+\)/gi, '').toLowerCase().replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
 
 // ─── CARD INTERACTIONS ───
 function selectCardColor(e, swatch, productId, color) {
@@ -3348,7 +3348,17 @@ function showToast(msg) {
       allBrands.add(foundBrand);
 
       const pSizes = p.attributes?.find(a => a.name === 'Talla' || a.name === 'Tallas')?.terms?.map(t => t.name) || [];
-      const pColors = p.attributes?.find(a => a.name === 'Colores' || a.name === 'Color')?.terms?.map(t => t.name) || [];
+      const rawColors = p.attributes?.find(a => a.name === 'Colores' || a.name === 'Color')?.terms?.map(t => t.name) || [];
+      const seenColors = new Set();
+      const pColors = [];
+      rawColors.forEach(c => {
+        const clean = c.replace(/\s*\(T\d+\)/gi, '').trim();
+        const key = clean.toLowerCase();
+        if (clean && !seenColors.has(key)) {
+          seenColors.add(key);
+          pColors.push(clean);
+        }
+      });
       
       pSizes.forEach(s => allSizes.add(s));
 
