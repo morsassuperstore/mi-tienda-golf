@@ -2343,7 +2343,7 @@ function renderProducts(list) {
   list.forEach(p => {
     const badgeHtml = p.badge ? `<span class="badge badge-${p.badge}">${p.badge === 'new' ? 'Nuevo' : p.badge === 'hot' ? 'Popular' : 'Oferta'}</span>` : '';
     const oldPriceHtml = p.oldPrice ? `<span class="product-price-old">${formatPrice(p.oldPrice)}</span><span class="product-price-save">-${Math.round((1-p.price/p.oldPrice)*100)}%</span>` : '';
-    const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" data-color="${c}" onclick="selectCardColor(event, this, ${p.id}, '${c}')" title="${getColorName(c)}">${c.replace(/\s*\(T\d+\)/gi, '').trim()}</span>`).join('');
+    const swatches = p.colors.map((c,i) => `<span class="color-swatch${i===0?' active':''}" data-color="${c}" onclick="selectCardColor(event, this, ${p.id}, '${c}')" title="${getColorName(c)}">${c.replace(/\s*\([A-Z]?\d+\)/gi, '').trim()}</span>`).join('');
     const sizes = p.sizes.length ? p.sizes.map(s => `<span class="size-btn" onclick="event.stopPropagation();selectSize(this)">${s}</span>`).join('') : '';
     const sizesSection = p.sizes.length ? `<div class="product-sizes">${sizes}</div>` : '';
 
@@ -2476,7 +2476,7 @@ function selectSize(btn) {
   btn.classList.add('selected');
 }
 
-const normalizeStr = s => (s || '').toString().replace(/\s*\(T\d+\)/gi, '').toLowerCase().replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
+const normalizeStr = s => (s || '').toString().replace(/\s*\([A-Z]?\d+\)/gi, '').toLowerCase().replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
 
 // ─── CARD INTERACTIONS ───
 function selectCardColor(e, swatch, productId, color) {
@@ -2823,7 +2823,7 @@ function openModal(id) {
     cWrap.style.display = 'block';
     cName.innerHTML = `${getColorName(p.colors[0])} <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:var(--text-mid); text-decoration:underline;">Limpiar selección</a>`;
     cEl.innerHTML = p.colors.map((c,i) =>
-      `<span class="pdv-color-swatch" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}', '${c}')">${c.replace(/\s*\(T\d+\)/gi, '').trim()}</span>`
+      `<span class="pdv-color-swatch" title="${getColorName(c)}" onclick="pdvSelectColor(this,'${c}', '${c}')">${c.replace(/\s*\([A-Z]?\d+\)/gi, '').trim()}</span>`
     ).join('');
     // Trigger initial filter
     if (p.variations && p.variations.length) {
@@ -3013,7 +3013,7 @@ function pdvSelectColor(el, hex, colorNameRaw) {
   document.querySelectorAll('.pdv-color-swatch').forEach(s => s.classList.remove('active'));
   if (el) el.classList.add('active');
   
-  const displayColor = (colorNameRaw || getColorName(hex)).replace(/\s*\(T\d+\)/gi, '').trim();
+  const displayColor = (colorNameRaw || getColorName(hex)).replace(/\s*\([A-Z]?\d+\)/gi, '').trim();
   document.getElementById('pdvColorName').innerHTML = `${displayColor} <a href="#" onclick="pdvClearSelection(event)" style="font-size:11px; margin-left:10px; color:#6b7280; text-decoration:underline;" id="pdvClearBtn">Limpiar selección</a>`;
   
   if (currentProduct) {
@@ -3352,7 +3352,7 @@ function showToast(msg) {
       const seenColors = new Set();
       const pColors = [];
       rawColors.forEach(c => {
-        const clean = c.replace(/\s*\(T\d+\)/gi, '').trim();
+        const clean = c.replace(/\s*\([A-Z]?\d+\)/gi, '').trim();
         const key = clean.toLowerCase();
         if (clean && !seenColors.has(key)) {
           seenColors.add(key);
