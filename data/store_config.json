@@ -1,17 +1,14 @@
 {
-  "enable_iva": false,
-  "tax_iva_pct": 16,
-  "enable_igtf": false,
-  "igtf_pct": 3,
   "payment_zelle": {
     "email": "info@morsasgolf.com",
     "name": "Morsa's Proshop LLC"
   },
-  "manual_exchange_rate": null,
+  "tax_iva_pct": 16,
+  "manual_exchange_rate": 6,
   "payment_pagomovil": {
-    "bank": "Bancamiga",
-    "id": "J-508203003",
-    "phone": "04128422837"
+    "bank": "Escribirnos por whatssap para compartir los datos y monto ",
+    "id": "Escribirnos por whatssap para compartir los datos y monto ",
+    "phone": "Escribirnos por whatssap para compartir los datos y monto "
   },
   "social_links": {
     "instagram": "https://instagram.com/morsassuperstore",
@@ -22,8 +19,11 @@
     "user": "@mariafernanda-nunez",
     "name": "Maria Fernanda Nunez"
   },
+  "enable_igtf": false,
   "free_shipping_threshold": 100,
+  "igtf_pct": 3,
   "whatsapp_number": "584128422837",
+  "enable_iva": false,
   "delivery_cost": 3,
   "payment_binance": {
     "pay_id": "ID: 364212398"
