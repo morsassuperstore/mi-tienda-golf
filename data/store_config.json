@@ -4,7 +4,7 @@
     "name": "Morsa's Proshop LLC"
   },
   "tax_iva_pct": 16,
-  "manual_exchange_rate": 6,
+  "manual_exchange_rate": 0,
   "payment_pagomovil": {
     "bank": "Escribirnos por whatssap para compartir los datos y monto ",
     "id": "Escribirnos por whatssap para compartir los datos y monto ",
